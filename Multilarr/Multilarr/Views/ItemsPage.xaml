@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:models="clr-namespace:Multilarr.Models;assembly=Multilarr"
              mc:Ignorable="d"
              x:Class="Multilarr.Views.ItemsPage"
              Title="{Binding Title}"
@@ -19,26 +20,26 @@
                 CachingStrategy="RecycleElement"
                 ItemSelected="OnItemSelected">
             <d:ListView.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>First Item</x:String>
-                    <x:String>Second Item</x:String>
-                    <x:String>Third Item</x:String>
-                    <x:String>Fourth Item</x:String>
-                    <x:String>Fifth Item</x:String>
-                    <x:String>Sixth Item</x:String>
+                <x:Array Type="{x:Type models:Item}">
+                    <models:Item Id = "1" Text="First item" Description="This is the first item description."/>
+                    <models:Item Id = "2" Text="Second item" Description="This is the second item description."/>
+                    <models:Item Id = "3" Text="Third item" Description="This is the third item description."/>
+                    <models:Item Id = "4" Text="Fourth item" Description="This is the fourth item description."/>
+                    <models:Item Id = "5" Text="Fifth item" Description="This is the fifth item description."/>
+                    <models:Item Id = "6" Text="Sixth item" Description="This is the sixth item description."/>
                 </x:Array>
             </d:ListView.ItemsSource>
             <ListView.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate x:DataType="models:Item">
                     <ViewCell>
                         <StackLayout Padding="10">
                             <Label Text="{Binding Text}" 
-                                d:Text="{Binding .}"
+                                d:Text="{Binding Text}"
                                 LineBreakMode="NoWrap" 
                                 Style="{DynamicResource ListItemTextStyle}" 
                                 FontSize="16" />
                             <Label Text="{Binding Description}" 
-                                d:Text="Item descripton"
+                                d:Text="{Binding Description}"
                                 LineBreakMode="NoWrap"
                                 Style="{DynamicResource ListItemDetailTextStyle}"
                                 FontSize="13" />

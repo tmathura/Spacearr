@@ -1,4 +1,5 @@
 ﻿using Multilarr.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,15 +9,9 @@ namespace Multilarr.Services
 {
     public class MockDriveDataStore : IDriveDataStore<Drive>
     {
-        private readonly List<Drive> _drives;
-
-        public MockDriveDataStore()
-        {
-            _drives = CreateDrives(10);
-        }
-
         public static List<Drive> CreateDrives(int total)
         {
+            var random = new Random();
             var drives = new List<Drive>();
             for (var i = 0; i < total; i++)
             {
@@ -28,8 +23,8 @@ namespace Multilarr.Services
                     DriveFormat = "FAT32",
                     DriveType = DriveType.Fixed,
                     IsReady = true,
-                    TotalFreeSpace = 5000,
-                    TotalSize = 10000
+                    TotalFreeSpace = i * random.Next(1, 10),
+                    TotalSize = i * random.Next(11, 20)
                 });
             }
 
@@ -38,12 +33,12 @@ namespace Multilarr.Services
 
         public async Task<Drive> GetDriveAsync(string name)
         {
-            return await Task.FromResult(_drives.FirstOrDefault(s => s.Name == name));
+            return await Task.FromResult(CreateDrives(10).FirstOrDefault(s => s.Name == name));
         }
 
         public async Task<IEnumerable<Drive>> GetDrivesAsync(bool forceRefresh = false)
         {
-            return await Task.FromResult(_drives);
+            return await Task.FromResult(CreateDrives(10));
         }
     }
 }

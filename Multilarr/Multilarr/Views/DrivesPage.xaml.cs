@@ -35,8 +35,7 @@ namespace Multilarr.Views
         {
             base.OnAppearing();
 
-            if (_viewModel.Drives.Count == 0)
-                _viewModel.LoadDrivesCommand.Execute(null);
+            _viewModel.LoadDrivesCommand.Execute(null);
         }
     }
 }

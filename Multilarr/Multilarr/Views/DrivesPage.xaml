@@ -22,7 +22,7 @@
                 ItemSelected="OnDriveSelected" x:DataType="viewModels:DrivesViewModel">
             <d:ListView.DrivesSource>
                 <x:Array Type="{x:Type models:Drive}">
-                    <models:Drive Name = "Drive 1" VolumeLabel="Volume Label 1" TotalFreeSpace = "5000" TotalSize = "10000"/>
+                    <models:Drive Name = "Drive 1" VolumeLabel="Volume Label 1"/>
                 </x:Array>
             </d:ListView.DrivesSource>
             <ListView.ItemTemplate>
@@ -34,11 +34,7 @@
                                 LineBreakMode="NoWrap" 
                                 Style="{DynamicResource ListDriveTextStyle}" 
                                 FontSize="16" />
-                            <Label Text="{Binding VolumeLabel}" 
-                                d:Text="{Binding VolumeLabel}"
-                                LineBreakMode="NoWrap"
-                                Style="{DynamicResource ListDriveDetailTextStyle}"
-                                FontSize="13" />
+                            <ProgressBar Progress="{Binding ProgressBarValue}" />
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

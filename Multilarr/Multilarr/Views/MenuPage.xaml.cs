@@ -8,13 +8,13 @@ namespace Multilarr.Views
     [DesignTimeVisible(false)]
     public partial class MenuPage : ContentPage
     {
-        MainPage RootPage { get => Application.Current.MainPage as MainPage; }
-        List<HomeMenuItem> menuItems;
+        private static MainPage RootPage => Application.Current.MainPage as MainPage;
+
         public MenuPage()
         {
             InitializeComponent();
 
-            menuItems = new List<HomeMenuItem>
+            var menuItems = new List<HomeMenuItem>
             {
                 new HomeMenuItem {Id = MenuItemType.Drives, Title="Drives" },
                 new HomeMenuItem {Id = MenuItemType.About, Title="About" }

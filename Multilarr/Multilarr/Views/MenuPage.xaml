@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:models="clr-namespace:Multilarr.Models;assembly=Multilarr"
              mc:Ignorable="d"
              x:Class="Multilarr.Views.MenuPage"
              Title="Menu">
@@ -11,16 +12,16 @@
         <ListView x:Name="ListViewMenu"
                     HasUnevenRows="True">
             <d:ListView.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>Item 1</x:String>
-                    <x:String>Item 2</x:String>
+                <x:Array Type="{x:Type models:HomeMenuItem}">
+                    <models:HomeMenuItem Id = "1" Title="Title 1"/>
+                    <models:HomeMenuItem Id = "2" Title="Title 2"/>
                 </x:Array>
             </d:ListView.ItemsSource>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell>
+                    <ViewCell x:DataType="models:HomeMenuItem">
                         <Grid Padding="10">
-                            <Label Text="{Binding Title}" d:Text="{Binding .}" FontSize="20"/>
+                            <Label Text="{Binding Title}" d:Text="{Binding Title}" FontSize="20"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>

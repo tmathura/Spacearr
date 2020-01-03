@@ -27,7 +27,6 @@ namespace Multilarr.Views
 
             await Navigation.PushAsync(new DriveDetailPage(new DriveDetailViewModel(drive)));
 
-            // Manually deselect drive.
             DrivesListView.SelectedItem = null;
         }
 

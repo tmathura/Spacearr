@@ -1,8 +1,6 @@
-﻿using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using Multilarr.Services;
+﻿using Multilarr.Services;
 using Multilarr.Views;
+using Xamarin.Forms;
 
 namespace Multilarr
 {
@@ -13,7 +11,6 @@ namespace Multilarr
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
             DependencyService.Register<MockDriveDataStore>();
             MainPage = new MainPage();
         }

@@ -1,18 +1,15 @@
-﻿using System;
+﻿using Multilarr.Models;
+using Multilarr.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-
 using Xamarin.Forms;
-
-using Multilarr.Models;
-using Multilarr.Services;
 
 namespace Multilarr.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
         public IDriveDataStore<Drive> DriveDataStore => DependencyService.Get<IDriveDataStore<Drive>>();
 
         bool isBusy = false;

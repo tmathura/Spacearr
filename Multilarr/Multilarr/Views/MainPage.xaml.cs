@@ -1,16 +1,11 @@
-﻿using System;
+﻿using Multilarr.Models;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
-using Multilarr.Models;
 
 namespace Multilarr.Views
 {
-    // Learn more about making custom code visible in the Xamarin.Forms previewer
-    // by visiting https://aka.ms/xamarinforms-previewer
     [DesignTimeVisible(false)]
     public partial class MainPage : MasterDetailPage
     {
@@ -21,7 +16,7 @@ namespace Multilarr.Views
 
             MasterBehavior = MasterBehavior.Popover;
 
-            MenuPages.Add((int)MenuItemType.Browse, (NavigationPage)Detail);
+            MenuPages.Add((int)MenuItemType.Drives, (NavigationPage)Detail);
         }
 
         public async Task NavigateFromMenu(int id)
@@ -30,14 +25,11 @@ namespace Multilarr.Views
             {
                 switch (id)
                 {
-                    case (int)MenuItemType.Browse:
-                        MenuPages.Add(id, new NavigationPage(new ItemsPage()));
+                    case (int)MenuItemType.Drives:
+                        MenuPages.Add(id, new NavigationPage(new DrivesPage()));
                         break;
                     case (int)MenuItemType.About:
                         MenuPages.Add(id, new NavigationPage(new AboutPage()));
-                        break;
-                    case (int)MenuItemType.Drives:
-                        MenuPages.Add(id, new NavigationPage(new DrivesPage()));
                         break;
                 }
             }

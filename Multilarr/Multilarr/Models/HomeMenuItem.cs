@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Multilarr.Models
+﻿namespace Multilarr.Models
 {
     public enum MenuItemType
     {
-        Browse,
-        About,
-        Drives
+        Drives,
+        About
     }
     public class HomeMenuItem
     {

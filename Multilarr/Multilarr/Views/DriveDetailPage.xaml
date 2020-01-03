@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:Multilarr.ViewModels;assembly=Multilarr"
+             mc:Ignorable="d"
+             x:Class="Multilarr.Views.DriveDetailPage"
+             Title="{Binding Title}" x:DataType="viewModels:DriveDetailViewModel">
+
+    <StackLayout Spacing="20" Padding="15">
+        <Label Text="Name:" FontSize="Medium" />
+        <Label Text="{Binding Drive.Name}" d:Text="Drive name" FontSize="Small"/>
+        <Label Text="Volume Label:" FontSize="Medium" />
+        <Label Text="{Binding Drive.VolumeLabel}" d:Text="Drive volume label" FontSize="Small"/>
+    </StackLayout>
+    
+</ContentPage>

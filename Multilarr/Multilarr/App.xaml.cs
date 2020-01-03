@@ -14,6 +14,7 @@ namespace Multilarr
             InitializeComponent();
 
             DependencyService.Register<MockDataStore>();
+            DependencyService.Register<MockDriveDataStore>();
             MainPage = new MainPage();
         }
 

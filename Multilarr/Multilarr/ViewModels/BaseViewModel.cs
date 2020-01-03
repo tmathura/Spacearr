@@ -13,6 +13,7 @@ namespace Multilarr.ViewModels
     public class BaseViewModel : INotifyPropertyChanged
     {
         public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+        public IDriveDataStore<Drive> DriveDataStore => DependencyService.Get<IDriveDataStore<Drive>>();
 
         bool isBusy = false;
         public bool IsBusy

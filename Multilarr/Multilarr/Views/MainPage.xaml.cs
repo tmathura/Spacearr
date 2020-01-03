@@ -36,6 +36,9 @@ namespace Multilarr.Views
                     case (int)MenuItemType.About:
                         MenuPages.Add(id, new NavigationPage(new AboutPage()));
                         break;
+                    case (int)MenuItemType.Drives:
+                        MenuPages.Add(id, new NavigationPage(new DrivesPage()));
+                        break;
                 }
             }
 

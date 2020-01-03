@@ -7,7 +7,8 @@ namespace Multilarr.Models
     public enum MenuItemType
     {
         Browse,
-        About
+        About,
+        Drives
     }
     public class HomeMenuItem
     {

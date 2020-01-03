@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:models="clr-namespace:Multilarr.Models;assembly=Multilarr"
+             xmlns:viewModels="clr-namespace:Multilarr.ViewModels;assembly=Multilarr"
+             mc:Ignorable="d"
+             x:Class="Multilarr.Views.DrivesPage"
+             Title="{Binding Title}"
+             x:DataType="viewModels:DrivesViewModel">
+
+    <StackLayout>
+        <ListView x:Name="DrivesListView"
+                ItemsSource="{Binding Drives}"
+                VerticalOptions="FillAndExpand"
+                HasUnevenRows="true"
+                RefreshCommand="{Binding LoadDrivesCommand}"
+                IsPullToRefreshEnabled="true"
+                IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                CachingStrategy="RecycleElement"
+                ItemSelected="OnDriveSelected" x:DataType="viewModels:DrivesViewModel">
+            <d:ListView.DrivesSource>
+                <x:Array Type="{x:Type models:Drive}">
+                    <models:Drive Name = "Drive 1" VolumeLabel="Volume Label 1" TotalFreeSpace = "5000" TotalSize = "10000"/>
+                </x:Array>
+            </d:ListView.DrivesSource>
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="models:Drive">
+                    <ViewCell>
+                        <StackLayout Padding="10">
+                            <Label Text="{Binding Name}" 
+                                d:Text="{Binding Name}"
+                                LineBreakMode="NoWrap" 
+                                Style="{DynamicResource ListDriveTextStyle}" 
+                                FontSize="16" />
+                            <Label Text="{Binding VolumeLabel}" 
+                                d:Text="{Binding VolumeLabel}"
+                                LineBreakMode="NoWrap"
+                                Style="{DynamicResource ListDriveDetailTextStyle}"
+                                FontSize="13" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+    
+</ContentPage>

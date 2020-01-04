@@ -22,8 +22,8 @@
                 ItemSelected="OnDriveSelected" x:DataType="viewModels:DrivesViewModel">
             <d:ListView.ItemsSource>
                 <x:Array Type="{x:Type models:Drive}">
-                    <models:Drive Name = "Drive 1" ProgressBarValue="0.5"/>
-                    <models:Drive Name = "Drive 2" ProgressBarValue="0.1"/>
+                    <models:Drive Name = "Drive 1" />
+                    <models:Drive Name = "Drive 2" />
                 </x:Array>
             </d:ListView.ItemsSource>
             <ListView.ItemTemplate>

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Multilarr.WorkerService.Windows.Common.Interfaces;
+using Multilarr.WorkerService.Windows.Models;
 
 namespace Multilarr.WorkerService.Windows.Command.MessageCommand.Commands
 {
@@ -16,33 +17,30 @@ namespace Multilarr.WorkerService.Windows.Command.MessageCommand.Commands
 
         public MessageCommandObject Execute()
         {
-            var telegramMsg = new List<string>();
+            var drives = new List<Drive>();
             if (_computerDrives.GetDrives().Length > 0)
             {
-                telegramMsg.Add("Drives:" + string.Format("\r\n{0}{0}{0}{0}{0}{0}{0}{0}{0}{0}", "\u2796"));
                 foreach (var drive in _computerDrives.GetDrives())
                 {
-                    telegramMsg.Add(
-                        $"\r\nName: {drive.Name}" +
-                        $"\r\nRoot Directory: {drive.RootDirectory}" +
-                        $"\r\nVolume Label: {drive.VolumeLabel}" +
-                        $"\r\nDrive Format: {drive.DriveFormat}" +
-                        $"\r\nDrive Type: {drive.DriveType}" +
-                        $"\r\nIs Ready: {drive.IsReady}" +
-                        $"\r\nTotal Free Space: {_dataSize.SizeSuffix(drive.TotalFreeSpace, 2)}" +
-                        $"\r\nTotal Size: {_dataSize.SizeSuffix(drive.TotalSize, 2)}" +
-                        string.Format("\r\n{0}{0}{0}{0}{0}{0}{0}{0}{0}{0}", "\u2796")
-                    );
+                    drives.Add(new Drive
+                    {
+                        Name = drive.Name,
+                        RootDirectory = drive.RootDirectory.ToString(),
+                        VolumeLabel = drive.VolumeLabel,
+                        DriveFormat = drive.DriveFormat,
+                        DriveType = drive.DriveType,
+                        IsReady = drive.IsReady,
+                        TotalFreeSpace = drive.TotalFreeSpace,
+                        TotalFreeSpaceString = _dataSize.SizeSuffix(drive.TotalFreeSpace, 2),
+                        TotalSize = drive.TotalSize,
+                        TotalSizeString = _dataSize.SizeSuffix(drive.TotalSize, 2)
+                    });
                 }
             }
 
-            if (telegramMsg.Count == 0) telegramMsg.Add("No drives.");
-
-            var result = string.Join("\r\n", telegramMsg.ToArray());
-
             var messageCommandObject = new MessageCommandObject
             {
-                Message = result
+                MessageObject = drives
             };
             return messageCommandObject;
         }

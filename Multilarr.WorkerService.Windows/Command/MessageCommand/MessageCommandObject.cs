@@ -2,6 +2,6 @@
 {
     public class MessageCommandObject
     {
-        public string Message { get; set; }
+        public object MessageObject { get; set; }
     }
 }

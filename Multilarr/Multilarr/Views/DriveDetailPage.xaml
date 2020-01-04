@@ -3,22 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms" 
              xmlns:viewModels="clr-namespace:Multilarr.ViewModels;assembly=Multilarr"
              mc:Ignorable="d"
              x:Class="Multilarr.Views.DriveDetailPage"
              Title="{Binding Title}" x:DataType="viewModels:DriveDetailViewModel">
 
-    <StackLayout Spacing="20" Padding="15">
-        <Label Text="Name:" FontSize="Medium" />
-        <Label Text="{Binding Drive.Name}" d:Text="Drive name" FontSize="Small" />
-        <Label Text="Root Directory:" FontSize="Medium" />
-        <Label Text="{Binding Drive.RootDirectory}" d:Text="Root directory label" FontSize="Small" />
-        <Label Text="Volume Label:" FontSize="Medium" />
-        <Label Text="{Binding Drive.VolumeLabel}" d:Text="Drive volume label" FontSize="Small" />
-        <Label Text="Drive Type:" FontSize="Medium" />
-        <Label Text="{Binding Drive.DriveType}" d:Text="Drive type label" FontSize="Small" />
-        <Label Text="Is Ready:" FontSize="Medium" />
-        <CheckBox IsChecked="{Binding Drive.IsReady}" IsEnabled="False" />
-    </StackLayout>
-    
+    <ScrollView>
+        <StackLayout Spacing="20" Padding="15">
+            <microcharts:ChartView x:Name="chartView" HeightRequest="250" VerticalOptions="FillAndExpand" />
+            <Label Text="Name:" FontSize="Medium" />
+            <Label Text="{Binding Drive.Name}" d:Text="Drive name" FontSize="Small" />
+            <Label Text="Root Directory:" FontSize="Medium" />
+            <Label Text="{Binding Drive.RootDirectory}" d:Text="Root directory label" FontSize="Small" />
+            <Label Text="Volume Label:" FontSize="Medium" />
+            <Label Text="{Binding Drive.VolumeLabel}" d:Text="Drive volume label" FontSize="Small" />
+            <Label Text="Drive Type:" FontSize="Medium" />
+            <Label Text="{Binding Drive.DriveType}" d:Text="Drive type label" FontSize="Small" />
+            <Label Text="Is Ready:" FontSize="Medium" />
+            <CheckBox IsChecked="{Binding Drive.IsReady}" IsEnabled="False" />
+        </StackLayout>
+    </ScrollView>
+
 </ContentPage>

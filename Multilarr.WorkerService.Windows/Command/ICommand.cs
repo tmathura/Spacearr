@@ -4,6 +4,6 @@ namespace Multilarr.WorkerService.Windows.Command
 {
     public interface ICommand
     {
-        MessageCommandObject Invoke(string command);
+        CommandObjectSerialized Invoke(string command);
     }
 }

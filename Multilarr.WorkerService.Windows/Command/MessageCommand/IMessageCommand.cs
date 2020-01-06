@@ -2,6 +2,6 @@
 {
     public interface IMessageCommand
     {
-        MessageCommandObject Execute();
+        CommandObjectSerialized Execute();
     }
 }

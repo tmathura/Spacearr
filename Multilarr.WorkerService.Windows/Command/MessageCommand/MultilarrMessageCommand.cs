@@ -2,7 +2,7 @@
 {
     public class MultilarrMessageCommand : IMultilarrMessageCommand
     {
-        public MessageCommandObject Invoke(IMessageCommand command)
+        public CommandObjectSerialized Invoke(IMessageCommand command)
         {
             return command.Execute();
         }

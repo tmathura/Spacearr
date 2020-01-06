@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Multilarr.WorkerService.Windows.Common.Interfaces;
 using Multilarr.WorkerService.Windows.Models;
+using Newtonsoft.Json;
 
 namespace Multilarr.WorkerService.Windows.Command.MessageCommand.Commands
 {
@@ -15,7 +16,7 @@ namespace Multilarr.WorkerService.Windows.Command.MessageCommand.Commands
             _computerDrives = computerDrives;
         }
 
-        public MessageCommandObject Execute()
+        public CommandObjectSerialized Execute()
         {
             var drives = new List<Drive>();
             if (_computerDrives.GetDrives().Length > 0)
@@ -38,9 +39,9 @@ namespace Multilarr.WorkerService.Windows.Command.MessageCommand.Commands
                 }
             }
 
-            var messageCommandObject = new MessageCommandObject
+            var messageCommandObject = new CommandObjectSerialized
             {
-                MessageObject = drives
+                SerializeObject = JsonConvert.SerializeObject(drives)
             };
             return messageCommandObject;
         }

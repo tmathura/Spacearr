@@ -2,6 +2,6 @@
 {
     public interface IMultilarrMessageCommand
     {
-        MessageCommandObject Invoke(IMessageCommand command);
+        CommandObjectSerialized Invoke(IMessageCommand command);
     }
 }

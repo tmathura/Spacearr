@@ -22,7 +22,6 @@ namespace Multilarr.WorkerService.Windows
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-
                 var commandObjectSerialized = _command.Invoke("drives");
                 _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
                 await Task.Delay(1000, stoppingToken);

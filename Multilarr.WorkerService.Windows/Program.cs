@@ -1,9 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Multilarr.WorkerService.Windows;
+using Multilarr.WorkerService.Windows.Command;
+using Multilarr.WorkerService.Windows.Command.MessageCommand;
+using Multilarr.WorkerService.Windows.Common;
+using Multilarr.WorkerService.Windows.Common.Interfaces;
 
 namespace Multilarr.WorkerService.Windows
 {
@@ -19,6 +20,11 @@ namespace Multilarr.WorkerService.Windows
                 .UseWindowsService()
                 .ConfigureServices((hostContext, services) =>
                 {
+                    services.AddSingleton<IDataSize, DataSize>();
+                    services.AddSingleton<IMultilarrMessageCommand, MultilarrMessageCommand>();
+                    services.AddSingleton<IComputerDrives, ComputerDrives>();
+                    services.AddSingleton<IComputerDriveInfo, ComputerDriveInfo>();
+                    services.AddSingleton<ICommand, Command.Command>();
                     services.AddHostedService<Worker>();
                 });
     }

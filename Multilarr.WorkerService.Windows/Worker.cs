@@ -1,18 +1,15 @@
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Multilarr.WorkerService.Windows.Command;
 using Multilarr.WorkerService.Windows.Common;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using Multilarr.WorkerService.Windows.Models;
 using Newtonsoft.Json;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Multilarr.WorkerService.Windows
 {
     public class Worker : BackgroundService
     {
-        private readonly ILogger<Worker> _logger;
         private readonly ICommand _command;
         private readonly PusherServer.Pusher _pusherSend;
         private readonly PusherClient.Pusher _pusherReceive;
@@ -23,9 +20,8 @@ namespace Multilarr.WorkerService.Windows
         private const string Secret = "27dd35a15799cb4dac36";
         private const string Cluster = "ap2";
 
-        public Worker(ILogger<Worker> logger, ICommand command)
+        public Worker(ICommand command)
         {
-            _logger = logger;
             _command = command;
 
             var optionsSend = new PusherServer.PusherOptions { Cluster = Cluster };

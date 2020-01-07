@@ -1,5 +1,6 @@
 ﻿using Multilarr.WorkerService.Windows.Command.MessageCommand;
 using Multilarr.WorkerService.Windows.Command.MessageCommand.Commands;
+using Multilarr.WorkerService.Windows.Common;
 using Multilarr.WorkerService.Windows.Common.Interfaces;
 
 namespace Multilarr.WorkerService.Windows.Command
@@ -17,13 +18,13 @@ namespace Multilarr.WorkerService.Windows.Command
             _computerDrives = computerDrives;
         }
 
-        public CommandObjectSerialized Invoke(string command)
+        public CommandObjectSerialized Invoke(Enumeration.CommandType command)
         {
             var messageCommandObject = new CommandObjectSerialized();
 
             switch (command)
             {
-                case "drives":
+                case Enumeration.CommandType.DrivesCommand:
                 {
                     messageCommandObject = InvokeDrivesCommand();
                     break;

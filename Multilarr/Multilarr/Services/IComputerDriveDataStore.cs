@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Multilarr.Models;
 
 namespace Multilarr.Services
 {
-    public interface IComputerDriveDataStore<T>
+    public interface IComputerDriveDataStore
     {
-        Task<IEnumerable<T>> GetComputerDrivesAsync();
+        Task<IEnumerable<ComputerDrive>> GetComputerDrivesAsync();
     }
 }

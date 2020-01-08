@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Multilarr.Services
 {
-    public class ComputerDriveDataStore : IComputerDriveDataStore<ComputerDrive>
+    public class ComputerDriveDataStore : IComputerDriveDataStore
     {
         private readonly PusherServer.IPusher _pusherSend;
         private readonly PusherClient.Pusher _pusherReceive;

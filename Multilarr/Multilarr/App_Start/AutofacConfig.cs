@@ -21,7 +21,7 @@ namespace Multilarr
             pusherReceive.ConnectAsync();
 
             builder.Register(c => new PusherServer.Pusher(AppId, Key, Secret, optionsSend)).As<PusherServer.IPusher>().SingleInstance();
-            builder.Register(c => new ComputerDriveDataStore(c.Resolve<PusherServer.IPusher>(), pusherReceive)).As<IComputerDriveDataStore<ComputerDrive>>().SingleInstance();
+            builder.Register(c => new ComputerDriveDataStore(c.Resolve<PusherServer.IPusher>(), pusherReceive)).As<IComputerDriveDataStore>().SingleInstance();
         }
     }
 }

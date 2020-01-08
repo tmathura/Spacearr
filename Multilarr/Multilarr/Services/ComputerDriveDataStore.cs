@@ -1,7 +1,10 @@
-﻿using Multilarr.Common;
+﻿using System;
+using Multilarr.Common;
 using Multilarr.Models;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Multilarr.Services
@@ -36,7 +39,17 @@ namespace Multilarr.Services
         {
             var pusherSendMessage = new PusherSendMessage { Command = Enumeration.CommandType.ComputerDrivesCommand};
             await _pusherSend.TriggerAsync("multilarr-channel", "multilarr_event", new { message = JsonConvert.SerializeObject(pusherSendMessage) });
-            while (_computerDrives == null) { }
+
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            while (_computerDrives == null)
+            {
+                if (stopwatch.ElapsedMilliseconds > 10000)
+                {
+                    throw new Exception("GetComputerDrivesAsync took too long!");
+                }
+            }
 
             var result = await Task.FromResult(_computerDrives);
             _computerDrives = null;

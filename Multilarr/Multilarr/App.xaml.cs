@@ -1,4 +1,4 @@
-﻿using Multilarr.Services;
+﻿using Autofac;
 using Multilarr.Views;
 using Xamarin.Forms;
 
@@ -10,8 +10,11 @@ namespace Multilarr
         public App()
         {
             InitializeComponent();
-
-            DependencyService.Register<MockDriveDataStore>();
+            
+            var builder = new ContainerBuilder();
+            AutofacConfig.Configure(builder);
+            ContainerProvider.Container = builder.Build();
+            
             MainPage = new MainPage();
         }
 

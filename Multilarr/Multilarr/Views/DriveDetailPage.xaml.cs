@@ -25,16 +25,16 @@ namespace Multilarr.Views
             
             var entries = new[]
             {
-                new ChartEntry(_viewModel.Drive.TotalSize - _viewModel.Drive.TotalFreeSpace)
+                new ChartEntry(_viewModel.Drive.TotalUsedSpace)
                 {
                     Label = "Used Space",
-                    ValueLabel = $"{_viewModel.Drive.TotalSize - _viewModel.Drive.TotalFreeSpace}",
+                    ValueLabel = $"{_viewModel.Drive.TotalUsedSpaceString}",
                     Color = SKColor.Parse("#68B9C0")
                 },
                 new ChartEntry(_viewModel.Drive.TotalFreeSpace)
                 {
                     Label = "Total Free Space",
-                    ValueLabel = $"{_viewModel.Drive.TotalFreeSpace}",
+                    ValueLabel = $"{_viewModel.Drive.TotalFreeSpaceString}",
                     Color = SKColor.Parse("#90D585"),
                 }
             };

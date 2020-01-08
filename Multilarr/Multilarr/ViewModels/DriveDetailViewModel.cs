@@ -7,7 +7,7 @@ namespace Multilarr.ViewModels
         public Drive Drive { get; set; }
         public DriveDetailViewModel(Drive drive = null)
         {
-            Title = drive?.Name;
+            Title = $"{drive?.Name}: {drive?.VolumeLabel}";
             Drive = drive;
         }
     }

@@ -1,4 +1,4 @@
-﻿namespace Multilarr.WorkerService.Windows.Models
+﻿namespace Multilarr.Models
 {
     public class PusherReceiveMessage
     {

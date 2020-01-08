@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Microsoft.Extensions.Hosting;
 using Multilarr.WorkerService.Windows.Command;
 using Multilarr.WorkerService.Windows.Common;
@@ -47,9 +48,10 @@ namespace Multilarr.WorkerService.Windows
             _myChannel = await _pusherReceive.SubscribeAsync("multilarr-channel");
             _myChannel.Bind("multilarr_event", (dynamic data) =>
             {
-                PusherReceiveMessage pusherReceiveMessage = JsonConvert.DeserializeObject<PusherReceiveMessage>(data.ToString());
-                var pusherMessageObject = JsonConvert.DeserializeObject<PusherMessageObject>(pusherReceiveMessage.Data);
-                ExecuteCommand(pusherMessageObject.Command);
+                PusherReceiveMessageObject pusherReceiveMessage = JsonConvert.DeserializeObject<PusherReceiveMessageObject>(data.ToString());
+                var pusherMessage = JsonConvert.DeserializeObject<PusherReceiveMessage>(pusherReceiveMessage.Data);
+                var deserializeObject = JsonConvert.DeserializeObject<PusherSendMessage>(pusherMessage.Message);
+                ExecuteCommand(deserializeObject.Command);
             });
         }
 

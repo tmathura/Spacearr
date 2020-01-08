@@ -33,6 +33,8 @@ namespace Multilarr.WorkerService.Windows.Command.MessageCommand.Commands
                         IsReady = drive.IsReady,
                         TotalFreeSpace = drive.TotalFreeSpace,
                         TotalFreeSpaceString = _dataSize.SizeSuffix(drive.TotalFreeSpace, 2),
+                        TotalUsedSpace = drive.TotalSize - drive.TotalFreeSpace,
+                        TotalUsedSpaceString = _dataSize.SizeSuffix(drive.TotalSize - drive.TotalFreeSpace, 2),
                         TotalSize = drive.TotalSize,
                         TotalSizeString = _dataSize.SizeSuffix(drive.TotalSize, 2)
                     });

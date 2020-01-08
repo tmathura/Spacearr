@@ -11,11 +11,9 @@
 
     <ScrollView>
         <StackLayout Spacing="20" Padding="15">
-            <microcharts:ChartView x:Name="chartView" HeightRequest="250" VerticalOptions="FillAndExpand" />
+            <microcharts:ChartView x:Name="chartView" HeightRequest="200" VerticalOptions="FillAndExpand" />
             <Label Text="Name:" FontSize="Medium" />
             <Label Text="{Binding Drive.Name}" d:Text="Drive name" FontSize="Small" />
-            <Label Text="Root Directory:" FontSize="Medium" />
-            <Label Text="{Binding Drive.RootDirectory}" d:Text="Root directory label" FontSize="Small" />
             <Label Text="Volume Label:" FontSize="Medium" />
             <Label Text="{Binding Drive.VolumeLabel}" d:Text="Drive volume label" FontSize="Small" />
             <Label Text="Drive Type:" FontSize="Medium" />

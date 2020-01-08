@@ -26,7 +26,7 @@ namespace Multilarr.Views
                 switch (id)
                 {
                     case (int)MenuItemType.Drives:
-                        _menuPages.Add(id, new NavigationPage(new DrivesPage()));
+                        _menuPages.Add(id, new NavigationPage(new ComputerDrivesPage()));
                         break;
                     case (int)MenuItemType.About:
                         _menuPages.Add(id, new NavigationPage(new AboutPage()));

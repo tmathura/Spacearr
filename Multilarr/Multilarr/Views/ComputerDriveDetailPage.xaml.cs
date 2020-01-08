@@ -7,11 +7,11 @@ using Xamarin.Forms;
 namespace Multilarr.Views
 {
     [DesignTimeVisible(false)]
-    public partial class DriveDetailPage : ContentPage
+    public partial class ComputerDriveDetailPage : ContentPage
     {
-        private readonly DriveDetailViewModel _viewModel;
+        private readonly ComputerDriveDetailViewModel _viewModel;
 
-        public DriveDetailPage(DriveDetailViewModel viewModel)
+        public ComputerDriveDetailPage(ComputerDriveDetailViewModel viewModel)
         {
             InitializeComponent();
 
@@ -25,16 +25,16 @@ namespace Multilarr.Views
             
             var entries = new[]
             {
-                new ChartEntry(_viewModel.Drive.TotalUsedSpace)
+                new ChartEntry(_viewModel.ComputerDrive.TotalUsedSpace)
                 {
                     Label = "Used Space",
-                    ValueLabel = $"{_viewModel.Drive.TotalUsedSpaceString}",
+                    ValueLabel = $"{_viewModel.ComputerDrive.TotalUsedSpaceString}",
                     Color = SKColor.Parse("#68B9C0")
                 },
-                new ChartEntry(_viewModel.Drive.TotalFreeSpace)
+                new ChartEntry(_viewModel.ComputerDrive.TotalFreeSpace)
                 {
                     Label = "Total Free Space",
-                    ValueLabel = $"{_viewModel.Drive.TotalFreeSpaceString}",
+                    ValueLabel = $"{_viewModel.ComputerDrive.TotalFreeSpaceString}",
                     Color = SKColor.Parse("#90D585"),
                 }
             };

@@ -10,7 +10,7 @@ namespace Multilarr.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDriveDataStore<Drive> DriveDataStore => ContainerProvider.Container.Resolve<IDriveDataStore<Drive>>();
+        public IComputerDriveDataStore<ComputerDrive> ComputerDriveDataStore => ContainerProvider.Container.Resolve<IComputerDriveDataStore<ComputerDrive>>();
 
         private bool _isBusy;
         public bool IsBusy

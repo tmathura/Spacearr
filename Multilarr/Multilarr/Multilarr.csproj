@@ -21,11 +21,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\DrivesPage.xaml.cs">
-      <DependentUpon>DrivesPage.xaml</DependentUpon>
+    <Compile Update="Views\ComputerDrivesPage.xaml.cs">
+      <DependentUpon>ComputerDrivesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\DriveDetailPage.xaml.cs">
-      <DependentUpon>DriveDetailPage.xaml</DependentUpon>
+    <Compile Update="Views\ComputerDriveDetailPage.xaml.cs">
+      <DependentUpon>ComputerDriveDetailPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>

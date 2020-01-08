@@ -6,20 +6,20 @@
              xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms" 
              xmlns:viewModels="clr-namespace:Multilarr.ViewModels;assembly=Multilarr"
              mc:Ignorable="d"
-             x:Class="Multilarr.Views.DriveDetailPage"
-             Title="{Binding Title}" x:DataType="viewModels:DriveDetailViewModel">
+             x:Class="Multilarr.Views.ComputerDriveDetailPage"
+             Title="{Binding Title}" x:DataType="viewModels:ComputerDriveDetailViewModel">
 
     <ScrollView>
         <StackLayout Spacing="20" Padding="15">
             <microcharts:ChartView x:Name="chartView" HeightRequest="200" VerticalOptions="FillAndExpand" />
             <Label Text="Name:" FontSize="Medium" />
-            <Label Text="{Binding Drive.Name}" d:Text="Drive name" FontSize="Small" />
+            <Label Text="{Binding ComputerDrive.Name}" d:Text="Computer drive name" FontSize="Small" />
             <Label Text="Volume Label:" FontSize="Medium" />
-            <Label Text="{Binding Drive.VolumeLabel}" d:Text="Drive volume label" FontSize="Small" />
+            <Label Text="{Binding ComputerDrive.VolumeLabel}" d:Text="Computer drive volume label" FontSize="Small" />
             <Label Text="Drive Type:" FontSize="Medium" />
-            <Label Text="{Binding Drive.DriveType}" d:Text="Drive type label" FontSize="Small" />
+            <Label Text="{Binding ComputerDrive.DriveType}" d:Text="Computer drive type label" FontSize="Small" />
             <Label Text="Is Ready:" FontSize="Medium" />
-            <CheckBox IsChecked="{Binding Drive.IsReady}" IsEnabled="False" />
+            <CheckBox IsChecked="{Binding ComputerDrive.IsReady}" IsEnabled="False" />
         </StackLayout>
     </ScrollView>
 

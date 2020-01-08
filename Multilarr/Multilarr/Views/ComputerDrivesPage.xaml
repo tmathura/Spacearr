@@ -6,34 +6,34 @@
              xmlns:models="clr-namespace:Multilarr.Models;assembly=Multilarr"
              xmlns:viewModels="clr-namespace:Multilarr.ViewModels;assembly=Multilarr"
              mc:Ignorable="d"
-             x:Class="Multilarr.Views.DrivesPage"
+             x:Class="Multilarr.Views.ComputerDrivesPage"
              Title="{Binding Title}"
-             x:DataType="viewModels:DrivesViewModel">
+             x:DataType="viewModels:ComputerDrivesViewModel">
 
     <StackLayout>
-        <ListView x:Name="DrivesListView"
-                ItemsSource="{Binding Drives}"
+        <ListView x:Name="ComputerDrivesListView"
+                ItemsSource="{Binding ComputerDrives}"
                 VerticalOptions="FillAndExpand"
                 HasUnevenRows="true"
-                RefreshCommand="{Binding LoadDrivesCommand}"
+                RefreshCommand="{Binding LoadComputerDrivesCommand}"
                 IsPullToRefreshEnabled="true"
                 IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                 CachingStrategy="RecycleElement"
-                ItemSelected="OnDriveSelected" x:DataType="viewModels:DrivesViewModel">
+                ItemSelected="OnComputerDriveSelected" x:DataType="viewModels:ComputerDrivesViewModel">
             <d:ListView.ItemsSource>
-                <x:Array Type="{x:Type models:Drive}">
-                    <models:Drive Name = "Drive 1" />
-                    <models:Drive Name = "Drive 2" />
+                <x:Array Type="{x:Type models:ComputerDrive}">
+                    <models:ComputerDrive Name = "Computer Drive 1" />
+                    <models:ComputerDrive Name = "Computer Drive 2" />
                 </x:Array>
             </d:ListView.ItemsSource>
             <ListView.ItemTemplate>
-                <DataTemplate x:DataType="models:Drive">
+                <DataTemplate x:DataType="models:ComputerDrive">
                     <ViewCell>
                         <StackLayout Padding="10">
                             <Label Text="{Binding Name}" 
                                 d:Text="{Binding Name}"
                                 LineBreakMode="NoWrap" 
-                                Style="{DynamicResource ListDriveTextStyle}" 
+                                Style="{DynamicResource ListItemTextStyle}" 
                                 FontSize="16" />
                             <ProgressBar Progress="{Binding ProgressBarValue}" />
                         </StackLayout>

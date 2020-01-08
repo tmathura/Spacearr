@@ -16,7 +16,7 @@ namespace Multilarr.Views
 
             var menuItems = new List<HomeMenuItem>
             {
-                new HomeMenuItem {Id = MenuItemType.Drives, Title="Drives" },
+                new HomeMenuItem {Id = MenuItemType.Drives, Title="Computer Drives" },
                 new HomeMenuItem {Id = MenuItemType.About, Title="About" }
             };
 

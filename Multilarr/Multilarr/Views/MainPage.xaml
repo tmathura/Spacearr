@@ -19,7 +19,7 @@
                 </OnPlatform>
             </NavigationPage.Icon>
             <x:Arguments>
-                <views:DrivesPage />
+                <views:ComputerDrivesPage />
             </x:Arguments>
         </NavigationPage>
     </MasterDetailPage.Detail>

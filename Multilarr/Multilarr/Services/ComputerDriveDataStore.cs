@@ -32,14 +32,15 @@ namespace Multilarr.Services
             });
         }
 
-        public async Task<IEnumerable<ComputerDrive>> GetComputerDrivesAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<ComputerDrive>> GetComputerDrivesAsync()
         {
             var pusherSendMessage = new PusherSendMessage { Command = Enumeration.CommandType.ComputerDrivesCommand};
             await _pusherSend.TriggerAsync("multilarr-channel", "multilarr_event", new { message = JsonConvert.SerializeObject(pusherSendMessage) });
             while (_computerDrives == null) { }
 
-            //_computerDrives = null;
-            return await Task.FromResult(_computerDrives);
+            var result = await Task.FromResult(_computerDrives);
+            _computerDrives = null;
+            return result;
         }
     }
 }

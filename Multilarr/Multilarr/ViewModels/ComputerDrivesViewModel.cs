@@ -29,7 +29,7 @@ namespace Multilarr.ViewModels
             try
             {
                 ComputerDrives.Clear();
-                var computerDrives = await ComputerDriveDataStore.GetComputerDrivesAsync(true);
+                var computerDrives = await ComputerDriveDataStore.GetComputerDrivesAsync();
                 foreach (var computerDrive in computerDrives)
                 {
                     ComputerDrives.Add(computerDrive);

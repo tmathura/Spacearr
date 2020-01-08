@@ -7,7 +7,7 @@ namespace Multilarr.ViewModels
         public ComputerDrive ComputerDrive { get; set; }
         public ComputerDriveDetailViewModel(ComputerDrive computerDrive = null)
         {
-            Title = $"{computerDrive?.Name}: {computerDrive?.VolumeLabel}";
+            Title = $"{computerDrive?.Name} {computerDrive?.VolumeLabel}";
             ComputerDrive = computerDrive;
         }
     }

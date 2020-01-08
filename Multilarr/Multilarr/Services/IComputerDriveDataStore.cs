@@ -5,6 +5,6 @@ namespace Multilarr.Services
 {
     public interface IComputerDriveDataStore<T>
     {
-        Task<IEnumerable<T>> GetComputerDrivesAsync(bool forceRefresh = false);
+        Task<IEnumerable<T>> GetComputerDrivesAsync();
     }
 }

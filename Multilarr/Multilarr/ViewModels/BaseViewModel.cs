@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using Multilarr.Models;
 using Multilarr.Services;
 using System;
 using System.Collections.Generic;

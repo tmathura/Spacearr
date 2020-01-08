@@ -4,6 +4,6 @@ namespace Multilarr.WorkerService.Windows.Common.Interfaces
 {
     public interface IComputerDrives
     {
-        DriveInfo[] GetDrives();
+        DriveInfo[] GetComputerDrives();
     }
 }

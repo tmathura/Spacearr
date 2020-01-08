@@ -24,9 +24,9 @@ namespace Multilarr.WorkerService.Windows.Command
 
             switch (command)
             {
-                case Enumeration.CommandType.DrivesCommand:
+                case Enumeration.CommandType.ComputerDrivesCommand:
                 {
-                    messageCommandObject = InvokeDrivesCommand();
+                    messageCommandObject = InvokeComputerDrivesCommand();
                     break;
                 }
             }
@@ -36,9 +36,9 @@ namespace Multilarr.WorkerService.Windows.Command
 
         #region MultilarrMessageCommands
 
-        private CommandObjectSerialized InvokeDrivesCommand()
+        private CommandObjectSerialized InvokeComputerDrivesCommand()
         {
-            var command = new DrivesCommand(_dataSize, _computerDrives);
+            var command = new ComputerDrivesCommand(_dataSize, _computerDrives);
             return _multilarrMessageCommand.Invoke(command);
         }
 

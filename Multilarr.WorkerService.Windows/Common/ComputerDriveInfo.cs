@@ -5,7 +5,7 @@ namespace Multilarr.WorkerService.Windows.Common
 {
     public class ComputerDriveInfo : IComputerDriveInfo
     {
-        public DriveInfo[] GetDrives()
+        public DriveInfo[] GetComputerDrives()
         {
             return DriveInfo.GetDrives();
         }

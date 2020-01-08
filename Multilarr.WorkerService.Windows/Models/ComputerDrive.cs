@@ -2,7 +2,7 @@
 
 namespace Multilarr.WorkerService.Windows.Models
 {
-    public class Drive
+    public class ComputerDrive
     {
         public string Name { get; set; }
         public string RootDirectory { get; set; }

@@ -5,16 +5,16 @@ namespace Multilarr.WorkerService.Windows.Common
 {
     public class ComputerDrives : IComputerDrives
     {
-        private static IComputerDriveInfo _drive;
+        private static IComputerDriveInfo _computerDrive;
 
-        public ComputerDrives(IComputerDriveInfo drive)
+        public ComputerDrives(IComputerDriveInfo computerDrive)
         {
-            _drive = drive;
+            _computerDrive = computerDrive;
         }
 
-        public DriveInfo[] GetDrives()
+        public DriveInfo[] GetComputerDrives()
         {
-            return _drive.GetDrives();
+            return _computerDrive.GetComputerDrives();
         }
     }
 }

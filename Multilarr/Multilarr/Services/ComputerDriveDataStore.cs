@@ -34,7 +34,7 @@ namespace Multilarr.Services
 
         public async Task<IEnumerable<ComputerDrive>> GetComputerDrivesAsync(bool forceRefresh = false)
         {
-            var pusherSendMessage = new PusherSendMessage { Command = Enumeration.CommandType.DrivesCommand};
+            var pusherSendMessage = new PusherSendMessage { Command = Enumeration.CommandType.ComputerDrivesCommand};
             await _pusherSend.TriggerAsync("multilarr-channel", "multilarr_event", new { message = JsonConvert.SerializeObject(pusherSendMessage) });
             while (_computerDrives == null) { }
 

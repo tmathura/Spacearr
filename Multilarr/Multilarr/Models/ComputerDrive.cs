@@ -16,7 +16,6 @@ namespace Multilarr.Models
         public string TotalUsedSpaceString { get; set; }
         public long TotalSize { get; set; }
         public string TotalSizeString { get; set; }
-
         public float ProgressBarValue => (TotalSize > 0 && TotalFreeSpace > 0 ? (float)(TotalSize - TotalFreeSpace) / TotalSize : 1);
     }
 }

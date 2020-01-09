@@ -17,7 +17,7 @@ namespace Multilarr
             AutofacConfig.Configure(builder);
             var container = builder.Build();
 
-            MainPage = new MainPage(container.Resolve<IComputerDriveDataStore>(), container.Resolve<ILogger>());
+            MainPage = new MainPage(container.Resolve<IComputerDriveService>(), container.Resolve<ILogger>());
         }
 
         protected override void OnStart()

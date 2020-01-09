@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Multilarr.Services
 {
-    public class ComputerDriveDataStore : IComputerDriveDataStore
+    public class ComputerDriveService : IComputerDriveService
     {
         private readonly PusherServer.IPusher _pusherSend;
         private readonly PusherClient.Pusher _pusherReceive;
@@ -17,7 +17,7 @@ namespace Multilarr.Services
         private List<ComputerDrive> _computerDrives;
         private readonly ILogger _logger;
 
-        public ComputerDriveDataStore(PusherServer.IPusher pusherSend, PusherClient.Pusher pusherReceive, ILogger logger)
+        public ComputerDriveService(PusherServer.IPusher pusherSend, PusherClient.Pusher pusherReceive, ILogger logger)
         {
             _pusherSend = pusherSend;
             _pusherReceive = pusherReceive;

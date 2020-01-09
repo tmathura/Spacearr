@@ -10,13 +10,13 @@ namespace Multilarr.ViewModels
 {
     public class ComputerDrivesViewModel : BaseViewModel
     {
-        private readonly IComputerDriveDataStore _computerDriveDataStore;
+        private readonly IComputerDriveService _computerDriveService;
         public ObservableCollection<ComputerDrive> ComputerDrives { get; set; }
         public Command LoadComputerDrivesCommand { get; set; }
 
-        public ComputerDrivesViewModel(IComputerDriveDataStore computerDriveDataStore)
+        public ComputerDrivesViewModel(IComputerDriveService computerDriveService)
         {
-            _computerDriveDataStore = computerDriveDataStore;
+            _computerDriveService = computerDriveService;
 
             Title = "Computer Drives";
             ComputerDrives = new ObservableCollection<ComputerDrive>();
@@ -33,7 +33,7 @@ namespace Multilarr.ViewModels
             try
             {
                 ComputerDrives.Clear();
-                var computerDrives = await _computerDriveDataStore.GetComputerDrivesAsync();
+                var computerDrives = await _computerDriveService.GetComputerDrivesAsync();
                 foreach (var computerDrive in computerDrives)
                 {
                     ComputerDrives.Add(computerDrive);

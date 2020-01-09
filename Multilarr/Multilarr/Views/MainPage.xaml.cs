@@ -11,15 +11,15 @@ namespace Multilarr.Views
     [DesignTimeVisible(false)]
     public partial class MainPage : MasterDetailPage
     {
-        private readonly IComputerDriveDataStore _computerDriveDataStore;
+        private readonly IComputerDriveService _computerDriveService;
         private readonly ILogger _logger;
         private readonly Dictionary<int, NavigationPage> _menuPages = new Dictionary<int, NavigationPage>();
 
-        public MainPage(IComputerDriveDataStore computerDriveDataStore, ILogger logger)
+        public MainPage(IComputerDriveService computerDriveService, ILogger logger)
         {
             InitializeComponent();
 
-            _computerDriveDataStore = computerDriveDataStore;
+            _computerDriveService = computerDriveService;
             _logger = logger;
 
             MasterBehavior = MasterBehavior.Popover;
@@ -37,7 +37,7 @@ namespace Multilarr.Views
                         _menuPages.Add(id, new NavigationPage(new HomePage()));
                         break;
                     case (int)MenuItemType.ComputerDrives:
-                        _menuPages.Add(id, new NavigationPage(new ComputerDrivesPage(_computerDriveDataStore)));
+                        _menuPages.Add(id, new NavigationPage(new ComputerDrivesPage(_computerDriveService)));
                         break;
                     case (int)MenuItemType.Logs:
                         _menuPages.Add(id, new NavigationPage(new LogsPage(_logger)));

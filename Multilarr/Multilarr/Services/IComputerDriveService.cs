@@ -4,7 +4,7 @@ using Multilarr.Models;
 
 namespace Multilarr.Services
 {
-    public interface IComputerDriveDataStore
+    public interface IComputerDriveService
     {
         Task<IEnumerable<ComputerDrive>> GetComputerDrivesAsync();
     }

@@ -11,11 +11,11 @@ namespace Multilarr.Views
     {
         private readonly ComputerDrivesViewModel _viewModel;
 
-        public ComputerDrivesPage(IComputerDriveDataStore computerDriveDataStore)
+        public ComputerDrivesPage(IComputerDriveService computerDriveService)
         {
             InitializeComponent();
 
-            BindingContext = _viewModel = new ComputerDrivesViewModel(computerDriveDataStore);
+            BindingContext = _viewModel = new ComputerDrivesViewModel(computerDriveService);
         }
 
         private async void OnComputerDriveSelected(object sender, SelectedItemChangedEventArgs args)

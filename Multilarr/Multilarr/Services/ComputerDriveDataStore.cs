@@ -15,7 +15,7 @@ namespace Multilarr.Services
         private readonly PusherClient.Pusher _pusherReceive;
         private PusherClient.Channel _myChannel;
         private List<ComputerDrive> _computerDrives;
-        private ILogger _logger;
+        private readonly ILogger _logger;
 
         public ComputerDriveDataStore(PusherServer.IPusher pusherSend, PusherClient.Pusher pusherReceive, ILogger logger)
         {

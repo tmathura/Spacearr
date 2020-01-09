@@ -1,4 +1,5 @@
 ﻿using Multilarr.Common.Interfaces.Logger;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -28,7 +29,8 @@ namespace Multilarr.Common.Logger
 			var log = new Log
             {
 				LogMessage = logMessage,
-				LogType = Enumeration.LogType.Info
+				LogType = Enumeration.LogType.Info,
+                LogDate = DateTime.Now
 			};
 
             return _loggerDatabase.SaveLogAsync(log);
@@ -39,7 +41,8 @@ namespace Multilarr.Common.Logger
 			var log = new Log
             {
 				LogMessage = logMessage,
-				LogType = Enumeration.LogType.Warn
+				LogType = Enumeration.LogType.Warn,
+                LogDate = DateTime.Now
 			};
 
             return _loggerDatabase.SaveLogAsync(log);
@@ -50,7 +53,8 @@ namespace Multilarr.Common.Logger
 			var log = new Log
             {
 				LogMessage = logMessage,
-				LogType = Enumeration.LogType.Error
+				LogType = Enumeration.LogType.Error,
+				LogDate = DateTime.Now
 			};
 
             return _loggerDatabase.SaveLogAsync(log);

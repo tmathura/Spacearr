@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using Multilarr.Common.Interfaces.Logger;
+using SQLite;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

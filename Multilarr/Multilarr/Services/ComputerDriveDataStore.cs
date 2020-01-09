@@ -1,12 +1,11 @@
-﻿using System;
-using Multilarr.Common;
+﻿using Multilarr.Common;
+using Multilarr.Common.Interfaces.Logger;
 using Multilarr.Models;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Threading;
 using System.Threading.Tasks;
-using Multilarr.Common.Logger;
 
 namespace Multilarr.Services
 {

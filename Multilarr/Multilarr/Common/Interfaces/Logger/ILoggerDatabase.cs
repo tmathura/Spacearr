@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Multilarr.Common.Logger;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Multilarr.Common.Logger
+namespace Multilarr.Common.Interfaces.Logger
 {
     public interface ILoggerDatabase
     {

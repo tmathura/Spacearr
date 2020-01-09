@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Multilarr.Common.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using Multilarr.Models;
 
 namespace Multilarr.Services
 {

@@ -1,7 +1,6 @@
-﻿using Multilarr.Common.Logger;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Multilarr.Models;
+using Multilarr.Common.Models;
 
 namespace Multilarr.Common.Interfaces.Logger
 {

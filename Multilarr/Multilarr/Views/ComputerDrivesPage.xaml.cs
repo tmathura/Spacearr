@@ -1,4 +1,4 @@
-﻿using Multilarr.Models;
+﻿using Multilarr.Common.Models;
 using Multilarr.Services;
 using Multilarr.ViewModels;
 using System.ComponentModel;

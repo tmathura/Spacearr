@@ -1,6 +1,4 @@
-﻿using Multilarr.Common;
-
-namespace Multilarr.Models
+﻿namespace Multilarr.Common.Models
 {
     public class PusherSendMessage
     {

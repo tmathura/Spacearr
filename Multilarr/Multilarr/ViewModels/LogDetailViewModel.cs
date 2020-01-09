@@ -1,4 +1,4 @@
-﻿using Multilarr.Models;
+﻿using Multilarr.Common.Models;
 
 namespace Multilarr.ViewModels
 {

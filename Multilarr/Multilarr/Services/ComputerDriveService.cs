@@ -1,6 +1,6 @@
 ﻿using Multilarr.Common;
 using Multilarr.Common.Interfaces.Logger;
-using Multilarr.Models;
+using Multilarr.Common.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace Multilarr.Models
+namespace Multilarr.Common.Models
 {
     public class ComputerDrive
     {

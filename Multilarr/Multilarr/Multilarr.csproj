@@ -38,4 +38,12 @@
       <DependentUpon>ComputerDriveDetailPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Common\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Multilarr.Common\Multilarr.Common.csproj" />
+  </ItemGroup>
 </Project>

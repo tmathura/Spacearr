@@ -1,5 +1,5 @@
 ﻿using Multilarr.Common.Interfaces.Logger;
-using Multilarr.Models;
+using Multilarr.Common.Models;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;

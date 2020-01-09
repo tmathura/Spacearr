@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Multilarr.Models;
+using Multilarr.Common.Models;
 
 namespace Multilarr.Common.Logger
 {

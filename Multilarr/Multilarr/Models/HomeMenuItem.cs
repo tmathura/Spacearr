@@ -2,8 +2,8 @@
 {
     public enum MenuItemType
     {
-        Drives,
-        About
+        ComputerDrives,
+        Logs
     }
     public class HomeMenuItem
     {

@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:models="clr-namespace:Multilarr.Models;assembly=Multilarr"
+             xmlns:viewModels="clr-namespace:Multilarr.ViewModels;assembly=Multilarr"
+             mc:Ignorable="d"
+             x:Class="Multilarr.Views.LogsPage"
+             Title="{Binding Title}"
+             x:DataType="viewModels:LogsViewModel">
+
+    <StackLayout>
+        <ListView x:Name="LogsListView"
+                ItemsSource="{Binding Logs}"
+                VerticalOptions="FillAndExpand"
+                HasUnevenRows="true"
+                RefreshCommand="{Binding LoadLogsCommand}"
+                IsPullToRefreshEnabled="true"
+                IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                CachingStrategy="RecycleElement"
+                x:DataType="viewModels:LogsViewModel">
+            <d:ListView.ItemsSource>
+                <x:Array Type="{x:Type models:Log}">
+                    <models:Log LogMessage = "Log message 1" />
+                    <models:Log LogMessage = "Log message 2" />
+                </x:Array>
+            </d:ListView.ItemsSource>
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="models:Log">
+                    <ViewCell>
+                        <StackLayout Padding="10">
+                            <Label Text="{Binding LogMessage}" 
+                                d:Text="{Binding LogMessage}"
+                                LineBreakMode="NoWrap" 
+                                Style="{DynamicResource ListItemTextStyle}" 
+                                FontSize="16" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+    
+</ContentPage>

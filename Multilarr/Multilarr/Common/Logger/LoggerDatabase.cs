@@ -2,6 +2,7 @@
 using SQLite;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Multilarr.Models;
 
 namespace Multilarr.Common.Logger
 {

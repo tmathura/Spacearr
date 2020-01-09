@@ -16,7 +16,7 @@ namespace Multilarr.Views
 
             MasterBehavior = MasterBehavior.Popover;
 
-            _menuPages.Add((int)MenuItemType.Drives, (NavigationPage)Detail);
+            _menuPages.Add((int)MenuItemType.ComputerDrives, (NavigationPage)Detail);
         }
 
         public async Task NavigateFromMenu(int id)
@@ -25,11 +25,11 @@ namespace Multilarr.Views
             {
                 switch (id)
                 {
-                    case (int)MenuItemType.Drives:
+                    case (int)MenuItemType.ComputerDrives:
                         _menuPages.Add(id, new NavigationPage(new ComputerDrivesPage()));
                         break;
-                    case (int)MenuItemType.About:
-                        _menuPages.Add(id, new NavigationPage(new AboutPage()));
+                    case (int)MenuItemType.Logs:
+                        _menuPages.Add(id, new NavigationPage(new LogsPage()));
                         break;
                 }
             }

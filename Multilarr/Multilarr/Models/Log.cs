@@ -1,7 +1,8 @@
 ﻿using System;
+using Multilarr.Common;
 using SQLite;
 
-namespace Multilarr.Common.Logger
+namespace Multilarr.Models
 {
 	public class Log
 	{

@@ -1,9 +1,10 @@
-using System.Collections.Generic;
 using Microsoft.Extensions.Hosting;
 using Multilarr.WorkerService.Windows.Command;
 using Multilarr.WorkerService.Windows.Common;
+using Multilarr.WorkerService.Windows.Common.Interfaces.Logger;
 using Multilarr.WorkerService.Windows.Models;
 using Newtonsoft.Json;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -15,15 +16,17 @@ namespace Multilarr.WorkerService.Windows
         private readonly PusherServer.Pusher _pusherSend;
         private readonly PusherClient.Pusher _pusherReceive;
         private PusherClient.Channel _myChannel;
+        private readonly ILogger _logger;
 
         private const string AppId = "927757";
         private const string Key = "1989c6974272ea96b1c4";
         private const string Secret = "27dd35a15799cb4dac36";
         private const string Cluster = "ap2";
 
-        public Worker(ICommand command)
+        public Worker(ICommand command, ILogger logger)
         {
             _command = command;
+            _logger = logger;
 
             var optionsSend = new PusherServer.PusherOptions { Cluster = Cluster };
             _pusherSend = new PusherServer.Pusher(AppId, Key, Secret, optionsSend);
@@ -55,10 +58,17 @@ namespace Multilarr.WorkerService.Windows
             });
         }
 
-        private void ExecuteCommand(Enumeration.CommandType command)
+        private async void ExecuteCommand(Enumeration.CommandType command)
         {
-            var commandObjectSerialized = _command.Invoke(command);
-            _pusherSend.TriggerAsync("multilarr-worker-service-windows-channel", "worker_service_event", new { message = commandObjectSerialized.SerializeObject });
+            try
+            {
+                var commandObjectSerialized = _command.Invoke(command);
+                await _pusherSend.TriggerAsync("multilarr-worker-service-windows-channel", "worker_service_event", new { message = commandObjectSerialized.SerializeObject });
+            }
+            catch (Exception e)
+            {
+                await _logger.LogErrorAsync(e.Message);
+            }
         }
     }
 }

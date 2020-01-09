@@ -1,12 +1,12 @@
 using Microsoft.Extensions.Hosting;
+using Multilarr.Common.Interfaces.Logger;
 using Multilarr.WorkerService.Windows.Command;
-using Multilarr.WorkerService.Windows.Common;
-using Multilarr.WorkerService.Windows.Common.Interfaces.Logger;
-using Multilarr.WorkerService.Windows.Models;
 using Newtonsoft.Json;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Multilarr.Common;
+using Multilarr.Common.Models;
 
 namespace Multilarr.WorkerService.Windows
 {

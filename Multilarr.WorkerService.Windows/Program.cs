@@ -1,11 +1,13 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Multilarr.Common;
+using Multilarr.Common.Interfaces;
+using Multilarr.Common.Interfaces.Logger;
+using Multilarr.Common.Logger;
 using Multilarr.WorkerService.Windows.Command;
 using Multilarr.WorkerService.Windows.Command.MessageCommand;
 using Multilarr.WorkerService.Windows.Common;
 using Multilarr.WorkerService.Windows.Common.Interfaces;
-using Multilarr.WorkerService.Windows.Common.Interfaces.Logger;
-using Multilarr.WorkerService.Windows.Common.Logger;
 using System;
 using System.IO;
 

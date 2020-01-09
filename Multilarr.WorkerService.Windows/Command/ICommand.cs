@@ -1,5 +1,5 @@
-﻿using Multilarr.WorkerService.Windows.Command.MessageCommand;
-using Multilarr.WorkerService.Windows.Common;
+﻿using Multilarr.Common;
+using Multilarr.WorkerService.Windows.Command.MessageCommand;
 
 namespace Multilarr.WorkerService.Windows.Command
 {

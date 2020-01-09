@@ -1,5 +1,5 @@
-﻿using System.IO;
-using Multilarr.WorkerService.Windows.Common.Interfaces;
+﻿using Multilarr.WorkerService.Windows.Common.Interfaces;
+using System.IO;
 
 namespace Multilarr.WorkerService.Windows.Common
 {

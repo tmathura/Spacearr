@@ -13,4 +13,8 @@
     <PackageReference Include="PusherServer" Version="4.2.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Multilarr.Common\Multilarr.Common.csproj" />
+  </ItemGroup>
 </Project>

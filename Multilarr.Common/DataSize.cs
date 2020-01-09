@@ -1,7 +1,7 @@
 ﻿using System;
-using Multilarr.WorkerService.Windows.Common.Interfaces;
+using Multilarr.Common.Interfaces;
 
-namespace Multilarr.WorkerService.Windows.Common
+namespace Multilarr.Common
 {
     public class DataSize : IDataSize
     {

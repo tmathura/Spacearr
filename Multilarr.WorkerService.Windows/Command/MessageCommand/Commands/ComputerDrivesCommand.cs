@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Multilarr.Common.Interfaces;
+using Multilarr.Common.Models;
 using Multilarr.WorkerService.Windows.Common.Interfaces;
-using Multilarr.WorkerService.Windows.Models;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Multilarr.WorkerService.Windows.Command.MessageCommand.Commands
 {

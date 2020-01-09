@@ -1,6 +1,8 @@
 ﻿using Autofac;
-using Multilarr.Models;
+using Multilarr.Common.Logger;
 using Multilarr.Services;
+using System;
+using System.IO;
 
 namespace Multilarr
 {
@@ -20,8 +22,10 @@ namespace Multilarr
             var pusherReceive = new PusherClient.Pusher(Key, optionsReceive);
             pusherReceive.ConnectAsync();
 
+            builder.Register(c => new LoggerDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "MultilarrSQLite.db3"))).As<ILoggerDatabase>().SingleInstance();
+            builder.Register(c => new Logger(c.Resolve<ILoggerDatabase>())).As<ILogger>().SingleInstance();
             builder.Register(c => new PusherServer.Pusher(AppId, Key, Secret, optionsSend)).As<PusherServer.IPusher>().SingleInstance();
-            builder.Register(c => new ComputerDriveDataStore(c.Resolve<PusherServer.IPusher>(), pusherReceive)).As<IComputerDriveDataStore>().SingleInstance();
+            builder.Register(c => new ComputerDriveDataStore(c.Resolve<PusherServer.IPusher>(), pusherReceive, c.Resolve<ILogger>())).As<IComputerDriveDataStore>().SingleInstance();
         }
     }
 }

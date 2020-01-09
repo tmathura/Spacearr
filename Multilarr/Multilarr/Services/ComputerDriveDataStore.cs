@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
+using Multilarr.Common.Logger;
 
 namespace Multilarr.Services
 {
@@ -15,11 +16,14 @@ namespace Multilarr.Services
         private readonly PusherClient.Pusher _pusherReceive;
         private PusherClient.Channel _myChannel;
         private List<ComputerDrive> _computerDrives;
+        private ILogger _logger;
 
-        public ComputerDriveDataStore(PusherServer.IPusher pusherSend, PusherClient.Pusher pusherReceive)
+        public ComputerDriveDataStore(PusherServer.IPusher pusherSend, PusherClient.Pusher pusherReceive, ILogger logger)
         {
             _pusherSend = pusherSend;
             _pusherReceive = pusherReceive;
+            _logger = logger;
+
             _ = SubscribeChannel();
         }
         
@@ -47,7 +51,9 @@ namespace Multilarr.Services
             {
                 if (stopwatch.ElapsedMilliseconds > 10000)
                 {
-                    throw new Exception("GetComputerDrivesAsync took too long!");
+                    const string errorMessage = "GetComputerDrivesAsync took too long!";
+                    await _logger.LogErrorAsync(errorMessage);
+                    throw new Exception(errorMessage);
                 }
             }
 

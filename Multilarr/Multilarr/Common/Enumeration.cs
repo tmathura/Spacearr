@@ -6,5 +6,11 @@
         {
             ComputerDrivesCommand
         }
+        public enum LogType
+        {
+            Info,
+            Warn,
+            Error
+        }
     }
 }

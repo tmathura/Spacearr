@@ -1,4 +1,6 @@
 ﻿using Autofac;
+using Multilarr.Common.Interfaces.Logger;
+using Multilarr.Services;
 using Multilarr.Views;
 using Xamarin.Forms;
 
@@ -13,9 +15,9 @@ namespace Multilarr
             
             var builder = new ContainerBuilder();
             AutofacConfig.Configure(builder);
-            ContainerProvider.Container = builder.Build();
-            
-            MainPage = new MainPage();
+            var container = builder.Build();
+
+            MainPage = new MainPage(container.Resolve<IComputerDriveDataStore>(), container.Resolve<ILogger>());
         }
 
         protected override void OnStart()

@@ -1,4 +1,5 @@
-﻿using Multilarr.Models;
+﻿using Multilarr.Common.Interfaces.Logger;
+using Multilarr.Models;
 using Multilarr.ViewModels;
 using System.ComponentModel;
 using Xamarin.Forms;
@@ -10,11 +11,11 @@ namespace Multilarr.Views
     {
         private readonly LogsViewModel _viewModel;
 
-        public LogsPage()
+        public LogsPage(ILogger logger)
         {
             InitializeComponent();
 
-            BindingContext = _viewModel = new LogsViewModel();
+            BindingContext = _viewModel = new LogsViewModel(logger);
         }
 
         private async void OnLogSelected(object sender, SelectedItemChangedEventArgs args)

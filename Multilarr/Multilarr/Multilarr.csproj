@@ -22,6 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\HomePage.xaml.cs">
+      <DependentUpon>HomePage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\LogDetailPage.xaml.cs">
       <DependentUpon>LogDetailPage.xaml</DependentUpon>
     </Compile>

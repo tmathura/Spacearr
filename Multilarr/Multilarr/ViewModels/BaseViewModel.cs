@@ -1,18 +1,12 @@
-﻿using Autofac;
-using Multilarr.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Multilarr.Common.Interfaces.Logger;
 
 namespace Multilarr.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IComputerDriveDataStore ComputerDriveDataStore => ContainerProvider.Container.Resolve<IComputerDriveDataStore>();
-        public ILogger Logger => ContainerProvider.Container.Resolve<ILogger>();
-
         private bool _isBusy;
         public bool IsBusy
         {

@@ -1,4 +1,5 @@
 ﻿using Multilarr.Models;
+using Multilarr.Services;
 using Multilarr.ViewModels;
 using System.ComponentModel;
 using Xamarin.Forms;
@@ -10,11 +11,11 @@ namespace Multilarr.Views
     {
         private readonly ComputerDrivesViewModel _viewModel;
 
-        public ComputerDrivesPage()
+        public ComputerDrivesPage(IComputerDriveDataStore computerDriveDataStore)
         {
             InitializeComponent();
 
-            BindingContext = _viewModel = new ComputerDrivesViewModel();
+            BindingContext = _viewModel = new ComputerDrivesViewModel(computerDriveDataStore);
         }
 
         private async void OnComputerDriveSelected(object sender, SelectedItemChangedEventArgs args)

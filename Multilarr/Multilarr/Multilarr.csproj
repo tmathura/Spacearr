@@ -11,6 +11,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Common\**" />
+    <EmbeddedResource Remove="Common\**" />
+    <None Remove="Common\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Autofac" Version="4.9.4" />
     <PackageReference Include="Microcharts" Version="0.8.5-pre" />
     <PackageReference Include="Microcharts.Forms" Version="0.8.5-pre" />
@@ -37,10 +43,6 @@
     <Compile Update="Views\ComputerDriveDetailPage.xaml.cs">
       <DependentUpon>ComputerDriveDetailPage.xaml</DependentUpon>
     </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Common\" />
   </ItemGroup>
 
   <ItemGroup>

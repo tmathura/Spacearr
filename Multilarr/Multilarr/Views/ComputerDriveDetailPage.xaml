@@ -13,7 +13,7 @@
         <StackLayout Spacing="20" Padding="15">
             <microcharts:ChartView x:Name="chartView" HeightRequest="200" VerticalOptions="FillAndExpand" />
             <Label Text="Name:" FontSize="Medium" />
-            <Label Text="{Binding ComputerDrive.Name}" d:Text="Computer drive name" FontSize="Small" />
+            <Label Text="{Binding ComputerDrive.Name}" d:Text="Computer drive name label" FontSize="Small" />
             <Label Text="Volume Label:" FontSize="Medium" />
             <Label Text="{Binding ComputerDrive.VolumeLabel}" d:Text="Computer drive volume label" FontSize="Small" />
             <Label Text="Drive Type:" FontSize="Medium" />

@@ -18,6 +18,7 @@ namespace Multilarr.Views
             {
                 new HomeMenuItem {Id = MenuItemType.Home, Title="Home" },
                 new HomeMenuItem {Id = MenuItemType.ComputerDrives, Title="Computer Drives" },
+                new HomeMenuItem {Id = MenuItemType.Notifications, Title="Notifications" },
                 new HomeMenuItem {Id = MenuItemType.Logs, Title="Logs" }
             };
 

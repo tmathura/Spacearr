@@ -28,6 +28,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\ComputerDriveDetailPage.xaml.cs">
+      <DependentUpon>ComputerDriveDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\NotificationsPage.xaml.cs">
+      <DependentUpon>NotificationsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
@@ -40,8 +46,8 @@
     <Compile Update="Views\ComputerDrivesPage.xaml.cs">
       <DependentUpon>ComputerDrivesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\ComputerDriveDetailPage.xaml.cs">
-      <DependentUpon>ComputerDriveDetailPage.xaml</DependentUpon>
+    <Compile Update="Views\NotificationDetailPage.xaml.cs">
+      <DependentUpon>NotificationDetailPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 

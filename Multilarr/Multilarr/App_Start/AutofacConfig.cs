@@ -27,6 +27,7 @@ namespace Multilarr
             builder.RegisterType<Logger>().As<ILogger>().SingleInstance();
             builder.Register(c => new PusherServer.Pusher(AppId, Key, Secret, optionsSend)).As<PusherServer.IPusher>().SingleInstance();
             builder.Register(c => new ComputerDriveService(c.Resolve<PusherServer.IPusher>(), pusherReceive, c.Resolve<ILogger>())).As<IComputerDriveService>().SingleInstance();
+            builder.Register(c => new NotificationService(pusherReceive)).As<INotificationService>().SingleInstance();
         }
     }
 }

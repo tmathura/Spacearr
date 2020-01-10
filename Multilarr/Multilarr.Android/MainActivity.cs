@@ -1,11 +1,9 @@
-﻿using System;
-
-using Android.App;
+﻿using Android.App;
+using Android.Content;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
+using Android.Runtime;
+using Xamarin.Forms;
 
 namespace Multilarr.Droid
 {
@@ -22,12 +20,32 @@ namespace Multilarr.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
+
+            CreateNotificationFromIntent(Intent);
         }
+
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+
+        protected override void OnNewIntent(Intent intent)
+        {
+            CreateNotificationFromIntent(intent);
+        }
+
+        void CreateNotificationFromIntent(Intent intent)
+        {
+            if (intent?.Extras != null)
+            {
+                var id = intent.Extras.GetInt(AndroidNotificationManager.IdKey);
+                var title = intent.Extras.GetString(AndroidNotificationManager.TitleKey);
+                var message = intent.Extras.GetString(AndroidNotificationManager.MessageKey);
+
+                DependencyService.Get<INotificationManager>().ReceiveNotification(id, title, message);
+            }
         }
     }
 }

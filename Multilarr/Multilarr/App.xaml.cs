@@ -17,7 +17,11 @@ namespace Multilarr
             AutofacConfig.Configure(builder);
             var container = builder.Build();
 
-            MainPage = new MainPage(container.Resolve<IComputerDriveService>(), container.Resolve<ILogger>());
+            #if __ANDROID__
+                DependencyService.Get<INotificationManager>().Initialize();
+            #endif
+
+            MainPage = new MainPage(container.Resolve<IComputerDriveService>(), container.Resolve<ILogger>(), container.Resolve<INotificationService>());
         }
 
         protected override void OnStart()

@@ -1,9 +1,10 @@
-﻿using Multilarr.Models;
+﻿using Multilarr.Common.Interfaces.Logger;
+using Multilarr.Models;
 using Multilarr.Services;
+using Multilarr.ViewModels;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
-using Multilarr.Common.Interfaces.Logger;
 using Xamarin.Forms;
 
 namespace Multilarr.Views
@@ -12,14 +13,26 @@ namespace Multilarr.Views
     public partial class MainPage : MasterDetailPage
     {
         private readonly IComputerDriveService _computerDriveService;
+        private readonly INotificationService _notificationService;
         private readonly ILogger _logger;
         private readonly Dictionary<int, NavigationPage> _menuPages = new Dictionary<int, NavigationPage>();
 
-        public MainPage(IComputerDriveService computerDriveService, ILogger logger)
+        public MainPage(IComputerDriveService computerDriveService, ILogger logger, INotificationService notificationService)
         {
             InitializeComponent();
 
+            var notificationManager = DependencyService.Get<INotificationManager>();
+            if (notificationManager != null)
+            {
+                notificationManager.NotificationReceived += (sender, eventArgs) =>
+                {
+                    var evtData = (NotificationEventArgs)eventArgs;
+                    ShowNotification(evtData.Id, evtData.Title, evtData.Message);
+                };
+            }
+
             _computerDriveService = computerDriveService;
+            _notificationService = notificationService;
             _logger = logger;
 
             MasterBehavior = MasterBehavior.Popover;
@@ -38,6 +51,9 @@ namespace Multilarr.Views
                         break;
                     case (int)MenuItemType.ComputerDrives:
                         _menuPages.Add(id, new NavigationPage(new ComputerDrivesPage(_computerDriveService)));
+                        break;
+                    case (int)MenuItemType.Notifications:
+                        _menuPages.Add(id, new NavigationPage(new NotificationsPage(_notificationService)));
                         break;
                     case (int)MenuItemType.Logs:
                         _menuPages.Add(id, new NavigationPage(new LogsPage(_logger)));
@@ -58,6 +74,17 @@ namespace Multilarr.Views
 
                 IsPresented = false;
             }
+        }
+
+        private void ShowNotification(int id, string title, string message)
+        {
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                var notification = new NotificationEventArgs { Id = id, Title = title, Message = message} ;
+                var newPage = new NavigationPage(new NotificationDetailPage(new NotificationDetailViewModel(notification)));
+                DependencyService.Get<IPushCancel>().CancelPush(id);
+                Detail = newPage;
+            });
         }
     }
 }

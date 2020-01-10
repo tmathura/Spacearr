@@ -4,6 +4,7 @@
     {
         Home,
         ComputerDrives,
+        Notifications,
         Logs
     }
     public class HomeMenuItem

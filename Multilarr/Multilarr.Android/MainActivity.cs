@@ -3,6 +3,8 @@ using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
+using AndroidX.Work;
+using Java.Util.Concurrent;
 using Xamarin.Forms;
 
 namespace Multilarr.Droid
@@ -22,6 +24,12 @@ namespace Multilarr.Droid
             LoadApplication(new App());
 
             CreateNotificationFromIntent(Intent);
+
+            const string taskId = "NotificationWorker_TaskId";
+            var builder = new PeriodicWorkRequest.Builder(typeof(NotificationWorker), 15, TimeUnit.Minutes);
+            builder.SetConstraints(Constraints.None);
+            var workRequest = builder.Build();
+            WorkManager.Instance.EnqueueUniquePeriodicWork(taskId, ExistingPeriodicWorkPolicy.Keep, workRequest);
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)

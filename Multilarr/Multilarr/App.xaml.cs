@@ -21,7 +21,7 @@ namespace Multilarr
                 DependencyService.Get<INotificationManager>().Initialize();
             #endif
 
-            MainPage = new MainPage(container.Resolve<IComputerDriveService>(), container.Resolve<ILogger>(), container.Resolve<INotificationService>());
+            MainPage = new MainPage(container.Resolve<IComputerDriveService>(), container.Resolve<ILogger>());
         }
 
         protected override void OnStart()

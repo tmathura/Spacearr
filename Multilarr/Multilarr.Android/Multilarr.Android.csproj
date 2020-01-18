@@ -53,11 +53,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Xamarin.Android.Arch.Work.Runtime">
+      <Version>1.0.0.3</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="4.3.0.908675" />
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AndroidNotificationManager.cs" />
+    <Compile Include="NotificationWorker.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="PushCancelService.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
@@ -88,6 +92,10 @@
     <AndroidResource Include="Resources\drawable\xamarin_logo.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Multilarr.Common\Multilarr.Common.csproj">
+      <Project>{07955d9e-746b-4274-b1e5-b233d577e437}</Project>
+      <Name>Multilarr.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Multilarr\Multilarr.csproj">
       <Project>{1E11DE0B-3C5F-4100-B8F6-EBE61C55151C}</Project>
       <Name>Multilarr</Name>

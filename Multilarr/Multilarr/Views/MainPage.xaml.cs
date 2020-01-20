@@ -1,5 +1,7 @@
 ﻿using Multilarr.Common.Interfaces.Logger;
+using Multilarr.Common.Models;
 using Multilarr.Models;
+using Multilarr.Notifications;
 using Multilarr.Services;
 using Multilarr.ViewModels;
 using System.Collections.Generic;

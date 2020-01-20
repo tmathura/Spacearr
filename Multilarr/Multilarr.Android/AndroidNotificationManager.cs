@@ -3,6 +3,8 @@ using Android.Content;
 using Android.Graphics;
 using Android.OS;
 using Android.Support.V4.App;
+using Multilarr.Common.Models;
+using Multilarr.Notifications;
 using System;
 using Xamarin.Forms;
 using AndroidApp = Android.App.Application;

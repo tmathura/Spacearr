@@ -39,7 +39,7 @@ namespace Multilarr.Droid
             foreach (var notification in notifications)
             {
                 _notificationManager.ScheduleNotification(notification.LogTitle, notification.LogMessage);
-                _notificationLogger.DeleteLogAsync(notification);
+               var deletedResult =  _notificationLogger.DeleteLogAsync(notification).Result;
             }
 
             return Result.InvokeSuccess();

@@ -1,4 +1,6 @@
-﻿namespace Multilarr.ViewModels
+﻿using Multilarr.Common.Models;
+
+namespace Multilarr.ViewModels
 {
     public class NotificationDetailViewModel : BaseViewModel
     {

@@ -31,9 +31,6 @@
     <Compile Update="Views\ComputerDriveDetailPage.xaml.cs">
       <DependentUpon>ComputerDriveDetailPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\NotificationsPage.xaml.cs">
-      <DependentUpon>NotificationsPage.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Views\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>

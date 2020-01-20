@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Multilarr
+namespace Multilarr.Common.Models
 {
     public class NotificationEventArgs : EventArgs
     {

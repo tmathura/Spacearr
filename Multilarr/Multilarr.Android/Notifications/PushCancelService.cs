@@ -1,12 +1,12 @@
 ﻿using Android.Content;
 using Android.Support.V4.App;
-using Multilarr.Droid;
+using Multilarr.Droid.Notifications;
 using Multilarr.Notifications;
 using Xamarin.Forms;
 using Application = Android.App.Application;
 
 [assembly: Dependency(typeof(PushCancelService))]
-namespace Multilarr.Droid
+namespace Multilarr.Droid.Notifications
 {
     public class PushCancelService : IPushCancel
     {

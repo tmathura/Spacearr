@@ -1,13 +1,13 @@
-﻿using Android.Content;
+﻿using System;
+using System.IO;
+using System.Threading.Tasks;
+using Android.Content;
 using AndroidX.Work;
 using Multilarr.Common.Models;
 using Multilarr.Common.NotificationLogger;
 using Newtonsoft.Json;
-using System;
-using System.IO;
-using System.Threading.Tasks;
 
-namespace Multilarr.Droid
+namespace Multilarr.Droid.Notifications
 {
     public class NotificationWorker : Worker
     {

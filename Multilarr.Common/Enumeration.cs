@@ -4,7 +4,8 @@
     {
         public enum CommandType
         {
-            ComputerDrivesCommand
+            ComputerDrivesCommand,
+            ComputerDrivesLowCommand
         }
         public enum LogType
         {

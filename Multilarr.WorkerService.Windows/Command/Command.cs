@@ -30,6 +30,12 @@ namespace Multilarr.WorkerService.Windows.Command
                     messageCommandObject = InvokeComputerDrivesCommand();
                     break;
                 }
+
+                case Enumeration.CommandType.ComputerDrivesLowCommand:
+                {
+                    messageCommandObject = InvokeComputerDrivesLowCommand();
+                    break;
+                }
             }
 
             return messageCommandObject;
@@ -40,6 +46,12 @@ namespace Multilarr.WorkerService.Windows.Command
         private CommandObjectSerialized InvokeComputerDrivesCommand()
         {
             var command = new ComputerDrivesCommand(_dataSize, _computerDrives);
+            return _multilarrMessageCommand.Invoke(command);
+        }
+
+        private CommandObjectSerialized InvokeComputerDrivesLowCommand()
+        {
+            var command = new ComputerDrivesLowCommand(_dataSize, _computerDrives);
             return _multilarrMessageCommand.Invoke(command);
         }
 

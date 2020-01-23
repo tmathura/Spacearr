@@ -15,6 +15,11 @@ namespace Multilarr.WorkerService.Windows
 {
     public class Program
     {
+        private const string AppId = "927757";
+        private const string Key = "1989c6974272ea96b1c4";
+        private const string Secret = "27dd35a15799cb4dac36";
+        private const string Cluster = "ap2";
+
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
@@ -32,6 +37,9 @@ namespace Multilarr.WorkerService.Windows
                     services.AddSingleton<ICommand, Command.Command>();
                     services.AddSingleton<ILoggerDatabase, LoggerDatabase>(serviceProvider => new LoggerDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "MultilarrWorkerServiceSQLite.db3")));
                     services.AddSingleton<ILogger, Logger>();
+                    services.AddSingleton<PusherServer.IPusherOptions, PusherServer.PusherOptions>(serviceProvider => new PusherServer.PusherOptions { Cluster = Cluster });
+                    services.AddSingleton<PusherServer.IPusher, PusherServer.Pusher>(serviceProvider => new PusherServer.Pusher(AppId, Key, Secret, services.BuildServiceProvider().GetService<PusherServer.IPusherOptions>()));
+                    services.AddSingleton<INotificationTimer, NotificationTimer>(serviceProvider => new NotificationTimer(900000, services.BuildServiceProvider().GetService<ICommand>(), services.BuildServiceProvider().GetService<PusherServer.IPusher>()));
                     services.AddHostedService<Worker>();
                 });
     }

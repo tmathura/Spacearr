@@ -16,17 +16,15 @@ namespace Multilarr
 
         public static void Configure(ContainerBuilder builder)
         {
-
-            var optionsSend = new PusherServer.PusherOptions { Cluster = Cluster };
-
             var optionsReceive = new PusherClient.PusherOptions { Cluster = Cluster };
             var pusherReceive = new PusherClient.Pusher(Key, optionsReceive);
             pusherReceive.ConnectAsync();
 
             builder.Register(c => new LoggerDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "MultilarrSQLite.db3"))).As<ILoggerDatabase>().SingleInstance();
             builder.RegisterType<Logger>().As<ILogger>().SingleInstance();
-            builder.Register(c => new PusherServer.Pusher(AppId, Key, Secret, optionsSend)).As<PusherServer.IPusher>().SingleInstance();
-            builder.Register(c => new ComputerDriveService(c.Resolve<PusherServer.IPusher>(), pusherReceive, c.Resolve<ILogger>())).As<IComputerDriveService>().SingleInstance();
+            builder.Register(c => new PusherServer.PusherOptions { Cluster = Cluster }).As<PusherServer.IPusherOptions>().SingleInstance();
+            builder.Register(c => new PusherServer.Pusher(AppId, Key, Secret, c.Resolve<PusherServer.IPusherOptions>())).As<PusherServer.IPusher>().SingleInstance();
+            builder.RegisterType<ComputerDriveService>().As<IComputerDriveService>().WithParameter("pusherReceive", pusherReceive).SingleInstance();
         }
     }
 }

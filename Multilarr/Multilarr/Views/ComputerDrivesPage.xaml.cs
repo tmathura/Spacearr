@@ -1,5 +1,5 @@
 ﻿using Multilarr.Common.Models;
-using Multilarr.Services;
+using Multilarr.Services.Interfaces;
 using Multilarr.ViewModels;
 using System.ComponentModel;
 using Xamarin.Forms;

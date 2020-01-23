@@ -1,6 +1,6 @@
 ﻿using Autofac;
 using Multilarr.Common.Interfaces.Logger;
-using Multilarr.Services;
+using Multilarr.Services.Interfaces;
 using Multilarr.Views;
 using Xamarin.Forms;
 

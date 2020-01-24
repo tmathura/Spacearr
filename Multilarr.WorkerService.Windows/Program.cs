@@ -40,6 +40,7 @@ namespace Multilarr.WorkerService.Windows
                     services.AddSingleton<PusherServer.IPusherOptions, PusherServer.PusherOptions>(serviceProvider => new PusherServer.PusherOptions { Cluster = Cluster });
                     services.AddSingleton<PusherServer.IPusher, PusherServer.Pusher>(serviceProvider => new PusherServer.Pusher(AppId, Key, Secret, services.BuildServiceProvider().GetService<PusherServer.IPusherOptions>()));
                     services.AddSingleton<INotificationTimer, NotificationTimer>(serviceProvider => new NotificationTimer(900000, services.BuildServiceProvider().GetService<ICommand>(), services.BuildServiceProvider().GetService<PusherServer.IPusher>()));
+                    services.AddSingleton<IPusherClientInterface, PusherClientInterface>(serviceProvider => new PusherClientInterface(Key, new PusherClient.PusherOptions { Cluster = Cluster }));
                     services.AddHostedService<Worker>();
                 });
     }

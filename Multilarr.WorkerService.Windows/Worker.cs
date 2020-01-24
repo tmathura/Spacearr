@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Hosting;
 using Multilarr.Common;
+using Multilarr.Common.Interfaces;
 using Multilarr.Common.Interfaces.Logger;
 using Multilarr.Common.Models;
 using Multilarr.WorkerService.Windows.Command;
@@ -16,20 +17,17 @@ namespace Multilarr.WorkerService.Windows
         private readonly ICommand _command;
         private readonly ILogger _logger;
         private readonly PusherServer.IPusher _pusherSend;
+        private readonly IPusherClientInterface _pusherReceive;
 
-        private readonly PusherClient.Pusher _pusherReceive;
         private PusherClient.Channel _myChannel;
-        private const string Key = "1989c6974272ea96b1c4";
-        private const string Cluster = "ap2";
 
-        public Worker(ICommand command, ILogger logger, PusherServer.IPusher pusherSend, INotificationTimer notificationTimer)
+        public Worker(ICommand command, ILogger logger, PusherServer.IPusher pusherSend, INotificationTimer notificationTimer, IPusherClientInterface pusherReceive)
         {
             _command = command;
             _logger = logger;
             _pusherSend = pusherSend;
 
-            var optionsReceive = new PusherClient.PusherOptions { Cluster = Cluster };
-            _pusherReceive = new PusherClient.Pusher(Key, optionsReceive);
+            _pusherReceive = pusherReceive;
             _pusherReceive.ConnectAsync();
 
             notificationTimer.Instantiate();

@@ -1,11 +1,12 @@
-﻿using System;
-using System.IO;
-using System.Threading.Tasks;
-using Android.Content;
+﻿using Android.Content;
 using AndroidX.Work;
+using Multilarr.Common;
 using Multilarr.Common.Models;
 using Multilarr.Common.NotificationLogger;
 using Newtonsoft.Json;
+using System;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace Multilarr.Droid.Notifications
 {
@@ -15,14 +16,13 @@ namespace Multilarr.Droid.Notifications
         private const string Cluster = "ap2";
 
         private readonly AndroidNotificationManager _notificationManager;
-        private readonly PusherClient.Pusher _pusherReceive;
+        private readonly PusherClientInterface _pusherReceive;
         private PusherClient.Channel _myChannel;
         private readonly NotificationLogger _notificationLogger;
 
         public NotificationWorker(Context context, WorkerParameters workerParameters) : base(context, workerParameters)
         {
-            var optionsReceive = new PusherClient.PusherOptions { Cluster = Cluster };
-            _pusherReceive = new PusherClient.Pusher(Key, optionsReceive);
+            _pusherReceive = new PusherClientInterface(Key, new PusherClient.PusherOptions { Cluster = Cluster });
             _pusherReceive.ConnectAsync();
 
             _ = SubscribeChannel();

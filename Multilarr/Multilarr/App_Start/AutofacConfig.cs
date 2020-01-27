@@ -1,4 +1,6 @@
 ﻿using Autofac;
+using Multilarr.Common;
+using Multilarr.Common.Interfaces;
 using Multilarr.Common.Interfaces.Logger;
 using Multilarr.Common.Logger;
 using Multilarr.Services;
@@ -17,15 +19,12 @@ namespace Multilarr
 
         public static void Configure(ContainerBuilder builder)
         {
-            var optionsReceive = new PusherClient.PusherOptions { Cluster = Cluster };
-            var pusherReceive = new PusherClient.Pusher(Key, optionsReceive);
-            pusherReceive.ConnectAsync();
-
             builder.Register(c => new LoggerDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "MultilarrSQLite.db3"))).As<ILoggerDatabase>().SingleInstance();
             builder.RegisterType<Logger>().As<ILogger>().SingleInstance();
             builder.Register(c => new PusherServer.PusherOptions { Cluster = Cluster }).As<PusherServer.IPusherOptions>().SingleInstance();
             builder.Register(c => new PusherServer.Pusher(AppId, Key, Secret, c.Resolve<PusherServer.IPusherOptions>())).As<PusherServer.IPusher>().SingleInstance();
-            builder.RegisterType<ComputerDriveService>().As<IComputerDriveService>().WithParameter("pusherReceive", pusherReceive).SingleInstance();
+            builder.Register(c => new PusherClientInterface(Key, new PusherClient.PusherOptions { Cluster = Cluster })).As<IPusherClientInterface>().SingleInstance();
+            builder.RegisterType<ComputerDriveService>().As<IComputerDriveService>().SingleInstance();
         }
     }
 }

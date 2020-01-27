@@ -21,7 +21,7 @@ namespace Multilarr.WorkerService.Windows
 
         private PusherClient.Channel _myChannel;
 
-        public Worker(ICommand command, ILogger logger, PusherServer.IPusher pusherSend, INotificationTimer notificationTimer, IPusherClientInterface pusherReceive)
+        public Worker(ICommand command, ILogger logger, PusherServer.IPusher pusherSend, IPusherClientInterface pusherReceive, INotificationTimer notificationTimer)
         {
             _command = command;
             _logger = logger;
@@ -29,9 +29,9 @@ namespace Multilarr.WorkerService.Windows
 
             _pusherReceive = pusherReceive;
             _pusherReceive.ConnectAsync();
+            _ = SubscribeChannel();
 
             notificationTimer.Instantiate();
-            _ = SubscribeChannel();
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)

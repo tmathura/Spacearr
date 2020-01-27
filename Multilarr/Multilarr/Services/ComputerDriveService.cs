@@ -1,4 +1,5 @@
 ﻿using Multilarr.Common;
+using Multilarr.Common.Interfaces;
 using Multilarr.Common.Interfaces.Logger;
 using Multilarr.Common.Models;
 using Multilarr.Services.Interfaces;
@@ -13,12 +14,12 @@ namespace Multilarr.Services
     public class ComputerDriveService : IComputerDriveService
     {
         private readonly PusherServer.IPusher _pusherSend;
-        private readonly PusherClient.Pusher _pusherReceive;
+        private readonly IPusherClientInterface _pusherReceive;
         private PusherClient.Channel _myChannel;
         private List<ComputerDrive> _computerDrives;
         private readonly ILogger _logger;
 
-        public ComputerDriveService(PusherServer.IPusher pusherSend, PusherClient.Pusher pusherReceive, ILogger logger)
+        public ComputerDriveService(PusherServer.IPusher pusherSend, IPusherClientInterface pusherReceive, ILogger logger)
         {
             _pusherSend = pusherSend;
             _pusherReceive = pusherReceive;
@@ -41,6 +42,8 @@ namespace Multilarr.Services
 
         public async Task<IEnumerable<ComputerDrive>> GetComputerDrivesAsync()
         {
+            await _pusherReceive.ConnectAsync();
+
             var pusherSendMessage = new PusherSendMessage { Command = Enumeration.CommandType.ComputerDrivesCommand};
             await _pusherSend.TriggerAsync("multilarr-channel", "multilarr_event", new { message = JsonConvert.SerializeObject(pusherSendMessage) });
 
@@ -59,6 +62,7 @@ namespace Multilarr.Services
 
             var result = await Task.FromResult(_computerDrives);
             _computerDrives = null;
+            await _pusherReceive.DisconnectAsync();
             return result;
         }
     }

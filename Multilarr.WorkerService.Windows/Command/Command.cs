@@ -1,4 +1,5 @@
-﻿using Multilarr.Common;
+﻿using Microsoft.Extensions.Configuration;
+using Multilarr.Common;
 using Multilarr.Common.Interfaces;
 using Multilarr.WorkerService.Windows.Command.MessageCommand;
 using Multilarr.WorkerService.Windows.Command.MessageCommand.Commands;
@@ -8,14 +9,14 @@ namespace Multilarr.WorkerService.Windows.Command
 {
     public class Command : ICommand
     {
-        private readonly long _lowDiskSpaceWarning;
+        private readonly IConfiguration _configuration;
         private readonly IDataSize _dataSize;
         private readonly IMultilarrMessageCommand _multilarrMessageCommand;
         private readonly IComputerDrives _computerDrives;
 
-        public Command(long lowDiskSpaceWarning, IDataSize dataSize, IMultilarrMessageCommand multilarrMessageCommand, IComputerDrives computerDrives)
+        public Command(IConfiguration configuration, IDataSize dataSize, IMultilarrMessageCommand multilarrMessageCommand, IComputerDrives computerDrives)
         {
-            _lowDiskSpaceWarning = lowDiskSpaceWarning;
+            _configuration = configuration;
             _dataSize = dataSize;
             _multilarrMessageCommand = multilarrMessageCommand;
             _computerDrives = computerDrives;
@@ -53,7 +54,7 @@ namespace Multilarr.WorkerService.Windows.Command
 
         private CommandObjectSerialized InvokeComputerDrivesLowCommand()
         {
-            var command = new ComputerDrivesLowCommand(_dataSize, _computerDrives, _lowDiskSpaceWarning);
+            var command = new ComputerDrivesLowCommand(_configuration, _dataSize, _computerDrives);
             return _multilarrMessageCommand.Invoke(command);
         }
 

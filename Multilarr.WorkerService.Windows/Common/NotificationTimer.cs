@@ -1,7 +1,9 @@
-﻿using Multilarr.Common;
+﻿using Microsoft.Extensions.Configuration;
+using Multilarr.Common;
 using Multilarr.WorkerService.Windows.Command;
 using Multilarr.WorkerService.Windows.Command.MessageCommand;
 using Multilarr.WorkerService.Windows.Common.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Timers;
 using Timer = System.Timers.Timer;
@@ -14,14 +16,14 @@ namespace Multilarr.WorkerService.Windows.Common
         private readonly PusherServer.IPusher _pusherSend;
         private readonly Timer _timer;
 
-        public NotificationTimer(double notificationTimerInterval, ICommand command, PusherServer.IPusher pusherSend)
+        public NotificationTimer(IConfiguration configuration, ICommand command, PusherServer.IPusher pusherSend)
         {
             _command = command;
             _pusherSend = pusherSend;
 
             _timer = new Timer
             {
-                Interval = notificationTimerInterval,
+                Interval = TimeSpan.FromMinutes(configuration.GetValue<double>("NotificationTimerMinutesInterval")).TotalMilliseconds,
                 AutoReset = true
             };
             _timer.Elapsed += ElapsedEventHandler;

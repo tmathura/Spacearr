@@ -1,4 +1,5 @@
-﻿using Multilarr.Common.Interfaces;
+﻿using Microsoft.Extensions.Configuration;
+using Multilarr.Common.Interfaces;
 using Multilarr.Common.Models;
 using Multilarr.WorkerService.Windows.Common.Interfaces;
 using Newtonsoft.Json;
@@ -10,21 +11,22 @@ namespace Multilarr.WorkerService.Windows.Command.MessageCommand.Commands
 {
     public class ComputerDrivesLowCommand : IMessageCommand
     {
+        private readonly long _lowComputerDriveValue;
+
         private readonly IDataSize _dataSize;
-        private readonly long _lowDiskSpaceWarning;
         private readonly IComputerDrives _windowsDrives;
 
-        public ComputerDrivesLowCommand(IDataSize dataSize, IComputerDrives windowsDrives, long lowDiskSpaceWarning)
+        public ComputerDrivesLowCommand(IConfiguration configuration, IDataSize dataSize, IComputerDrives windowsDrives)
         {
             _dataSize = dataSize;
             _windowsDrives = windowsDrives;
-            _lowDiskSpaceWarning = lowDiskSpaceWarning;
+            _lowComputerDriveValue = configuration.GetValue<long>("LowComputerDriveGBValue");
         }
 
         public CommandObjectSerialized Execute()
         {
             NotificationEventArgs notificationEventArgs = null;
-            var lowDiskSpaceWarningGb = _lowDiskSpaceWarning;
+            var lowDiskSpaceWarningGb = _lowComputerDriveValue;
 
             if (lowDiskSpaceWarningGb > 0)
             {

@@ -19,6 +19,8 @@ namespace Multilarr.WorkerService.Windows
         private const string Key = "1989c6974272ea96b1c4";
         private const string Secret = "27dd35a15799cb4dac36";
         private const string Cluster = "ap2";
+        private const long LowDiskSpaceWarning = 20;
+        private const int NotificationTimerInterval = 15;
 
         public static void Main(string[] args)
         {
@@ -34,13 +36,17 @@ namespace Multilarr.WorkerService.Windows
                     services.AddSingleton<IMultilarrMessageCommand, MultilarrMessageCommand>();
                     services.AddSingleton<IComputerDrives, ComputerDrives>();
                     services.AddSingleton<IComputerDriveInfo, ComputerDriveInfo>();
-                    services.AddSingleton<ICommand, Command.Command>();
-                    services.AddSingleton<ILoggerDatabase, LoggerDatabase>(serviceProvider => new LoggerDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "MultilarrWorkerServiceSQLite.db3")));
+                    services.AddSingleton<ICommand, Command.Command>(serviceProvider => new Command.Command(LowDiskSpaceWarning, services.BuildServiceProvider().GetService<IDataSize>(),
+                        services.BuildServiceProvider().GetService<IMultilarrMessageCommand>(), services.BuildServiceProvider().GetService<IComputerDrives>()));
+                    services.AddSingleton<ILoggerDatabase, LoggerDatabase>(serviceProvider => new LoggerDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                        "MultilarrWorkerServiceSQLite.db3")));
                     services.AddSingleton<ILogger, Logger>();
                     services.AddSingleton<PusherServer.IPusherOptions, PusherServer.PusherOptions>(serviceProvider => new PusherServer.PusherOptions { Cluster = Cluster });
-                    services.AddSingleton<PusherServer.IPusher, PusherServer.Pusher>(serviceProvider => new PusherServer.Pusher(AppId, Key, Secret, services.BuildServiceProvider().GetService<PusherServer.IPusherOptions>()));
+                    services.AddSingleton<PusherServer.IPusher, PusherServer.Pusher>(serviceProvider => new PusherServer.Pusher(AppId, Key, Secret,
+                        services.BuildServiceProvider().GetService<PusherServer.IPusherOptions>()));
                     services.AddSingleton<IPusherClientInterface, PusherClientInterface>(serviceProvider => new PusherClientInterface(Key, new PusherClient.PusherOptions { Cluster = Cluster }));
-                    services.AddSingleton<INotificationTimer, NotificationTimer>(serviceProvider => new NotificationTimer(900000, services.BuildServiceProvider().GetService<ICommand>(), services.BuildServiceProvider().GetService<PusherServer.IPusher>()));
+                    services.AddSingleton<INotificationTimer, NotificationTimer>(serviceProvider => new NotificationTimer(TimeSpan.FromMinutes(NotificationTimerInterval).TotalMilliseconds,
+                        services.BuildServiceProvider().GetService<ICommand>(), services.BuildServiceProvider().GetService<PusherServer.IPusher>()));
                     services.AddHostedService<Worker>();
                 });
     }

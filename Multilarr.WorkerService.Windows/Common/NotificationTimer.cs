@@ -14,14 +14,14 @@ namespace Multilarr.WorkerService.Windows.Common
         private readonly PusherServer.IPusher _pusherSend;
         private readonly Timer _timer;
 
-        public NotificationTimer(int timerInterval, ICommand command, PusherServer.IPusher pusherSend)
+        public NotificationTimer(double notificationTimerInterval, ICommand command, PusherServer.IPusher pusherSend)
         {
             _command = command;
             _pusherSend = pusherSend;
 
             _timer = new Timer
             {
-                Interval = timerInterval,
+                Interval = notificationTimerInterval,
                 AutoReset = true
             };
             _timer.Elapsed += ElapsedEventHandler;

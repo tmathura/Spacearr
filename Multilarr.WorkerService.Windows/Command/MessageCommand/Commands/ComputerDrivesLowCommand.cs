@@ -14,11 +14,11 @@ namespace Multilarr.WorkerService.Windows.Command.MessageCommand.Commands
         private readonly long _lowDiskSpaceWarning;
         private readonly IComputerDrives _windowsDrives;
 
-        public ComputerDrivesLowCommand(IDataSize dataSize, IComputerDrives windowsDrives)
+        public ComputerDrivesLowCommand(IDataSize dataSize, IComputerDrives windowsDrives, long lowDiskSpaceWarning)
         {
             _dataSize = dataSize;
             _windowsDrives = windowsDrives;
-            _lowDiskSpaceWarning = 10;
+            _lowDiskSpaceWarning = lowDiskSpaceWarning;
         }
 
         public CommandObjectSerialized Execute()

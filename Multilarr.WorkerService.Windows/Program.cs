@@ -26,24 +26,25 @@ namespace Multilarr.WorkerService.Windows
                 .UseWindowsService()
                 .ConfigureServices((hostContext, services) =>
                 {
+                    services.AddSingleton<ILoggerDatabase, LoggerDatabase>(serviceProvider =>
+                        new LoggerDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "MultilarrWorkerServiceSQLite.db3")));
+                    services.AddSingleton<PusherServer.IPusherOptions, PusherServer.PusherOptions>(serviceProvider =>
+                        new PusherServer.PusherOptions { Cluster = services.BuildServiceProvider().GetService<IConfiguration>().GetSection("PusherCluster").Value });
+                    services.AddSingleton<PusherServer.IPusher, PusherServer.Pusher>(serviceProvider => new PusherServer.Pusher(
+                        services.BuildServiceProvider().GetService<IConfiguration>().GetSection("PusherAppId").Value,
+                        services.BuildServiceProvider().GetService<IConfiguration>().GetSection("PusherKey").Value,
+                        services.BuildServiceProvider().GetService<IConfiguration>().GetSection("PusherSecret").Value,
+                        services.BuildServiceProvider().GetService<PusherServer.IPusherOptions>()));
+                    services.AddSingleton<IPusherClientInterface, PusherClientInterface>(serviceProvider =>
+                        new PusherClientInterface(services.BuildServiceProvider().GetService<IConfiguration>().GetSection("PusherKey").Value,
+                            new PusherClient.PusherOptions { Cluster = services.BuildServiceProvider().GetService<IConfiguration>().GetSection("PusherCluster").Value }));
+
                     services.AddSingleton<IDataSize, DataSize>();
                     services.AddSingleton<IMultilarrMessageCommand, MultilarrMessageCommand>();
                     services.AddSingleton<IComputerDrives, ComputerDrives>();
                     services.AddSingleton<IComputerDriveInfo, ComputerDriveInfo>();
                     services.AddSingleton<ICommand, Command.Command>();
-                    services.AddSingleton<ILoggerDatabase, LoggerDatabase>(serviceProvider => 
-                        new LoggerDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "MultilarrWorkerServiceSQLite.db3")));
                     services.AddSingleton<ILogger, Logger>();
-                    services.AddSingleton<PusherServer.IPusherOptions, PusherServer.PusherOptions>(serviceProvider => 
-                        new PusherServer.PusherOptions { Cluster = services.BuildServiceProvider().GetService<IConfiguration>().GetSection("PusherCluster").Value });
-                    services.AddSingleton<PusherServer.IPusher, PusherServer.Pusher>(serviceProvider => new PusherServer.Pusher(
-                        services.BuildServiceProvider().GetService<IConfiguration>().GetSection("PusherAppId").Value,
-                        services.BuildServiceProvider().GetService<IConfiguration>().GetSection("PusherKey").Value, 
-                        services.BuildServiceProvider().GetService<IConfiguration>().GetSection("PusherSecret").Value,
-                        services.BuildServiceProvider().GetService<PusherServer.IPusherOptions>()));
-                    services.AddSingleton<IPusherClientInterface, PusherClientInterface>(serviceProvider => 
-                        new PusherClientInterface(services.BuildServiceProvider().GetService<IConfiguration>().GetSection("PusherKey").Value,
-                        new PusherClient.PusherOptions { Cluster = services.BuildServiceProvider().GetService<IConfiguration>().GetSection("PusherCluster").Value }));
                     services.AddSingleton<INotificationTimer, NotificationTimer>();
                     services.AddHostedService<Worker>();
                 });

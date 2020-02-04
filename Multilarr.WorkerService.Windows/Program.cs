@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Multilarr.Common;
@@ -15,11 +16,6 @@ namespace Multilarr.WorkerService.Windows
 {
     public class Program
     {
-        private const string AppId = "927757";
-        private const string Key = "1989c6974272ea96b1c4";
-        private const string Secret = "27dd35a15799cb4dac36";
-        private const string Cluster = "ap2";
-
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
@@ -35,13 +31,19 @@ namespace Multilarr.WorkerService.Windows
                     services.AddSingleton<IComputerDrives, ComputerDrives>();
                     services.AddSingleton<IComputerDriveInfo, ComputerDriveInfo>();
                     services.AddSingleton<ICommand, Command.Command>();
-                    services.AddSingleton<ILoggerDatabase, LoggerDatabase>(serviceProvider => new LoggerDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                        "MultilarrWorkerServiceSQLite.db3")));
+                    services.AddSingleton<ILoggerDatabase, LoggerDatabase>(serviceProvider => 
+                        new LoggerDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "MultilarrWorkerServiceSQLite.db3")));
                     services.AddSingleton<ILogger, Logger>();
-                    services.AddSingleton<PusherServer.IPusherOptions, PusherServer.PusherOptions>(serviceProvider => new PusherServer.PusherOptions { Cluster = Cluster });
-                    services.AddSingleton<PusherServer.IPusher, PusherServer.Pusher>(serviceProvider => new PusherServer.Pusher(AppId, Key, Secret,
+                    services.AddSingleton<PusherServer.IPusherOptions, PusherServer.PusherOptions>(serviceProvider => 
+                        new PusherServer.PusherOptions { Cluster = services.BuildServiceProvider().GetService<IConfiguration>().GetSection("PusherCluster").Value });
+                    services.AddSingleton<PusherServer.IPusher, PusherServer.Pusher>(serviceProvider => new PusherServer.Pusher(
+                        services.BuildServiceProvider().GetService<IConfiguration>().GetSection("PusherAppId").Value,
+                        services.BuildServiceProvider().GetService<IConfiguration>().GetSection("PusherKey").Value, 
+                        services.BuildServiceProvider().GetService<IConfiguration>().GetSection("PusherSecret").Value,
                         services.BuildServiceProvider().GetService<PusherServer.IPusherOptions>()));
-                    services.AddSingleton<IPusherClientInterface, PusherClientInterface>(serviceProvider => new PusherClientInterface(Key, new PusherClient.PusherOptions { Cluster = Cluster }));
+                    services.AddSingleton<IPusherClientInterface, PusherClientInterface>(serviceProvider => 
+                        new PusherClientInterface(services.BuildServiceProvider().GetService<IConfiguration>().GetSection("PusherKey").Value,
+                        new PusherClient.PusherOptions { Cluster = services.BuildServiceProvider().GetService<IConfiguration>().GetSection("PusherCluster").Value }));
                     services.AddSingleton<INotificationTimer, NotificationTimer>();
                     services.AddHostedService<Worker>();
                 });

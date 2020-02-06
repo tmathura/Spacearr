@@ -13,7 +13,7 @@ namespace Multilarr.Droid.Notifications
         public void CancelPush(int id)
         {
             var notificationManager = NotificationManagerCompat.From(Application.Context);
-            notificationManager.CancelAll();
+            notificationManager.Cancel(id);
             CreateIntent(id);
         }
         private Intent CreateIntent(int id)

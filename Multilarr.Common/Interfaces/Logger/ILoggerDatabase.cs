@@ -23,5 +23,15 @@ namespace Multilarr.Common.Interfaces.Logger
         Task<int> DeleteLogAsync(NotificationLog item);
 
         #endregion
+
+        #region Settings
+
+        Task<List<SettingLog>> GetSettingLogsAsync();
+        Task<SettingLog> GetSettingLogAsync(int id);
+        Task<int> SaveLogAsync(SettingLog item);
+        Task<int> UpdateLogAsync(SettingLog item);
+        Task<int> DeleteLogAsync(SettingLog item);
+
+        #endregion
     }
 }

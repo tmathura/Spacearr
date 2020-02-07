@@ -15,7 +15,8 @@ namespace Multilarr.Common.Logger
 			_database = new SQLiteAsyncConnection(databasePath);
 			_database.CreateTableAsync<Log>().Wait();
             _database.CreateTableAsync<NotificationLog>().Wait();
-		}
+            _database.CreateTableAsync<SettingLog>().Wait();
+        }
 
 		public async Task<List<Log>> GetLogsAsync()
 		{
@@ -55,6 +56,35 @@ namespace Multilarr.Common.Logger
         }
 
         public async Task<int> DeleteLogAsync(NotificationLog item)
+        {
+            return await _database.DeleteAsync(item);
+        }
+
+        #endregion
+
+        #region Settings
+
+        public async Task<List<SettingLog>> GetSettingLogsAsync()
+        {
+            return await _database.Table<SettingLog>().ToListAsync();
+        }
+
+        public async Task<SettingLog> GetSettingLogAsync(int id)
+        {
+            return await _database.Table<SettingLog>().Where(x => x.Id == id).FirstOrDefaultAsync();
+        }
+
+        public async Task<int> SaveLogAsync(SettingLog item)
+        {
+            return await _database.InsertAsync(item);
+        }
+
+        public async Task<int> UpdateLogAsync(SettingLog item)
+        {
+            return await _database.UpdateAsync(item);
+        }
+
+        public async Task<int> DeleteLogAsync(SettingLog item)
         {
             return await _database.DeleteAsync(item);
         }

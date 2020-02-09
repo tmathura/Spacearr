@@ -12,22 +12,24 @@
         <ToolbarItem Text="Cancel" Clicked="Cancel_Clicked" />
         <ToolbarItem Text="Save" Clicked="Save_Clicked" />
     </ContentPage.ToolbarItems>
-    
+
     <ContentPage.Content>
-        <StackLayout Spacing="20" Padding="15">
-            <Label Text="Computer Name:" FontSize="Medium" />
-            <Entry Text="{Binding Setting.ComputerName}" d:Text="Computer name" FontSize="Small" />
-            <Label Text="Pusher App Id:" FontSize="Medium" />
-            <Entry Text="{Binding Setting.PusherAppId}" d:Text="Pusher app id" FontSize="Small" />
-            <Label Text="Pusher Key:" FontSize="Medium" />
-            <Entry Text="{Binding Setting.PusherKey}" d:Text="Pusher key" FontSize="Small" />
-            <Label Text="Pusher Secret:" FontSize="Medium" />
-            <Entry Text="{Binding Setting.PusherSecret}" d:Text="Pusher secret" FontSize="Small" />
-            <Label Text="Pusher Cluster:" FontSize="Medium" />
-            <Entry Text="{Binding Setting.PusherCluster}" d:Text="Pusher cluster" FontSize="Small" />
-            <Label Text="Is Default:" FontSize="Medium" />
-            <CheckBox IsChecked="{Binding Setting.IsDefault}" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout Spacing="20" Padding="15">
+                <Label Text="Computer Name:" FontSize="Medium" />
+                <Entry Text="{Binding Setting.ComputerName}" d:Text="Computer name" FontSize="Small" />
+                <Label Text="Pusher App Id:" FontSize="Medium" />
+                <Entry Text="{Binding Setting.PusherAppId}" d:Text="Pusher app id" FontSize="Small" />
+                <Label Text="Pusher Key:" FontSize="Medium" />
+                <Entry Text="{Binding Setting.PusherKey}" d:Text="Pusher key" FontSize="Small" />
+                <Label Text="Pusher Secret:" FontSize="Medium" />
+                <Entry Text="{Binding Setting.PusherSecret}" d:Text="Pusher secret" FontSize="Small" />
+                <Label Text="Pusher Cluster:" FontSize="Medium" />
+                <Entry Text="{Binding Setting.PusherCluster}" d:Text="Pusher cluster" FontSize="Small" />
+                <Label Text="Is Default:" FontSize="Medium" />
+                <CheckBox IsChecked="{Binding Setting.IsDefault}" />
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
-    
+
 </ContentPage>

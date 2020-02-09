@@ -55,6 +55,9 @@ namespace Multilarr.Views
                     case (int)MenuItemType.Logs:
                         _menuPages.Add(id, new NavigationPage(new LogsPage(_logger)));
                         break;
+                    case (int)MenuItemType.Settings:
+                        _menuPages.Add(id, new NavigationPage(new SettingsPage(_logger)));
+                        break;
                 }
             }
 

@@ -16,9 +16,10 @@ namespace Multilarr.Views
 
             var menuItems = new List<HomeMenuItem>
             {
-                new HomeMenuItem {Id = MenuItemType.Home, Title="Home" },
-                new HomeMenuItem {Id = MenuItemType.ComputerDrives, Title="Computer Drives" },
-                new HomeMenuItem {Id = MenuItemType.Logs, Title="Logs" }
+                new HomeMenuItem {Id = MenuItemType.Home, Title = "Home" },
+                new HomeMenuItem {Id = MenuItemType.ComputerDrives, Title = "Computer Drives" },
+                new HomeMenuItem {Id = MenuItemType.Logs, Title = "Logs" },
+                new HomeMenuItem {Id = MenuItemType.Settings, Title = "Settings" }
             };
 
             ListViewMenu.ItemsSource = menuItems;

@@ -10,16 +10,20 @@
              Title="{Binding Title}"
              x:DataType="viewModels:SettingsViewModel">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Clicked="AddSetting_Clicked" />
+    </ContentPage.ToolbarItems>
+
     <StackLayout>
         <ListView x:Name="SettingsListView"
-                ItemsSource="{Binding Settings}"
-                VerticalOptions="FillAndExpand"
-                HasUnevenRows="true"
-                RefreshCommand="{Binding LoadSettingsCommand}"
-                IsPullToRefreshEnabled="true"
-                IsRefreshing="{Binding IsBusy, Mode=OneWay}"
-                CachingStrategy="RecycleElement"
-                ItemSelected="OnSettingSelected" x:DataType="viewModels:SettingsViewModel">
+                  ItemsSource="{Binding Settings}"
+                  VerticalOptions="FillAndExpand"
+                  HasUnevenRows="true"
+                  RefreshCommand="{Binding LoadSettingsCommand}"
+                  IsPullToRefreshEnabled="true"
+                  IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                  CachingStrategy="RecycleElement"
+                  ItemSelected="OnSettingSelected" x:DataType="viewModels:SettingsViewModel">
             <d:ListView.ItemsSource>
                 <x:Array Type="{x:Type models:SettingLog}">
                     <models:SettingLog ComputerName = "Computer name 1" />

@@ -8,21 +8,28 @@
              x:Class="Multilarr.Views.SettingDetailPage"
              Title="{Binding Title}" x:DataType="viewModels:SettingDetailViewModel">
 
-    <ScrollView>
-        <StackLayout Spacing="20" Padding="15">
-            <Label Text="Computer Name:" FontSize="Medium" />
-            <Label Text="{Binding SettingLog.ComputerName}" d:Text="Computer name" FontSize="Small" />
-            <Label Text="Pusher App Id:" FontSize="Medium" />
-            <Label Text="{Binding SettingLog.PusherAppId}" d:Text="Pusher app id" FontSize="Small" />
-            <Label Text="Pusher Key:" FontSize="Medium" />
-            <Label Text="{Binding SettingLog.PusherKey}" d:Text="Pusher key" FontSize="Small" />
-            <Label Text="Pusher Secret:" FontSize="Medium" />
-            <Label Text="{Binding SettingLog.PusherSecret}" d:Text="Pusher secret" FontSize="Small" />
-            <Label Text="Pusher Cluster:" FontSize="Medium" />
-            <Label Text="{Binding SettingLog.PusherCluster}" d:Text="Pusher cluster" FontSize="Small" />
-            <Label Text="Is Default:" FontSize="Medium" />
-            <CheckBox IsChecked="{Binding SettingLog.IsDefault}" IsEnabled="False" />
-        </StackLayout>
-    </ScrollView>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Cancel" Clicked="Cancel_Clicked" />
+        <ToolbarItem Text="Update" Clicked="Update_Clicked" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Spacing="20" Padding="15">
+                <Label Text="Computer Name:" FontSize="Medium" />
+                <Entry Text="{Binding SettingLog.ComputerName}" d:Text="Computer name" FontSize="Small" />
+                <Label Text="Pusher App Id:" FontSize="Medium" />
+                <Entry Text="{Binding SettingLog.PusherAppId}" d:Text="Pusher app id" FontSize="Small" />
+                <Label Text="Pusher Key:" FontSize="Medium" />
+                <Entry Text="{Binding SettingLog.PusherKey}" d:Text="Pusher key" FontSize="Small" />
+                <Label Text="Pusher Secret:" FontSize="Medium" />
+                <Entry Text="{Binding SettingLog.PusherSecret}" d:Text="Pusher secret" FontSize="Small" />
+                <Label Text="Pusher Cluster:" FontSize="Medium" />
+                <Entry Text="{Binding SettingLog.PusherCluster}" d:Text="Pusher cluster" FontSize="Small" />
+                <Label Text="Is Default:" FontSize="Medium" />
+                <CheckBox IsChecked="{Binding SettingLog.IsDefault}" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
 
 </ContentPage>

@@ -113,27 +113,19 @@ namespace Multilarr.Common.Logger
             return _loggerDatabase.GetSettingLogAsync(id);
         }
 
-        public Task<int> LogSettingAsync(string computerName, string pusherAppId, string pusherKey, string pusherSecret, string pusherCluster, bool isDefault)
+        public Task<int> LogSettingAsync(SettingLog item)
         {
-            var settingLog = new SettingLog
-            {
-                ComputerName = computerName,
-                PusherAppId = pusherAppId,
-                PusherKey = pusherKey,
-                PusherSecret = pusherSecret,
-                PusherCluster = pusherCluster,
-                IsDefault = default,
-                CreatedDate = DateTime.Now,
-                UpdatedDate = DateTime.Now
-            };
 
-            return _loggerDatabase.SaveLogAsync(settingLog);
+            item.CreatedDate = DateTime.Now;
+            item.UpdatedDate = DateTime.Now;
+
+            return _loggerDatabase.SaveLogAsync(item);
         }
 
         public Task<int> UpdateSettingAsync(SettingLog item)
         {
             item.UpdatedDate = DateTime.Now;
-            return _loggerDatabase.SaveLogAsync(item);
+            return _loggerDatabase.UpdateLogAsync(item);
         }
 
         public Task<int> DeleteLogAsync(SettingLog item)

@@ -30,7 +30,7 @@ namespace Multilarr.Common.Interfaces.Logger
 
         Task<List<SettingLog>> GetSettingLogsAsync();
         Task<SettingLog> GetSettingLogAsync(int id);
-        Task<int> LogSettingAsync(string computerName, string pusherAppId, string pusherKey, string pusherSecret, string pusherCluster, bool isDefault);
+        Task<int> LogSettingAsync(SettingLog item);
         Task<int> UpdateSettingAsync(SettingLog item);
         Task<int> DeleteLogAsync(SettingLog item);
 

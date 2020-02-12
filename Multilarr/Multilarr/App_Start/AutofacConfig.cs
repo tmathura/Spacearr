@@ -21,9 +21,8 @@ namespace Multilarr
         {
             builder.Register(c => new LoggerDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "MultilarrSQLite.db3"))).As<ILoggerDatabase>().SingleInstance();
             builder.RegisterType<Logger>().As<ILogger>().SingleInstance();
-            builder.Register(c => new PusherServer.PusherOptions { Cluster = Cluster }).As<PusherServer.IPusherOptions>().SingleInstance();
-            builder.Register(c => new PusherServer.Pusher(AppId, Key, Secret, c.Resolve<PusherServer.IPusherOptions>())).As<PusherServer.IPusher>().SingleInstance();
-            builder.Register(c => new PusherClientInterface(Key, new PusherClient.PusherOptions { Cluster = Cluster })).As<IPusherClientInterface>().SingleInstance();
+            builder.RegisterType<Setting>().As<ISetting>().SingleInstance();
+            builder.RegisterType<Pusher>().As<IPusher>().SingleInstance();
             builder.RegisterType<ComputerDriveService>().As<IComputerDriveService>().SingleInstance();
         }
     }

@@ -13,44 +13,27 @@ namespace Multilarr.Services
 {
     public class ComputerDriveService : IComputerDriveService
     {
-        private readonly PusherServer.IPusher _pusherSend;
-        private readonly IPusherClientInterface _pusherReceive;
-        private PusherClient.Channel _myChannel;
-        private List<ComputerDrive> _computerDrives;
+        private readonly IPusher _pusher;
         private readonly ILogger _logger;
+        private List<ComputerDrive> _computerDrives;
 
-        public ComputerDriveService(PusherServer.IPusher pusherSend, IPusherClientInterface pusherReceive, ILogger logger)
+        public ComputerDriveService(IPusher pusher, ILogger logger)
         {
-            _pusherSend = pusherSend;
-            _pusherReceive = pusherReceive;
+            _pusher = pusher;
             _logger = logger;
-
-            _ = SubscribeChannel();
         }
         
-        private async Task SubscribeChannel()
-        {
-            _myChannel = await _pusherReceive.SubscribeAsync("multilarr-worker-service-windows-channel");
-            _myChannel.Bind("worker_service_event", (dynamic data) =>
-            {
-                PusherReceiveMessageObject pusherReceiveMessageObject = JsonConvert.DeserializeObject<PusherReceiveMessageObject>(data.ToString());
-                var pusherReceiveMessage = JsonConvert.DeserializeObject<PusherReceiveMessage>(pusherReceiveMessageObject.Data);
-                var deserializeObject = JsonConvert.DeserializeObject<List<ComputerDrive>>(pusherReceiveMessage.Message);
-                _computerDrives = deserializeObject;
-            });
-        }
-
         public async Task<IEnumerable<ComputerDrive>> GetComputerDrivesAsync()
         {
-            await _pusherReceive.ConnectAsync();
+            await _pusher.ReceiverConnect("multilarr-worker-service-windows-channel", "worker_service_event");
 
             var pusherSendMessage = new PusherSendMessage { Command = Enumeration.CommandType.ComputerDrivesCommand};
-            await _pusherSend.TriggerAsync("multilarr-channel", "multilarr_event", new { message = JsonConvert.SerializeObject(pusherSendMessage) });
+            await _pusher.SendMessage("multilarr-channel", "multilarr_event", JsonConvert.SerializeObject(pusherSendMessage));
 
             var stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            while (_computerDrives == null)
+            while (_pusher.ReturnData == null)
             {
                 if (stopwatch.ElapsedMilliseconds > 10000)
                 {
@@ -60,9 +43,13 @@ namespace Multilarr.Services
                 }
             }
 
+            _computerDrives = JsonConvert.DeserializeObject<List<ComputerDrive>>(_pusher.ReturnData);
+
             var result = await Task.FromResult(_computerDrives);
+            _pusher.ReturnData = null;
             _computerDrives = null;
-            await _pusherReceive.DisconnectAsync();
+
+            await _pusher.ReceiverDisconnect();
             return result;
         }
     }

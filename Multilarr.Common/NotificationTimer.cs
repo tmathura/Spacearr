@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Timers;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Multilarr.Common.Command;
 using Multilarr.Common.Command.MessageCommand;
 using Multilarr.Common.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Timers;
 using Timer = System.Timers.Timer;
 
 namespace Multilarr.Common
@@ -12,13 +12,13 @@ namespace Multilarr.Common
     public class NotificationTimer : INotificationTimer
     {
         private readonly ICommand _command;
-        private readonly PusherServer.IPusher _pusherSend;
+        private readonly IPusher _pusher;
         private readonly Timer _timer;
 
-        public NotificationTimer(IConfiguration configuration, ICommand command, PusherServer.IPusher pusherSend)
+        public NotificationTimer(IConfiguration configuration, ICommand command, IPusher pusher)
         {
             _command = command;
-            _pusherSend = pusherSend;
+            _pusher = pusher;
 
             _timer = new Timer
             {
@@ -47,7 +47,7 @@ namespace Multilarr.Common
 
             foreach (var commandObjectSerialized in commandObjectSerializedList)
             {
-                _pusherSend.TriggerAsync("multilarr-worker-service-windows-notification-channel", "worker_service_event", new { message = commandObjectSerialized.SerializeObject });
+                _pusher.SendMessage("multilarr-worker-service-windows-notification-channel", "worker_service_event", commandObjectSerialized.SerializeObject);
             }
         }
     }

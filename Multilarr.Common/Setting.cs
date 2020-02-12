@@ -11,6 +11,8 @@ namespace Multilarr.Common
         public string Secret { get; set; }
         public string Cluster { get; set; }
 
+        public Setting() { }
+
         public Setting(ILogger logger)
         {
             var settings = Task.Run(logger.GetSettingLogsAsync).Result;

@@ -1,10 +1,5 @@
 using Microsoft.Extensions.Hosting;
-using Multilarr.Common;
-using Multilarr.Common.Command;
 using Multilarr.Common.Interfaces;
-using Multilarr.Common.Models;
-using Newtonsoft.Json;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,23 +7,9 @@ namespace Multilarr.WorkerService.Windows
 {
     public class Worker : BackgroundService
     {
-        private readonly ICommand _command;
-        private readonly ILogger _logger;
-        private readonly PusherServer.IPusher _pusherSend;
-        private readonly IPusherClientInterface _pusherReceive;
-
-        private PusherClient.Channel _myChannel;
-
-        public Worker(ICommand command, ILogger logger, PusherServer.IPusher pusherSend, IPusherClientInterface pusherReceive, INotificationTimer notificationTimer)
+        public Worker(IPusher pusher, INotificationTimer notificationTimer)
         {
-            _command = command;
-            _logger = logger;
-            _pusherSend = pusherSend;
-
-            _pusherReceive = pusherReceive;
-            _pusherReceive.ConnectAsync();
-            _ = SubscribeChannel();
-
+            pusher.CommandReceiverConnect("multilarr-channel", "multilarr_event", "multilarr-worker-service-windows-channel", "worker_service_event");
             notificationTimer.Instantiate();
         }
 
@@ -37,31 +18,6 @@ namespace Multilarr.WorkerService.Windows
             while (!stoppingToken.IsCancellationRequested)
             {
                 await Task.Delay(1000, stoppingToken);
-            }
-        }
-
-        private async Task SubscribeChannel()
-        {
-            _myChannel = await _pusherReceive.SubscribeAsync("multilarr-channel");
-            _myChannel.Bind("multilarr_event", (dynamic data) =>
-            {
-                PusherReceiveMessageObject pusherReceiveMessage = JsonConvert.DeserializeObject<PusherReceiveMessageObject>(data.ToString());
-                var pusherMessage = JsonConvert.DeserializeObject<PusherReceiveMessage>(pusherReceiveMessage.Data);
-                var deserializeObject = JsonConvert.DeserializeObject<PusherSendMessage>(pusherMessage.Message);
-                ExecuteCommand(deserializeObject.Command);
-            });
-        }
-
-        private async void ExecuteCommand(Enumeration.CommandType command)
-        {
-            try
-            {
-                var commandObjectSerialized = _command.Invoke(command);
-                await _pusherSend.TriggerAsync("multilarr-worker-service-windows-channel", "worker_service_event", new { message = commandObjectSerialized.SerializeObject });
-            }
-            catch (Exception e)
-            {
-                await _logger.LogErrorAsync(e.Message);
             }
         }
     }

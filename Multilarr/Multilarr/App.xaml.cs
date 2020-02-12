@@ -1,5 +1,5 @@
 ﻿using Autofac;
-using Multilarr.Common.Interfaces.Logger;
+using Multilarr.Common.Interfaces;
 using Multilarr.Services.Interfaces;
 using Multilarr.Views;
 using Xamarin.Forms;

@@ -1,10 +1,9 @@
 ﻿using Multilarr.Common.Interfaces;
 using Multilarr.Common.Models;
-using Multilarr.WorkerService.Windows.Common.Interfaces;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace Multilarr.WorkerService.Windows.Command.MessageCommand.Commands
+namespace Multilarr.Common.Command.MessageCommand.Commands
 {
     public class ComputerDrivesCommand : IMessageCommand
     {

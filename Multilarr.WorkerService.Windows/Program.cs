@@ -2,13 +2,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Multilarr.Common;
+using Multilarr.Common.Command;
+using Multilarr.Common.Command.MessageCommand;
 using Multilarr.Common.Interfaces;
-using Multilarr.Common.Interfaces.Logger;
-using Multilarr.Common.Logger;
-using Multilarr.WorkerService.Windows.Command;
-using Multilarr.WorkerService.Windows.Command.MessageCommand;
-using Multilarr.WorkerService.Windows.Common;
-using Multilarr.WorkerService.Windows.Common.Interfaces;
 using System;
 using System.IO;
 
@@ -43,7 +39,7 @@ namespace Multilarr.WorkerService.Windows
                     services.AddSingleton<IMultilarrMessageCommand, MultilarrMessageCommand>();
                     services.AddSingleton<IComputerDrives, ComputerDrives>();
                     services.AddSingleton<IComputerDriveInfo, ComputerDriveInfo>();
-                    services.AddSingleton<ICommand, Command.Command>();
+                    services.AddSingleton<ICommand, Common.Command.Command>();
                     services.AddSingleton<ILogger, Logger>();
                     services.AddSingleton<INotificationTimer, NotificationTimer>();
                     services.AddHostedService<Worker>();

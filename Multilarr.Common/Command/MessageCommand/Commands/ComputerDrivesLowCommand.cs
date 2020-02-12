@@ -1,13 +1,12 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Multilarr.Common.Interfaces;
 using Multilarr.Common.Models;
-using Multilarr.WorkerService.Windows.Common.Interfaces;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace Multilarr.WorkerService.Windows.Command.MessageCommand.Commands
+namespace Multilarr.Common.Command.MessageCommand.Commands
 {
     public class ComputerDrivesLowCommand : IMessageCommand
     {
@@ -20,7 +19,7 @@ namespace Multilarr.WorkerService.Windows.Command.MessageCommand.Commands
         {
             _dataSize = dataSize;
             _windowsDrives = windowsDrives;
-            _lowComputerDriveValue = configuration.GetValue<long>("LowComputerDriveGBValue");
+            _lowComputerDriveValue = Convert.ToInt64(configuration.GetSection("LowComputerDriveGBValue").Value);
         }
 
         public CommandObjectSerialized Execute()

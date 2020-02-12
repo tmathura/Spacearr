@@ -1,4 +1,4 @@
-﻿namespace Multilarr.WorkerService.Windows.Command.MessageCommand
+﻿namespace Multilarr.Common.Command.MessageCommand
 {
     public interface IMultilarrMessageCommand
     {

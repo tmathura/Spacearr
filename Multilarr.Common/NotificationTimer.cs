@@ -1,14 +1,13 @@
-﻿using Microsoft.Extensions.Configuration;
-using Multilarr.Common;
-using Multilarr.WorkerService.Windows.Command;
-using Multilarr.WorkerService.Windows.Command.MessageCommand;
-using Multilarr.WorkerService.Windows.Common.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Timers;
+using Microsoft.Extensions.Configuration;
+using Multilarr.Common.Command;
+using Multilarr.Common.Command.MessageCommand;
+using Multilarr.Common.Interfaces;
 using Timer = System.Timers.Timer;
 
-namespace Multilarr.WorkerService.Windows.Common
+namespace Multilarr.Common
 {
     public class NotificationTimer : INotificationTimer
     {
@@ -23,7 +22,7 @@ namespace Multilarr.WorkerService.Windows.Common
 
             _timer = new Timer
             {
-                Interval = TimeSpan.FromMinutes(configuration.GetValue<double>("NotificationTimerMinutesInterval")).TotalMilliseconds,
+                Interval = TimeSpan.FromMinutes(Convert.ToDouble(configuration.GetSection("NotificationTimerMinutesInterval").Value)).TotalMilliseconds,
                 AutoReset = true
             };
             _timer.Elapsed += ElapsedEventHandler;

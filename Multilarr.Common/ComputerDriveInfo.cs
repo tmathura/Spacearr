@@ -1,7 +1,7 @@
-﻿using Multilarr.WorkerService.Windows.Common.Interfaces;
-using System.IO;
+﻿using System.IO;
+using Multilarr.Common.Interfaces;
 
-namespace Multilarr.WorkerService.Windows.Common
+namespace Multilarr.Common
 {
     public class ComputerDriveInfo : IComputerDriveInfo
     {

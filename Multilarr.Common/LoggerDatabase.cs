@@ -1,10 +1,10 @@
-﻿using Multilarr.Common.Interfaces.Logger;
-using Multilarr.Common.Models;
+﻿using Multilarr.Common.Models;
 using SQLite;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Multilarr.Common.Interfaces;
 
-namespace Multilarr.Common.Logger
+namespace Multilarr.Common
 {
     public class LoggerDatabase : ILoggerDatabase
     {

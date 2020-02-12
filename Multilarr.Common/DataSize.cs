@@ -1,5 +1,5 @@
-﻿using System;
-using Multilarr.Common.Interfaces;
+﻿using Multilarr.Common.Interfaces;
+using System;
 
 namespace Multilarr.Common
 {

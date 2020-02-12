@@ -1,10 +1,8 @@
 using Microsoft.Extensions.Hosting;
 using Multilarr.Common;
+using Multilarr.Common.Command;
 using Multilarr.Common.Interfaces;
-using Multilarr.Common.Interfaces.Logger;
 using Multilarr.Common.Models;
-using Multilarr.WorkerService.Windows.Command;
-using Multilarr.WorkerService.Windows.Common.Interfaces;
 using Newtonsoft.Json;
 using System;
 using System.Threading;

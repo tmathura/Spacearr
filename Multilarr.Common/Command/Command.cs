@@ -1,11 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Multilarr.Common;
+using Multilarr.Common.Command.MessageCommand;
+using Multilarr.Common.Command.MessageCommand.Commands;
 using Multilarr.Common.Interfaces;
-using Multilarr.WorkerService.Windows.Command.MessageCommand;
-using Multilarr.WorkerService.Windows.Command.MessageCommand.Commands;
-using Multilarr.WorkerService.Windows.Common.Interfaces;
 
-namespace Multilarr.WorkerService.Windows.Command
+namespace Multilarr.Common.Command
 {
     public class Command : ICommand
     {

@@ -1,4 +1,4 @@
-﻿namespace Multilarr.WorkerService.Windows.Common.Interfaces
+﻿namespace Multilarr.Common.Interfaces
 {
     public interface INotificationTimer
     {

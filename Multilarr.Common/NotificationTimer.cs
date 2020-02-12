@@ -47,7 +47,7 @@ namespace Multilarr.Common
 
             foreach (var commandObjectSerialized in commandObjectSerializedList)
             {
-                _pusher.SendMessage("multilarr-worker-service-windows-notification-channel", "worker_service_event", commandObjectSerialized.SerializeObject);
+                _pusher.SendMessage(Enumeration.PusherChannel.MultilarrWorkerServiceWindowsNotificationChannel.ToString(), Enumeration.PusherEvent.WorkerServiceEvent.ToString(), commandObjectSerialized.SerializeObject);
             }
         }
     }

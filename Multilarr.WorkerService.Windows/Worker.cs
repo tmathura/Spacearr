@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Hosting;
+using Multilarr.Common;
 using Multilarr.Common.Interfaces;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,7 +10,13 @@ namespace Multilarr.WorkerService.Windows
     {
         public Worker(IPusher pusher, INotificationTimer notificationTimer)
         {
-            pusher.CommandReceiverConnect("multilarr-channel", "multilarr_event", "multilarr-worker-service-windows-channel", "worker_service_event");
+            pusher.CommandReceiverConnect(
+                Enumeration.PusherChannel.MultilarrChannel.ToString(),
+                Enumeration.PusherEvent.MultilarrEvent.ToString(),
+                Enumeration.PusherChannel.MultilarrWorkerServiceWindowsChannel.ToString(),
+                Enumeration.PusherEvent.WorkerServiceEvent.ToString()
+                );
+
             notificationTimer.Instantiate();
         }
 

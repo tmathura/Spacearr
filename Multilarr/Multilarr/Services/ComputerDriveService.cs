@@ -24,10 +24,10 @@ namespace Multilarr.Services
         
         public async Task<IEnumerable<ComputerDrive>> GetComputerDrivesAsync()
         {
-            await _pusher.ReceiverConnect("multilarr-worker-service-windows-channel", "worker_service_event");
+            await _pusher.ReceiverConnect(Enumeration.PusherChannel.MultilarrWorkerServiceWindowsChannel.ToString(), Enumeration.PusherEvent.WorkerServiceEvent.ToString());
 
             var pusherSendMessage = new PusherSendMessage { Command = Enumeration.CommandType.ComputerDrivesCommand};
-            await _pusher.SendMessage("multilarr-channel", "multilarr_event", JsonConvert.SerializeObject(pusherSendMessage));
+            await _pusher.SendMessage(Enumeration.PusherChannel.MultilarrChannel.ToString(), Enumeration.PusherEvent.MultilarrEvent.ToString(), JsonConvert.SerializeObject(pusherSendMessage));
 
             var stopwatch = new Stopwatch();
             stopwatch.Start();

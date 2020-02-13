@@ -36,7 +36,20 @@ namespace Multilarr.Common
         public Pusher(ILogger logger, ISetting setting)
         {
             _logger = logger;
-            _command = null;
+            _setting = setting;
+        }
+
+        public Pusher(ILogger logger, string appId, string key, string secret, string cluster)
+        {
+            var setting = new Setting
+            {
+                AppId = appId,
+                Key = key,
+                Secret = secret,
+                Cluster = cluster
+            };
+
+            _logger = logger;
             _setting = setting;
         }
 
@@ -87,6 +100,30 @@ namespace Multilarr.Common
                 var pusherMessage = JsonConvert.DeserializeObject<PusherReceiveMessage>(pusherReceiveMessage.Data);
                 var deserializeObject = JsonConvert.DeserializeObject<PusherSendMessage>(pusherMessage.Message);
                 ExecuteCommand(deserializeObject.Command, channelNameSend, eventNameSend);
+            });
+
+            await _pusherReceive.ConnectAsync();
+        }
+
+        public async Task NotificationReceiverConnect(string channelNameReceive, string eventNameReceive)
+        {
+            _pusherReceive = null;
+            ReturnData = null;
+            if (!string.IsNullOrWhiteSpace(_setting.AppId) && !string.IsNullOrWhiteSpace(_setting.Key) && !string.IsNullOrWhiteSpace(_setting.Secret) && !string.IsNullOrWhiteSpace(_setting.Cluster))
+            {
+                _pusherReceive = new PusherClient.Pusher(_setting.Key, new PusherClient.PusherOptions { Cluster = _setting.Cluster });
+            }
+
+            _myChannel = await _pusherReceive.SubscribeAsync(channelNameReceive);
+            _myChannel.Bind(eventNameReceive, (dynamic data) =>
+            {
+                var logs = _logger.GetNotificationLogsAsync().Result;
+
+                PusherReceiveMessageObject pusherReceiveMessageObject = JsonConvert.DeserializeObject<PusherReceiveMessageObject>(data.ToString());
+                var pusherReceiveMessage = JsonConvert.DeserializeObject<PusherReceiveMessage>(pusherReceiveMessageObject.Data);
+                var deserializeObject = JsonConvert.DeserializeObject<NotificationEventArgs>(pusherReceiveMessage.Message);
+
+                _logger.LogNotificationAsync(deserializeObject.Title, deserializeObject.Message);
             });
 
             await _pusherReceive.ConnectAsync();

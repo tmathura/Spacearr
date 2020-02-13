@@ -4,6 +4,7 @@ using Multilarr.Common;
 using Multilarr.Common.Models;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Logger = Multilarr.Common.Logger;
@@ -12,33 +13,33 @@ namespace Multilarr.Droid.Notifications
 {
     public class NotificationWorker : Worker
     {
-        private const string AppId = "927757";
-        private const string Key = "1989c6974272ea96b1c4";
-        private const string Secret = "27dd35a15799cb4dac36";
-        private const string Cluster = "ap2";
 
         private readonly AndroidNotificationManager _notificationManager;
-        private readonly PusherServer.Pusher _pusherSend;
-        private readonly PusherClientInterface _pusherReceive;
-        private PusherClient.Channel _myChannel;
+        private readonly List<Pusher> _pusher;
         private readonly Logger _logger;
 
         public NotificationWorker(Context context, WorkerParameters workerParameters) : base(context, workerParameters)
         {
+            _pusher = new List<Pusher>();
             var loggerDatabase = new LoggerDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "MultilarrSQLite.db3"));
             _logger = new Logger(loggerDatabase);
 
-            _pusherSend = new PusherServer.Pusher(AppId, Key, Secret, new PusherServer.PusherOptions { Cluster = Cluster });
+            var settings = _logger.GetSettingLogsAsync().Result;
 
-            var getResult = _pusherSend.GetAsync<object>("/channels/multilarr-worker-service-windows-notification-channel").Result;
-            var pusherSendRequestResultObject = JsonConvert.DeserializeObject<PusherSendRequestResultObject>(((PusherServer.RequestResult) getResult).Body);
-
-            if (!pusherSendRequestResultObject.Occupied)
+            var pusherCount = 0;
+            foreach (var setting in settings)
             {
-                _pusherReceive = new PusherClientInterface(Key, new PusherClient.PusherOptions { Cluster = Cluster });
-                _pusherReceive.ConnectAsync();
+                var pusherSend = new PusherServer.Pusher(setting.PusherAppId, setting.PusherKey, setting.PusherSecret, new PusherServer.PusherOptions { Cluster = setting.PusherCluster });
 
-                _ = SubscribeChannel();
+                var getResult = pusherSend.GetAsync<object>($"/channels/{Enumeration.PusherChannel.MultilarrWorkerServiceWindowsNotificationChannel.ToString()}").Result;
+                var pusherSendRequestResultObject = JsonConvert.DeserializeObject<PusherSendRequestResultObject>(((PusherServer.RequestResult)getResult).Body);
+
+                if (!pusherSendRequestResultObject.Occupied)
+                {
+                    _pusher.Add(new Pusher(_logger, setting.PusherAppId, setting.PusherKey, setting.PusherSecret, setting.PusherCluster));
+                    _ = _pusher[pusherCount].NotificationReceiverConnect(Enumeration.PusherChannel.MultilarrWorkerServiceWindowsNotificationChannel.ToString(), Enumeration.PusherEvent.WorkerServiceEvent.ToString());
+                    pusherCount += 1;
+                }
             }
 
             _notificationManager = new AndroidNotificationManager();
@@ -54,21 +55,6 @@ namespace Multilarr.Droid.Notifications
             }
 
             return Result.InvokeSuccess();
-        }
-
-        private async Task SubscribeChannel()
-        {
-            _myChannel = await _pusherReceive.SubscribeAsync("multilarr-worker-service-windows-notification-channel");
-            _myChannel.Bind("worker_service_event", (dynamic data) =>
-            {
-                var logs = _logger.GetNotificationLogsAsync().Result;
-
-                PusherReceiveMessageObject pusherReceiveMessageObject = JsonConvert.DeserializeObject<PusherReceiveMessageObject>(data.ToString());
-                var pusherReceiveMessage = JsonConvert.DeserializeObject<PusherReceiveMessage>(pusherReceiveMessageObject.Data);
-                var deserializeObject = JsonConvert.DeserializeObject<NotificationEventArgs>(pusherReceiveMessage.Message);
-
-                _logger.LogNotificationAsync(deserializeObject.Title, deserializeObject.Message);
-            });
         }
     }
 }

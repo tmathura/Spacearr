@@ -17,6 +17,12 @@ namespace Multilarr.Common
         private PusherClient.Channel _myChannel;
         private PusherClient.Pusher _pusherReceive;
         public string ReturnData { get; set; }
+        
+        public Pusher(ILogger logger, ISetting setting)
+        {
+            _logger = logger;
+            _setting = setting;
+        }
 
         public Pusher(ILogger logger, ICommand command, IConfiguration configuration)
         {
@@ -30,12 +36,6 @@ namespace Multilarr.Common
 
             _logger = logger;
             _command = command;
-            _setting = setting;
-        }
-
-        public Pusher(ILogger logger, ISetting setting)
-        {
-            _logger = logger;
             _setting = setting;
         }
 
@@ -55,7 +55,9 @@ namespace Multilarr.Common
 
         public async Task SendMessage(string channelName, string eventName, string message)
         {
+            _setting.PopulateSetting();
             PusherServer.Pusher pusherSend = null;
+
             if (!string.IsNullOrWhiteSpace(_setting.AppId) && !string.IsNullOrWhiteSpace(_setting.Key) && !string.IsNullOrWhiteSpace(_setting.Secret) && !string.IsNullOrWhiteSpace(_setting.Cluster))
             {
                 pusherSend = new PusherServer.Pusher(_setting.AppId, _setting.Key, _setting.Secret, new PusherServer.PusherOptions { Cluster = _setting.Cluster });
@@ -66,8 +68,10 @@ namespace Multilarr.Common
 
         public async Task ReceiverConnect(string channelName, string eventName)
         {
+            _setting.PopulateSetting();
             _pusherReceive = null;
             ReturnData = null;
+
             if (!string.IsNullOrWhiteSpace(_setting.AppId) && !string.IsNullOrWhiteSpace(_setting.Key) && !string.IsNullOrWhiteSpace(_setting.Secret) && !string.IsNullOrWhiteSpace(_setting.Cluster))
             {
                 _pusherReceive = new PusherClient.Pusher(_setting.Key, new PusherClient.PusherOptions { Cluster = _setting.Cluster });
@@ -86,8 +90,10 @@ namespace Multilarr.Common
 
         public async Task CommandReceiverConnect(string channelNameReceive, string eventNameReceive, string channelNameSend, string eventNameSend)
         {
+            _setting.PopulateSetting();
             _pusherReceive = null;
             ReturnData = null;
+
             if (!string.IsNullOrWhiteSpace(_setting.AppId) && !string.IsNullOrWhiteSpace(_setting.Key) && !string.IsNullOrWhiteSpace(_setting.Secret) && !string.IsNullOrWhiteSpace(_setting.Cluster))
             {
                 _pusherReceive = new PusherClient.Pusher(_setting.Key, new PusherClient.PusherOptions { Cluster = _setting.Cluster });
@@ -107,8 +113,10 @@ namespace Multilarr.Common
 
         public async Task NotificationReceiverConnect(string channelNameReceive, string eventNameReceive)
         {
+            _setting.PopulateSetting();
             _pusherReceive = null;
             ReturnData = null;
+
             if (!string.IsNullOrWhiteSpace(_setting.AppId) && !string.IsNullOrWhiteSpace(_setting.Key) && !string.IsNullOrWhiteSpace(_setting.Secret) && !string.IsNullOrWhiteSpace(_setting.Cluster))
             {
                 _pusherReceive = new PusherClient.Pusher(_setting.Key, new PusherClient.PusherOptions { Cluster = _setting.Cluster });

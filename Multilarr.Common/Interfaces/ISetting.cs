@@ -6,5 +6,6 @@
         string Key { get; set; }
         string Secret { get; set; }
         string Cluster { get; set; }
+        void PopulateSetting();
     }
 }

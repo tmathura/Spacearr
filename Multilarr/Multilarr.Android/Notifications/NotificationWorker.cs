@@ -6,7 +6,6 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading.Tasks;
 using Logger = Multilarr.Common.Logger;
 
 namespace Multilarr.Droid.Notifications

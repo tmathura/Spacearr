@@ -1,4 +1,5 @@
-﻿using Multilarr.Common.Models;
+﻿using Multilarr.Common.Interfaces;
+using Multilarr.Common.Models;
 using Multilarr.Services.Interfaces;
 using Multilarr.ViewModels;
 using System.ComponentModel;
@@ -11,11 +12,11 @@ namespace Multilarr.Views
     {
         private readonly ComputerDrivesViewModel _viewModel;
 
-        public ComputerDrivesPage(IComputerDriveService computerDriveService)
+        public ComputerDrivesPage(ILogger logger, IComputerDriveService computerDriveService)
         {
             InitializeComponent();
 
-            BindingContext = _viewModel = new ComputerDrivesViewModel(computerDriveService);
+            BindingContext = _viewModel = new ComputerDrivesViewModel(logger, computerDriveService);
         }
 
         private async void OnComputerDriveSelected(object sender, SelectedItemChangedEventArgs args)

@@ -13,13 +13,11 @@ namespace Multilarr.Services
     public class ComputerDriveService : IComputerDriveService
     {
         private readonly IPusher _pusher;
-        private readonly ILogger _logger;
         private List<ComputerDrive> _computerDrives;
 
-        public ComputerDriveService(IPusher pusher, ILogger logger)
+        public ComputerDriveService(IPusher pusher)
         {
             _pusher = pusher;
-            _logger = logger;
         }
         
         public async Task<IEnumerable<ComputerDrive>> GetComputerDrivesAsync()
@@ -36,9 +34,7 @@ namespace Multilarr.Services
             {
                 if (stopwatch.ElapsedMilliseconds > 10000)
                 {
-                    const string errorMessage = "GetComputerDrivesAsync took too long!";
-                    await _logger.LogErrorAsync(errorMessage);
-                    throw new Exception(errorMessage);
+                    throw new Exception("GetComputerDrivesAsync took too long!");
                 }
             }
 

@@ -51,11 +51,12 @@ namespace Multilarr.Common
             return _loggerDatabase.SaveLogAsync(log);
         }
 
-        public Task<int> LogErrorAsync(string logMessage)
+        public Task<int> LogErrorAsync(string logMessage, string stackTrace)
         {
             var log = new Log
             {
                 LogMessage = logMessage,
+                LogStackTrace = stackTrace,
                 LogType = Enumeration.LogType.Error,
                 LogDate = DateTime.Now
             };

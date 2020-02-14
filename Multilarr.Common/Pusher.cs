@@ -56,14 +56,17 @@ namespace Multilarr.Common
         public async Task SendMessage(string channelName, string eventName, string message)
         {
             _setting.PopulateSetting();
-            PusherServer.Pusher pusherSend = null;
 
             if (!string.IsNullOrWhiteSpace(_setting.AppId) && !string.IsNullOrWhiteSpace(_setting.Key) && !string.IsNullOrWhiteSpace(_setting.Secret) && !string.IsNullOrWhiteSpace(_setting.Cluster))
             {
-                pusherSend = new PusherServer.Pusher(_setting.AppId, _setting.Key, _setting.Secret, new PusherServer.PusherOptions { Cluster = _setting.Cluster });
-            }
+                var pusherSend = new PusherServer.Pusher(_setting.AppId, _setting.Key, _setting.Secret, new PusherServer.PusherOptions { Cluster = _setting.Cluster });
 
-            await pusherSend.TriggerAsync(channelName, eventName, new { message });
+                await pusherSend.TriggerAsync(channelName, eventName, new { message });
+            }
+            else
+            {
+                throw new Exception("No default setting saved.");
+            }
         }
 
         public async Task ReceiverConnect(string channelName, string eventName)
@@ -75,17 +78,21 @@ namespace Multilarr.Common
             if (!string.IsNullOrWhiteSpace(_setting.AppId) && !string.IsNullOrWhiteSpace(_setting.Key) && !string.IsNullOrWhiteSpace(_setting.Secret) && !string.IsNullOrWhiteSpace(_setting.Cluster))
             {
                 _pusherReceive = new PusherClient.Pusher(_setting.Key, new PusherClient.PusherOptions { Cluster = _setting.Cluster });
+
+                _myChannel = await _pusherReceive.SubscribeAsync(channelName);
+                _myChannel.Bind(eventName, (dynamic data) =>
+                {
+                    PusherReceiveMessageObject pusherReceiveMessageObject = JsonConvert.DeserializeObject<PusherReceiveMessageObject>(data.ToString());
+                    var pusherReceiveMessage = JsonConvert.DeserializeObject<PusherReceiveMessage>(pusherReceiveMessageObject.Data);
+                    ReturnData = pusherReceiveMessage.Message;
+                });
+
+                await _pusherReceive.ConnectAsync();
             }
-
-            _myChannel = await _pusherReceive.SubscribeAsync(channelName);
-            _myChannel.Bind(eventName, (dynamic data) =>
+            else
             {
-                PusherReceiveMessageObject pusherReceiveMessageObject = JsonConvert.DeserializeObject<PusherReceiveMessageObject>(data.ToString());
-                var pusherReceiveMessage = JsonConvert.DeserializeObject<PusherReceiveMessage>(pusherReceiveMessageObject.Data);
-                ReturnData = pusherReceiveMessage.Message;
-            });
-
-            await _pusherReceive.ConnectAsync();
+                throw new Exception("No default setting saved.");
+            }
         }
 
         public async Task CommandReceiverConnect(string channelNameReceive, string eventNameReceive, string channelNameSend, string eventNameSend)
@@ -97,18 +104,22 @@ namespace Multilarr.Common
             if (!string.IsNullOrWhiteSpace(_setting.AppId) && !string.IsNullOrWhiteSpace(_setting.Key) && !string.IsNullOrWhiteSpace(_setting.Secret) && !string.IsNullOrWhiteSpace(_setting.Cluster))
             {
                 _pusherReceive = new PusherClient.Pusher(_setting.Key, new PusherClient.PusherOptions { Cluster = _setting.Cluster });
+
+                _myChannel = await _pusherReceive.SubscribeAsync(channelNameReceive);
+                _myChannel.Bind(eventNameReceive, (dynamic data) =>
+                {
+                    PusherReceiveMessageObject pusherReceiveMessage = JsonConvert.DeserializeObject<PusherReceiveMessageObject>(data.ToString());
+                    var pusherMessage = JsonConvert.DeserializeObject<PusherReceiveMessage>(pusherReceiveMessage.Data);
+                    var deserializeObject = JsonConvert.DeserializeObject<PusherSendMessage>(pusherMessage.Message);
+                    ExecuteCommand(deserializeObject.Command, channelNameSend, eventNameSend);
+                });
+
+                await _pusherReceive.ConnectAsync();
             }
-
-            _myChannel = await _pusherReceive.SubscribeAsync(channelNameReceive);
-            _myChannel.Bind(eventNameReceive, (dynamic data) =>
+            else
             {
-                PusherReceiveMessageObject pusherReceiveMessage = JsonConvert.DeserializeObject<PusherReceiveMessageObject>(data.ToString());
-                var pusherMessage = JsonConvert.DeserializeObject<PusherReceiveMessage>(pusherReceiveMessage.Data);
-                var deserializeObject = JsonConvert.DeserializeObject<PusherSendMessage>(pusherMessage.Message);
-                ExecuteCommand(deserializeObject.Command, channelNameSend, eventNameSend);
-            });
-
-            await _pusherReceive.ConnectAsync();
+                throw new Exception("No default setting saved.");
+            }
         }
 
         public async Task NotificationReceiverConnect(string channelNameReceive, string eventNameReceive)
@@ -120,21 +131,25 @@ namespace Multilarr.Common
             if (!string.IsNullOrWhiteSpace(_setting.AppId) && !string.IsNullOrWhiteSpace(_setting.Key) && !string.IsNullOrWhiteSpace(_setting.Secret) && !string.IsNullOrWhiteSpace(_setting.Cluster))
             {
                 _pusherReceive = new PusherClient.Pusher(_setting.Key, new PusherClient.PusherOptions { Cluster = _setting.Cluster });
+
+                _myChannel = await _pusherReceive.SubscribeAsync(channelNameReceive);
+                _myChannel.Bind(eventNameReceive, (dynamic data) =>
+                {
+                    var logs = _logger.GetNotificationLogsAsync().Result;
+
+                    PusherReceiveMessageObject pusherReceiveMessageObject = JsonConvert.DeserializeObject<PusherReceiveMessageObject>(data.ToString());
+                    var pusherReceiveMessage = JsonConvert.DeserializeObject<PusherReceiveMessage>(pusherReceiveMessageObject.Data);
+                    var deserializeObject = JsonConvert.DeserializeObject<NotificationEventArgs>(pusherReceiveMessage.Message);
+
+                    _logger.LogNotificationAsync(deserializeObject.Title, deserializeObject.Message);
+                });
+
+                await _pusherReceive.ConnectAsync();
             }
-
-            _myChannel = await _pusherReceive.SubscribeAsync(channelNameReceive);
-            _myChannel.Bind(eventNameReceive, (dynamic data) =>
+            else
             {
-                var logs = _logger.GetNotificationLogsAsync().Result;
-
-                PusherReceiveMessageObject pusherReceiveMessageObject = JsonConvert.DeserializeObject<PusherReceiveMessageObject>(data.ToString());
-                var pusherReceiveMessage = JsonConvert.DeserializeObject<PusherReceiveMessage>(pusherReceiveMessageObject.Data);
-                var deserializeObject = JsonConvert.DeserializeObject<NotificationEventArgs>(pusherReceiveMessage.Message);
-
-                _logger.LogNotificationAsync(deserializeObject.Title, deserializeObject.Message);
-            });
-
-            await _pusherReceive.ConnectAsync();
+                throw new Exception("No default setting saved.");
+            }
         }
 
         public async Task ReceiverDisconnect()
@@ -153,7 +168,7 @@ namespace Multilarr.Common
             }
             catch (Exception e)
             {
-                await _logger.LogErrorAsync(e.Message);
+                await _logger.LogErrorAsync(e.Message, e.StackTrace);
             }
         }
     }

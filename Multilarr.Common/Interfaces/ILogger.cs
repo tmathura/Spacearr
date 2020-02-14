@@ -12,7 +12,7 @@ namespace Multilarr.Common.Interfaces
         Task<Log> GetLogAsync(int id);
         Task<int> LogInfoAsync(string logMessage);
         Task<int> LogWarnAsync(string logMessage);
-        Task<int> LogErrorAsync(string logMessage);
+        Task<int> LogErrorAsync(string logMessage, string stackTrace);
         Task<int> DeleteLogAsync(Log item);
 
         #endregion

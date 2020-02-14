@@ -50,7 +50,7 @@ namespace Multilarr.Views
                         _menuPages.Add(id, new NavigationPage(new HomePage()));
                         break;
                     case (int)MenuItemType.ComputerDrives:
-                        _menuPages.Add(id, new NavigationPage(new ComputerDrivesPage(_computerDriveService)));
+                        _menuPages.Add(id, new NavigationPage(new ComputerDrivesPage(_logger, _computerDriveService)));
                         break;
                     case (int)MenuItemType.Logs:
                         _menuPages.Add(id, new NavigationPage(new LogsPage(_logger)));

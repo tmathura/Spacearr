@@ -1,4 +1,5 @@
-﻿using Multilarr.Common.Interfaces;
+﻿using System;
+using Multilarr.Common.Interfaces;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -24,26 +25,33 @@ namespace Multilarr.Common
 
         public void PopulateSetting()
         {
-            if (_logger != null)
+            try
             {
-                var settings = Task.Run(_logger.GetSettingLogsAsync).Result;
-                if (settings == null)
+                if (_logger != null)
                 {
-                    _logger.LogErrorAsync("No settings saved.");
-                }
-                else if (settings.Any(x => x.IsDefault))
-                {
-                    var setting = settings.FirstOrDefault(x => x.IsDefault);
+                    var settings = Task.Run(_logger.GetSettingLogsAsync).Result;
+                    if (settings == null)
+                    {
+                        throw new Exception("No settings saved.");
+                    }
+                    else if (settings.Any(x => x.IsDefault))
+                    {
+                        var setting = settings.FirstOrDefault(x => x.IsDefault);
 
-                    AppId = setting?.PusherAppId;
-                    Key = setting?.PusherKey;
-                    Secret = setting?.PusherSecret;
-                    Cluster = setting?.PusherCluster;
+                        AppId = setting?.PusherAppId;
+                        Key = setting?.PusherKey;
+                        Secret = setting?.PusherSecret;
+                        Cluster = setting?.PusherCluster;
+                    }
+                    else
+                    {
+                        throw new Exception("No default setting saved.");
+                    }
                 }
-                else
-                {
-                    _logger.LogErrorAsync("No default setting saved.");
-                }
+            }
+            catch (Exception e)
+            {
+                _logger?.LogWarnAsync(e.Message);
             }
         }
     }

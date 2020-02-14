@@ -1,8 +1,9 @@
-﻿using Multilarr.Common.Models;
+﻿using Multilarr.Common.Interfaces;
+using Multilarr.Common.Models;
 using Multilarr.Services.Interfaces;
+using Multilarr.Views;
 using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -10,12 +11,15 @@ namespace Multilarr.ViewModels
 {
     public class ComputerDrivesViewModel : BaseViewModel
     {
+        private readonly ILogger _logger;
         private readonly IComputerDriveService _computerDriveService;
+
         public ObservableCollection<ComputerDrive> ComputerDrives { get; set; }
         public Command LoadComputerDrivesCommand { get; set; }
 
-        public ComputerDrivesViewModel(IComputerDriveService computerDriveService)
+        public ComputerDrivesViewModel(ILogger logger, IComputerDriveService computerDriveService)
         {
+            _logger = logger;
             _computerDriveService = computerDriveService;
 
             Title = "Computer Drives";
@@ -41,7 +45,9 @@ namespace Multilarr.ViewModels
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
+                var mainPage = Application.Current.MainPage as MainPage;
+                mainPage?.DisplayAlert("Error", ex.Message, "OK");
+                await _logger.LogErrorAsync(ex.Message, ex.StackTrace);
             }
             finally
             {

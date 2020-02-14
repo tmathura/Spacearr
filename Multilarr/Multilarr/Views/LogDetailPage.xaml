@@ -14,6 +14,8 @@
             <Label Text="{Binding Log.Id}" d:Text="Id 1 label" FontSize="Small" />
             <Label Text="Log Message:" FontSize="Medium" />
             <Label Text="{Binding Log.LogMessage}" d:Text="Log message label" FontSize="Small" />
+            <Label Text="Log Stack Trace:" FontSize="Medium" />
+            <Label Text="{Binding Log.LogStackTrace}" d:Text="Log stack trace label" FontSize="Small" />
             <Label Text="Log Type:" FontSize="Medium" />
             <Label Text="{Binding Log.LogType}" d:Text="log type label" FontSize="Small" />
             <Label Text="Log Date:" FontSize="Medium" />

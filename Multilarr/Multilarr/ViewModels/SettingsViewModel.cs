@@ -1,8 +1,8 @@
 ﻿using Multilarr.Common.Interfaces;
 using Multilarr.Common.Models;
+using Multilarr.Views;
 using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -41,7 +41,8 @@ namespace Multilarr.ViewModels
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
+                var mainPage = Application.Current.MainPage as MainPage;
+                mainPage?.DisplayAlert("Error", ex.Message, "OK");
             }
             finally
             {

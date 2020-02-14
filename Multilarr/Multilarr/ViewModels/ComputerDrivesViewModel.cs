@@ -45,9 +45,9 @@ namespace Multilarr.ViewModels
             }
             catch (Exception ex)
             {
+                await _logger.LogErrorAsync(ex.Message, ex.StackTrace);
                 var mainPage = Application.Current.MainPage as MainPage;
                 mainPage?.DisplayAlert("Error", ex.Message, "OK");
-                await _logger.LogErrorAsync(ex.Message, ex.StackTrace);
             }
             finally
             {

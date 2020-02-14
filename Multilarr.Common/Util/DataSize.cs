@@ -1,7 +1,7 @@
-﻿using Multilarr.Common.Interfaces;
+﻿using Multilarr.Common.Interfaces.Util;
 using System;
 
-namespace Multilarr.Common
+namespace Multilarr.Common.Util
 {
     public class DataSize : IDataSize
     {

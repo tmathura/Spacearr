@@ -1,6 +1,6 @@
 ﻿using Multilarr.Common.Command.MessageCommand;
 
-namespace Multilarr.Common.Command
+namespace Multilarr.Common.Interfaces.Command
 {
     public interface ICommand
     {

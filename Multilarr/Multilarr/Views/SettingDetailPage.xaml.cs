@@ -1,4 +1,4 @@
-﻿using Multilarr.Common.Interfaces;
+﻿using Multilarr.Common.Interfaces.Logger;
 using Multilarr.ViewModels;
 using System;
 using System.ComponentModel;

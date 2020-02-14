@@ -2,8 +2,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Multilarr.Common;
 using Multilarr.Common.Command;
-using Multilarr.Common.Command.MessageCommand;
 using Multilarr.Common.Interfaces;
+using Multilarr.Common.Interfaces.Command;
+using Multilarr.Common.Interfaces.Command.MessageCommand;
+using Multilarr.Common.Interfaces.Logger;
+using Multilarr.Common.Interfaces.Util;
+using Multilarr.Common.Logger;
+using Multilarr.Common.Util;
 using System;
 using System.IO;
 

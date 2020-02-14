@@ -1,10 +1,10 @@
-﻿using Multilarr.Common.Models;
+﻿using Multilarr.Common.Interfaces.Logger;
+using Multilarr.Common.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Multilarr.Common.Interfaces;
 
-namespace Multilarr.Common
+namespace Multilarr.Common.Logger
 {
     public class Logger : ILogger
 	{

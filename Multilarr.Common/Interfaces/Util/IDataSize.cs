@@ -1,4 +1,4 @@
-﻿namespace Multilarr.Common.Interfaces
+﻿namespace Multilarr.Common.Interfaces.Util
 {
     public interface IDataSize
     {

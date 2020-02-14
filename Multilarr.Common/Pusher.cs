@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Multilarr.Common.Command;
 using Multilarr.Common.Interfaces;
+using Multilarr.Common.Interfaces.Command;
+using Multilarr.Common.Interfaces.Logger;
 using Multilarr.Common.Models;
 using Newtonsoft.Json;
 using System;

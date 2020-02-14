@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Multilarr.Common.Command;
 using Multilarr.Common.Command.MessageCommand;
 using Multilarr.Common.Interfaces;
+using Multilarr.Common.Interfaces.Command;
 using System;
 using System.Collections.Generic;
 using System.Timers;

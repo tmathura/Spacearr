@@ -1,12 +1,13 @@
 ﻿using Android.Content;
 using AndroidX.Work;
 using Multilarr.Common;
+using Multilarr.Common.Logger;
 using Multilarr.Common.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Logger = Multilarr.Common.Logger;
+using Logger = Multilarr.Common.Logger.Logger;
 
 namespace Multilarr.Droid.Notifications
 {

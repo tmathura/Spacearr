@@ -1,6 +1,8 @@
 ﻿using Autofac;
 using Multilarr.Common;
 using Multilarr.Common.Interfaces;
+using Multilarr.Common.Interfaces.Logger;
+using Multilarr.Common.Logger;
 using Multilarr.Services;
 using Multilarr.Services.Interfaces;
 using System;

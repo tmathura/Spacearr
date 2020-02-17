@@ -94,6 +94,13 @@ namespace Multilarr.Common
             }
         }
 
+        public async Task ReceiverDisconnect()
+        {
+            await _pusherReceive.DisconnectAsync();
+            _pusherReceive = null;
+            ReturnData = null;
+        }
+
         public async Task NotificationReceiverConnect(string channelNameReceive, string eventNameReceive)
         {
             _setting.PopulateSetting();
@@ -122,13 +129,6 @@ namespace Multilarr.Common
             {
                 throw new Exception("No default setting saved.");
             }
-        }
-
-        public async Task ReceiverDisconnect()
-        {
-            await _pusherReceive.DisconnectAsync();
-            _pusherReceive = null;
-            ReturnData = null;
         }
 
         public async void ExecuteCommand(ICommand command, string channelName, string eventName)

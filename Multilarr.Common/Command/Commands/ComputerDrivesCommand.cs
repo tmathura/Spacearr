@@ -1,11 +1,11 @@
 ﻿using Multilarr.Common.Interfaces;
-using Multilarr.Common.Interfaces.Command.MessageCommand;
+using Multilarr.Common.Interfaces.Command;
 using Multilarr.Common.Interfaces.Util;
 using Multilarr.Common.Models;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace Multilarr.Common.Command.MessageCommand.Commands
+namespace Multilarr.Common.Command.Commands
 {
     public class ComputerDrivesCommand : IMessageCommand
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Multilarr.Common.Interfaces;
-using Multilarr.Common.Interfaces.Command.MessageCommand;
+using Multilarr.Common.Interfaces.Command;
 using Multilarr.Common.Interfaces.Util;
 using Multilarr.Common.Models;
 using Newtonsoft.Json;
@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace Multilarr.Common.Command.MessageCommand.Commands
+namespace Multilarr.Common.Command.Commands
 {
     public class ComputerDrivesLowCommand : IMessageCommand
     {

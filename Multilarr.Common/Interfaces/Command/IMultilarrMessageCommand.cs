@@ -1,4 +1,4 @@
-﻿namespace Multilarr.Common.Interfaces.Command.MessageCommand
+﻿namespace Multilarr.Common.Interfaces.Command
 {
     public interface IMultilarrMessageCommand
     {

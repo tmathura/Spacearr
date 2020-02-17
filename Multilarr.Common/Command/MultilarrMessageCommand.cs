@@ -1,6 +1,6 @@
-﻿using Multilarr.Common.Interfaces.Command.MessageCommand;
+﻿using Multilarr.Common.Interfaces.Command;
 
-namespace Multilarr.Common.Command.MessageCommand
+namespace Multilarr.Common.Command
 {
     public class MultilarrMessageCommand : IMultilarrMessageCommand
     {

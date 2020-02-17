@@ -11,6 +11,7 @@ using Multilarr.Common.Logger;
 using Multilarr.Common.Util;
 using System;
 using System.IO;
+using Multilarr.Common.Command.MessageCommand;
 
 namespace Multilarr.WorkerService.Windows
 {

@@ -24,22 +24,29 @@ namespace Multilarr.Droid.Notifications
             var loggerDatabase = new LoggerDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "MultilarrSQLite.db3"));
             _logger = new Logger(loggerDatabase);
 
-            var settings = _logger.GetSettingLogsAsync().Result;
-
-            var pusherCount = 0;
-            foreach (var setting in settings)
+            try
             {
-                var pusherSend = new PusherServer.Pusher(setting.PusherAppId, setting.PusherKey, setting.PusherSecret, new PusherServer.PusherOptions { Cluster = setting.PusherCluster });
+                var settings = _logger.GetSettingLogsAsync().Result;
 
-                var getResult = pusherSend.GetAsync<object>($"/channels/{Enumeration.PusherChannel.MultilarrWorkerServiceWindowsNotificationChannel.ToString()}").Result;
-                var pusherSendRequestResultObject = JsonConvert.DeserializeObject<PusherSendRequestResultObject>(((PusherServer.RequestResult)getResult).Body);
-
-                if (!pusherSendRequestResultObject.Occupied)
+                var pusherCount = 0;
+                foreach (var setting in settings)
                 {
-                    _pusher.Add(new Pusher(_logger, setting.PusherAppId, setting.PusherKey, setting.PusherSecret, setting.PusherCluster));
-                    _ = _pusher[pusherCount].NotificationReceiverConnect(Enumeration.PusherChannel.MultilarrWorkerServiceWindowsNotificationChannel.ToString(), Enumeration.PusherEvent.WorkerServiceEvent.ToString());
-                    pusherCount += 1;
+                    var pusherSend = new PusherServer.Pusher(setting.PusherAppId, setting.PusherKey, setting.PusherSecret, new PusherServer.PusherOptions { Cluster = setting.PusherCluster });
+
+                    var getResult = pusherSend.GetAsync<object>($"/channels/{Enumeration.PusherChannel.MultilarrWorkerServiceWindowsNotificationChannel.ToString()}").Result;
+                    var pusherSendRequestResultObject = JsonConvert.DeserializeObject<PusherSendRequestResultObject>(((PusherServer.RequestResult)getResult).Body);
+
+                    if (!pusherSendRequestResultObject.Occupied)
+                    {
+                        _pusher.Add(new Pusher(_logger, setting.PusherAppId, setting.PusherKey, setting.PusherSecret, setting.PusherCluster));
+                        _ = _pusher[pusherCount].NotificationReceiverConnect(Enumeration.PusherChannel.MultilarrWorkerServiceWindowsNotificationChannel.ToString(), Enumeration.PusherEvent.WorkerServiceEvent.ToString());
+                        pusherCount += 1;
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+                _logger.LogErrorAsync(e.Message, e.StackTrace);
             }
 
             _notificationManager = new AndroidNotificationManager();

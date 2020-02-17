@@ -2,9 +2,10 @@
 
 namespace Multilarr.Common.Command
 {
-    public class MultilarrMessageCommand : IMultilarrMessageCommand
+    public class Invoker : IInvoker
     {
-        public string Invoke(IMessageCommand command)
+        public Invoker() { }
+        public string Invoke(ICommand command)
         {
             return command.Execute();
         }

@@ -10,7 +10,7 @@ using System.IO;
 
 namespace Multilarr.Common.Command.Commands
 {
-    public class ComputerDrivesLowCommand : IMessageCommand
+    public class ComputerDrivesLowCommand : ICommand
     {
         private readonly long _lowComputerDriveValue;
 

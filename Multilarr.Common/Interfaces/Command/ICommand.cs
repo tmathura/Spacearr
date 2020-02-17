@@ -2,6 +2,6 @@
 {
     public interface ICommand
     {
-        string Invoke(Enumeration.CommandType command);
+        string Execute();
     }
 }

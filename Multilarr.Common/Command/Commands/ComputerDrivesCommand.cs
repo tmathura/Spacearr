@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Multilarr.Common.Command.Commands
 {
-    public class ComputerDrivesCommand : IMessageCommand
+    public class ComputerDrivesCommand : ICommand
     {
         private readonly IDataSize _dataSize;
         private readonly IComputerDrives _computerDrives;

@@ -6,9 +6,9 @@ namespace Multilarr.Common.Interfaces
     {
         string ReturnData { get; set; }
 
+        void Connect();
         Task SendMessage(string channelName, string eventName, string message);
         Task ReceiverConnect(string channelName, string eventName);
         Task ReceiverDisconnect();
-        Task ComputerDrivesCommandReceiverConnect();
     }
 }

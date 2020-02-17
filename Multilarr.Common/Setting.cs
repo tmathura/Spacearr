@@ -1,4 +1,5 @@
-﻿using Multilarr.Common.Interfaces;
+﻿using Microsoft.Extensions.Configuration;
+using Multilarr.Common.Interfaces;
 using Multilarr.Common.Interfaces.Logger;
 using System;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace Multilarr.Common
     public class Setting : ISetting
     {
         private readonly ILogger _logger;
+        private readonly IConfiguration _configuration;
 
         public string AppId { get; set; }
         public string Key { get; set; }
@@ -24,11 +26,22 @@ namespace Multilarr.Common
             PopulateSetting();
         }
 
+        public Setting(ILogger logger, IConfiguration configuration)
+        {
+            _logger = logger;
+            _configuration = configuration;
+
+            AppId = configuration.GetSection("PusherAppId").Value;
+            Key = configuration.GetSection("PusherKey").Value;
+            Secret = configuration.GetSection("PusherSecret").Value;
+            Cluster = configuration.GetSection("PusherCluster").Value;
+        }
+
         public void PopulateSetting()
         {
             try
             {
-                if (_logger != null)
+                if (_logger != null && _configuration == null)
                 {
                     var settings = Task.Run(_logger.GetSettingLogsAsync).Result;
                     if (settings == null)

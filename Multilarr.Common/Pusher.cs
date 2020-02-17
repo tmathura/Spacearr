@@ -1,9 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
-using Multilarr.Common.Command.Commands;
-using Multilarr.Common.Interfaces;
+﻿using Multilarr.Common.Interfaces;
 using Multilarr.Common.Interfaces.Command;
 using Multilarr.Common.Interfaces.Logger;
-using Multilarr.Common.Interfaces.Util;
 using Multilarr.Common.Models;
 using Newtonsoft.Json;
 using System;
@@ -16,8 +13,7 @@ namespace Multilarr.Common
         private readonly ILogger _logger;
         private readonly IInvoker _invoker;
         private readonly ISetting _setting;
-        private readonly IDataSize _dataSize;
-        private readonly IComputerDrives _computerDrives;
+        private readonly IComputerDrivesCommandReceiver _computerDrivesCommandReceiver;
 
         private PusherClient.Channel _myChannel;
         private PusherClient.Pusher _pusherReceive;
@@ -29,21 +25,12 @@ namespace Multilarr.Common
             _setting = setting;
         }
 
-        public Pusher(ILogger logger, IInvoker invoker, IConfiguration configuration, IDataSize dataSize, IComputerDrives computerDrives)
+        public Pusher(ILogger logger, IInvoker invoker, ISetting setting, IComputerDrivesCommandReceiver computerDrivesCommandReceiver)
         {
-            var setting = new Setting
-            {
-                AppId = configuration.GetSection("PusherAppId").Value,
-                Key = configuration.GetSection("PusherKey").Value,
-                Secret = configuration.GetSection("PusherSecret").Value,
-                Cluster = configuration.GetSection("PusherCluster").Value
-            };
-
             _logger = logger;
             _invoker = invoker;
             _setting = setting;
-            _dataSize = dataSize;
-            _computerDrives = computerDrives;
+            _computerDrivesCommandReceiver = computerDrivesCommandReceiver;
         }
 
         public Pusher(ILogger logger, string appId, string key, string secret, string cluster)
@@ -58,6 +45,11 @@ namespace Multilarr.Common
 
             _logger = logger;
             _setting = setting;
+        }
+
+        public void Connect()
+        {
+            _computerDrivesCommandReceiver.Connect(ExecuteCommand);
         }
 
         public async Task SendMessage(string channelName, string eventName, string message)
@@ -139,43 +131,7 @@ namespace Multilarr.Common
             ReturnData = null;
         }
 
-        public async Task ComputerDrivesCommandReceiverConnect()
-        {
-            _setting.PopulateSetting();
-            _pusherReceive = null;
-            ReturnData = null;
-
-            var channelNameReceive = $"{ Enumeration.CommandType.ComputerDrivesCommand }{ Enumeration.PusherChannel.MultilarrWorkerServiceWindowsChannel.ToString() }";
-            var eventNameReceive = $"{ Enumeration.CommandType.ComputerDrivesCommand }{ Enumeration.PusherEvent.WorkerServiceEvent.ToString() }";
-            var channelNameSend = $"{ Enumeration.CommandType.ComputerDrivesCommand }{ Enumeration.PusherChannel.MultilarrChannel.ToString() }";
-            var eventNameSend = $"{ Enumeration.CommandType.ComputerDrivesCommand }{ Enumeration.PusherEvent.MultilarrEvent.ToString() }";
-
-            if (!string.IsNullOrWhiteSpace(_setting.AppId) && !string.IsNullOrWhiteSpace(_setting.Key) && !string.IsNullOrWhiteSpace(_setting.Secret) && !string.IsNullOrWhiteSpace(_setting.Cluster))
-            {
-                _pusherReceive = new PusherClient.Pusher(_setting.Key, new PusherClient.PusherOptions { Cluster = _setting.Cluster });
-
-                _myChannel = await _pusherReceive.SubscribeAsync(channelNameReceive);
-                _myChannel.Bind(eventNameReceive, (dynamic data) =>
-                {
-                    PusherReceiveMessageObject pusherReceiveMessage = JsonConvert.DeserializeObject<PusherReceiveMessageObject>(data.ToString());
-                    var pusherMessage = JsonConvert.DeserializeObject<PusherReceiveMessage>(pusherReceiveMessage.Data);
-                    var deserializeObject = JsonConvert.DeserializeObject<PusherSendMessage>(pusherMessage.Message);
-                    if (deserializeObject.Command == Enumeration.CommandType.ComputerDrivesCommand)
-                    {
-                        var command = new ComputerDrivesCommand(_dataSize, _computerDrives);
-                    ExecuteCommand(command, channelNameSend, eventNameSend);
-                    }
-                });
-
-                await _pusherReceive.ConnectAsync();
-            }
-            else
-            {
-                throw new Exception("No default setting saved.");
-            }
-        }
-
-        private async void ExecuteCommand(ICommand command, string channelName, string eventName)
+        public async void ExecuteCommand(ICommand command, string channelName, string eventName)
         {
             try
             {

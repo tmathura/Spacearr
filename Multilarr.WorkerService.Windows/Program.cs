@@ -31,10 +31,12 @@ namespace Multilarr.WorkerService.Windows
                     services.AddSingleton<ILogger, Logger>();
                     services.AddSingleton<IPusher, Pusher>();
                     services.AddSingleton<IInvoker, Invoker>();
+                    services.AddSingleton<ISetting, Setting>();
                     services.AddSingleton<IDataSize, DataSize>();
                     services.AddSingleton<IComputerDrives, ComputerDrives>();
                     services.AddSingleton<IComputerDriveInfo, ComputerDriveInfo>();
                     services.AddSingleton<INotificationTimer, NotificationTimer>();
+                    services.AddSingleton<IComputerDrivesCommandReceiver, ComputerDrivesCommandReceiver>();
                 });
     }
 }

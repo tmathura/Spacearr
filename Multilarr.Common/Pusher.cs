@@ -164,8 +164,8 @@ namespace Multilarr.Common
         {
             try
             {
-                var commandObjectSerialized = _command.Invoke(command);
-                await SendMessage(channelName, eventName, commandObjectSerialized.SerializeObject);
+                var json = _command.Invoke(command);
+                await SendMessage(channelName, eventName, json);
             }
             catch (Exception e)
             {

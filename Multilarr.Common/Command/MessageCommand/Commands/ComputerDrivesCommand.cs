@@ -18,7 +18,7 @@ namespace Multilarr.Common.Command.MessageCommand.Commands
             _computerDrives = computerDrives;
         }
 
-        public CommandObjectSerialized Execute()
+        public string Execute()
         {
             var computerDrives = new List<ComputerDrive>();
             if (_computerDrives.GetComputerDrives().Length > 0)
@@ -43,11 +43,7 @@ namespace Multilarr.Common.Command.MessageCommand.Commands
                 }
             }
 
-            var messageCommandObject = new CommandObjectSerialized
-            {
-                SerializeObject = JsonConvert.SerializeObject(computerDrives)
-            };
-            return messageCommandObject;
+            return JsonConvert.SerializeObject(computerDrives);
         }
     }
 }

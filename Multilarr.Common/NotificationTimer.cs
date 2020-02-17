@@ -40,14 +40,14 @@ namespace Multilarr.Common
 
         private void ElapsedEventHandler(object sender, ElapsedEventArgs e)
         {
-            var commandObjectSerializedList = new List<CommandObjectSerialized>
+            var jsonList = new List<string>
             {
                 _command.Invoke(Enumeration.CommandType.ComputerDrivesLowCommand)
             };
 
-            foreach (var commandObjectSerialized in commandObjectSerializedList)
+            foreach (var json in jsonList)
             {
-                _pusher.SendMessage(Enumeration.PusherChannel.MultilarrWorkerServiceWindowsNotificationChannel.ToString(), Enumeration.PusherEvent.WorkerServiceEvent.ToString(), commandObjectSerialized.SerializeObject);
+                _pusher.SendMessage(Enumeration.PusherChannel.MultilarrWorkerServiceWindowsNotificationChannel.ToString(), Enumeration.PusherEvent.WorkerServiceEvent.ToString(), json);
             }
         }
     }

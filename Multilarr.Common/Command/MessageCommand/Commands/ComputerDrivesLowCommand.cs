@@ -24,7 +24,7 @@ namespace Multilarr.Common.Command.MessageCommand.Commands
             _lowComputerDriveValue = Convert.ToInt64(configuration.GetSection("LowComputerDriveGBValue").Value);
         }
 
-        public CommandObjectSerialized Execute()
+        public string Execute()
         {
             NotificationEventArgs notificationEventArgs = null;
             var lowDiskSpaceWarningGb = _lowComputerDriveValue;
@@ -55,11 +55,7 @@ namespace Multilarr.Common.Command.MessageCommand.Commands
                 }
             }
 
-            var messageCommandObject = new CommandObjectSerialized
-            {
-                SerializeObject = JsonConvert.SerializeObject(notificationEventArgs)
-            };
-            return messageCommandObject;
+            return JsonConvert.SerializeObject(notificationEventArgs);
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Multilarr.Common.Command.MessageCommand;
 using Multilarr.Common.Command.MessageCommand.Commands;
 using Multilarr.Common.Interfaces;
 using Multilarr.Common.Interfaces.Command;
@@ -23,37 +22,37 @@ namespace Multilarr.Common.Command
             _computerDrives = computerDrives;
         }
 
-        public CommandObjectSerialized Invoke(Enumeration.CommandType command)
+        public string Invoke(Enumeration.CommandType command)
         {
-            var messageCommandObject = new CommandObjectSerialized();
+            string json = null;
 
             switch (command)
             {
                 case Enumeration.CommandType.ComputerDrivesCommand:
                 {
-                    messageCommandObject = InvokeComputerDrivesCommand();
+                    json = InvokeComputerDrivesCommand();
                     break;
                 }
 
                 case Enumeration.CommandType.ComputerDrivesLowCommand:
                 {
-                    messageCommandObject = InvokeComputerDrivesLowCommand();
+                    json = InvokeComputerDrivesLowCommand();
                     break;
                 }
             }
 
-            return messageCommandObject;
+            return json;
         }
 
         #region MultilarrMessageCommands
 
-        private CommandObjectSerialized InvokeComputerDrivesCommand()
+        private string InvokeComputerDrivesCommand()
         {
             var command = new ComputerDrivesCommand(_dataSize, _computerDrives);
             return _multilarrMessageCommand.Invoke(command);
         }
 
-        private CommandObjectSerialized InvokeComputerDrivesLowCommand()
+        private string InvokeComputerDrivesLowCommand()
         {
             var command = new ComputerDrivesLowCommand(_configuration, _dataSize, _computerDrives);
             return _multilarrMessageCommand.Invoke(command);

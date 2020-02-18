@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Multilarr.Common.Interfaces
+namespace Multilarr.Common.Interfaces.Pusher
 {
     public interface IPusher
     {

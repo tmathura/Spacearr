@@ -3,6 +3,7 @@ using AndroidX.Work;
 using Multilarr.Common;
 using Multilarr.Common.Logger;
 using Multilarr.Common.Models;
+using Multilarr.Common.Pusher;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

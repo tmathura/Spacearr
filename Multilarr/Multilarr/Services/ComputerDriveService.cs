@@ -1,5 +1,5 @@
 ﻿using Multilarr.Common;
-using Multilarr.Common.Interfaces;
+using Multilarr.Common.Interfaces.Pusher;
 using Multilarr.Common.Models;
 using Multilarr.Services.Interfaces;
 using Newtonsoft.Json;

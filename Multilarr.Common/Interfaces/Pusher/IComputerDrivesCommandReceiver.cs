@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Multilarr.Common.Interfaces.Command;
+using System;
 using System.Threading.Tasks;
-using Multilarr.Common.Interfaces.Command;
 
-namespace Multilarr.Common.Interfaces
+namespace Multilarr.Common.Interfaces.Pusher
 {
     public interface IComputerDrivesCommandReceiver
     {

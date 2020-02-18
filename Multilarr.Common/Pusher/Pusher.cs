@@ -1,12 +1,13 @@
 ﻿using Multilarr.Common.Interfaces;
 using Multilarr.Common.Interfaces.Command;
 using Multilarr.Common.Interfaces.Logger;
+using Multilarr.Common.Interfaces.Pusher;
 using Multilarr.Common.Models;
 using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
 
-namespace Multilarr.Common
+namespace Multilarr.Common.Pusher
 {
     public class Pusher : IPusher
     {

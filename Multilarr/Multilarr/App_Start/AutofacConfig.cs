@@ -2,7 +2,9 @@
 using Multilarr.Common;
 using Multilarr.Common.Interfaces;
 using Multilarr.Common.Interfaces.Logger;
+using Multilarr.Common.Interfaces.Pusher;
 using Multilarr.Common.Logger;
+using Multilarr.Common.Pusher;
 using Multilarr.Services;
 using Multilarr.Services.Interfaces;
 using System;

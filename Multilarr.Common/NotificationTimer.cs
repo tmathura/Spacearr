@@ -2,6 +2,7 @@
 using Multilarr.Common.Command.Commands;
 using Multilarr.Common.Interfaces;
 using Multilarr.Common.Interfaces.Command;
+using Multilarr.Common.Interfaces.Pusher;
 using Multilarr.Common.Interfaces.Util;
 using System;
 using System.Collections.Generic;

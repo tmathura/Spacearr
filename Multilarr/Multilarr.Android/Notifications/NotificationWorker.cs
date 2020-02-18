@@ -40,7 +40,7 @@ namespace Multilarr.Droid.Notifications
                     if (!pusherSendRequestResultObject.Occupied)
                     {
                         _pusher.Add(new Pusher(_logger, setting.PusherAppId, setting.PusherKey, setting.PusherSecret, setting.PusherCluster));
-                        _ = _pusher[pusherCount].NotificationReceiverConnect(Enumeration.PusherChannel.MultilarrWorkerServiceWindowsNotificationChannel.ToString(), Enumeration.PusherEvent.WorkerServiceEvent.ToString());
+                        _pusher[pusherCount].NotificationReceiverConnect();
                         pusherCount += 1;
                     }
                 }

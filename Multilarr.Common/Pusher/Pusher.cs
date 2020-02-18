@@ -50,7 +50,7 @@ namespace Multilarr.Common.Pusher
             _notificationReceiver = new NotificationReceiver(_logger, _setting);
         }
 
-        public void Connect()
+        public void CommandReceiverConnect()
         {
             _computerDrivesCommandReceiver.Connect(ExecuteCommand);
         }

@@ -6,7 +6,7 @@ namespace Multilarr.Common.Interfaces.Pusher
     {
         string ReturnData { get; set; }
 
-        void Connect();
+        void CommandReceiverConnect();
         Task SendMessage(string channelName, string eventName, string message);
         Task ReceiverConnect(string channelName, string eventName);
         Task ReceiverDisconnect();

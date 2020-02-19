@@ -4,11 +4,11 @@ namespace Multilarr.Common.Interfaces.Pusher
 {
     public interface IPusher
     {
-        string ReturnData { get; set; }
+        string ReturnData { get; }
 
         void CommandReceiverConnect();
+        void ServiceReceiverConnect(string channelName, string eventName);
+        void ServiceReceiverDisconnect();
         Task SendMessage(string channelName, string eventName, string message);
-        Task ReceiverConnect(string channelName, string eventName);
-        Task ReceiverDisconnect();
     }
 }

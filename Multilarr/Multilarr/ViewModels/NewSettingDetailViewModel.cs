@@ -20,7 +20,7 @@ namespace Multilarr.ViewModels
         public NewSettingDetailViewModel(Page page, ILogger logger)
         {
             _logger = logger;
-            Title = $"{SettingLog?.ComputerName}";
+            Title = "New Setting";
 
             _page = page;
 

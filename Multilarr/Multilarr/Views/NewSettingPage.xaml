@@ -6,7 +6,7 @@
              xmlns:viewModels="clr-namespace:Multilarr.ViewModels;assembly=Multilarr"
              mc:Ignorable="d"
              x:Class="Multilarr.Views.NewSettingPage"
-             Title="New Setting" x:DataType="viewModels:NewSettingDetailViewModel">
+             Title="{Binding Title}" x:DataType="viewModels:NewSettingDetailViewModel">
     
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Cancel" Command="{Binding CancelCommand}" />

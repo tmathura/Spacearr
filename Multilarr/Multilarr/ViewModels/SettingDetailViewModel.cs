@@ -44,7 +44,7 @@ namespace Multilarr.ViewModels
                 {
                     await _logger.UpdateSettingAsync(SettingLog);
                     await _page.DisplayAlert("Success", "Setting saved!", "OK");
-                    await _page.Navigation.PopModalAsync();
+                    await _page.Navigation.PopAsync();
                 }
                 else
                 {
@@ -73,7 +73,7 @@ namespace Multilarr.ViewModels
 
             try
             {
-                await _page.Navigation.PopModalAsync();
+                await _page.Navigation.PopAsync();
             }
             catch (Exception ex)
             {

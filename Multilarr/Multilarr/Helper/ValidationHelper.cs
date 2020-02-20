@@ -21,7 +21,6 @@ namespace Multilarr.Helper
 
             if (!isValid)
             {
-                FormatErrors(errors);
                 ShowValidationFields(errors, model, page);
             }
 
@@ -90,31 +89,6 @@ namespace Multilarr.Helper
         {
             var properties = model.GetType().GetProperties().Where(prop => prop.CanRead && prop.GetCustomAttributes(typeof(ValidationAttribute), true).Any() && prop.GetIndexParameters().Length == 0).ToList();
             return properties;
-        }
-
-        private static void FormatErrors(IEnumerable<ValidationResult> errors)
-        {
-            foreach (var error in errors)
-            {
-                var memberName = ((string[])error.MemberNames)[0];
-
-                var pattern = $@"\b{memberName}\b";
-
-                if (!string.IsNullOrWhiteSpace(memberName))
-                {
-                    var replaceText = new StringBuilder(memberName.Length * 2);
-                    replaceText.Append(memberName[0]);
-
-                    for (var i = 1; i < memberName.Length; i++)
-                    {
-                        if (char.IsUpper(memberName[i]) && memberName[i - 1] != ' ')
-                            replaceText.Append(' ');
-                        replaceText.Append(memberName[i]);
-                    }
-
-                    error.ErrorMessage = Regex.Replace(error.ErrorMessage, pattern, replaceText.ToString(), RegexOptions.IgnoreCase);
-                }
-            }
         }
     }
 }

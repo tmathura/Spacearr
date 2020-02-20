@@ -19,10 +19,9 @@ namespace Multilarr.ViewModels
 
         public NewSettingDetailViewModel(Page page, ILogger logger)
         {
+            _page = page;
             _logger = logger;
             Title = "New Setting";
-
-            _page = page;
 
             SaveCommand = new Command(async () => await SaveAsync());
             CancelCommand = new Command(async () => await CancelAsync());

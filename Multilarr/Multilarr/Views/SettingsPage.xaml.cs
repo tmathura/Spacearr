@@ -19,10 +19,10 @@ namespace Multilarr.Views
 
             InitializeComponent();
 
-            BindingContext = _viewModel = new SettingsViewModel(logger);
+            BindingContext = _viewModel = new SettingsViewModel(this, logger);
         }
 
-        private async void OnSettingSelected(object sender, SelectedItemChangedEventArgs args)
+        private async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
             var settingLog = (SettingLog) args.SelectedItem;
             if (settingLog == null)
@@ -35,16 +35,11 @@ namespace Multilarr.Views
             SettingsListView.SelectedItem = null;
         }
 
-        async void AddSetting_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushModalAsync(new NavigationPage(new NewSettingPage(_logger)));
-        }
-
         protected override void OnAppearing()
         {
             base.OnAppearing();
 
-            _viewModel.LoadSettingsCommand.Execute(null);
+            _viewModel.LoadItemsCommand.Execute(null);
         }
     }
 }

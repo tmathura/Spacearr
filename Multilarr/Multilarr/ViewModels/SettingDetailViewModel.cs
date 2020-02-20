@@ -19,11 +19,10 @@ namespace Multilarr.ViewModels
 
         public SettingDetailViewModel(Page page, ILogger logger, SettingLog settingLog)
         {
+            _page = page;
             _logger = logger;
             SettingLog = settingLog;
             Title = $"{SettingLog?.ComputerName}";
-
-            _page = page;
 
             UpdateCommand = new Command(async () => await UpdateAsync());
             CancelCommand = new Command(async () => await CancelAsync());

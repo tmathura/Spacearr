@@ -11,7 +11,7 @@
              x:DataType="viewModels:SettingsViewModel">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" Clicked="AddSetting_Clicked" />
+        <ToolbarItem Text="Add" Command="{Binding AddCommand}" />
     </ContentPage.ToolbarItems>
 
     <StackLayout>
@@ -19,11 +19,11 @@
                   ItemsSource="{Binding Settings}"
                   VerticalOptions="FillAndExpand"
                   HasUnevenRows="true"
-                  RefreshCommand="{Binding LoadSettingsCommand}"
+                  RefreshCommand="{Binding LoadItemsCommand}"
                   IsPullToRefreshEnabled="true"
                   IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                   CachingStrategy="RecycleElement"
-                  ItemSelected="OnSettingSelected" x:DataType="viewModels:SettingsViewModel">
+                  ItemSelected="OnItemSelected" x:DataType="viewModels:SettingsViewModel">
             <d:ListView.ItemsSource>
                 <x:Array Type="{x:Type models:SettingLog}">
                     <models:SettingLog ComputerName = "Computer name 1" />

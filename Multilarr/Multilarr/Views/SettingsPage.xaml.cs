@@ -30,7 +30,7 @@ namespace Multilarr.Views
                 return;
             }
 
-            await Navigation.PushAsync(new SettingDetailPage(_logger, new SettingDetailViewModel(settingLog)));
+            await Navigation.PushAsync(new SettingDetailPage(_logger, settingLog));
 
             SettingsListView.SelectedItem = null;
         }

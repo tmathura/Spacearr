@@ -27,7 +27,7 @@ namespace Multilarr.Views
                 return;
             }
 
-            await Navigation.PushAsync(new ComputerDriveDetailPage(new ComputerDriveDetailViewModel(computerDrive)));
+            await Navigation.PushAsync(new ComputerDriveDetailPage(computerDrive));
 
             ComputerDrivesListView.SelectedItem = null;
         }

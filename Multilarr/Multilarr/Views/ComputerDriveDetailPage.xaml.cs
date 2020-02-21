@@ -1,4 +1,5 @@
 ﻿using Microcharts;
+using Multilarr.Common.Models;
 using Multilarr.ViewModels;
 using SkiaSharp;
 using System.ComponentModel;
@@ -11,11 +12,11 @@ namespace Multilarr.Views
     {
         private readonly ComputerDriveDetailViewModel _viewModel;
 
-        public ComputerDriveDetailPage(ComputerDriveDetailViewModel viewModel)
+        public ComputerDriveDetailPage(ComputerDrive computerDrive)
         {
             InitializeComponent();
 
-            _viewModel = viewModel;
+            _viewModel = new ComputerDriveDetailViewModel(computerDrive);
             BindingContext = _viewModel;
         }
 
@@ -39,7 +40,7 @@ namespace Multilarr.Views
                 }
             };
 
-            var chart = new PieChart() { Entries = entries };
+            var chart = new PieChart { Entries = entries };
 
             this.chartView.Chart = chart;
         }

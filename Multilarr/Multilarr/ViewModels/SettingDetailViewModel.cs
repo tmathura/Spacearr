@@ -13,8 +13,8 @@ namespace Multilarr.ViewModels
         private readonly Page _page;
         private readonly ILogger _logger;
 
+        public ICommand DeleteCommand { get; }
         public ICommand UpdateCommand { get; }
-        public ICommand CancelCommand { get; }
         public SettingLog SettingLog { get; set; }
 
         public SettingDetailViewModel(Page page, ILogger logger, SettingLog settingLog)
@@ -24,8 +24,34 @@ namespace Multilarr.ViewModels
             SettingLog = settingLog;
             Title = $"{SettingLog?.ComputerName}";
 
+            DeleteCommand = new Command(async () => await DeleteAsync());
             UpdateCommand = new Command(async () => await UpdateAsync());
-            CancelCommand = new Command(async () => await CancelAsync());
+        }
+        
+        private async Task DeleteAsync()
+        {
+            if (IsBusy)
+            {
+                return;
+            }
+
+            IsBusy = true;
+
+            try
+            {
+                await _logger.DeleteLogAsync(SettingLog);
+                await _page.DisplayAlert("Success", "Setting Deleted!", "OK");
+                await _page.Navigation.PopAsync();
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex.Message, ex.StackTrace);
+                _page?.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
 
         private async Task UpdateAsync()
@@ -49,30 +75,6 @@ namespace Multilarr.ViewModels
                 {
                     return;
                 }
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex.Message, ex.StackTrace);
-                _page?.DisplayAlert("Error", ex.Message, "OK");
-            }
-            finally
-            {
-                IsBusy = false;
-            }
-        }
-
-        private async Task CancelAsync()
-        {
-            if (IsBusy)
-            {
-                return;
-            }
-
-            IsBusy = true;
-
-            try
-            {
-                await _page.Navigation.PopAsync();
             }
             catch (Exception ex)
             {

@@ -9,7 +9,7 @@
              Title="{Binding Title}" x:DataType="viewModels:SettingDetailViewModel">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Cancel" Command="{Binding CancelCommand}" />
+        <ToolbarItem Text="Delete" Command="{Binding DeleteCommand}" />
         <ToolbarItem Text="Update" Command="{Binding UpdateCommand}" />
     </ContentPage.ToolbarItems>
 

@@ -16,7 +16,7 @@ namespace Multilarr.Views
         {
             InitializeComponent();
 
-            BindingContext = _viewModel = new ComputerDrivesViewModel(logger, computerDriveService);
+            BindingContext = _viewModel = new ComputerDrivesViewModel(this, logger, computerDriveService);
         }
 
         private async void OnComputerDriveSelected(object sender, SelectedItemChangedEventArgs args)
@@ -36,7 +36,7 @@ namespace Multilarr.Views
         {
             base.OnAppearing();
 
-            _viewModel.LoadComputerDrivesCommand.Execute(null);
+            _viewModel.LoadItemsCommand.Execute(null);
         }
     }
 }

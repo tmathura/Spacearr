@@ -48,8 +48,7 @@ namespace Multilarr.ViewModels
             }
             catch (Exception ex)
             {
-                var mainPage = Application.Current.MainPage as MainPage;
-                mainPage?.DisplayAlert("Error", ex.Message, "OK");
+                _page?.DisplayAlert("Error", ex.Message, "OK");
             }
             finally
             {

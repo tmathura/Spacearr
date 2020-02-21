@@ -15,7 +15,7 @@ namespace Multilarr.Views
         {
             InitializeComponent();
 
-            BindingContext = _viewModel = new LogsViewModel(logger);
+            BindingContext = _viewModel = new LogsViewModel(this, logger);
         }
 
         private async void OnLogSelected(object sender, SelectedItemChangedEventArgs args)
@@ -35,7 +35,7 @@ namespace Multilarr.Views
         {
             base.OnAppearing();
 
-            _viewModel.LoadLogsCommand.Execute(null);
+            _viewModel.LoadItemsCommand.Execute(null);
         }
     }
 }

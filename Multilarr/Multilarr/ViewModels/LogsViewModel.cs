@@ -1,6 +1,5 @@
 ﻿using Multilarr.Common.Interfaces.Logger;
 using Multilarr.Common.Models;
-using Multilarr.Views;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -10,20 +9,22 @@ namespace Multilarr.ViewModels
 {
     public class LogsViewModel : BaseViewModel
     {
+        private readonly Page _page;
         private readonly ILogger _logger;
         public ObservableCollection<Log> Logs { get; set; }
-        public Command LoadLogsCommand { get; set; }
+        public Command LoadItemsCommand { get; set; }
 
-        public LogsViewModel(ILogger logger)
+        public LogsViewModel(Page page, ILogger logger)
         {
+            _page = page;
             _logger = logger;
 
             Title = "Logs";
             Logs = new ObservableCollection<Log>();
-            LoadLogsCommand = new Command(async () => await ExecuteLoadLogsCommand());
+            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
         }
 
-        private async Task ExecuteLoadLogsCommand()
+        private async Task ExecuteLoadItemsCommand()
         {
             if (IsBusy)
                 return;
@@ -41,8 +42,7 @@ namespace Multilarr.ViewModels
             }
             catch (Exception ex)
             {
-                var mainPage = Application.Current.MainPage as MainPage;
-                mainPage?.DisplayAlert("Error", ex.Message, "OK");
+                _page?.DisplayAlert("Error", ex.Message, "OK");
             }
             finally
             {

@@ -81,7 +81,7 @@ namespace Multilarr.Views
             Device.BeginInvokeOnMainThread(() =>
             {
                 var notification = new NotificationEventArgs { Id = id, Title = title, Message = message} ;
-                var newPage = new NavigationPage(new NotificationDetailPage(new NotificationDetailViewModel(notification)));
+                var newPage = new NavigationPage(new NotificationDetailPage(notification));
                 DependencyService.Get<IPushCancel>().CancelPush(id);
                 Detail = newPage;
             });

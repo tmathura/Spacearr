@@ -1,4 +1,5 @@
-﻿using Multilarr.ViewModels;
+﻿using Multilarr.Common.Models;
+using Multilarr.ViewModels;
 using System.ComponentModel;
 using Xamarin.Forms;
 
@@ -7,11 +8,11 @@ namespace Multilarr.Views
     [DesignTimeVisible(false)]
     public partial class LogDetailPage : ContentPage
     {
-        public LogDetailPage(LogDetailViewModel viewModel)
+        public LogDetailPage(Log log)
         {
             InitializeComponent();
 
-            BindingContext = viewModel;
+            BindingContext = new LogDetailViewModel(log);
         }
     }
 }

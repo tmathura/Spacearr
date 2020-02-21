@@ -26,7 +26,7 @@ namespace Multilarr.Views
                 return;
             }
 
-            await Navigation.PushAsync(new LogDetailPage(new LogDetailViewModel(log)));
+            await Navigation.PushAsync(new LogDetailPage(log));
 
             LogsListView.SelectedItem = null;
         }

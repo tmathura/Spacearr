@@ -16,9 +16,8 @@ namespace Multilarr
     {
         public static void Configure(ContainerBuilder builder)
         {
-            builder.Register(c => new LoggerDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "MultilarrSQLite.db3"))).As<ILoggerDatabase>().SingleInstance();
+            builder.Register(c => new Logger(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "MultilarrSQLite.db3"))).As<ILogger>().SingleInstance();
 
-            builder.RegisterType<Logger>().As<ILogger>().SingleInstance();
             builder.RegisterType<Pusher>().As<IPusher>().SingleInstance();
             builder.RegisterType<Setting>().As<ISetting>().SingleInstance();
             builder.RegisterType<ServiceReceiverConnect>().As<IServiceReceiverConnect>().SingleInstance();

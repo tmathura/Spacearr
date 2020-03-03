@@ -1,7 +1,6 @@
 ﻿using Android.Content;
 using AndroidX.Work;
 using Multilarr.Common;
-using Multilarr.Common.Logger;
 using Multilarr.Common.Models;
 using Multilarr.Common.Pusher;
 using Newtonsoft.Json;
@@ -22,8 +21,7 @@ namespace Multilarr.Droid.Notifications
         public NotificationWorker(Context context, WorkerParameters workerParameters) : base(context, workerParameters)
         {
             _pusher = new List<Pusher>();
-            var loggerDatabase = new LoggerDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "MultilarrSQLite.db3"));
-            _logger = new Logger(loggerDatabase);
+            _logger = new Logger(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "MultilarrSQLite.db3"));
 
             try
             {
@@ -47,7 +45,7 @@ namespace Multilarr.Droid.Notifications
             }
             catch (Exception e)
             {
-                _logger.LogErrorAsync(e.Message, e.StackTrace);
+                _ = _logger.LogErrorAsync(e.Message, e.StackTrace);
             }
 
             _notificationManager = new AndroidNotificationManager();
@@ -59,7 +57,7 @@ namespace Multilarr.Droid.Notifications
             foreach (var notification in notifications)
             {
                 _notificationManager.ScheduleNotification(notification.LogTitle, notification.LogMessage);
-               var deletedResult =  _logger.DeleteLogAsync(notification).Result;
+                _ = _logger.DeleteLogAsync(notification);
             }
 
             return Result.InvokeSuccess();

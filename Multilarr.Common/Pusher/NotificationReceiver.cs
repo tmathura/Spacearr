@@ -38,8 +38,6 @@ namespace Multilarr.Common.Pusher
                     var myChannel = await pusherReceive.SubscribeAsync(_channelNameReceive);
                     myChannel.Bind(_eventNameReceive, (dynamic data) =>
                     {
-                        var logs = _logger.GetNotificationLogsAsync().Result;
-
                         PusherReceiveMessageObject pusherReceiveMessageObject = JsonConvert.DeserializeObject<PusherReceiveMessageObject>(data.ToString());
                         var pusherReceiveMessage = JsonConvert.DeserializeObject<PusherReceiveMessage>(pusherReceiveMessageObject.Data);
                         var deserializeObject = JsonConvert.DeserializeObject<NotificationEventArgs>(pusherReceiveMessage.Message);

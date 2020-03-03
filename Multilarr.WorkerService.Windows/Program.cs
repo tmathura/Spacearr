@@ -27,10 +27,9 @@ namespace Multilarr.WorkerService.Windows
                 .UseWindowsService()
                 .ConfigureServices((hostContext, services) =>
                 {
-                    services.AddSingleton<ILoggerDatabase, LoggerDatabase>(serviceProvider => new LoggerDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "MultilarrWorkerServiceSQLite.db3")));
+                    services.AddSingleton<ILogger, Logger>(serviceProvider => new Logger(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "MultilarrWorkerServiceSQLite.db3")));
 
                     services.AddHostedService<Worker>();
-                    services.AddSingleton<ILogger, Logger>();
                     services.AddSingleton<IPusher, Pusher>();
                     services.AddSingleton<IInvoker, Invoker>();
                     services.AddSingleton<ISetting, Setting>();

@@ -1,5 +1,6 @@
 ﻿using Multilarr.Common.Interfaces.Logger;
 using Multilarr.Common.Models;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -7,53 +8,39 @@ using System.Threading.Tasks;
 namespace Multilarr.Common.Logger
 {
     public class Logger : ILogger
-	{
-        private readonly ILoggerDatabase _loggerDatabase;
+    {
+        private readonly SQLiteAsyncConnection _database;
 
-		public Logger(ILoggerDatabase loggerDatabase)
-		{
-            _loggerDatabase = loggerDatabase;
-		}
+        public Logger(string databasePath)
+        {
+            _database = new SQLiteAsyncConnection(databasePath);
+            _database.CreateTableAsync<Log>().Wait();
+            _database.CreateTableAsync<NotificationLog>().Wait();
+            _database.CreateTableAsync<SettingLog>().Wait();
+        }
 
         #region Logs
-        
-        public Task<List<Log>> GetLogsAsync()
-        {
-            return _loggerDatabase.GetLogsAsync();
-        }
 
-        public Task<Log> GetLogAsync(int id)
-        {
-            return _loggerDatabase.GetLogAsync(id);
-        }
+        public async Task<List<Log>> GetLogsAsync()
+		{
+			return await _database.Table<Log>().ToListAsync();
+		}
 
-        public Task<int> LogInfoAsync(string logMessage)
+        public async Task LogWarnAsync(string logMessage)
         {
-            var log = new Log
-            {
-                LogMessage = logMessage,
-                LogType = Enumeration.LogType.Info,
-                LogDate = DateTime.Now
-            };
-
-            return _loggerDatabase.SaveLogAsync(log);
-        }
-
-        public Task<int> LogWarnAsync(string logMessage)
-        {
-            var log = new Log
+            var record = new Log
             {
                 LogMessage = logMessage,
                 LogType = Enumeration.LogType.Warn,
                 LogDate = DateTime.Now
             };
 
-            return _loggerDatabase.SaveLogAsync(log);
+            await _database.InsertAsync(record);
         }
 
-        public Task<int> LogErrorAsync(string logMessage, string stackTrace)
+        public async Task LogErrorAsync(string logMessage, string stackTrace)
         {
-            var log = new Log
+            var record = new Log
             {
                 LogMessage = logMessage,
                 LogStackTrace = stackTrace,
@@ -61,77 +48,62 @@ namespace Multilarr.Common.Logger
                 LogDate = DateTime.Now
             };
 
-            return _loggerDatabase.SaveLogAsync(log);
-        }
-
-        public Task<int> DeleteLogAsync(Log item)
-        {
-            return _loggerDatabase.DeleteLogAsync(item);
+            await _database.InsertAsync(record);
         }
 
         #endregion
 
         #region Notifications
 
-        public Task<List<NotificationLog>> GetNotificationLogsAsync()
+        public async Task<List<NotificationLog>> GetNotificationLogsAsync()
         {
-            return _loggerDatabase.GetNotificationLogsAsync();
+            return await _database.Table<NotificationLog>().ToListAsync();
         }
 
-        public Task<NotificationLog> GetNotificationLogAsync(int id)
+        public async Task LogNotificationAsync(string logTitle, string logMessage)
         {
-            return _loggerDatabase.GetNotificationLogAsync(id);
-        }
-
-        public Task<int> LogNotificationAsync(string logTitle, string logMessage)
-        {
-            var notificationLog = new NotificationLog
+            var record = new NotificationLog
             {
                 LogTitle = logTitle,
                 LogMessage = logMessage,
                 LogDate = DateTime.Now
             };
 
-            return _loggerDatabase.SaveLogAsync(notificationLog);
+            await _database.InsertAsync(record);
         }
 
-        public Task<int> DeleteLogAsync(NotificationLog item)
+        public async Task DeleteLogAsync(NotificationLog record)
         {
-            return _loggerDatabase.DeleteLogAsync(item);
+            await _database.DeleteAsync(record);
         }
 
         #endregion
 
         #region Settings
 
-        public Task<List<SettingLog>> GetSettingLogsAsync()
+        public async Task<List<SettingLog>> GetSettingLogsAsync()
         {
-            return _loggerDatabase.GetSettingLogsAsync();
+            return await _database.Table<SettingLog>().ToListAsync();
         }
 
-        public Task<SettingLog> GetSettingLogAsync(int id)
+        public async Task LogSettingAsync(SettingLog record)
         {
-            return _loggerDatabase.GetSettingLogAsync(id);
+
+            record.CreatedDate = DateTime.Now;
+            record.UpdatedDate = DateTime.Now;
+
+            await _database.InsertAsync(record);
         }
 
-        public Task<int> LogSettingAsync(SettingLog item)
+        public async Task UpdateSettingAsync(SettingLog record)
         {
-
-            item.CreatedDate = DateTime.Now;
-            item.UpdatedDate = DateTime.Now;
-
-            return _loggerDatabase.SaveLogAsync(item);
+            record.UpdatedDate = DateTime.Now;
+            await _database.UpdateAsync(record);
         }
 
-        public Task<int> UpdateSettingAsync(SettingLog item)
+        public async Task DeleteLogAsync(SettingLog record)
         {
-            item.UpdatedDate = DateTime.Now;
-            return _loggerDatabase.UpdateLogAsync(item);
-        }
-
-        public Task<int> DeleteLogAsync(SettingLog item)
-        {
-            return _loggerDatabase.DeleteLogAsync(item);
+            await _database.DeleteAsync(record);
         }
 
         #endregion

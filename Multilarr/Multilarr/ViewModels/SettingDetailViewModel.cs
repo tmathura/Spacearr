@@ -1,9 +1,10 @@
-﻿using Multilarr.Common.Models;
+﻿using Multilarr.Common.Interfaces.Logger;
+using Multilarr.Common.Models;
+using Multilarr.Common.Pusher;
 using Multilarr.Helper;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Multilarr.Common.Interfaces.Logger;
 using Xamarin.Forms;
 
 namespace Multilarr.ViewModels
@@ -67,13 +68,17 @@ namespace Multilarr.ViewModels
             {
                 if (ValidationHelper.IsFormValid(SettingLog, _page))
                 {
-                    await _logger.UpdateSettingAsync(SettingLog);
-                    await _page.DisplayAlert("Success", "Setting saved!", "OK");
-                    await _page.Navigation.PopAsync();
-                }
-                else
-                {
-                    return;
+                    var pusherValid = await Pusher.Validate(SettingLog.PusherAppId, SettingLog.PusherKey, SettingLog.PusherSecret, SettingLog.PusherCluster);
+                    if (pusherValid)
+                    {
+                        await _logger.UpdateSettingAsync(SettingLog);
+                        await _page.DisplayAlert("Success", "Setting saved!", "OK");
+                        await _page.Navigation.PopAsync();
+                    }
+                    else
+                    {
+                        await _page.DisplayAlert("Error", "Pusher details invalid!", "OK");
+                    }
                 }
             }
             catch (Exception ex)

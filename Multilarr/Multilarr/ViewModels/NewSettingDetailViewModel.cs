@@ -1,5 +1,6 @@
 ﻿using Multilarr.Common.Interfaces.Logger;
 using Multilarr.Common.Models;
+using Multilarr.Common.Pusher;
 using Multilarr.Helper;
 using System;
 using System.Threading.Tasks;
@@ -40,13 +41,17 @@ namespace Multilarr.ViewModels
             {
                 if (ValidationHelper.IsFormValid(SettingLog, _page))
                 {
-                    await _logger.LogSettingAsync(SettingLog);
-                    await _page.DisplayAlert("Success", "Setting saved!", "OK");
-                    await _page.Navigation.PopModalAsync();
-                }
-                else
-                {
-                    return;
+                    var pusherValid = await Pusher.Validate(SettingLog.PusherAppId, SettingLog.PusherKey, SettingLog.PusherSecret, SettingLog.PusherCluster);
+                    if (pusherValid)
+                    {
+                        await _logger.LogSettingAsync(SettingLog);
+                        await _page.DisplayAlert("Success", "Setting saved!", "OK");
+                        await _page.Navigation.PopModalAsync();
+                    }
+                    else
+                    {
+                        await _page.DisplayAlert("Error", "Pusher details invalid!", "OK");
+                    }
                 }
             }
             catch (Exception ex)

@@ -95,5 +95,12 @@ namespace Multilarr.Common.Pusher
                 await _logger.LogErrorAsync(e.Message, e.StackTrace);
             }
         }
+
+        public static async Task<bool> Validate(string appId, string key, string secret, string cluster)
+        {
+            var pusherSend = new PusherServer.Pusher(appId, key, secret, new PusherServer.PusherOptions { Cluster = cluster });
+            var getResult = await pusherSend.GetAsync<object>("/channels/ValidationTestChannel");
+            return getResult.Data != null;
+        }
     }
 }

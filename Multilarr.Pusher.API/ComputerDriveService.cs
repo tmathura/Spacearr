@@ -1,14 +1,14 @@
 ﻿using Multilarr.Common;
 using Multilarr.Common.Interfaces.Pusher;
 using Multilarr.Common.Models;
-using Multilarr.Services.Interfaces;
+using Multilarr.Pusher.API.Interfaces;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
-namespace Multilarr.Services
+namespace Multilarr.Pusher.API
 {
     public class ComputerDriveService : IComputerDriveService
     {

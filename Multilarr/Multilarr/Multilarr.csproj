@@ -57,5 +57,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Multilarr.Common\Multilarr.Common.csproj" />
+    <ProjectReference Include="..\..\Multilarr.Pusher.API\Multilarr.Pusher.API.csproj" />
   </ItemGroup>
 </Project>

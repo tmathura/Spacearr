@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Multilarr.Services.Interfaces
+namespace Multilarr.Pusher.API.Interfaces
 {
     public interface IComputerDriveService
     {

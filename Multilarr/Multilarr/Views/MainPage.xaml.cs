@@ -2,8 +2,7 @@
 using Multilarr.Common.Models;
 using Multilarr.Models;
 using Multilarr.Notifications;
-using Multilarr.Services.Interfaces;
-using Multilarr.ViewModels;
+using Multilarr.Pusher.API.Interfaces;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;

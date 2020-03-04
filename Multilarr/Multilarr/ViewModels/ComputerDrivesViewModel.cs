@@ -1,6 +1,6 @@
 ﻿using Multilarr.Common.Interfaces.Logger;
 using Multilarr.Common.Models;
-using Multilarr.Pusher.API.Interfaces;
+using Multilarr.Pusher.API.Interfaces.Service;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;

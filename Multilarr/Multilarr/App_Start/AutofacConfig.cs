@@ -5,8 +5,8 @@ using Multilarr.Common.Interfaces.Logger;
 using Multilarr.Common.Interfaces.Pusher;
 using Multilarr.Common.Logger;
 using Multilarr.Common.Pusher;
-using Multilarr.Pusher.API;
-using Multilarr.Pusher.API.Interfaces;
+using Multilarr.Pusher.API.Interfaces.Service;
+using Multilarr.Pusher.API.Service;
 using System;
 using System.IO;
 

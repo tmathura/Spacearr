@@ -1,6 +1,6 @@
 ﻿using Multilarr.Common.Interfaces.Logger;
 using Multilarr.Common.Models;
-using Multilarr.Pusher.API.Interfaces;
+using Multilarr.Pusher.API.Interfaces.Service;
 using Multilarr.ViewModels;
 using System.ComponentModel;
 using Xamarin.Forms;

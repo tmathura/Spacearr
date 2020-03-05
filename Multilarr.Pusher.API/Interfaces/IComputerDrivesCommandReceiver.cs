@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Multilarr.Common.Interfaces.Pusher
+namespace Multilarr.Pusher.API.Interfaces
 {
     public interface IComputerDrivesCommandReceiver
     {

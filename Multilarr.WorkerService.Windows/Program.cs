@@ -5,11 +5,11 @@ using Multilarr.Common.Command;
 using Multilarr.Common.Interfaces;
 using Multilarr.Common.Interfaces.Command;
 using Multilarr.Common.Interfaces.Logger;
-using Multilarr.Common.Interfaces.Pusher;
 using Multilarr.Common.Interfaces.Util;
 using Multilarr.Common.Logger;
-using Multilarr.Common.Pusher;
 using Multilarr.Common.Util;
+using Multilarr.Pusher.API;
+using Multilarr.Pusher.API.Interfaces;
 using System;
 using System.IO;
 
@@ -30,7 +30,7 @@ namespace Multilarr.WorkerService.Windows
                     services.AddSingleton<ILogger, Logger>(serviceProvider => new Logger(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "MultilarrWorkerServiceSQLite.db3")));
 
                     services.AddHostedService<Worker>();
-                    services.AddSingleton<IPusher, Pusher>();
+                    services.AddSingleton<IPusher, Pusher.API.Pusher>();
                     services.AddSingleton<IInvoker, Invoker>();
                     services.AddSingleton<ISetting, Setting>();
                     services.AddSingleton<IDataSize, DataSize>();

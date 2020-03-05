@@ -96,6 +96,10 @@
       <Project>{07955d9e-746b-4274-b1e5-b233d577e437}</Project>
       <Name>Multilarr.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Multilarr.Pusher.API\Multilarr.Pusher.API.csproj">
+      <Project>{30304f6e-055d-47d8-88e4-6b8e306306d4}</Project>
+      <Name>Multilarr.Pusher.API</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Multilarr\Multilarr.csproj">
       <Project>{1E11DE0B-3C5F-4100-B8F6-EBE61C55151C}</Project>
       <Name>Multilarr</Name>

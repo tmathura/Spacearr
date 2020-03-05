@@ -2,7 +2,6 @@
 using AndroidX.Work;
 using Multilarr.Common;
 using Multilarr.Common.Models;
-using Multilarr.Common.Pusher;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -15,12 +14,12 @@ namespace Multilarr.Droid.Notifications
     {
 
         private readonly AndroidNotificationManager _notificationManager;
-        private readonly List<Pusher> _pusher;
+        private readonly List<Pusher.API.Pusher> _pusher;
         private readonly Logger _logger;
 
         public NotificationWorker(Context context, WorkerParameters workerParameters) : base(context, workerParameters)
         {
-            _pusher = new List<Pusher>();
+            _pusher = new List<Pusher.API.Pusher>();
             _logger = new Logger(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "MultilarrSQLite.db3"));
 
             try
@@ -37,7 +36,7 @@ namespace Multilarr.Droid.Notifications
 
                     if (!pusherSendRequestResultObject.Occupied)
                     {
-                        _pusher.Add(new Pusher(_logger, setting.PusherAppId, setting.PusherKey, setting.PusherSecret, setting.PusherCluster));
+                        _pusher.Add(new Pusher.API.Pusher(_logger, setting.PusherAppId, setting.PusherKey, setting.PusherSecret, setting.PusherCluster));
                         _pusher[pusherCount].NotificationReceiverConnect();
                         pusherCount += 1;
                     }

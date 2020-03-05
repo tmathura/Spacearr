@@ -1,15 +1,16 @@
-﻿using Multilarr.Common.Command.Commands;
+﻿using Multilarr.Common;
+using Multilarr.Common.Command.Commands;
 using Multilarr.Common.Interfaces;
 using Multilarr.Common.Interfaces.Command;
 using Multilarr.Common.Interfaces.Logger;
-using Multilarr.Common.Interfaces.Pusher;
 using Multilarr.Common.Interfaces.Util;
 using Multilarr.Common.Models;
+using Multilarr.Pusher.API.Interfaces;
 using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
 
-namespace Multilarr.Common.Pusher
+namespace Multilarr.Pusher.API
 {
     public class ComputerDrivesCommandReceiver : IComputerDrivesCommandReceiver
     {

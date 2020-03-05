@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Hosting;
 using Multilarr.Common.Interfaces;
-using Multilarr.Common.Interfaces.Pusher;
+using Multilarr.Pusher.API.Interfaces;
 using System.Threading;
 using System.Threading.Tasks;
 

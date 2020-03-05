@@ -1,15 +1,16 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Multilarr.Common;
 using Multilarr.Common.Command.Commands;
 using Multilarr.Common.Interfaces;
 using Multilarr.Common.Interfaces.Command;
-using Multilarr.Common.Interfaces.Pusher;
 using Multilarr.Common.Interfaces.Util;
+using Multilarr.Pusher.API.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Timers;
 using Timer = System.Timers.Timer;
 
-namespace Multilarr.Common
+namespace Multilarr.Pusher.API
 {
     public class NotificationTimer : INotificationTimer
     {

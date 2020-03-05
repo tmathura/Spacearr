@@ -40,7 +40,7 @@ namespace Multilarr.ViewModels
             {
                 if (ValidationHelper.IsFormValid(SettingLog, _page))
                 {
-                    var pusherValid = await Common.Pusher.Pusher.Validate(SettingLog.PusherAppId, SettingLog.PusherKey, SettingLog.PusherSecret, SettingLog.PusherCluster);
+                    var pusherValid = await Pusher.API.Pusher.Validate(SettingLog.PusherAppId, SettingLog.PusherKey, SettingLog.PusherSecret, SettingLog.PusherCluster);
                     if (pusherValid)
                     {
                         await _logger.LogSettingAsync(SettingLog);

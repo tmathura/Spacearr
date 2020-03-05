@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multilarr.Android", "Multil
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multilarr.iOS", "Multilarr.iOS\Multilarr.iOS.csproj", "{10D3CC97-E227-4314-8F6F-BDC03605BDCF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Multilarr.Core", "Multilarr\Multilarr\Multilarr.Core.csproj", "{8CB8FECD-0779-444B-A21C-7DFC554C111D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Multilarr.Core", "Multilarr.Core\Multilarr.Core.csproj", "{8CB8FECD-0779-444B-A21C-7DFC554C111D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Multilarr.WorkerService.Windows", "Multilarr.WorkerService.Windows\Multilarr.WorkerService.Windows.csproj", "{1C626A6F-74FE-423B-B644-974F589C74C2}"
 EndProject

@@ -100,7 +100,7 @@
       <Project>{30304f6e-055d-47d8-88e4-6b8e306306d4}</Project>
       <Name>Multilarr.Pusher.API</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Multilarr\Multilarr\Multilarr.Core.csproj">
+    <ProjectReference Include="..\Multilarr.Core\Multilarr.Core.csproj">
       <Project>{8CB8FECD-0779-444B-A21C-7DFC554C111D}</Project>
       <Name>Multilarr.Core</Name>
     </ProjectReference>

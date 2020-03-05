@@ -1,6 +1,6 @@
 ﻿using Multilarr.Common.Models;
 
-namespace Multilarr.ViewModels
+namespace Multilarr.Core.ViewModels
 {
     public class ComputerDriveDetailViewModel : BaseViewModel
     {

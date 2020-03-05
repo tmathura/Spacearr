@@ -4,8 +4,8 @@
             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             mc:Ignorable="d"
-            xmlns:views="clr-namespace:Multilarr.Views"
-            x:Class="Multilarr.Views.MainPage">
+            xmlns:views="clr-namespace:Multilarr.Core.Views"
+            x:Class="Multilarr.Core.Views.MainPage">
 
     <MasterDetailPage.Master>
         <views:MenuPage />

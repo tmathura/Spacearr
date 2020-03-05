@@ -1,12 +1,12 @@
 ﻿using Multilarr.Common.Interfaces.Logger;
 using Multilarr.Common.Models;
-using Multilarr.Helper;
+using Multilarr.Core.Helper;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace Multilarr.ViewModels
+namespace Multilarr.Core.ViewModels
 {
     public class SettingDetailViewModel : BaseViewModel
     {

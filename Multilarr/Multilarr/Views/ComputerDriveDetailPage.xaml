@@ -4,9 +4,9 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms" 
-             xmlns:viewModels="clr-namespace:Multilarr.ViewModels;assembly=Multilarr"
+             xmlns:viewModels="clr-namespace:Multilarr.Core.ViewModels;assembly=Multilarr.Core"
              mc:Ignorable="d"
-             x:Class="Multilarr.Views.ComputerDriveDetailPage"
+             x:Class="Multilarr.Core.Views.ComputerDriveDetailPage"
              Title="{Binding Title}" x:DataType="viewModels:ComputerDriveDetailViewModel">
 
     <ScrollView>

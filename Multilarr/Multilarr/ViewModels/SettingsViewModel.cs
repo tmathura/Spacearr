@@ -1,13 +1,13 @@
 ﻿using Multilarr.Common.Interfaces.Logger;
 using Multilarr.Common.Models;
-using Multilarr.Views;
+using Multilarr.Core.Views;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace Multilarr.ViewModels
+namespace Multilarr.Core.ViewModels
 {
     public class SettingsViewModel : BaseViewModel
     {

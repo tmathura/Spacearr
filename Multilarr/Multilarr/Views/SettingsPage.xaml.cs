@@ -1,11 +1,10 @@
 ﻿using Multilarr.Common.Interfaces.Logger;
 using Multilarr.Common.Models;
-using Multilarr.ViewModels;
-using System;
+using Multilarr.Core.ViewModels;
 using System.ComponentModel;
 using Xamarin.Forms;
 
-namespace Multilarr.Views
+namespace Multilarr.Core.Views
 {
     [DesignTimeVisible(false)]
     public partial class SettingsPage : ContentPage

@@ -1,7 +1,7 @@
 ﻿using Android.Content;
 using Android.Support.V4.App;
+using Multilarr.Core.Notifications;
 using Multilarr.Droid.Notifications;
-using Multilarr.Notifications;
 using Xamarin.Forms;
 using Application = Android.App.Application;
 

@@ -5,8 +5,8 @@ using Android.OS;
 using Android.Runtime;
 using AndroidX.Work;
 using Java.Util.Concurrent;
+using Multilarr.Core.Notifications;
 using Multilarr.Droid.Notifications;
-using Multilarr.Notifications;
 using Xamarin.Forms;
 
 namespace Multilarr.Droid
@@ -23,7 +23,7 @@ namespace Multilarr.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            LoadApplication(new App());
+            LoadApplication(new Core.App());
 
             CreateNotificationFromIntent(Intent);
 

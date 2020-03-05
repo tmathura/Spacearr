@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using Xamarin.Forms;
 
-namespace Multilarr.Views
+namespace Multilarr.Core.Views
 {
     [DesignTimeVisible(false)]
     public partial class HomePage : ContentPage

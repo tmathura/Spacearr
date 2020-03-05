@@ -10,7 +10,7 @@ using Multilarr.Pusher.API.Service;
 using System;
 using System.IO;
 
-namespace Multilarr
+namespace Multilarr.Core
 {
     public class AutofacConfig
     {

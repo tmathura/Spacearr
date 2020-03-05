@@ -149,13 +149,13 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="4.3.0.908675" />
-    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.1.9"/>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.1.9" />
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Multilarr\Multilarr.csproj">
-      <Project>{1E11DE0B-3C5F-4100-B8F6-EBE61C55151C}</Project>
-      <Name>Multilarr</Name>
+    <ProjectReference Include="..\Multilarr\Multilarr.Core.csproj">
+      <Project>{8CB8FECD-0779-444B-A21C-7DFC554C111D}</Project>
+      <Name>Multilarr.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

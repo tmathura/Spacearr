@@ -1,4 +1,4 @@
-﻿namespace Multilarr.Models
+﻿namespace Multilarr.Core.Models
 {
     public enum MenuItemType
     {

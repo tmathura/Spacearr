@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Multilarr.ViewModels
+namespace Multilarr.Core.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {

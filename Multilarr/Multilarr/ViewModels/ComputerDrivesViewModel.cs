@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace Multilarr.ViewModels
+namespace Multilarr.Core.ViewModels
 {
     public class ComputerDrivesViewModel : BaseViewModel
     {

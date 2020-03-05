@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Multilarr.Views.HomePage"
+             x:Class="Multilarr.Core.Views.HomePage"
              Title="{Binding Title}">
 
     <Label Text="Welcome" FontSize="Large" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />

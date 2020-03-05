@@ -1,14 +1,14 @@
 ﻿using Multilarr.Common.Interfaces.Logger;
 using Multilarr.Common.Models;
-using Multilarr.Models;
-using Multilarr.Notifications;
 using Multilarr.Pusher.API.Interfaces.Service;
+using Multilarr.Core.Models;
+using Multilarr.Core.Notifications;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace Multilarr.Views
+namespace Multilarr.Core.Views
 {
     [DesignTimeVisible(false)]
     public partial class MainPage : MasterDetailPage

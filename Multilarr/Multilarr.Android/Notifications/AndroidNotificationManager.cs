@@ -1,12 +1,12 @@
-﻿using System;
-using Android.App;
+﻿using Android.App;
 using Android.Content;
 using Android.Graphics;
 using Android.OS;
 using Android.Support.V4.App;
 using Multilarr.Common.Models;
+using Multilarr.Core.Notifications;
 using Multilarr.Droid.Notifications;
-using Multilarr.Notifications;
+using System;
 using Xamarin.Forms;
 using AndroidApp = Android.App.Application;
 

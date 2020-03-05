@@ -136,9 +136,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\Multilarr\Multilarr.csproj">
-      <Project>{1E11DE0B-3C5F-4100-B8F6-EBE61C55151C}</Project>
-      <Name>Multilarr</Name>
+    <ProjectReference Include="..\Multilarr\Multilarr.Core.csproj">
+      <Project>{8CB8FECD-0779-444B-A21C-7DFC554C111D}</Project>
+      <Name>Multilarr.Core</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

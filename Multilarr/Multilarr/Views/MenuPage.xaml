@@ -3,9 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:models="clr-namespace:Multilarr.Models;assembly=Multilarr"
+             xmlns:models="clr-namespace:Multilarr.Core.Models;assembly=Multilarr.Core"
              mc:Ignorable="d"
-             x:Class="Multilarr.Views.MenuPage"
+             x:Class="Multilarr.Core.Views.MenuPage"
              Title="Menu">
              
     <StackLayout VerticalOptions="FillAndExpand">

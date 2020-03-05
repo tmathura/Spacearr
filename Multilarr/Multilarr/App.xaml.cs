@@ -1,10 +1,10 @@
 ﻿using Autofac;
 using Multilarr.Common.Interfaces.Logger;
 using Multilarr.Pusher.API.Interfaces.Service;
-using Multilarr.Views;
+using Multilarr.Core.Views;
 using Xamarin.Forms;
 
-namespace Multilarr
+namespace Multilarr.Core
 {
     public partial class App : Application
     {

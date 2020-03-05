@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Multilarr.Notifications
+namespace Multilarr.Core.Notifications
 {
     public interface INotificationManager
     {

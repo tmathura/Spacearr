@@ -1,9 +1,9 @@
-﻿using Multilarr.Models;
+﻿using Multilarr.Core.Models;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Xamarin.Forms;
 
-namespace Multilarr.Views
+namespace Multilarr.Core.Views
 {
     [DesignTimeVisible(false)]
     public partial class MenuPage : ContentPage

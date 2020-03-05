@@ -1,11 +1,11 @@
 ﻿using Microcharts;
 using Multilarr.Common.Models;
-using Multilarr.ViewModels;
+using Multilarr.Core.ViewModels;
 using SkiaSharp;
 using System.ComponentModel;
 using Xamarin.Forms;
 
-namespace Multilarr.Views
+namespace Multilarr.Core.Views
 {
     [DesignTimeVisible(false)]
     public partial class ComputerDriveDetailPage : ContentPage

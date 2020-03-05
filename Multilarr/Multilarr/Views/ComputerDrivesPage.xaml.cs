@@ -1,11 +1,11 @@
 ﻿using Multilarr.Common.Interfaces.Logger;
 using Multilarr.Common.Models;
+using Multilarr.Core.ViewModels;
 using Multilarr.Pusher.API.Interfaces.Service;
-using Multilarr.ViewModels;
 using System.ComponentModel;
 using Xamarin.Forms;
 
-namespace Multilarr.Views
+namespace Multilarr.Core.Views
 {
     [DesignTimeVisible(false)]
     public partial class ComputerDrivesPage : ContentPage

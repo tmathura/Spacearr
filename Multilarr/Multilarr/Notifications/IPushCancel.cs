@@ -1,4 +1,4 @@
-﻿namespace Multilarr.Notifications
+﻿namespace Multilarr.Core.Notifications
 {
     public interface IPushCancel
     {

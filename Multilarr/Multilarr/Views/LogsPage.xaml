@@ -4,9 +4,9 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:models="clr-namespace:Multilarr.Common.Models;assembly=Multilarr.Common"
-             xmlns:viewModels="clr-namespace:Multilarr.ViewModels;assembly=Multilarr"
+             xmlns:viewModels="clr-namespace:Multilarr.Core.ViewModels;assembly=Multilarr.Core"
              mc:Ignorable="d"
-             x:Class="Multilarr.Views.LogsPage"
+             x:Class="Multilarr.Core.Views.LogsPage"
              Title="{Binding Title}"
              x:DataType="viewModels:LogsViewModel">
 

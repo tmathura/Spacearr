@@ -92,15 +92,15 @@
     <AndroidResource Include="Resources\drawable\xamarin_logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Multilarr.Common\Multilarr.Common.csproj">
+    <ProjectReference Include="..\Multilarr.Common\Multilarr.Common.csproj">
       <Project>{07955d9e-746b-4274-b1e5-b233d577e437}</Project>
       <Name>Multilarr.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Multilarr.Pusher.API\Multilarr.Pusher.API.csproj">
+    <ProjectReference Include="..\Multilarr.Pusher.API\Multilarr.Pusher.API.csproj">
       <Project>{30304f6e-055d-47d8-88e4-6b8e306306d4}</Project>
       <Name>Multilarr.Pusher.API</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Multilarr\Multilarr.Core.csproj">
+    <ProjectReference Include="..\Multilarr\Multilarr\Multilarr.Core.csproj">
       <Project>{8CB8FECD-0779-444B-A21C-7DFC554C111D}</Project>
       <Name>Multilarr.Core</Name>
     </ProjectReference>

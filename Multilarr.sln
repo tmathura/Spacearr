@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multilarr.UWP", "Multilarr\Multilarr.UWP\Multilarr.UWP.csproj", "{7EF11016-1C0B-4B6A-9F05-1D9BC13847B8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multilarr.UWP", "Multilarr.UWP\Multilarr.UWP.csproj", "{7EF11016-1C0B-4B6A-9F05-1D9BC13847B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multilarr.Android", "Multilarr\Multilarr.Android\Multilarr.Android.csproj", "{68DF6F8D-0EFB-4616-83AF-6AFC6A446A1E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multilarr.Android", "Multilarr.Android\Multilarr.Android.csproj", "{68DF6F8D-0EFB-4616-83AF-6AFC6A446A1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multilarr.iOS", "Multilarr\Multilarr.iOS\Multilarr.iOS.csproj", "{10D3CC97-E227-4314-8F6F-BDC03605BDCF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multilarr.iOS", "Multilarr.iOS\Multilarr.iOS.csproj", "{10D3CC97-E227-4314-8F6F-BDC03605BDCF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Multilarr.Core", "Multilarr\Multilarr\Multilarr.Core.csproj", "{8CB8FECD-0779-444B-A21C-7DFC554C111D}"
 EndProject

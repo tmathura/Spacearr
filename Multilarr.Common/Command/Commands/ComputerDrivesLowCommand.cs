@@ -15,12 +15,12 @@ namespace Multilarr.Common.Command.Commands
         private readonly long _lowComputerDriveValue;
 
         private readonly IDataSize _dataSize;
-        private readonly IComputerDrives _windowsDrives;
+        private readonly IComputerDrives _computerDrives;
 
-        public ComputerDrivesLowCommand(IConfiguration configuration, IDataSize dataSize, IComputerDrives windowsDrives)
+        public ComputerDrivesLowCommand(IConfiguration configuration, IDataSize dataSize, IComputerDrives computerDrives)
         {
             _dataSize = dataSize;
-            _windowsDrives = windowsDrives;
+            _computerDrives = computerDrives;
             _lowComputerDriveValue = Convert.ToInt64(configuration.GetSection("LowComputerDriveGBValue").Value);
         }
 
@@ -32,9 +32,9 @@ namespace Multilarr.Common.Command.Commands
             if (lowDiskSpaceWarningGb > 0)
             {
                 var notificationList = new List<string>();
-                if (_windowsDrives.GetComputerDrives().Count > 0)
+                if (_computerDrives.GetComputerDrives().Count > 0)
                 {
-                    foreach (var drive in _windowsDrives.GetComputerDrives())
+                    foreach (var drive in _computerDrives.GetComputerDrives())
                     {
                         if (drive.DriveType != DriveType.Fixed) continue;
                         var lowDiskSpaceWarningBytes = lowDiskSpaceWarningGb * 1024 * 1024 * 1024;

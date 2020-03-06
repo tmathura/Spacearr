@@ -1,5 +1,5 @@
-﻿using System.IO;
-using Multilarr.Common.Interfaces;
+﻿using Multilarr.Common.Interfaces;
+using System.Collections.Generic;
 
 namespace Multilarr.Common
 {
@@ -12,7 +12,7 @@ namespace Multilarr.Common
             _computerDrive = computerDrive;
         }
 
-        public DriveInfo[] GetComputerDrives()
+        public List<ComputerDriveInfo> GetComputerDrives()
         {
             return _computerDrive.GetComputerDrives();
         }

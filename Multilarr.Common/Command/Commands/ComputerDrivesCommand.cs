@@ -21,14 +21,14 @@ namespace Multilarr.Common.Command.Commands
         public string Execute()
         {
             var computerDrives = new List<ComputerDrive>();
-            if (_computerDrives.GetComputerDrives().Length > 0)
+            if (_computerDrives.GetComputerDrives().Count > 0)
             {
                 foreach (var computerDrive in _computerDrives.GetComputerDrives())
                 {
                     computerDrives.Add(new ComputerDrive
                     {
                         Name = computerDrive.Name,
-                        RootDirectory = computerDrive.RootDirectory.ToString(),
+                        RootDirectory = computerDrive.RootDirectory,
                         VolumeLabel = computerDrive.VolumeLabel,
                         DriveFormat = computerDrive.DriveFormat,
                         DriveType = computerDrive.DriveType,

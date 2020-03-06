@@ -32,7 +32,7 @@ namespace Multilarr.Common.Command.Commands
             if (lowDiskSpaceWarningGb > 0)
             {
                 var notificationList = new List<string>();
-                if (_windowsDrives.GetComputerDrives().Length > 0)
+                if (_windowsDrives.GetComputerDrives().Count > 0)
                 {
                     foreach (var drive in _windowsDrives.GetComputerDrives())
                     {

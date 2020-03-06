@@ -45,6 +45,19 @@ namespace Multilarr.Common.Tests
         }
 
         [TestMethod]
+        public async Task PopulateSetting_NoSetting()
+        {
+            // Arrange
+            _setting = new Setting(_mockILogger.Object);
+
+            // Act
+            await _setting.PopulateSetting();
+
+            // Assert
+            _mockILogger.Verify(x => x.LogWarnAsync("No settings saved."), Times.Once);
+        }
+
+        [TestMethod]
         public async Task PopulateSetting_Config()
         {
             // Arrange

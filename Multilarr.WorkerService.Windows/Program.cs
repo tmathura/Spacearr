@@ -5,9 +5,7 @@ using Multilarr.Common.Command;
 using Multilarr.Common.Interfaces;
 using Multilarr.Common.Interfaces.Command;
 using Multilarr.Common.Interfaces.Logger;
-using Multilarr.Common.Interfaces.Util;
 using Multilarr.Common.Logger;
-using Multilarr.Common.Util;
 using Multilarr.Pusher.API;
 using Multilarr.Pusher.API.Interfaces;
 using System;
@@ -32,7 +30,6 @@ namespace Multilarr.WorkerService.Windows
                     services.AddHostedService<Worker>();
                     services.AddSingleton<IPusher, Pusher.API.Pusher>();
                     services.AddSingleton<IInvoker, Invoker>();
-                    services.AddSingleton<IDataSize, DataSize>();
                     services.AddSingleton<IComputerDrives, ComputerDrives>();
                     services.AddSingleton<IComputerDriveInfo, ComputerDriveInfo>();
                     services.AddSingleton<INotificationTimer, NotificationTimer>();

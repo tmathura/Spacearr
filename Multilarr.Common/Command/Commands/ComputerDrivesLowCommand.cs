@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Multilarr.Common.Interfaces;
 using Multilarr.Common.Interfaces.Command;
-using Multilarr.Common.Interfaces.Util;
 using Multilarr.Common.Models;
+using Multilarr.Common.Util;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -14,12 +14,10 @@ namespace Multilarr.Common.Command.Commands
     {
         private readonly long _lowComputerDriveValue;
 
-        private readonly IDataSize _dataSize;
         private readonly IComputerDrives _computerDrives;
 
-        public ComputerDrivesLowCommand(IConfiguration configuration, IDataSize dataSize, IComputerDrives computerDrives)
+        public ComputerDrivesLowCommand(IConfiguration configuration, IComputerDrives computerDrives)
         {
-            _dataSize = dataSize;
             _computerDrives = computerDrives;
             _lowComputerDriveValue = Convert.ToInt64(configuration.GetSection("LowComputerDriveGBValue").Value);
         }
@@ -40,7 +38,7 @@ namespace Multilarr.Common.Command.Commands
                         var lowDiskSpaceWarningBytes = lowDiskSpaceWarningGb * 1024 * 1024 * 1024;
                         if (lowDiskSpaceWarningBytes >= drive.TotalFreeSpace)
                         {
-                            notificationList.Add($"Disk drive: {drive.VolumeLabel} ({drive.Name}) is low on space.{Environment.NewLine}Total free space: {_dataSize.SizeSuffix(drive.TotalFreeSpace, 2)}");
+                            notificationList.Add($"Disk drive: {drive.VolumeLabel} ({drive.Name}) is low on space.{Environment.NewLine}Total free space: {DataSize.SizeSuffix(drive.TotalFreeSpace, 2)}");
                         }
                     }
                 }

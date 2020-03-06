@@ -3,7 +3,6 @@ using Multilarr.Common.Command.Commands;
 using Multilarr.Common.Interfaces;
 using Multilarr.Common.Interfaces.Command;
 using Multilarr.Common.Interfaces.Logger;
-using Multilarr.Common.Interfaces.Util;
 using Multilarr.Common.Models;
 using Multilarr.Pusher.API.Interfaces;
 using Newtonsoft.Json;
@@ -15,7 +14,6 @@ namespace Multilarr.Pusher.API
     public class ComputerDrivesCommandReceiver : IComputerDrivesCommandReceiver
     {
         private readonly ILogger _logger;
-        private readonly IDataSize _dataSize;
         private readonly IComputerDrives _computerDrives;
 
         private readonly string _channelNameReceive;
@@ -23,10 +21,9 @@ namespace Multilarr.Pusher.API
         private readonly string _channelNameSend;
         private readonly string _eventNameSend;
 
-        public ComputerDrivesCommandReceiver(ILogger logger, IDataSize dataSize, IComputerDrives computerDrives)
+        public ComputerDrivesCommandReceiver(ILogger logger, IComputerDrives computerDrives)
         {
             _logger = logger;
-            _dataSize = dataSize;
             _computerDrives = computerDrives;
 
             _channelNameReceive = $"{ Enumeration.CommandType.ComputerDrivesCommand }{ Enumeration.PusherChannel.MultilarrWorkerServiceWindowsChannel.ToString() }";
@@ -51,7 +48,7 @@ namespace Multilarr.Pusher.API
                         var deserializeObject = JsonConvert.DeserializeObject<PusherSendMessage>(pusherMessage.Message);
                         if (deserializeObject.Command == Enumeration.CommandType.ComputerDrivesCommand)
                         {
-                            var command = new ComputerDrivesCommand(_dataSize, _computerDrives);
+                            var command = new ComputerDrivesCommand(_computerDrives);
                             executeCommand(command, _channelNameSend, _eventNameSend);
                         }
                     });

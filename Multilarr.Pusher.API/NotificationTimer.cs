@@ -3,7 +3,6 @@ using Multilarr.Common;
 using Multilarr.Common.Command.Commands;
 using Multilarr.Common.Interfaces;
 using Multilarr.Common.Interfaces.Command;
-using Multilarr.Common.Interfaces.Util;
 using Multilarr.Pusher.API.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -17,17 +16,15 @@ namespace Multilarr.Pusher.API
         private readonly IConfiguration _configuration;
         private readonly IInvoker _invoker;
         private readonly IPusher _pusher;
-        private readonly IDataSize _dataSize;
         private readonly IComputerDrives _computerDrives;
 
         private readonly Timer _timer;
 
-        public NotificationTimer(IConfiguration configuration, IInvoker invoker, IPusher pusher, IDataSize dataSize, IComputerDrives computerDrives)
+        public NotificationTimer(IConfiguration configuration, IInvoker invoker, IPusher pusher, IComputerDrives computerDrives)
         {
             _configuration = configuration;
             _invoker = invoker;
             _pusher = pusher;
-            _dataSize = dataSize;
             _computerDrives = computerDrives;
 
             _timer = new Timer
@@ -50,7 +47,7 @@ namespace Multilarr.Pusher.API
 
         private void ElapsedEventHandler(object sender, ElapsedEventArgs e)
         {
-            var command = new ComputerDrivesLowCommand(_configuration, _dataSize, _computerDrives);
+            var command = new ComputerDrivesLowCommand(_configuration, _computerDrives);
             var jsonList = new List<string>
             {
                 _invoker.Invoke(command)

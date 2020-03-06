@@ -1,13 +1,12 @@
-﻿using Multilarr.Common.Interfaces.Util;
-using System;
+﻿using System;
 
 namespace Multilarr.Common.Util
 {
-    public class DataSize : IDataSize
+    public class DataSize
     {
-        private readonly string[] _sizeSuffixes = {"bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"};
+        private static readonly string[] SizeSuffixes = {"bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"};
 
-        public string SizeSuffix(long value, int decimalPlaces = 1)
+        public static string SizeSuffix(long value, int decimalPlaces = 1)
         {
             if (decimalPlaces < 0) throw new ArgumentOutOfRangeException(nameof(decimalPlaces));
 
@@ -36,7 +35,7 @@ namespace Multilarr.Common.Util
                 adjustedSize /= 1024;
             }
 
-            return string.Format("{0:n" + decimalPlaces + "} {1}", adjustedSize, _sizeSuffixes[mag]);
+            return string.Format("{0:n" + decimalPlaces + "} {1}", adjustedSize, SizeSuffixes[mag]);
         }
     }
 }

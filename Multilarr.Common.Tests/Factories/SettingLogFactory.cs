@@ -5,9 +5,9 @@ namespace Multilarr.Common.Tests.Factories
 {
     public static class SettingLogFactory
     {
-        public static List<SettingLog> Default(string appId, string key, string secret, string cluster) => CreateSettingLogs(1, appId, key, secret, cluster);
+        public static List<SettingLog> Default(string appId, string key, string secret, string cluster) => CreateSettingLogs(1, appId, key, secret, cluster, null);
 
-        public static List<SettingLog> CreateSettingLogs(int total, string appId = null, string key = null, string secret = null, string cluster = null)
+        public static List<SettingLog> CreateSettingLogs(int total, string appId = null, string key = null, string secret = null, string cluster = null, bool? isDefault = null)
         {
             var settingLogs = new List<SettingLog>();
 
@@ -19,7 +19,7 @@ namespace Multilarr.Common.Tests.Factories
                     PusherKey = key ?? $"Key {i}",
                     PusherSecret = secret ?? $"Secret {i}",
                     PusherCluster = cluster ?? $"Cluster {i}",
-                    IsDefault = i == 0
+                    IsDefault = isDefault ?? i == 0
                 });
             }
 

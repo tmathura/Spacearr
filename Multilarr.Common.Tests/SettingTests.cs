@@ -58,6 +58,27 @@ namespace Multilarr.Common.Tests
         }
 
         [TestMethod]
+        public async Task PopulateSetting_NoDefaultSetting()
+        {
+            // Arrange
+            const string appId = "The appId";
+            const string key = "The key";
+            const string secret = "The secret";
+            const string cluster = "The cluster";
+
+            var settingLogList = SettingLogFactory.CreateSettingLogs(5, appId, key, secret, cluster, false);
+            var taskSettingLogList = Task.FromResult(settingLogList);
+            _mockILogger.Setup(x => x.GetSettingLogsAsync()).Returns(taskSettingLogList);
+            _setting = new Setting(_mockILogger.Object);
+
+            // Act
+            await _setting.PopulateSetting();
+
+            // Assert
+            _mockILogger.Verify(x => x.LogWarnAsync("No default setting saved."), Times.Once);
+        }
+
+        [TestMethod]
         public async Task PopulateSetting_Config()
         {
             // Arrange

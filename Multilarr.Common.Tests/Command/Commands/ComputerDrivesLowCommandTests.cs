@@ -58,6 +58,7 @@ namespace Multilarr.Common.Tests.Command.Commands
 
             // Assert
             Assert.IsNotNull(commandData);
+            Assert.IsNull(notificationEventArgs);
         }
     }
 }

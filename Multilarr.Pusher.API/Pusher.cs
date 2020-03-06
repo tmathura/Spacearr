@@ -35,32 +35,32 @@ namespace Multilarr.Pusher.API
             _notificationReceiver = new NotificationReceiver(_logger);
         }
 
-        public void ComputerDrivesCommandReceiverConnect()
+        public async Task ComputerDrivesCommandReceiverConnect()
         {
-            _setting.PopulateSetting();
-            _computerDrivesCommandReceiver.Connect(ExecuteCommand, _setting.AppId, _setting.Key, _setting.Secret, _setting.Cluster);
+            await _setting.PopulateSetting();
+            await _computerDrivesCommandReceiver.Connect(ExecuteCommand, _setting.AppId, _setting.Key, _setting.Secret, _setting.Cluster);
         }
 
-        public void WorkerServiceReceiverConnect(string channelName, string eventName)
+        public async Task WorkerServiceReceiverConnect(string channelName, string eventName)
         {
-            _setting.PopulateSetting();
-            _workerServiceReceiver.Connect(channelName, eventName, _setting.AppId, _setting.Key, _setting.Secret, _setting.Cluster);
+            await _setting.PopulateSetting();
+            await _workerServiceReceiver.Connect(channelName, eventName, _setting.AppId, _setting.Key, _setting.Secret, _setting.Cluster);
         }
 
-        public void WorkerServiceReceiverDisconnect()
+        public async Task WorkerServiceReceiverDisconnect()
         {
-            _workerServiceReceiver.Disconnect();
+            await _workerServiceReceiver.Disconnect();
         }
 
-        public void NotificationReceiverConnect()
+        public async Task NotificationReceiverConnect()
         {
-            _setting.PopulateSetting();
-            _notificationReceiver.Connect(_setting.AppId, _setting.Key, _setting.Secret, _setting.Cluster);
+            await _setting.PopulateSetting();
+            await _notificationReceiver.Connect(_setting.AppId, _setting.Key, _setting.Secret, _setting.Cluster);
         }
 
         public async Task SendMessage(string channelName, string eventName, string message)
         {
-            _setting.PopulateSetting();
+            await _setting.PopulateSetting();
 
             if (!string.IsNullOrWhiteSpace(_setting.AppId) && !string.IsNullOrWhiteSpace(_setting.Key) && !string.IsNullOrWhiteSpace(_setting.Secret) && !string.IsNullOrWhiteSpace(_setting.Cluster))
             {

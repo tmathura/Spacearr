@@ -1,4 +1,6 @@
-﻿namespace Multilarr.Common.Interfaces
+﻿using System.Threading.Tasks;
+
+namespace Multilarr.Common.Interfaces
 {
     public interface ISetting
     {
@@ -6,6 +8,6 @@
         string Key { get; set; }
         string Secret { get; set; }
         string Cluster { get; set; }
-        void PopulateSetting();
+        Task PopulateSetting();
     }
 }

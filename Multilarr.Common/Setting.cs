@@ -33,13 +33,13 @@ namespace Multilarr.Common
             Cluster = configuration.GetSection("PusherCluster").Value;
         }
 
-        public void PopulateSetting()
+        public async Task PopulateSetting()
         {
             if (!_useConfig)
             {
                 try
                 {
-                    var settings = Task.Run(_logger.GetSettingLogsAsync).Result;
+                    var settings = await _logger.GetSettingLogsAsync();
                     if (settings == null)
                     {
                         throw new Exception("No settings saved.");

@@ -18,4 +18,8 @@
     <ProjectReference Include="..\Multilarr.Common\Multilarr.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Util\" />
+  </ItemGroup>
+
 </Project>

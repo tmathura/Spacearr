@@ -49,7 +49,7 @@ namespace Multilarr.Droid.Notifications
                         var configuration = new ConfigurationBuilder().AddInMemoryCollection(settingDictionary).Build();
 
                         _pusher.Add(new Pusher.API.Pusher(_logger, configuration, null, null));
-                        _pusher[pusherCount].NotificationReceiverConnect();
+                        _ = _pusher[pusherCount].NotificationReceiverConnect();
                         pusherCount += 1;
                     }
                 }

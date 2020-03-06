@@ -1,8 +1,10 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Collections.Generic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Multilarr.Common.Interfaces.Logger;
 using Multilarr.Common.Tests.Factories;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 
 namespace Multilarr.Common.Tests
 {
@@ -31,6 +33,36 @@ namespace Multilarr.Common.Tests
             var taskSettingLogList = Task.FromResult(settingLogList);
             _mockILogger.Setup(x => x.GetSettingLogsAsync()).Returns(taskSettingLogList);
             _setting = new Setting(_mockILogger.Object);
+
+            // Act
+            await _setting.PopulateSetting();
+
+            // Assert
+            Assert.AreEqual(appId, _setting.AppId);
+            Assert.AreEqual(key, _setting.Key);
+            Assert.AreEqual(secret, _setting.Secret);
+            Assert.AreEqual(cluster, _setting.Cluster);
+        }
+
+        [TestMethod]
+        public async Task PopulateSetting_Config()
+        {
+            // Arrange
+            const string appId = "The appId";
+            const string key = "The key";
+            const string secret = "The secret";
+            const string cluster = "The cluster";
+
+            var settingDictionary = new Dictionary<string, string>
+            {
+                { "PusherAppId", appId },
+                { "PusherKey", key },
+                { "PusherSecret", secret },
+                { "PusherCluster", cluster }
+            };
+            var configuration = new ConfigurationBuilder().AddInMemoryCollection(settingDictionary).Build();
+
+            _setting = new Setting(_mockILogger.Object, configuration);
 
             // Act
             await _setting.PopulateSetting();

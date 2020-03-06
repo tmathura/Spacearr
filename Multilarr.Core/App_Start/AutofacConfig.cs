@@ -20,7 +20,7 @@ namespace Multilarr.Core
 
             builder.RegisterType<Pusher.API.Pusher>().As<IPusher>().SingleInstance();
             builder.RegisterType<Setting>().As<ISetting>().SingleInstance();
-            builder.RegisterType<ServiceReceiverConnect>().As<IServiceReceiverConnect>().SingleInstance();
+            builder.RegisterType<WorkerServiceReceiver>().As<IWorkerServiceReceiver>().SingleInstance();
             builder.RegisterType<ComputerDriveService>().As<IComputerDriveService>().SingleInstance();
         }
     }

@@ -1,5 +1,4 @@
 ﻿using Multilarr.Common;
-using Multilarr.Common.Interfaces;
 using Multilarr.Common.Interfaces.Logger;
 using Multilarr.Common.Models;
 using Multilarr.Pusher.API.Interfaces;
@@ -12,29 +11,25 @@ namespace Multilarr.Pusher.API
     public class NotificationReceiver : INotificationReceiver
     {
         private readonly ILogger _logger;
-        private readonly ISetting _setting;
 
         private readonly string _channelNameReceive;
         private readonly string _eventNameReceive;
 
-        public NotificationReceiver(ILogger logger, ISetting setting)
+        public NotificationReceiver(ILogger logger)
         {
             _logger = logger;
-            _setting = setting;
 
            _channelNameReceive = Enumeration.PusherChannel.MultilarrWorkerServiceWindowsNotificationChannel.ToString();
            _eventNameReceive = Enumeration.PusherEvent.WorkerServiceEvent.ToString();
         }
 
-        public async Task Connect()
+        public async Task Connect(string appId, string key, string secret, string cluster)
         {
             try
             {
-                _setting.PopulateSetting();
-
-                if (!string.IsNullOrWhiteSpace(_setting.AppId) && !string.IsNullOrWhiteSpace(_setting.Key) && !string.IsNullOrWhiteSpace(_setting.Secret) && !string.IsNullOrWhiteSpace(_setting.Cluster))
+                if (!string.IsNullOrWhiteSpace(appId) && !string.IsNullOrWhiteSpace(key) && !string.IsNullOrWhiteSpace(secret) && !string.IsNullOrWhiteSpace(cluster))
                 {
-                    var pusherReceive = new PusherClient.Pusher(_setting.Key, new PusherClient.PusherOptions { Cluster = _setting.Cluster });
+                    var pusherReceive = new PusherClient.Pusher(key, new PusherClient.PusherOptions { Cluster = cluster });
 
                     var myChannel = await pusherReceive.SubscribeAsync(_channelNameReceive);
                     myChannel.Bind(_eventNameReceive, (dynamic data) =>

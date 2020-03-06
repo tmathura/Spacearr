@@ -27,7 +27,7 @@ namespace Multilarr.Pusher.API.Service
             var channelNameSend = $"{ Enumeration.CommandType.ComputerDrivesCommand }{ Enumeration.PusherChannel.MultilarrWorkerServiceWindowsChannel.ToString() }";
             var eventNameSend = $"{ Enumeration.CommandType.ComputerDrivesCommand }{ Enumeration.PusherEvent.WorkerServiceEvent.ToString() }";
 
-            _pusher.ServiceReceiverConnect(channelNameReceive, eventNameReceive);
+            _pusher.WorkerServiceReceiverConnect(channelNameReceive, eventNameReceive);
 
             var pusherSendMessage = new PusherSendMessage { Command = Enumeration.CommandType.ComputerDrivesCommand};
             await _pusher.SendMessage(channelNameSend, eventNameSend, JsonConvert.SerializeObject(pusherSendMessage));
@@ -48,7 +48,7 @@ namespace Multilarr.Pusher.API.Service
             var result = await Task.FromResult(_computerDrives);
             _computerDrives = null;
 
-            _pusher.ServiceReceiverDisconnect();
+            _pusher.WorkerServiceReceiverDisconnect();
             return result;
         }
     }

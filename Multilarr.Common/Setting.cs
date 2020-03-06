@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Multilarr.Common.Interfaces;
 using Multilarr.Common.Interfaces.Logger;
-using Multilarr.Common.Models;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,6 +9,7 @@ namespace Multilarr.Common
 {
     public class Setting : ISetting
     {
+        private readonly bool _useConfig;
         private readonly ILogger _logger;
 
         public string AppId { get; set; }
@@ -17,46 +17,27 @@ namespace Multilarr.Common
         public string Secret { get; set; }
         public string Cluster { get; set; }
 
-        public Setting() { }
-
         public Setting(ILogger logger)
         {
             _logger = logger;
-
-            PopulateSetting();
         }
 
         public Setting(ILogger logger, IConfiguration configuration)
         {
             _logger = logger;
-            
-            var setting = new SettingLog
-            {
-                ComputerName = "WorkerService",
-                PusherAppId = configuration.GetSection("PusherAppId").Value,
-                PusherKey = configuration.GetSection("PusherKey").Value,
-                PusherSecret = configuration.GetSection("PusherSecret").Value,
-                PusherCluster = configuration.GetSection("PusherCluster").Value,
-                IsDefault = true
-            };
 
-            var settings = _logger.GetSettingLogsAsync().Result;
-
-            if (settings.Count == 0)
-            {
-                _logger.LogSettingAsync(setting);
-            }
-            else
-            {
-                _logger.UpdateSettingAsync(setting);
-            }
+            _useConfig = true;
+            AppId = configuration.GetSection("PusherAppId").Value;
+            Key = configuration.GetSection("PusherKey").Value;
+            Secret = configuration.GetSection("PusherSecret").Value;
+            Cluster = configuration.GetSection("PusherCluster").Value;
         }
 
         public void PopulateSetting()
         {
-            try
+            if (!_useConfig)
             {
-                if (_logger != null)
+                try
                 {
                     var settings = Task.Run(_logger.GetSettingLogsAsync).Result;
                     if (settings == null)
@@ -77,10 +58,10 @@ namespace Multilarr.Common
                         throw new Exception("No default setting saved.");
                     }
                 }
-            }
-            catch (Exception e)
-            {
-                _logger?.LogWarnAsync(e.Message);
+                catch (Exception e)
+                {
+                    _logger?.LogWarnAsync(e.Message);
+                }
             }
         }
     }

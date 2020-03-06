@@ -1,5 +1,6 @@
 ﻿using Android.Content;
 using AndroidX.Work;
+using Microsoft.Extensions.Configuration;
 using Multilarr.Common;
 using Multilarr.Common.Models;
 using Newtonsoft.Json;
@@ -36,7 +37,18 @@ namespace Multilarr.Droid.Notifications
 
                     if (!pusherSendRequestResultObject.Occupied)
                     {
-                        _pusher.Add(new Pusher.API.Pusher(_logger, setting.PusherAppId, setting.PusherKey, setting.PusherSecret, setting.PusherCluster));
+
+                        var settingDictionary = new Dictionary<string, string>
+                        {
+                            { "PusherAppId", setting.PusherAppId },
+                            { "PusherKey", setting.PusherKey },
+                            { "PusherSecret", setting.PusherSecret },
+                            { "PusherCluster", setting.PusherCluster }
+                        };
+
+                        var configuration = new ConfigurationBuilder().AddInMemoryCollection(settingDictionary).Build();
+
+                        _pusher.Add(new Pusher.API.Pusher(_logger, configuration, null, null));
                         _pusher[pusherCount].NotificationReceiverConnect();
                         pusherCount += 1;
                     }

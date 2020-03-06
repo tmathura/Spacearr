@@ -6,6 +6,6 @@ namespace Multilarr.Pusher.API.Interfaces
 {
     public interface IComputerDrivesCommandReceiver
     {
-        Task Connect(Action<ICommand, string, string> executeCommand);
+        Task Connect(Action<ICommand, string, string> executeCommand, string appId, string key, string secret, string cluster);
     }
 }

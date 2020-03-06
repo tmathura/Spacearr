@@ -6,9 +6,9 @@ namespace Multilarr.Pusher.API.Interfaces
     {
         string ReturnData { get; }
 
-        void CommandReceiverConnect();
-        void ServiceReceiverConnect(string channelName, string eventName);
-        void ServiceReceiverDisconnect();
+        void ComputerDrivesCommandReceiverConnect();
+        void WorkerServiceReceiverConnect(string channelName, string eventName);
+        void WorkerServiceReceiverDisconnect();
         Task SendMessage(string channelName, string eventName, string message);
     }
 }

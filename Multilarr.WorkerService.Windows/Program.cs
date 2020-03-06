@@ -32,7 +32,6 @@ namespace Multilarr.WorkerService.Windows
                     services.AddHostedService<Worker>();
                     services.AddSingleton<IPusher, Pusher.API.Pusher>();
                     services.AddSingleton<IInvoker, Invoker>();
-                    services.AddSingleton<ISetting, Setting>();
                     services.AddSingleton<IDataSize, DataSize>();
                     services.AddSingleton<IComputerDrives, ComputerDrives>();
                     services.AddSingleton<IComputerDriveInfo, ComputerDriveInfo>();

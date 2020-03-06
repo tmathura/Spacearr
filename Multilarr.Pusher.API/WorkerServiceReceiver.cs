@@ -1,37 +1,33 @@
-﻿using System;
-using System.Threading.Tasks;
-using Multilarr.Common.Interfaces;
-using Multilarr.Common.Interfaces.Logger;
+﻿using Multilarr.Common.Interfaces.Logger;
 using Multilarr.Common.Models;
 using Multilarr.Pusher.API.Interfaces;
 using Newtonsoft.Json;
+using System;
+using System.Threading.Tasks;
 
 namespace Multilarr.Pusher.API
 {
-    public class ServiceReceiverConnect : IServiceReceiverConnect
+    public class WorkerServiceReceiver : IWorkerServiceReceiver
     {
         private readonly ILogger _logger;
-        private readonly ISetting _setting;
         public string ReturnData { get; set; }
         private PusherClient.Pusher _pusherReceive;
 
-        public ServiceReceiverConnect(ILogger logger, ISetting setting)
+        public WorkerServiceReceiver(ILogger logger)
         {
             _logger = logger;
-            _setting = setting;
         }
 
-        public async Task Connect(string channelNameReceive, string eventNameReceive)
+        public async Task Connect(string channelNameReceive, string eventNameReceive, string appId, string key, string secret, string cluster)
         {
             try
             {
                 ReturnData = null;
                 _pusherReceive = null;
-                _setting.PopulateSetting();
 
-                if (!string.IsNullOrWhiteSpace(_setting.AppId) && !string.IsNullOrWhiteSpace(_setting.Key) && !string.IsNullOrWhiteSpace(_setting.Secret) && !string.IsNullOrWhiteSpace(_setting.Cluster))
+                if (!string.IsNullOrWhiteSpace(appId) && !string.IsNullOrWhiteSpace(key) && !string.IsNullOrWhiteSpace(secret) && !string.IsNullOrWhiteSpace(cluster))
                 {
-                    _pusherReceive = new PusherClient.Pusher(_setting.Key, new PusherClient.PusherOptions { Cluster = _setting.Cluster });
+                    _pusherReceive = new PusherClient.Pusher(key, new PusherClient.PusherOptions { Cluster = cluster });
 
                     var myChannel = await _pusherReceive.SubscribeAsync(channelNameReceive);
                     myChannel.Bind(eventNameReceive, (dynamic data) =>
@@ -54,7 +50,7 @@ namespace Multilarr.Pusher.API
             }
         }
 
-        public async Task ReceiverDisconnect()
+        public async Task Disconnect()
         {
             await _pusherReceive.DisconnectAsync();
             _pusherReceive = null;

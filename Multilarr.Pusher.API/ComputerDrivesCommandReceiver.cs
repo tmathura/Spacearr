@@ -15,7 +15,6 @@ namespace Multilarr.Pusher.API
     public class ComputerDrivesCommandReceiver : IComputerDrivesCommandReceiver
     {
         private readonly ILogger _logger;
-        private readonly ISetting _setting;
         private readonly IDataSize _dataSize;
         private readonly IComputerDrives _computerDrives;
 
@@ -24,10 +23,9 @@ namespace Multilarr.Pusher.API
         private readonly string _channelNameSend;
         private readonly string _eventNameSend;
 
-        public ComputerDrivesCommandReceiver(ILogger logger, ISetting setting, IDataSize dataSize, IComputerDrives computerDrives)
+        public ComputerDrivesCommandReceiver(ILogger logger, IDataSize dataSize, IComputerDrives computerDrives)
         {
             _logger = logger;
-            _setting = setting;
             _dataSize = dataSize;
             _computerDrives = computerDrives;
 
@@ -37,13 +35,13 @@ namespace Multilarr.Pusher.API
             _eventNameSend = $"{ Enumeration.CommandType.ComputerDrivesCommand }{ Enumeration.PusherEvent.MultilarrEvent.ToString() }";
         }
 
-        public async Task Connect(Action<ICommand, string, string> executeCommand)
+        public async Task Connect(Action<ICommand, string, string> executeCommand, string appId, string key, string secret, string cluster)
         {
             try
             {
-                if (!string.IsNullOrWhiteSpace(_setting.AppId) && !string.IsNullOrWhiteSpace(_setting.Key) && !string.IsNullOrWhiteSpace(_setting.Secret) && !string.IsNullOrWhiteSpace(_setting.Cluster))
+                if (!string.IsNullOrWhiteSpace(appId) && !string.IsNullOrWhiteSpace(key) && !string.IsNullOrWhiteSpace(secret) && !string.IsNullOrWhiteSpace(cluster))
                 {
-                    var pusherReceive = new PusherClient.Pusher(_setting.Key, new PusherClient.PusherOptions { Cluster = _setting.Cluster });
+                    var pusherReceive = new PusherClient.Pusher(key, new PusherClient.PusherOptions { Cluster = cluster });
 
                     var myChannel = await pusherReceive.SubscribeAsync(_channelNameReceive);
                     myChannel.Bind(_eventNameReceive, (dynamic data) =>

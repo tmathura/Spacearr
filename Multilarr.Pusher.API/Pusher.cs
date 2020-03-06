@@ -1,4 +1,5 @@
-﻿using Multilarr.Common;
+﻿using Microsoft.Extensions.Configuration;
+using Multilarr.Common;
 using Multilarr.Common.Interfaces;
 using Multilarr.Common.Interfaces.Command;
 using Multilarr.Common.Interfaces.Logger;
@@ -14,58 +15,47 @@ namespace Multilarr.Pusher.API
         private readonly IInvoker _invoker;
         private readonly ISetting _setting;
         private readonly INotificationReceiver _notificationReceiver;
-        private readonly IServiceReceiverConnect _serviceReceiverConnect;
+        private readonly IWorkerServiceReceiver _workerServiceReceiver;
         private readonly IComputerDrivesCommandReceiver _computerDrivesCommandReceiver;
-        public string ReturnData => _serviceReceiverConnect?.ReturnData;
+        public string ReturnData => _workerServiceReceiver?.ReturnData;
 
-        public Pusher(ILogger logger, ISetting setting, IServiceReceiverConnect serviceReceiverConnect)
+        public Pusher(ILogger logger, ISetting setting, IWorkerServiceReceiver workerServiceReceiver)
         {
             _logger = logger;
             _setting = setting;
-            _serviceReceiverConnect = serviceReceiverConnect;
+            _workerServiceReceiver = workerServiceReceiver;
         }
 
-        public Pusher(ILogger logger, IInvoker invoker, ISetting setting, IComputerDrivesCommandReceiver computerDrivesCommandReceiver)
+        public Pusher(ILogger logger, IConfiguration configuration, IInvoker invoker, IComputerDrivesCommandReceiver computerDrivesCommandReceiver)
         {
             _logger = logger;
             _invoker = invoker;
-            _setting = setting;
+            _setting = new Setting(logger, configuration);
             _computerDrivesCommandReceiver = computerDrivesCommandReceiver;
+            _notificationReceiver = new NotificationReceiver(_logger);
         }
 
-        public Pusher(ILogger logger, string appId, string key, string secret, string cluster)
+        public void ComputerDrivesCommandReceiverConnect()
         {
-            var setting = new Setting
-            {
-                AppId = appId,
-                Key = key,
-                Secret = secret,
-                Cluster = cluster
-            };
-
-            _logger = logger;
-            _setting = setting;
-            _notificationReceiver = new NotificationReceiver(_logger, _setting);
+            _setting.PopulateSetting();
+            _computerDrivesCommandReceiver.Connect(ExecuteCommand, _setting.AppId, _setting.Key, _setting.Secret, _setting.Cluster);
         }
 
-        public void CommandReceiverConnect()
+        public void WorkerServiceReceiverConnect(string channelName, string eventName)
         {
-            _computerDrivesCommandReceiver.Connect(ExecuteCommand);
+            _setting.PopulateSetting();
+            _workerServiceReceiver.Connect(channelName, eventName, _setting.AppId, _setting.Key, _setting.Secret, _setting.Cluster);
         }
 
-        public void ServiceReceiverConnect(string channelName, string eventName)
+        public void WorkerServiceReceiverDisconnect()
         {
-            _serviceReceiverConnect.Connect(channelName, eventName);
-        }
-
-        public void ServiceReceiverDisconnect()
-        {
-            _serviceReceiverConnect.ReceiverDisconnect();
+            _workerServiceReceiver.Disconnect();
         }
 
         public void NotificationReceiverConnect()
         {
-            _notificationReceiver.Connect();
+            _setting.PopulateSetting();
+            _notificationReceiver.Connect(_setting.AppId, _setting.Key, _setting.Secret, _setting.Cluster);
         }
 
         public async Task SendMessage(string channelName, string eventName, string message)

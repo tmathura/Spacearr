@@ -10,7 +10,7 @@ namespace Multilarr.WorkerService.Windows
     {
         public Worker(IPusher pusher, INotificationTimer notificationTimer)
         {
-            pusher.CommandReceiverConnect();
+            pusher.ComputerDrivesCommandReceiverConnect();
 
             notificationTimer.Instantiate();
         }

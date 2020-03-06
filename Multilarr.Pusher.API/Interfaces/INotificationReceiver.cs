@@ -4,6 +4,6 @@ namespace Multilarr.Pusher.API.Interfaces
 {
     public interface INotificationReceiver
     {
-        Task Connect();
+        Task Connect(string appId, string key, string secret, string cluster);
     }
 }

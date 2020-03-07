@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Multilarr.Common.Tests.Models
 {
     [TestClass]
-    public class AddressModelTests
+    public class SettingLogTests
     {
         private ICollection<ValidationResult> _results;
 
@@ -44,7 +44,7 @@ namespace Multilarr.Common.Tests.Models
         [DataRow("Computer Name", "App Id", "Key", "Secret", null)]
         [DataRow("Computer Name", "App Id", "Key", null, null)]
         [DataRow("Computer Name", null, null, null, null)]
-        public void Validate_InvalidComputerName(string computerName, string appId, string key, string secret, string cluster)
+        public void Validate_Invalid(string computerName, string appId, string key, string secret, string cluster)
         {
             // Arrange
             var model = new SettingLog
@@ -61,6 +61,33 @@ namespace Multilarr.Common.Tests.Models
 
             // Assert
             Assert.IsFalse(passed);
+        }
+
+        [TestMethod]
+        public void Validate_InvalidDescription()
+        {
+            // Arrange
+            var errorMessages = new List<string>
+            {
+                "Please specify the Computer Name.",
+                "The Pusher App Id field is required.",
+                "The Pusher Key field is required.",
+                "The Pusher Secret field is required.",
+                "The Pusher Cluster field is required."
+            };
+            var model = new SettingLog();
+
+            // Act
+            var passed = TestModel.Validate(model, out _results);
+
+            // Assert
+            Assert.IsFalse(passed);
+            Assert.AreEqual(errorMessages.Count, _results.Count);
+
+            foreach (var validationResult in _results)
+            {
+                Assert.IsTrue(errorMessages.Contains(validationResult.ToString()));
+            }
         }
     }
 }

@@ -3,7 +3,7 @@ using System;
 
 namespace Multilarr.Common.Models
 {
-	public class NotificationLog
+	public class NotificationModel
 	{
 		[PrimaryKey, AutoIncrement]
 		public int Id { get; set; }

@@ -15,7 +15,7 @@ namespace Multilarr.Common.Logger
         {
             _database = new SQLiteAsyncConnection(databasePath);
             _database.CreateTableAsync<LogModel>().Wait();
-            _database.CreateTableAsync<NotificationLog>().Wait();
+            _database.CreateTableAsync<NotificationModel>().Wait();
             _database.CreateTableAsync<SettingLog>().Wait();
         }
 
@@ -55,14 +55,14 @@ namespace Multilarr.Common.Logger
 
         #region Notifications
 
-        public async Task<List<NotificationLog>> GetNotificationLogsAsync()
+        public async Task<List<NotificationModel>> GetNotificationLogsAsync()
         {
-            return await _database.Table<NotificationLog>().ToListAsync();
+            return await _database.Table<NotificationModel>().ToListAsync();
         }
 
         public async Task LogNotificationAsync(string logTitle, string logMessage)
         {
-            var record = new NotificationLog
+            var record = new NotificationModel
             {
                 LogTitle = logTitle,
                 LogMessage = logMessage,
@@ -72,7 +72,7 @@ namespace Multilarr.Common.Logger
             await _database.InsertAsync(record);
         }
 
-        public async Task DeleteLogAsync(NotificationLog record)
+        public async Task DeleteLogAsync(NotificationModel record)
         {
             await _database.DeleteAsync(record);
         }

@@ -3,17 +3,17 @@ using System.Collections.Generic;
 
 namespace Multilarr.Common.Tests.Factories
 {
-    public static class SettingLogFactory
+    public static class SettingModelFactory
     {
-        public static List<SettingLog> Default(string appId, string key, string secret, string cluster) => CreateSettingLogs(1, appId, key, secret, cluster, null);
+        public static List<SettingModel> Default(string appId, string key, string secret, string cluster) => CreateSettingModels(1, appId, key, secret, cluster, null);
 
-        public static List<SettingLog> CreateSettingLogs(int total, string appId = null, string key = null, string secret = null, string cluster = null, bool? isDefault = null)
+        public static List<SettingModel> CreateSettingModels(int total, string appId = null, string key = null, string secret = null, string cluster = null, bool? isDefault = null)
         {
-            var settingLogs = new List<SettingLog>();
+            var settings = new List<SettingModel>();
 
             for (var i = 0; i < total; i++)
             {
-                settingLogs.Add(new SettingLog
+                settings.Add(new SettingModel
                 {
                     PusherAppId = appId ?? $"AppId {i}",
                     PusherKey = key ?? $"Key {i}",
@@ -23,7 +23,7 @@ namespace Multilarr.Common.Tests.Factories
                 });
             }
 
-            return settingLogs;
+            return settings;
         }
     }
 }

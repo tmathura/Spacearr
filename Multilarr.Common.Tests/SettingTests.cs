@@ -29,9 +29,9 @@ namespace Multilarr.Common.Tests
             const string secret = "The secret";
             const string cluster = "The cluster";
 
-            var settingLogList = SettingLogFactory.Default(appId, key, secret, cluster);
-            var taskSettingLogList = Task.FromResult(settingLogList);
-            _mockILogger.Setup(x => x.GetSettingLogsAsync()).Returns(taskSettingLogList);
+            var settingList = SettingModelFactory.Default(appId, key, secret, cluster);
+            var taskSettingList = Task.FromResult(settingList);
+            _mockILogger.Setup(x => x.GetSettingsAsync()).Returns(taskSettingList);
             _setting = new Setting(_mockILogger.Object);
 
             // Act
@@ -66,9 +66,9 @@ namespace Multilarr.Common.Tests
             const string secret = "The secret";
             const string cluster = "The cluster";
 
-            var settingLogList = SettingLogFactory.CreateSettingLogs(5, appId, key, secret, cluster, false);
-            var taskSettingLogList = Task.FromResult(settingLogList);
-            _mockILogger.Setup(x => x.GetSettingLogsAsync()).Returns(taskSettingLogList);
+            var settingList = SettingModelFactory.CreateSettingModels(5, appId, key, secret, cluster, false);
+            var taskSettingList = Task.FromResult(settingList);
+            _mockILogger.Setup(x => x.GetSettingsAsync()).Returns(taskSettingList);
             _setting = new Setting(_mockILogger.Object);
 
             // Act

@@ -23,13 +23,13 @@ namespace Multilarr.Core.Views
 
         private async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            var settingLog = (SettingLog) args.SelectedItem;
-            if (settingLog == null)
+            var settingModel = (SettingModel) args.SelectedItem;
+            if (settingModel == null)
             {
                 return;
             }
 
-            await Navigation.PushAsync(new SettingDetailPage(_logger, settingLog));
+            await Navigation.PushAsync(new SettingDetailPage(_logger, settingModel));
 
             SettingsListView.SelectedItem = null;
         }

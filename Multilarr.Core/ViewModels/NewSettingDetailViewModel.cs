@@ -15,7 +15,7 @@ namespace Multilarr.Core.ViewModels
 
         public ICommand SaveCommand { get; }
         public ICommand CancelCommand { get; }
-        public SettingLog SettingLog { get; set; } = new SettingLog();
+        public SettingModel SettingModel { get; set; } = new SettingModel();
 
         public NewSettingDetailViewModel(Page page, ILogger logger)
         {
@@ -38,12 +38,12 @@ namespace Multilarr.Core.ViewModels
 
             try
             {
-                if (ValidationHelper.IsFormValid(SettingLog, _page))
+                if (ValidationHelper.IsFormValid(SettingModel, _page))
                 {
-                    var pusherValid = await Pusher.API.Pusher.Validate(SettingLog.PusherAppId, SettingLog.PusherKey, SettingLog.PusherSecret, SettingLog.PusherCluster);
+                    var pusherValid = await Pusher.API.Pusher.Validate(SettingModel.PusherAppId, SettingModel.PusherKey, SettingModel.PusherSecret, SettingModel.PusherCluster);
                     if (pusherValid)
                     {
-                        await _logger.LogSettingAsync(SettingLog);
+                        await _logger.LogSettingAsync(SettingModel);
                         await _page.DisplayAlert("Success", "Setting saved!", "OK");
                         await _page.Navigation.PopModalAsync();
                     }

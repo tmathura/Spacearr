@@ -9,11 +9,11 @@ namespace Multilarr.Core.Views
     [DesignTimeVisible(false)]
     public partial class SettingDetailPage : ContentPage
     {
-        public SettingDetailPage(ILogger logger, SettingLog settingLog)
+        public SettingDetailPage(ILogger logger, SettingModel settingModel)
         {
             InitializeComponent();
             
-            BindingContext = new SettingDetailViewModel(this, logger, settingLog);
+            BindingContext = new SettingDetailViewModel(this, logger, settingModel);
         }
     }
 }

@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Multilarr.Common.Tests.Models
 {
     [TestClass]
-    public class SettingLogTests
+    public class SettingModelTests
     {
         private ICollection<ValidationResult> _results;
 
@@ -15,7 +15,7 @@ namespace Multilarr.Common.Tests.Models
         public void Validate()
         {
             // Arrange
-            var model = new SettingLog
+            var model = new SettingModel
             {
                 ComputerName = "Computer Name",
                 PusherAppId = "Pusher App Id",
@@ -47,7 +47,7 @@ namespace Multilarr.Common.Tests.Models
         public void Validate_Invalid(string computerName, string appId, string key, string secret, string cluster)
         {
             // Arrange
-            var model = new SettingLog
+            var model = new SettingModel
             {
                 ComputerName = computerName,
                 PusherAppId = appId,
@@ -75,7 +75,7 @@ namespace Multilarr.Common.Tests.Models
                 "The Pusher Secret field is required.",
                 "The Pusher Cluster field is required."
             };
-            var model = new SettingLog();
+            var model = new SettingModel();
 
             // Act
             var passed = TestModel.Validate(model, out _results);

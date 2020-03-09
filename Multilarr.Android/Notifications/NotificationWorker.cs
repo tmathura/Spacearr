@@ -25,7 +25,7 @@ namespace Multilarr.Droid.Notifications
 
             try
             {
-                var settings = _logger.GetSettingLogsAsync().Result;
+                var settings = _logger.GetSettingsAsync().Result;
 
                 var pusherCount = 0;
                 foreach (var setting in settings)

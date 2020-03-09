@@ -22,10 +22,10 @@ namespace Multilarr.Common.Interfaces.Logger
 
         #region Settings
 
-        Task<List<SettingLog>> GetSettingLogsAsync();
-        Task LogSettingAsync(SettingLog record);
-        Task UpdateSettingAsync(SettingLog record);
-        Task DeleteLogAsync(SettingLog record);
+        Task<List<SettingModel>> GetSettingsAsync();
+        Task LogSettingAsync(SettingModel record);
+        Task UpdateSettingAsync(SettingModel record);
+        Task DeleteLogAsync(SettingModel record);
 
         #endregion
     }

@@ -16,7 +16,7 @@ namespace Multilarr.Core.ViewModels
 
         public ICommand LoadItemsCommand { get; set; }
         public ICommand AddCommand { get; }
-        public ObservableCollection<SettingLog> Settings { get; set; }
+        public ObservableCollection<SettingModel> Settings { get; set; }
 
         public SettingsViewModel(Page page, ILogger logger)
         {
@@ -24,7 +24,7 @@ namespace Multilarr.Core.ViewModels
             _logger = logger;
 
             Title = "Settings";
-            Settings = new ObservableCollection<SettingLog>();
+            Settings = new ObservableCollection<SettingModel>();
 
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             AddCommand = new Command(async () => await AddAsync());
@@ -40,7 +40,7 @@ namespace Multilarr.Core.ViewModels
             try
             {
                 Settings.Clear();
-                var settings = await _logger.GetSettingLogsAsync();
+                var settings = await _logger.GetSettingsAsync();
                 foreach (var setting in settings)
                 {
                     Settings.Add(setting);

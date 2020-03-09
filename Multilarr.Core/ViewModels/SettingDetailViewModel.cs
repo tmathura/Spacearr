@@ -15,14 +15,14 @@ namespace Multilarr.Core.ViewModels
 
         public ICommand DeleteCommand { get; }
         public ICommand UpdateCommand { get; }
-        public SettingLog SettingLog { get; set; }
+        public SettingModel SettingModel { get; set; }
 
-        public SettingDetailViewModel(Page page, ILogger logger, SettingLog settingLog)
+        public SettingDetailViewModel(Page page, ILogger logger, SettingModel settingModel)
         {
             _page = page;
             _logger = logger;
-            SettingLog = settingLog;
-            Title = $"{SettingLog?.ComputerName}";
+            SettingModel = settingModel;
+            Title = $"{SettingModel?.ComputerName}";
 
             DeleteCommand = new Command(async () => await DeleteAsync());
             UpdateCommand = new Command(async () => await UpdateAsync());
@@ -39,7 +39,7 @@ namespace Multilarr.Core.ViewModels
 
             try
             {
-                await _logger.DeleteLogAsync(SettingLog);
+                await _logger.DeleteLogAsync(SettingModel);
                 await _page.DisplayAlert("Success", "Setting Deleted!", "OK");
                 await _page.Navigation.PopAsync();
             }
@@ -65,12 +65,12 @@ namespace Multilarr.Core.ViewModels
 
             try
             {
-                if (ValidationHelper.IsFormValid(SettingLog, _page))
+                if (ValidationHelper.IsFormValid(SettingModel, _page))
                 {
-                    var pusherValid = await Pusher.API.Pusher.Validate(SettingLog.PusherAppId, SettingLog.PusherKey, SettingLog.PusherSecret, SettingLog.PusherCluster);
+                    var pusherValid = await Pusher.API.Pusher.Validate(SettingModel.PusherAppId, SettingModel.PusherKey, SettingModel.PusherSecret, SettingModel.PusherCluster);
                     if (pusherValid)
                     {
-                        await _logger.UpdateSettingAsync(SettingLog);
+                        await _logger.UpdateSettingAsync(SettingModel);
                         await _page.DisplayAlert("Success", "Setting saved!", "OK");
                         await _page.Navigation.PopAsync();
                     }

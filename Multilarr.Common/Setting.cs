@@ -39,7 +39,7 @@ namespace Multilarr.Common
             {
                 try
                 {
-                    var settings = await _logger.GetSettingLogsAsync();
+                    var settings = await _logger.GetSettingsAsync();
                     if (settings == null)
                     {
                         throw new Exception("No settings saved.");

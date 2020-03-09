@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Multilarr.Common.Models
 {
-	public class SettingLog
+	public class SettingModel
 	{
 		[PrimaryKey, AutoIncrement]
 		public int Id { get; set; }

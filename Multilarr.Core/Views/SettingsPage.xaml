@@ -25,13 +25,13 @@
                   CachingStrategy="RecycleElement"
                   ItemSelected="OnItemSelected" x:DataType="viewModels:SettingsViewModel">
             <d:ListView.ItemsSource>
-                <x:Array Type="{x:Type models:SettingLog}">
-                    <models:SettingLog ComputerName = "Computer name 1" />
-                    <models:SettingLog ComputerName = "Computer name 2" />
+                <x:Array Type="{x:Type models:SettingModel}">
+                    <models:SettingModel ComputerName = "Computer name 1" />
+                    <models:SettingModel ComputerName = "Computer name 2" />
                 </x:Array>
             </d:ListView.ItemsSource>
             <ListView.ItemTemplate>
-                <DataTemplate x:DataType="models:SettingLog">
+                <DataTemplate x:DataType="models:SettingModel">
                     <ViewCell>
                         <StackLayout Padding="10">
                             <Label Text="{Binding ComputerName}" 

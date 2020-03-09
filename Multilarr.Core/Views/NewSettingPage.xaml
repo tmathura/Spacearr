@@ -17,22 +17,22 @@
         <ScrollView>
             <StackLayout Spacing="20" Padding="15">
                 <Label Text="Computer Name:" FontSize="Medium" />
-                <Entry Text="{Binding SettingLog.ComputerName}" d:Text="Computer name" FontSize="Small" />
-                <Label x:Name="SettingLog_ComputerNameError" IsVisible="False" TextColor="Red" />
+                <Entry Text="{Binding SettingModel.ComputerName}" d:Text="Computer name" FontSize="Small" />
+                <Label x:Name="SettingModel_ComputerNameError" IsVisible="False" TextColor="Red" />
                 <Label Text="Pusher App Id:" FontSize="Medium" />
-                <Entry Text="{Binding SettingLog.PusherAppId}" d:Text="Pusher app id" FontSize="Small" />
-                <Label x:Name="SettingLog_PusherAppIdError" IsVisible="False" TextColor="Red" />
+                <Entry Text="{Binding SettingModel.PusherAppId}" d:Text="Pusher app id" FontSize="Small" />
+                <Label x:Name="SettingModel_PusherAppIdError" IsVisible="False" TextColor="Red" />
                 <Label Text="Pusher Key:" FontSize="Medium" />
-                <Entry Text="{Binding SettingLog.PusherKey}" d:Text="Pusher key" FontSize="Small" />
-                <Label x:Name="SettingLog_PusherKeyError" IsVisible="False" TextColor="Red" />
+                <Entry Text="{Binding SettingModel.PusherKey}" d:Text="Pusher key" FontSize="Small" />
+                <Label x:Name="SettingModel_PusherKeyError" IsVisible="False" TextColor="Red" />
                 <Label Text="Pusher Secret:" FontSize="Medium" />
-                <Entry Text="{Binding SettingLog.PusherSecret}" d:Text="Pusher secret" FontSize="Small" />
-                <Label x:Name="SettingLog_PusherSecretError" IsVisible="False" TextColor="Red" />
+                <Entry Text="{Binding SettingModel.PusherSecret}" d:Text="Pusher secret" FontSize="Small" />
+                <Label x:Name="SettingModel_PusherSecretError" IsVisible="False" TextColor="Red" />
                 <Label Text="Pusher Cluster:" FontSize="Medium" />
-                <Entry Text="{Binding SettingLog.PusherCluster}" d:Text="Pusher cluster" FontSize="Small" />
-                <Label x:Name="SettingLog_PusherClusterError" IsVisible="False" TextColor="Red" />
+                <Entry Text="{Binding SettingModel.PusherCluster}" d:Text="Pusher cluster" FontSize="Small" />
+                <Label x:Name="SettingModel_PusherClusterError" IsVisible="False" TextColor="Red" />
                 <Label Text="Is Default:" FontSize="Medium" />
-                <CheckBox IsChecked="{Binding SettingLog.IsDefault}" />
+                <CheckBox IsChecked="{Binding SettingModel.IsDefault}" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

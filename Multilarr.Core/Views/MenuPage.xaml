@@ -12,14 +12,14 @@
         <ListView x:Name="ListViewMenu"
                     HasUnevenRows="True">
             <d:ListView.ItemsSource>
-                <x:Array Type="{x:Type models:HomeMenuItem}">
-                    <models:HomeMenuItem Id = "1" Title="Title 1"/>
-                    <models:HomeMenuItem Id = "2" Title="Title 2"/>
+                <x:Array Type="{x:Type models:HomeMenuItemModel}">
+                    <models:HomeMenuItemModel Id = "1" Title="Title 1"/>
+                    <models:HomeMenuItemModel Id = "2" Title="Title 2"/>
                 </x:Array>
             </d:ListView.ItemsSource>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell x:DataType="models:HomeMenuItem">
+                    <ViewCell x:DataType="models:HomeMenuItemModel">
                         <Grid Padding="10">
                             <Label Text="{Binding Title}" d:Text="{Binding Title}" FontSize="20"/>
                         </Grid>

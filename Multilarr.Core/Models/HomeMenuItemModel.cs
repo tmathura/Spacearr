@@ -7,7 +7,7 @@
         Logs,
         Settings
     }
-    public class HomeMenuItem
+    public class HomeMenuItemModel
     {
         public MenuItemType Id { get; set; }
 

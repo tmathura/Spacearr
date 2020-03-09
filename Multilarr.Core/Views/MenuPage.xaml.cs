@@ -14,12 +14,12 @@ namespace Multilarr.Core.Views
         {
             InitializeComponent();
 
-            var menuItems = new List<HomeMenuItem>
+            var menuItems = new List<HomeMenuItemModel>
             {
-                new HomeMenuItem {Id = MenuItemType.Home, Title = "Home" },
-                new HomeMenuItem {Id = MenuItemType.ComputerDrives, Title = "Computer Drives" },
-                new HomeMenuItem {Id = MenuItemType.Logs, Title = "Logs" },
-                new HomeMenuItem {Id = MenuItemType.Settings, Title = "Settings" }
+                new HomeMenuItemModel {Id = MenuItemType.Home, Title = "Home" },
+                new HomeMenuItemModel {Id = MenuItemType.ComputerDrives, Title = "Computer Drives" },
+                new HomeMenuItemModel {Id = MenuItemType.Logs, Title = "Logs" },
+                new HomeMenuItemModel {Id = MenuItemType.Settings, Title = "Settings" }
             };
 
             ListViewMenu.ItemsSource = menuItems;
@@ -32,7 +32,7 @@ namespace Multilarr.Core.Views
                     return;
                 }
 
-                var id = (int)((HomeMenuItem)e.SelectedItem).Id;
+                var id = (int)((HomeMenuItemModel)e.SelectedItem).Id;
                 await RootPage.NavigateFromMenu(id);
             };
         }

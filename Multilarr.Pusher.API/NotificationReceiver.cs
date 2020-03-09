@@ -36,7 +36,7 @@ namespace Multilarr.Pusher.API
                     {
                         PusherReceiveMessageObjectModel pusherReceiveMessageObject = JsonConvert.DeserializeObject<PusherReceiveMessageObjectModel>(data.ToString());
                         var pusherReceiveMessage = JsonConvert.DeserializeObject<PusherReceiveMessageModel>(pusherReceiveMessageObject.Data);
-                        var deserializeObject = JsonConvert.DeserializeObject<NotificationEventArgs>(pusherReceiveMessage.Message);
+                        var deserializeObject = JsonConvert.DeserializeObject<NotificationEventArgsModel>(pusherReceiveMessage.Message);
 
                         _logger.LogNotificationAsync(deserializeObject.Title, deserializeObject.Message);
                     });

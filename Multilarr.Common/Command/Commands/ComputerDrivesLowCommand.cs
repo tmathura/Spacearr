@@ -24,7 +24,7 @@ namespace Multilarr.Common.Command.Commands
 
         public string Execute()
         {
-            NotificationEventArgs notificationEventArgs = null;
+            NotificationEventArgsModel notificationEventArgs = null;
             var lowDiskSpaceWarningGb = _lowComputerDriveValue;
 
             if (lowDiskSpaceWarningGb > 0)
@@ -45,7 +45,7 @@ namespace Multilarr.Common.Command.Commands
 
                 if (notificationList.Count > 0)
                 {
-                    notificationEventArgs = new NotificationEventArgs
+                    notificationEventArgs = new NotificationEventArgsModel
                     {
                         Title = "Computer Drives Low",
                         Message = string.Join(Environment.NewLine, notificationList.ToArray())

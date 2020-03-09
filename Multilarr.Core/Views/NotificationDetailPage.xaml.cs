@@ -8,7 +8,7 @@ namespace Multilarr.Core.Views
     [DesignTimeVisible(false)]
     public partial class NotificationDetailPage : ContentPage
     {
-        public NotificationDetailPage(NotificationEventArgs notification)
+        public NotificationDetailPage(NotificationEventArgsModel notification)
         {
             InitializeComponent();
 

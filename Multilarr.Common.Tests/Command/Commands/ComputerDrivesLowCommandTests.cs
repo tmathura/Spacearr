@@ -35,7 +35,7 @@ namespace Multilarr.Common.Tests.Command.Commands
 
             // Act
             var commandData = _computerDrivesLowCommand.Execute();
-            var notificationEventArgs = JsonConvert.DeserializeObject<NotificationEventArgs>(commandData);
+            var notificationEventArgs = JsonConvert.DeserializeObject<NotificationEventArgsModel>(commandData);
 
             // Assert
             Assert.IsNotNull(commandData);
@@ -54,7 +54,7 @@ namespace Multilarr.Common.Tests.Command.Commands
 
             // Act
             var commandData = _computerDrivesLowCommand.Execute();
-            var notificationEventArgs = JsonConvert.DeserializeObject<NotificationEventArgs>(commandData);
+            var notificationEventArgs = JsonConvert.DeserializeObject<NotificationEventArgsModel>(commandData);
 
             // Assert
             Assert.IsNotNull(commandData);

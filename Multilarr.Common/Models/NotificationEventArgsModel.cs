@@ -2,7 +2,7 @@
 
 namespace Multilarr.Common.Models
 {
-    public class NotificationEventArgs : EventArgs
+    public class NotificationEventArgsModel : EventArgs
     {
         public int Id { get; set; }
         public string Title { get; set; }

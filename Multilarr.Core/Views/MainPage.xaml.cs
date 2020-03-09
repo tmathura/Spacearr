@@ -26,7 +26,7 @@ namespace Multilarr.Core.Views
             {
                 notificationManager.NotificationReceived += (sender, eventArgs) =>
                 {
-                    var evtData = (NotificationEventArgs)eventArgs;
+                    var evtData = (NotificationEventArgsModel)eventArgs;
                     ShowNotification(evtData.Id, evtData.Title, evtData.Message);
                 };
             }
@@ -79,7 +79,7 @@ namespace Multilarr.Core.Views
         {
             Device.BeginInvokeOnMainThread(() =>
             {
-                var notification = new NotificationEventArgs { Id = id, Title = title, Message = message} ;
+                var notification = new NotificationEventArgsModel { Id = id, Title = title, Message = message} ;
                 var newPage = new NavigationPage(new NotificationDetailPage(notification));
                 DependencyService.Get<IPushCancel>().CancelPush(id);
                 Detail = newPage;

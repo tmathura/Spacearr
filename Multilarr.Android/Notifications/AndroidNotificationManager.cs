@@ -67,7 +67,7 @@ namespace Multilarr.Droid.Notifications
 
         public void ReceiveNotification(int id, string title, string message)
         {
-            var args = new NotificationEventArgs()
+            var args = new NotificationEventArgsModel()
             {
                 Id = id,
                 Title = title,

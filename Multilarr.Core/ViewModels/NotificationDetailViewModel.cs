@@ -4,8 +4,8 @@ namespace Multilarr.Core.ViewModels
 {
     public class NotificationDetailViewModel : BaseViewModel
     {
-        public NotificationEventArgs Notification { get; set; }
-        public NotificationDetailViewModel(NotificationEventArgs notification = null)
+        public NotificationEventArgsModel Notification { get; set; }
+        public NotificationDetailViewModel(NotificationEventArgsModel notification = null)
         {
             Title = $"{notification?.Title}";
             Notification = notification;

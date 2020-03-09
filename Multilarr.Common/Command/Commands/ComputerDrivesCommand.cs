@@ -1,7 +1,6 @@
 ﻿using Multilarr.Common.Interfaces;
 using Multilarr.Common.Interfaces.Command;
 using Multilarr.Common.Models;
-using Multilarr.Common.Util;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
@@ -32,11 +31,7 @@ namespace Multilarr.Common.Command.Commands
                         DriveType = computerDrive.DriveType,
                         IsReady = computerDrive.IsReady,
                         TotalFreeSpace = computerDrive.TotalFreeSpace,
-                        TotalFreeSpaceString = DataSize.SizeSuffix(computerDrive.TotalFreeSpace, 2),
-                        TotalUsedSpace = computerDrive.TotalSize - computerDrive.TotalFreeSpace,
-                        TotalUsedSpaceString = DataSize.SizeSuffix(computerDrive.TotalSize - computerDrive.TotalFreeSpace, 2),
-                        TotalSize = computerDrive.TotalSize,
-                        TotalSizeString = DataSize.SizeSuffix(computerDrive.TotalSize, 2)
+                        TotalSize = computerDrive.TotalSize
                     });
                 }
             }

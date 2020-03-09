@@ -3,7 +3,7 @@ using System;
 
 namespace Multilarr.Common.Models
 {
-	public class Log
+	public class LogModel
 	{
 		[PrimaryKey, AutoIncrement]
 		public int Id { get; set; }

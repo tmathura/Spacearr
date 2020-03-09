@@ -20,7 +20,7 @@ namespace Multilarr.Core.Views
 
         private async void OnLogSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            var log = (Log) args.SelectedItem;
+            var log = (LogModel) args.SelectedItem;
             if (log == null)
             {
                 return;

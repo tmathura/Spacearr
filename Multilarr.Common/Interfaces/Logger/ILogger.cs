@@ -8,7 +8,7 @@ namespace Multilarr.Common.Interfaces.Logger
     {
         #region Logs
         
-        Task<List<Log>> GetLogsAsync();
+        Task<List<LogModel>> GetLogsAsync();
         Task LogWarnAsync(string logMessage);
         Task LogErrorAsync(string logMessage, string stackTrace);
 

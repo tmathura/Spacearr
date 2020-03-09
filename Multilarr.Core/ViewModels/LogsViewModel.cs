@@ -11,7 +11,7 @@ namespace Multilarr.Core.ViewModels
     {
         private readonly Page _page;
         private readonly ILogger _logger;
-        public ObservableCollection<Log> Logs { get; set; }
+        public ObservableCollection<LogModel> Logs { get; set; }
         public Command LoadItemsCommand { get; set; }
 
         public LogsViewModel(Page page, ILogger logger)
@@ -20,7 +20,7 @@ namespace Multilarr.Core.ViewModels
             _logger = logger;
 
             Title = "Logs";
-            Logs = new ObservableCollection<Log>();
+            Logs = new ObservableCollection<LogModel>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
         }
 

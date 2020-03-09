@@ -21,13 +21,13 @@
                 CachingStrategy="RecycleElement"
                 ItemSelected="OnLogSelected" x:DataType="viewModels:LogsViewModel">
             <d:ListView.ItemsSource>
-                <x:Array Type="{x:Type models:Log}">
-                    <models:Log LogMessage = "Log message 1" />
-                    <models:Log LogMessage = "Log message 2" />
+                <x:Array Type="{x:Type models:LogModel}">
+                    <models:LogModel LogMessage = "Log message 1" />
+                    <models:LogModel LogMessage = "Log message 2" />
                 </x:Array>
             </d:ListView.ItemsSource>
             <ListView.ItemTemplate>
-                <DataTemplate x:DataType="models:Log">
+                <DataTemplate x:DataType="models:LogModel">
                     <ViewCell>
                         <StackLayout Padding="10">
                             <Label Text="{Binding LogMessage}" 

@@ -8,7 +8,7 @@ namespace Multilarr.Core.Views
     [DesignTimeVisible(false)]
     public partial class LogDetailPage : ContentPage
     {
-        public LogDetailPage(Log log)
+        public LogDetailPage(LogModel log)
         {
             InitializeComponent();
 

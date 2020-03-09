@@ -14,21 +14,21 @@ namespace Multilarr.Common.Logger
         public Logger(string databasePath)
         {
             _database = new SQLiteAsyncConnection(databasePath);
-            _database.CreateTableAsync<Log>().Wait();
+            _database.CreateTableAsync<LogModel>().Wait();
             _database.CreateTableAsync<NotificationLog>().Wait();
             _database.CreateTableAsync<SettingLog>().Wait();
         }
 
         #region Logs
 
-        public async Task<List<Log>> GetLogsAsync()
+        public async Task<List<LogModel>> GetLogsAsync()
 		{
-			return await _database.Table<Log>().ToListAsync();
+			return await _database.Table<LogModel>().ToListAsync();
 		}
 
         public async Task LogWarnAsync(string logMessage)
         {
-            var record = new Log
+            var record = new LogModel
             {
                 LogMessage = logMessage,
                 LogType = Enumeration.LogType.Warn,
@@ -40,7 +40,7 @@ namespace Multilarr.Common.Logger
 
         public async Task LogErrorAsync(string logMessage, string stackTrace)
         {
-            var record = new Log
+            var record = new LogModel
             {
                 LogMessage = logMessage,
                 LogStackTrace = stackTrace,

@@ -1,6 +1,6 @@
 ﻿namespace Multilarr.Common.Models
 {
-    public class PusherSendRequestResultObject
+    public class PusherSendRequestResultObjectModel
     {
         public bool Occupied { get; set; }
     }

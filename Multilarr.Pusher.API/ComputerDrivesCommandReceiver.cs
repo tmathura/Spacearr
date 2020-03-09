@@ -43,9 +43,9 @@ namespace Multilarr.Pusher.API
                     var myChannel = await pusherReceive.SubscribeAsync(_channelNameReceive);
                     myChannel.Bind(_eventNameReceive, (dynamic data) =>
                     {
-                        PusherReceiveMessageObject pusherReceiveMessage = JsonConvert.DeserializeObject<PusherReceiveMessageObject>(data.ToString());
-                        var pusherMessage = JsonConvert.DeserializeObject<PusherReceiveMessage>(pusherReceiveMessage.Data);
-                        var deserializeObject = JsonConvert.DeserializeObject<PusherSendMessage>(pusherMessage.Message);
+                        PusherReceiveMessageObjectModel pusherReceiveMessage = JsonConvert.DeserializeObject<PusherReceiveMessageObjectModel>(data.ToString());
+                        var pusherMessage = JsonConvert.DeserializeObject<PusherReceiveMessageModel>(pusherReceiveMessage.Data);
+                        var deserializeObject = JsonConvert.DeserializeObject<PusherSendMessageModel>(pusherMessage.Message);
                         if (deserializeObject.Command == Enumeration.CommandType.ComputerDrivesCommand)
                         {
                             var command = new ComputerDrivesCommand(_computerDrives);

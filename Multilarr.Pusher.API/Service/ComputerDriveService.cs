@@ -29,7 +29,7 @@ namespace Multilarr.Pusher.API.Service
 
             await _pusher.WorkerServiceReceiverConnect(channelNameReceive, eventNameReceive);
 
-            var pusherSendMessage = new PusherSendMessage { Command = Enumeration.CommandType.ComputerDrivesCommand};
+            var pusherSendMessage = new PusherSendMessageModel { Command = Enumeration.CommandType.ComputerDrivesCommand};
             await _pusher.SendMessage(channelNameSend, eventNameSend, JsonConvert.SerializeObject(pusherSendMessage));
 
             var stopwatch = new Stopwatch();

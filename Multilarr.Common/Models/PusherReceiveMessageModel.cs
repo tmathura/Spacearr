@@ -1,6 +1,6 @@
 ﻿namespace Multilarr.Common.Models
 {
-    public class PusherReceiveMessage
+    public class PusherReceiveMessageModel
     {
         public string Message { get; set; }
     }

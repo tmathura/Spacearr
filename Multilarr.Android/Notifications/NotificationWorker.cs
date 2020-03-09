@@ -33,7 +33,7 @@ namespace Multilarr.Droid.Notifications
                     var pusherSend = new PusherServer.Pusher(setting.PusherAppId, setting.PusherKey, setting.PusherSecret, new PusherServer.PusherOptions { Cluster = setting.PusherCluster });
 
                     var getResult = pusherSend.GetAsync<object>($"/channels/{Enumeration.PusherChannel.MultilarrWorkerServiceWindowsNotificationChannel.ToString()}").Result;
-                    var pusherSendRequestResultObject = JsonConvert.DeserializeObject<PusherSendRequestResultObject>(((PusherServer.RequestResult)getResult).Body);
+                    var pusherSendRequestResultObject = JsonConvert.DeserializeObject<PusherSendRequestResultObjectModel>(((PusherServer.RequestResult)getResult).Body);
 
                     if (!pusherSendRequestResultObject.Occupied)
                     {

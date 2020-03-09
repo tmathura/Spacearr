@@ -12,7 +12,7 @@ namespace Multilarr.Core.Views
     {
         private readonly ComputerDriveDetailViewModel _viewModel;
 
-        public ComputerDriveDetailPage(ComputerDrive computerDrive)
+        public ComputerDriveDetailPage(ComputerDriveModel computerDrive)
         {
             InitializeComponent();
 

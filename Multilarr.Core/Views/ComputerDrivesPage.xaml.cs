@@ -21,7 +21,7 @@ namespace Multilarr.Core.Views
 
         private async void OnComputerDriveSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            var computerDrive = (ComputerDrive) args.SelectedItem;
+            var computerDrive = (ComputerDriveModel) args.SelectedItem;
             if (computerDrive == null)
             {
                 return;

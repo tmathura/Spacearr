@@ -31,7 +31,7 @@ namespace Multilarr.Common.Tests.Command.Commands
 
             // Act
             var commandData = _computerDrivesCommand.Execute();
-            var computerDrives = JsonConvert.DeserializeObject<List<ComputerDrive>>(commandData);
+            var computerDrives = JsonConvert.DeserializeObject<List<ComputerDriveModel>>(commandData);
 
             // Assert
             Assert.AreEqual(noOfComputerDrives, computerDrives.Count);
@@ -46,7 +46,7 @@ namespace Multilarr.Common.Tests.Command.Commands
 
             // Act
             var commandData = _computerDrivesCommand.Execute();
-            var computerDrives = JsonConvert.DeserializeObject<List<ComputerDrive>>(commandData);
+            var computerDrives = JsonConvert.DeserializeObject<List<ComputerDriveModel>>(commandData);
 
             // Assert
             Assert.AreEqual(0, computerDrives.Count);

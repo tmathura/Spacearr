@@ -14,7 +14,7 @@ namespace Multilarr.Core.ViewModels
         private readonly ILogger _logger;
         private readonly IComputerDriveService _computerDriveService;
 
-        public ObservableCollection<ComputerDrive> ComputerDrives { get; set; }
+        public ObservableCollection<ComputerDriveModel> ComputerDrives { get; set; }
         public Command LoadItemsCommand { get; set; }
 
         public ComputerDrivesViewModel(Page page, ILogger logger, IComputerDriveService computerDriveService)
@@ -24,7 +24,7 @@ namespace Multilarr.Core.ViewModels
             _computerDriveService = computerDriveService;
 
             Title = "Computer Drives";
-            ComputerDrives = new ObservableCollection<ComputerDrive>();
+            ComputerDrives = new ObservableCollection<ComputerDriveModel>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
         }
 

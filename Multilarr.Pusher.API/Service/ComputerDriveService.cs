@@ -13,14 +13,14 @@ namespace Multilarr.Pusher.API.Service
     public class ComputerDriveService : IComputerDriveService
     {
         private readonly IPusher _pusher;
-        private List<ComputerDrive> _computerDrives;
+        private List<ComputerDriveModel> _computerDrives;
 
         public ComputerDriveService(IPusher pusher)
         {
             _pusher = pusher;
         }
         
-        public async Task<IEnumerable<ComputerDrive>> GetComputerDrivesAsync()
+        public async Task<IEnumerable<ComputerDriveModel>> GetComputerDrivesAsync()
         {
             var channelNameReceive = $"{ Enumeration.CommandType.ComputerDrivesCommand }{ Enumeration.PusherChannel.MultilarrChannel.ToString() }";
             var eventNameReceive = $"{ Enumeration.CommandType.ComputerDrivesCommand }{ Enumeration.PusherEvent.MultilarrEvent.ToString() }";
@@ -43,7 +43,7 @@ namespace Multilarr.Pusher.API.Service
                 }
             }
 
-            _computerDrives = JsonConvert.DeserializeObject<List<ComputerDrive>>(_pusher.ReturnData);
+            _computerDrives = JsonConvert.DeserializeObject<List<ComputerDriveModel>>(_pusher.ReturnData);
 
             var result = await Task.FromResult(_computerDrives);
             _computerDrives = null;

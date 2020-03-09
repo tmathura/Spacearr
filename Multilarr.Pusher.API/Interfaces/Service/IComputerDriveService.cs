@@ -6,6 +6,6 @@ namespace Multilarr.Pusher.API.Interfaces.Service
 {
     public interface IComputerDriveService
     {
-        Task<IEnumerable<ComputerDrive>> GetComputerDrivesAsync();
+        Task<IEnumerable<ComputerDriveModel>> GetComputerDrivesAsync();
     }
 }

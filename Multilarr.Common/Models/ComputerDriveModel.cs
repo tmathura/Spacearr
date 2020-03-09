@@ -3,7 +3,7 @@ using System.IO;
 
 namespace Multilarr.Common.Models
 {
-    public class ComputerDrive
+    public class ComputerDriveModel
     {
         public string Name { get; set; }
         public string RootDirectory { get; set; }

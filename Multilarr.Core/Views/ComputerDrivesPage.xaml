@@ -21,13 +21,13 @@
                 CachingStrategy="RecycleElement"
                 ItemSelected="OnComputerDriveSelected" x:DataType="viewModels:ComputerDrivesViewModel">
             <d:ListView.ItemsSource>
-                <x:Array Type="{x:Type models:ComputerDrive}">
-                    <models:ComputerDrive Name = "Computer Drive 1" />
-                    <models:ComputerDrive Name = "Computer Drive 2" />
+                <x:Array Type="{x:Type models:ComputerDriveModel}">
+                    <models:ComputerDriveModel Name = "Computer Drive 1" />
+                    <models:ComputerDriveModel Name = "Computer Drive 2" />
                 </x:Array>
             </d:ListView.ItemsSource>
             <ListView.ItemTemplate>
-                <DataTemplate x:DataType="models:ComputerDrive">
+                <DataTemplate x:DataType="models:ComputerDriveModel">
                     <ViewCell>
                         <StackLayout Padding="10">
                             <Label Text="{Binding Name}" 

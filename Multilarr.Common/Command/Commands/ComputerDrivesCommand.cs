@@ -17,12 +17,12 @@ namespace Multilarr.Common.Command.Commands
 
         public string Execute()
         {
-            var computerDrives = new List<ComputerDrive>();
+            var computerDrives = new List<ComputerDriveModel>();
             if (_computerDrives.GetComputerDrives().Count > 0)
             {
                 foreach (var computerDrive in _computerDrives.GetComputerDrives())
                 {
-                    computerDrives.Add(new ComputerDrive
+                    computerDrives.Add(new ComputerDriveModel
                     {
                         Name = computerDrive.Name,
                         RootDirectory = computerDrive.RootDirectory,

@@ -4,14 +4,14 @@ using Multilarr.Common.Models;
 namespace Multilarr.Common.Tests.Models
 {
     [TestClass]
-    public class ComputerDriveTests
+    public class ComputerDriveModelTests
     {
 
         [TestMethod]
         public void Validate_TestCase1()
         {
             // Arrange
-            var model = new ComputerDrive
+            var model = new ComputerDriveModel
             {
                 TotalSize = 1073741824,
                 TotalFreeSpace = 1073741824
@@ -28,7 +28,7 @@ namespace Multilarr.Common.Tests.Models
         public void Validate_TestCase2()
         {
             // Arrange
-            var model = new ComputerDrive
+            var model = new ComputerDriveModel
             {
                 TotalSize = 1073741824,
                 TotalFreeSpace = 536870912

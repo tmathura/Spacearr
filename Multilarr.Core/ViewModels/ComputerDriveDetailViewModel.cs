@@ -4,11 +4,11 @@ namespace Multilarr.Core.ViewModels
 {
     public class ComputerDriveDetailViewModel : BaseViewModel
     {
-        public ComputerDriveModel ComputerDrive { get; set; }
-        public ComputerDriveDetailViewModel(ComputerDriveModel computerDrive = null)
+        public ComputerDriveModel ComputerDriveModel { get; set; }
+        public ComputerDriveDetailViewModel(ComputerDriveModel computerDriveModel)
         {
-            Title = $"{computerDrive?.Name} {computerDrive?.VolumeLabel}";
-            ComputerDrive = computerDrive;
+            Title = $"{computerDriveModel?.Name} {computerDriveModel?.VolumeLabel}";
+            ComputerDriveModel = computerDriveModel;
         }
     }
 }

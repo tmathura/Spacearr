@@ -23,12 +23,12 @@ namespace Multilarr.Common.Tests
         [TestMethod]
         public async Task PopulateSetting()
         {
-            // Arrange
             const string appId = "The appId";
             const string key = "The key";
             const string secret = "The secret";
             const string cluster = "The cluster";
 
+            // Arrange
             var settingList = SettingModelFactory.Default(appId, key, secret, cluster);
             var taskSettingList = Task.FromResult(settingList);
             _mockILogger.Setup(x => x.GetSettingsAsync()).Returns(taskSettingList);
@@ -60,12 +60,12 @@ namespace Multilarr.Common.Tests
         [TestMethod]
         public async Task PopulateSetting_NoDefaultSetting()
         {
-            // Arrange
             const string appId = "The appId";
             const string key = "The key";
             const string secret = "The secret";
             const string cluster = "The cluster";
 
+            // Arrange
             var settingList = SettingModelFactory.CreateSettingModels(5, appId, key, secret, cluster, false);
             var taskSettingList = Task.FromResult(settingList);
             _mockILogger.Setup(x => x.GetSettingsAsync()).Returns(taskSettingList);
@@ -81,12 +81,12 @@ namespace Multilarr.Common.Tests
         [TestMethod]
         public async Task PopulateSetting_Config()
         {
-            // Arrange
             const string appId = "The appId";
             const string key = "The key";
             const string secret = "The secret";
             const string cluster = "The cluster";
 
+            // Arrange
             var settingDictionary = new Dictionary<string, string>
             {
                 { "PusherAppId", appId },

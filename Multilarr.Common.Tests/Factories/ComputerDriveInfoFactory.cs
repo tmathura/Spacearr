@@ -6,7 +6,6 @@ namespace Multilarr.Common.Tests.Factories
 {
     public static class ComputerDriveInfoFactory
     {
-        public static List<ComputerDriveInfo> Default => CreateComputerDriveInfos(1);
         public static List<ComputerDriveInfo> CreateComputerDriveInfoFixed => CreateComputerDriveInfos(1, DriveType.Fixed);
 
         public static List<ComputerDriveInfo> CreateComputerDriveInfos(int total, DriveType? driveType = null)

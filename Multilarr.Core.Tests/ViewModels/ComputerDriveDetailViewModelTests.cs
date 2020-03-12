@@ -10,12 +10,13 @@ namespace Multilarr.Core.Tests.ViewModels
         [TestMethod]
         public void ComputerDriveDetailViewModel()
         {
-            // Arrange
             var computerDriveModel = new ComputerDriveModel
             {
                 Name = "Computer Name",
                 VolumeLabel = "VolumeL abel"
             };
+
+            // Arrange
             var computerDriveDetailViewModel = new ComputerDriveDetailViewModel(computerDriveModel);
 
             // Assert

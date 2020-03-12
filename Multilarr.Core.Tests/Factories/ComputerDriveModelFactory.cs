@@ -7,8 +7,6 @@ namespace Multilarr.Core.Tests.Factories
 {
     public static class ComputerDriveModelFactory
     {
-        public static IEnumerable<ComputerDriveModel> Default => CreateComputerDriveModels(1);
-
         public static IEnumerable<ComputerDriveModel> CreateComputerDriveModels(int total, DriveType? driveType = null)
         {
             var computerDriveModels = new List<ComputerDriveModel>();

@@ -24,8 +24,9 @@ namespace Multilarr.Common.Tests.Command.Commands
         [TestMethod]
         public void Execute()
         {
-            // Arrange
             const int noOfComputerDrives = 9;
+
+            // Arrange
             _mockIComputerDrives.Setup(x => x.GetComputerDrives()).Returns(ComputerDriveInfoFactory.CreateComputerDriveInfos(noOfComputerDrives));
             _computerDrivesCommand = new ComputerDrivesCommand(_mockIComputerDrives.Object);
 

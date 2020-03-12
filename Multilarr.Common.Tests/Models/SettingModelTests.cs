@@ -66,7 +66,6 @@ namespace Multilarr.Common.Tests.Models
         [TestMethod]
         public void Validate_InvalidDescription()
         {
-            // Arrange
             var errorMessages = new List<string>
             {
                 "Please specify the Computer Name.",
@@ -75,6 +74,8 @@ namespace Multilarr.Common.Tests.Models
                 "The Pusher Secret field is required.",
                 "The Pusher Cluster field is required."
             };
+
+            // Arrange
             var model = new SettingModel();
 
             // Act

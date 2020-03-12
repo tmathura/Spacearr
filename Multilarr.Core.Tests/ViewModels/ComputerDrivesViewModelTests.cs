@@ -13,15 +13,15 @@ namespace Multilarr.Core.Tests.ViewModels
     public class ComputerDrivesViewModelTests
     {
         private Mock<ILogger> _mockILogger;
-        private Mock<IDisplayAlertHelper> _displayAlertHelper;
-        private Mock<IComputerDriveService> _computerDriveService;
+        private Mock<IDisplayAlertHelper> _mockDisplayAlertHelper;
+        private Mock<IComputerDriveService> _mockComputerDriveService;
 
         [TestInitialize]
         public void SetUp()
         {
             _mockILogger = new Mock<ILogger>();
-            _displayAlertHelper = new Mock<IDisplayAlertHelper>();
-            _computerDriveService = new Mock<IComputerDriveService>();
+            _mockDisplayAlertHelper = new Mock<IDisplayAlertHelper>();
+            _mockComputerDriveService = new Mock<IComputerDriveService>();
         }
 
         [TestMethod]
@@ -29,7 +29,7 @@ namespace Multilarr.Core.Tests.ViewModels
         {
             {
                 // Arrange
-                var computerDriveDetailViewModel = new ComputerDrivesViewModel(_mockILogger.Object, _displayAlertHelper.Object, _computerDriveService.Object);
+                var computerDriveDetailViewModel = new ComputerDrivesViewModel(_mockILogger.Object, _mockDisplayAlertHelper.Object, _mockComputerDriveService.Object);
 
                 // Assert
                 Assert.AreEqual("Computer Drives", computerDriveDetailViewModel.Title);
@@ -45,8 +45,8 @@ namespace Multilarr.Core.Tests.ViewModels
                 // Arrange
                 var computerDriveModelList = ComputerDriveModelFactory.CreateComputerDriveModels(noOfComputerDriveModels);
                 var taskComputerDriveModelList = Task.FromResult(computerDriveModelList);
-                _computerDriveService.Setup(x => x.GetComputerDrivesAsync()).Returns(taskComputerDriveModelList);
-                var computerDriveDetailViewModel = new ComputerDrivesViewModel(_mockILogger.Object, _displayAlertHelper.Object, _computerDriveService.Object);
+                _mockComputerDriveService.Setup(x => x.GetComputerDrivesAsync()).Returns(taskComputerDriveModelList);
+                var computerDriveDetailViewModel = new ComputerDrivesViewModel(_mockILogger.Object, _mockDisplayAlertHelper.Object, _mockComputerDriveService.Object);
                 
                 // Act
                 computerDriveDetailViewModel.LoadItemsCommand.Execute(null);
@@ -63,8 +63,8 @@ namespace Multilarr.Core.Tests.ViewModels
         {
             {
                 // Arrange
-                _computerDriveService.Setup(x => x.GetComputerDrivesAsync()).Throws(new Exception("GetComputerDrivesAsync took too long!"));
-                var computerDriveDetailViewModel = new ComputerDrivesViewModel(_mockILogger.Object, _displayAlertHelper.Object, _computerDriveService.Object);
+                _mockComputerDriveService.Setup(x => x.GetComputerDrivesAsync()).Throws(new Exception("GetComputerDrivesAsync took too long!"));
+                var computerDriveDetailViewModel = new ComputerDrivesViewModel(_mockILogger.Object, _mockDisplayAlertHelper.Object, _mockComputerDriveService.Object);
                 
                 // Act
                 computerDriveDetailViewModel.LoadItemsCommand.Execute(null);
@@ -72,7 +72,7 @@ namespace Multilarr.Core.Tests.ViewModels
                 // Assert
                 Assert.AreEqual("Computer Drives", computerDriveDetailViewModel.Title);
                 Assert.AreEqual(0, computerDriveDetailViewModel.ComputerDrives.Count);
-                _displayAlertHelper.Verify(x => x.CustomDisplayAlert("Error", "GetComputerDrivesAsync took too long!", "OK"), Times.Once);
+                _mockDisplayAlertHelper.Verify(x => x.CustomDisplayAlert("Error", "GetComputerDrivesAsync took too long!", "OK"), Times.Once);
             }
         }
     }

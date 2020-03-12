@@ -7,7 +7,7 @@ using Xamarin.Forms;
 namespace Multilarr.Core.Views
 {
     [DesignTimeVisible(false)]
-    public partial class LogsPage : ContentPage
+    public partial class LogsPage : ContentPage, IDisplayAlertHelper
     {
         private readonly LogsViewModel _viewModel;
 
@@ -15,7 +15,7 @@ namespace Multilarr.Core.Views
         {
             InitializeComponent();
 
-            BindingContext = _viewModel = new LogsViewModel(this, logger);
+            BindingContext = _viewModel = new LogsViewModel(logger, this);
         }
 
         private async void OnLogSelected(object sender, SelectedItemChangedEventArgs args)
@@ -36,6 +36,11 @@ namespace Multilarr.Core.Views
             base.OnAppearing();
 
             _viewModel.LoadItemsCommand.Execute(null);
+        }
+
+        public void CustomDisplayAlert(string title, string message, string cancelText)
+        {
+            DisplayAlert(title, message, cancelText);
         }
     }
 }

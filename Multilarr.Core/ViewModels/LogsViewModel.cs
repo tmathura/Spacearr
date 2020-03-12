@@ -9,15 +9,15 @@ namespace Multilarr.Core.ViewModels
 {
     public class LogsViewModel : BaseViewModel
     {
-        private readonly Page _page;
         private readonly ILogger _logger;
+        private readonly IDisplayAlertHelper _displayAlertHelper;
         public ObservableCollection<LogModel> Logs { get; set; }
         public Command LoadItemsCommand { get; set; }
 
-        public LogsViewModel(Page page, ILogger logger)
+        public LogsViewModel(ILogger logger, IDisplayAlertHelper displayAlertHelper)
         {
-            _page = page;
             _logger = logger;
+            _displayAlertHelper = displayAlertHelper;
 
             Title = "Logs";
             Logs = new ObservableCollection<LogModel>();
@@ -42,7 +42,7 @@ namespace Multilarr.Core.ViewModels
             }
             catch (Exception ex)
             {
-                _page?.DisplayAlert("Error", ex.Message, "OK");
+                _displayAlertHelper.CustomDisplayAlert("Error", ex.Message, "OK");
             }
             finally
             {

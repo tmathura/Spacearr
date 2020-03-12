@@ -4,10 +4,10 @@ using Multilarr.Core.ViewModels;
 
 namespace Multilarr.Core.Tests.ViewModels
 {
-    [TestClass()]
+    [TestClass]
     public class ComputerDriveDetailViewModelTests
     {
-        [TestMethod()]
+        [TestMethod]
         public void ComputerDriveDetailViewModel()
         {
             // Arrange

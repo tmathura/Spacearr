@@ -10,17 +10,17 @@ namespace Multilarr.Core.ViewModels
 {
     public class ComputerDrivesViewModel : BaseViewModel
     {
-        private readonly Page _page;
         private readonly ILogger _logger;
+        private readonly IDisplayAlertHelper _displayAlertHelper;
         private readonly IComputerDriveService _computerDriveService;
 
         public ObservableCollection<ComputerDriveModel> ComputerDrives { get; set; }
         public Command LoadItemsCommand { get; set; }
 
-        public ComputerDrivesViewModel(Page page, ILogger logger, IComputerDriveService computerDriveService)
+        public ComputerDrivesViewModel(ILogger logger, IDisplayAlertHelper displayAlertHelper, IComputerDriveService computerDriveService)
         {
-            _page = page;
             _logger = logger;
+            _displayAlertHelper = displayAlertHelper;
             _computerDriveService = computerDriveService;
 
             Title = "Computer Drives";
@@ -46,8 +46,8 @@ namespace Multilarr.Core.ViewModels
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex.Message, ex.StackTrace); 
-                _page?.DisplayAlert("Error", ex.Message, "OK");
+                await _logger.LogErrorAsync(ex.Message, ex.StackTrace);
+                _displayAlertHelper.CustomDisplayAlert("Error", ex.Message, "OK");
             }
             finally
             {

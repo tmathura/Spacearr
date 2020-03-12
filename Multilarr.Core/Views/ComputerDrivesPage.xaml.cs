@@ -8,7 +8,7 @@ using Xamarin.Forms;
 namespace Multilarr.Core.Views
 {
     [DesignTimeVisible(false)]
-    public partial class ComputerDrivesPage : ContentPage
+    public partial class ComputerDrivesPage : ContentPage, IDisplayAlertHelper
     {
         private readonly ComputerDrivesViewModel _viewModel;
 
@@ -16,7 +16,7 @@ namespace Multilarr.Core.Views
         {
             InitializeComponent();
 
-            BindingContext = _viewModel = new ComputerDrivesViewModel(this, logger, computerDriveService);
+            BindingContext = _viewModel = new ComputerDrivesViewModel(logger, this, computerDriveService);
         }
 
         private async void OnComputerDriveSelected(object sender, SelectedItemChangedEventArgs args)
@@ -37,6 +37,11 @@ namespace Multilarr.Core.Views
             base.OnAppearing();
 
             _viewModel.LoadItemsCommand.Execute(null);
+        }
+
+        public void CustomDisplayAlert(string title, string message, string cancelText)
+        {
+            DisplayAlert(title, message, cancelText);
         }
     }
 }

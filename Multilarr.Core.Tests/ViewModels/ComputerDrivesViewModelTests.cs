@@ -12,6 +12,7 @@ namespace Multilarr.Core.Tests.ViewModels
     [TestClass]
     public class ComputerDrivesViewModelTests
     {
+        private const string Title = "Computer Drives";
         private Mock<ILogger> _mockILogger;
         private Mock<IDisplayAlertHelper> _mockDisplayAlertHelper;
         private Mock<IComputerDriveService> _mockComputerDriveService;
@@ -32,7 +33,7 @@ namespace Multilarr.Core.Tests.ViewModels
                 var computerDriveDetailViewModel = new ComputerDrivesViewModel(_mockILogger.Object, _mockDisplayAlertHelper.Object, _mockComputerDriveService.Object);
 
                 // Assert
-                Assert.AreEqual("Computer Drives", computerDriveDetailViewModel.Title);
+                Assert.AreEqual(Title, computerDriveDetailViewModel.Title);
             }
         }
 
@@ -52,7 +53,7 @@ namespace Multilarr.Core.Tests.ViewModels
                 computerDriveDetailViewModel.LoadItemsCommand.Execute(null);
 
                 // Assert
-                Assert.AreEqual("Computer Drives", computerDriveDetailViewModel.Title);
+                Assert.AreEqual(Title, computerDriveDetailViewModel.Title);
                 Assert.IsNotNull(computerDriveDetailViewModel.ComputerDrives);
                 Assert.AreEqual(noOfComputerDriveModels, computerDriveDetailViewModel.ComputerDrives.Count);
             }
@@ -62,17 +63,19 @@ namespace Multilarr.Core.Tests.ViewModels
         public void LoadItemsCommand_Exception()
         {
             {
+                const string exceptionMessage = "GetComputerDrivesAsync took too long!";
+
                 // Arrange
-                _mockComputerDriveService.Setup(x => x.GetComputerDrivesAsync()).Throws(new Exception("GetComputerDrivesAsync took too long!"));
+                _mockComputerDriveService.Setup(x => x.GetComputerDrivesAsync()).Throws(new Exception(exceptionMessage));
                 var computerDriveDetailViewModel = new ComputerDrivesViewModel(_mockILogger.Object, _mockDisplayAlertHelper.Object, _mockComputerDriveService.Object);
                 
                 // Act
                 computerDriveDetailViewModel.LoadItemsCommand.Execute(null);
 
                 // Assert
-                Assert.AreEqual("Computer Drives", computerDriveDetailViewModel.Title);
+                Assert.AreEqual(Title, computerDriveDetailViewModel.Title);
                 Assert.AreEqual(0, computerDriveDetailViewModel.ComputerDrives.Count);
-                _mockDisplayAlertHelper.Verify(x => x.CustomDisplayAlert("Error", "GetComputerDrivesAsync took too long!", "OK"), Times.Once);
+                _mockDisplayAlertHelper.Verify(x => x.CustomDisplayAlert("Error", exceptionMessage, "OK"), Times.Once);
             }
         }
     }

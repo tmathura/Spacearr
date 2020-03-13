@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Spacearr.Common.Interfaces.Logger;
 using Spacearr.Common.Tests.Factories;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
 
 namespace Spacearr.Common.Tests
 {

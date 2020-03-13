@@ -1,9 +1,9 @@
 ﻿using Android.Content;
 using AndroidX.Work;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using Spacearr.Common;
 using Spacearr.Common.Models;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;

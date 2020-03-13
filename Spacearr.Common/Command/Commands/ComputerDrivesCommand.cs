@@ -1,7 +1,7 @@
-﻿using Spacearr.Common.Interfaces;
+﻿using Newtonsoft.Json;
+using Spacearr.Common.Interfaces;
 using Spacearr.Common.Interfaces.Command;
 using Spacearr.Common.Models;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace Spacearr.Common.Command.Commands

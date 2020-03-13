@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Spacearr.Common.Models;
+﻿using Spacearr.Common.Models;
+using System.Collections.Generic;
 
 namespace Spacearr.Core.Xamarin.Tests.Factories
 {

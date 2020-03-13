@@ -1,10 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Newtonsoft.Json;
 using Spacearr.Common.Command.Commands;
 using Spacearr.Common.Interfaces;
 using Spacearr.Common.Models;
 using Spacearr.Common.Tests.Factories;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace Spacearr.Common.Tests.Command.Commands

@@ -95,5 +95,38 @@ namespace Multilarr.Core.Tests.ViewModels
             Assert.AreEqual(Title, newSettingDetailViewModel.Title);
             _mockIDisplayAlertHelper.Verify(x => x.CustomDisplayAlert("Error", exceptionMessage, "OK"), Times.Once);
         }
+
+        [TestMethod]
+        public void DeleteCommand()
+        {
+            // Arrange
+            var settingDetailViewModel = new SettingDetailViewModel(_mockILogger.Object, _mockIPusherValidation.Object, _mockINavigationPopHelper.Object, _mockIValidationHelper.Object, _mockIDisplayAlertHelper.Object, _settingModel);
+
+            // Act
+            settingDetailViewModel.DeleteCommand.Execute(null);
+
+            // Assert
+            Assert.AreEqual(Title, settingDetailViewModel.Title);
+            _mockILogger.Verify(x => x.DeleteLogAsync(_settingModel), Times.Once);
+            _mockIDisplayAlertHelper.Verify(x => x.CustomDisplayAlert("Success", "Setting Deleted!", "OK"), Times.Once);
+            _mockINavigationPopHelper.Verify(x => x.CustomPopAsync(), Times.Once);
+        }
+
+        [TestMethod]
+        public void DeleteCommand_Exception()
+        {
+            const string exceptionMessage = "Error on DeleteLogAsync!";
+
+            // Arrange
+            _mockILogger.Setup(x => x.DeleteLogAsync(_settingModel)).Throws(new Exception(exceptionMessage));
+            var newSettingDetailViewModel = new SettingDetailViewModel(_mockILogger.Object, _mockIPusherValidation.Object, _mockINavigationPopHelper.Object, _mockIValidationHelper.Object, _mockIDisplayAlertHelper.Object, _settingModel);
+
+            // Act
+            newSettingDetailViewModel.DeleteCommand.Execute(null);
+
+            // Assert
+            Assert.AreEqual(Title, newSettingDetailViewModel.Title);
+            _mockIDisplayAlertHelper.Verify(x => x.CustomDisplayAlert("Error", exceptionMessage, "OK"), Times.Once);
+        }
     }
 }

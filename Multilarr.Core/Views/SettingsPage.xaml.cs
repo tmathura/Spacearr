@@ -1,14 +1,16 @@
 ﻿using Multilarr.Common.Interfaces.Logger;
 using Multilarr.Common.Models;
+using Multilarr.Core.Helpers;
 using Multilarr.Core.ViewModels;
 using Multilarr.Pusher.API.Interfaces;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Multilarr.Core.Views
 {
     [DesignTimeVisible(false)]
-    public partial class SettingsPage : ContentPage
+    public partial class SettingsPage : ContentPage, IDisplayAlertHelper, INavigationPushModalHelper
     {
         private readonly ILogger _logger;
         private readonly IPusherValidation _pusherValidation;
@@ -21,7 +23,7 @@ namespace Multilarr.Core.Views
 
             InitializeComponent();
 
-            BindingContext = _viewModel = new SettingsViewModel(this, logger, pusherValidation);
+            BindingContext = _viewModel = new SettingsViewModel(logger, pusherValidation, this, this);
         }
 
         private async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
@@ -42,6 +44,16 @@ namespace Multilarr.Core.Views
             base.OnAppearing();
 
             _viewModel.LoadItemsCommand.Execute(null);
+        }
+
+        public async Task CustomDisplayAlert(string title, string message, string cancelText)
+        {
+            await DisplayAlert(title, message, cancelText);
+        }
+
+        public async Task CustomPushModalAsync(Page page)
+        {
+            await Navigation.PushModalAsync(page);
         }
     }
 }

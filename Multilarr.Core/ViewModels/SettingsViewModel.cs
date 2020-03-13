@@ -1,8 +1,6 @@
 ﻿using Multilarr.Common.Interfaces.Logger;
 using Multilarr.Common.Models;
 using Multilarr.Core.Helpers;
-using Multilarr.Core.Views;
-using Multilarr.Pusher.API.Interfaces;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -14,20 +12,20 @@ namespace Multilarr.Core.ViewModels
     public class SettingsViewModel : BaseViewModel
     {
         private readonly ILogger _logger;
-        private readonly IPusherValidation _pusherValidation;
         private readonly IDisplayAlertHelper _displayAlertHelper;
         private readonly INavigationPushModalHelper _navigationPushModalHelper;
+        private readonly Page _newSettingPage;
 
         public ICommand LoadItemsCommand { get; set; }
         public ICommand AddCommand { get; }
         public ObservableCollection<SettingModel> Settings { get; set; }
 
-        public SettingsViewModel(ILogger logger, IPusherValidation pusherValidation, IDisplayAlertHelper displayAlertHelper, INavigationPushModalHelper navigationPushModalHelper)
+        public SettingsViewModel(ILogger logger, IDisplayAlertHelper displayAlertHelper, INavigationPushModalHelper navigationPushModalHelper, Page newSettingPage)
         {
             _logger = logger;
-            _pusherValidation = pusherValidation;
             _displayAlertHelper = displayAlertHelper;
             _navigationPushModalHelper = navigationPushModalHelper;
+            _newSettingPage = newSettingPage;
 
             Title = "Settings";
             Settings = new ObservableCollection<SettingModel>();
@@ -73,7 +71,7 @@ namespace Multilarr.Core.ViewModels
 
             try
             {
-                await _navigationPushModalHelper.CustomPushModalAsync(new NavigationPage(new NewSettingPage(_logger, _pusherValidation)));
+                await _navigationPushModalHelper.CustomPushModalAsync(_newSettingPage);
             }
             catch (Exception ex)
             {

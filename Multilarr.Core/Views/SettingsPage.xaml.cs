@@ -23,7 +23,7 @@ namespace Multilarr.Core.Views
 
             InitializeComponent();
 
-            BindingContext = _viewModel = new SettingsViewModel(logger, pusherValidation, this, this);
+            BindingContext = _viewModel = new SettingsViewModel(logger, this, this, new NavigationPage(new NewSettingPage(_logger, _pusherValidation)));
         }
 
         private async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)

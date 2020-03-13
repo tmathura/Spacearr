@@ -1,5 +1,6 @@
 ﻿using Multilarr.Common.Interfaces.Logger;
 using Multilarr.Common.Models;
+using Multilarr.Core.Helpers;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ namespace Multilarr.Core.ViewModels
     {
         private readonly ILogger _logger;
         private readonly IDisplayAlertHelper _displayAlertHelper;
+
         public ObservableCollection<LogModel> Logs { get; set; }
         public Command LoadItemsCommand { get; set; }
 
@@ -42,7 +44,7 @@ namespace Multilarr.Core.ViewModels
             }
             catch (Exception ex)
             {
-                _displayAlertHelper.CustomDisplayAlert("Error", ex.Message, "OK");
+                await _displayAlertHelper.CustomDisplayAlert("Error", ex.Message, "OK");
             }
             finally
             {

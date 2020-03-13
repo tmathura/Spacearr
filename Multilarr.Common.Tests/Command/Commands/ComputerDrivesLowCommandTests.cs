@@ -27,9 +27,9 @@ namespace Multilarr.Common.Tests.Command.Commands
         public void Execute()
         {
             // Arrange
-            var configurationSection = new Mock<IConfigurationSection>();
-            configurationSection.Setup(a => a.Value).Returns("1");
-            _mockIConfiguration.Setup(a => a.GetSection("LowComputerDriveGBValue")).Returns(configurationSection.Object);
+            var mockIConfigurationSection = new Mock<IConfigurationSection>();
+            mockIConfigurationSection.Setup(a => a.Value).Returns("1");
+            _mockIConfiguration.Setup(a => a.GetSection("LowComputerDriveGBValue")).Returns(mockIConfigurationSection.Object);
             _mockIComputerDrives.Setup(x => x.GetComputerDrives()).Returns(ComputerDriveInfoFactory.CreateComputerDriveInfoFixed);
             _computerDrivesLowCommand = new ComputerDrivesLowCommand(_mockIConfiguration.Object, _mockIComputerDrives.Object);
 
@@ -46,9 +46,9 @@ namespace Multilarr.Common.Tests.Command.Commands
         public void Execute_ZeroComputerDrivesLow()
         {
             // Arrange
-            var configurationSection = new Mock<IConfigurationSection>();
-            configurationSection.Setup(a => a.Value).Returns("0");
-            _mockIConfiguration.Setup(a => a.GetSection("LowComputerDriveGBValue")).Returns(configurationSection.Object);
+            var mockIConfigurationSection = new Mock<IConfigurationSection>();
+            mockIConfigurationSection.Setup(a => a.Value).Returns("0");
+            _mockIConfiguration.Setup(a => a.GetSection("LowComputerDriveGBValue")).Returns(mockIConfigurationSection.Object);
             _mockIComputerDrives.Setup(x => x.GetComputerDrives()).Returns(ComputerDriveInfoFactory.CreateComputerDriveInfoFixed);
             _computerDrivesLowCommand = new ComputerDrivesLowCommand(_mockIConfiguration.Object, _mockIComputerDrives.Object);
 

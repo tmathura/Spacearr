@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Multilarr.Common.Interfaces.Logger;
+using Multilarr.Core.Helpers;
 using Multilarr.Core.Tests.Factories;
 using Multilarr.Core.ViewModels;
 using Multilarr.Pusher.API.Interfaces.Service;
@@ -14,15 +15,15 @@ namespace Multilarr.Core.Tests.ViewModels
     {
         private const string Title = "Computer Drives";
         private Mock<ILogger> _mockILogger;
-        private Mock<IDisplayAlertHelper> _mockDisplayAlertHelper;
-        private Mock<IComputerDriveService> _mockComputerDriveService;
+        private Mock<IDisplayAlertHelper> _mockIDisplayAlertHelper;
+        private Mock<IComputerDriveService> _mockIComputerDriveService;
 
         [TestInitialize]
         public void SetUp()
         {
             _mockILogger = new Mock<ILogger>();
-            _mockDisplayAlertHelper = new Mock<IDisplayAlertHelper>();
-            _mockComputerDriveService = new Mock<IComputerDriveService>();
+            _mockIDisplayAlertHelper = new Mock<IDisplayAlertHelper>();
+            _mockIComputerDriveService = new Mock<IComputerDriveService>();
         }
 
         [TestMethod]
@@ -30,7 +31,7 @@ namespace Multilarr.Core.Tests.ViewModels
         {
             {
                 // Arrange
-                var computerDriveDetailViewModel = new ComputerDrivesViewModel(_mockILogger.Object, _mockDisplayAlertHelper.Object, _mockComputerDriveService.Object);
+                var computerDriveDetailViewModel = new ComputerDrivesViewModel(_mockILogger.Object, _mockIDisplayAlertHelper.Object, _mockIComputerDriveService.Object);
 
                 // Assert
                 Assert.AreEqual(Title, computerDriveDetailViewModel.Title);
@@ -46,8 +47,8 @@ namespace Multilarr.Core.Tests.ViewModels
                 // Arrange
                 var computerDriveModelList = ComputerDriveModelFactory.CreateComputerDriveModels(noOfComputerDriveModels);
                 var taskComputerDriveModelList = Task.FromResult(computerDriveModelList);
-                _mockComputerDriveService.Setup(x => x.GetComputerDrivesAsync()).Returns(taskComputerDriveModelList);
-                var computerDriveDetailViewModel = new ComputerDrivesViewModel(_mockILogger.Object, _mockDisplayAlertHelper.Object, _mockComputerDriveService.Object);
+                _mockIComputerDriveService.Setup(x => x.GetComputerDrivesAsync()).Returns(taskComputerDriveModelList);
+                var computerDriveDetailViewModel = new ComputerDrivesViewModel(_mockILogger.Object, _mockIDisplayAlertHelper.Object, _mockIComputerDriveService.Object);
                 
                 // Act
                 computerDriveDetailViewModel.LoadItemsCommand.Execute(null);
@@ -66,8 +67,8 @@ namespace Multilarr.Core.Tests.ViewModels
                 const string exceptionMessage = "GetComputerDrivesAsync took too long!";
 
                 // Arrange
-                _mockComputerDriveService.Setup(x => x.GetComputerDrivesAsync()).Throws(new Exception(exceptionMessage));
-                var computerDriveDetailViewModel = new ComputerDrivesViewModel(_mockILogger.Object, _mockDisplayAlertHelper.Object, _mockComputerDriveService.Object);
+                _mockIComputerDriveService.Setup(x => x.GetComputerDrivesAsync()).Throws(new Exception(exceptionMessage));
+                var computerDriveDetailViewModel = new ComputerDrivesViewModel(_mockILogger.Object, _mockIDisplayAlertHelper.Object, _mockIComputerDriveService.Object);
                 
                 // Act
                 computerDriveDetailViewModel.LoadItemsCommand.Execute(null);
@@ -75,7 +76,7 @@ namespace Multilarr.Core.Tests.ViewModels
                 // Assert
                 Assert.AreEqual(Title, computerDriveDetailViewModel.Title);
                 Assert.AreEqual(0, computerDriveDetailViewModel.ComputerDrives.Count);
-                _mockDisplayAlertHelper.Verify(x => x.CustomDisplayAlert("Error", exceptionMessage, "OK"), Times.Once);
+                _mockIDisplayAlertHelper.Verify(x => x.CustomDisplayAlert("Error", exceptionMessage, "OK"), Times.Once);
             }
         }
     }

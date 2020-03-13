@@ -5,13 +5,20 @@ using System.Linq;
 using System.Reflection;
 using Xamarin.Forms;
 
-namespace Multilarr.Core.Helper
+namespace Multilarr.Core.Helpers
 {
-    public static class ValidationHelper
+    public class ValidationHelper : IValidationHelper
     {
-        public static bool IsFormValid(object model, Page page)
+        private readonly Page _page;
+
+        public ValidationHelper(Page page)
         {
-            HideValidationFields(model, page);
+            _page = page;
+        }
+
+        public bool IsFormValid(object model)
+        {
+            HideValidationFields(model, _page);
 
             var errors = new List<ValidationResult>();
             var context = new ValidationContext(model);
@@ -19,7 +26,7 @@ namespace Multilarr.Core.Helper
 
             if (!isValid)
             {
-                ShowValidationFields(errors, model, page);
+                ShowValidationFields(errors, model, _page);
             }
 
             return !errors.Any();

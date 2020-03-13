@@ -1,7 +1,9 @@
 ﻿using Multilarr.Common.Interfaces.Logger;
 using Multilarr.Common.Models;
+using Multilarr.Core.Helpers;
 using Multilarr.Core.ViewModels;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Multilarr.Core.Views
@@ -38,9 +40,9 @@ namespace Multilarr.Core.Views
             _viewModel.LoadItemsCommand.Execute(null);
         }
 
-        public void CustomDisplayAlert(string title, string message, string cancelText)
+        public async Task CustomDisplayAlert(string title, string message, string cancelText)
         {
-            DisplayAlert(title, message, cancelText);
+            await DisplayAlert(title, message, cancelText);
         }
     }
 }

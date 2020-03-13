@@ -1,5 +1,6 @@
 ﻿using Multilarr.Common.Interfaces.Logger;
 using Multilarr.Common.Models;
+using Multilarr.Core.Helpers;
 using Multilarr.Pusher.API.Interfaces.Service;
 using System;
 using System.Collections.ObjectModel;
@@ -47,7 +48,7 @@ namespace Multilarr.Core.ViewModels
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex.Message, ex.StackTrace);
-                _displayAlertHelper.CustomDisplayAlert("Error", ex.Message, "OK");
+                await _displayAlertHelper.CustomDisplayAlert("Error", ex.Message, "OK");
             }
             finally
             {

@@ -1,6 +1,6 @@
 ﻿using Multilarr.Common.Interfaces.Logger;
 using Multilarr.Common.Models;
-using Multilarr.Core.Helper;
+using Multilarr.Core.Helpers;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -10,19 +10,24 @@ namespace Multilarr.Core.ViewModels
 {
     public class SettingDetailViewModel : BaseViewModel
     {
-        private readonly Page _page;
         private readonly ILogger _logger;
+        private readonly INavigationPopHelper _navigationPopHelper;
+        private readonly IValidationHelper _validationHelper;
+        private readonly IDisplayAlertHelper _displayAlertHelper;
 
         public ICommand DeleteCommand { get; }
         public ICommand UpdateCommand { get; }
         public SettingModel SettingModel { get; set; }
 
-        public SettingDetailViewModel(Page page, ILogger logger, SettingModel settingModel)
+        public SettingDetailViewModel(ILogger logger, INavigationPopHelper navigationPopHelper, IValidationHelper validationHelper, IDisplayAlertHelper displayAlertHelper, SettingModel settingModel)
         {
-            _page = page;
             _logger = logger;
+            _navigationPopHelper = navigationPopHelper;
+            _validationHelper = validationHelper;
+            _displayAlertHelper = displayAlertHelper;
             SettingModel = settingModel;
-            Title = $"{SettingModel?.ComputerName}";
+
+            Title = $"{SettingModel.ComputerName}";
 
             DeleteCommand = new Command(async () => await DeleteAsync());
             UpdateCommand = new Command(async () => await UpdateAsync());
@@ -40,13 +45,13 @@ namespace Multilarr.Core.ViewModels
             try
             {
                 await _logger.DeleteLogAsync(SettingModel);
-                await _page.DisplayAlert("Success", "Setting Deleted!", "OK");
-                await _page.Navigation.PopAsync();
+                await _displayAlertHelper.CustomDisplayAlert("Success", "Setting Deleted!", "OK");
+                await _navigationPopHelper.CustomPopAsync();
             }
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex.Message, ex.StackTrace);
-                _page?.DisplayAlert("Error", ex.Message, "OK");
+                await _displayAlertHelper.CustomDisplayAlert("Error", ex.Message, "OK");
             }
             finally
             {
@@ -65,25 +70,25 @@ namespace Multilarr.Core.ViewModels
 
             try
             {
-                if (ValidationHelper.IsFormValid(SettingModel, _page))
+                if (_validationHelper.IsFormValid(SettingModel))
                 {
                     var pusherValid = await Pusher.API.Pusher.Validate(SettingModel.PusherAppId, SettingModel.PusherKey, SettingModel.PusherSecret, SettingModel.PusherCluster);
                     if (pusherValid)
                     {
                         await _logger.UpdateSettingAsync(SettingModel);
-                        await _page.DisplayAlert("Success", "Setting saved!", "OK");
-                        await _page.Navigation.PopAsync();
+                        await _displayAlertHelper.CustomDisplayAlert("Success", "Setting saved!", "OK");
+                        await _navigationPopHelper.CustomPopAsync();
                     }
                     else
                     {
-                        await _page.DisplayAlert("Error", "Pusher details invalid!", "OK");
+                        await _displayAlertHelper.CustomDisplayAlert("Error", "Pusher details invalid!", "OK");
                     }
                 }
             }
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex.Message, ex.StackTrace);
-                _page?.DisplayAlert("Error", ex.Message, "OK");
+                await _displayAlertHelper.CustomDisplayAlert("Error", ex.Message, "OK");
             }
             finally
             {

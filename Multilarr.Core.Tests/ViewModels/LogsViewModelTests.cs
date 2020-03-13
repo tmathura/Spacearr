@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Multilarr.Common.Interfaces.Logger;
+using Multilarr.Core.Helpers;
 using Multilarr.Core.Tests.Factories;
 using Multilarr.Core.ViewModels;
 using System;
@@ -13,13 +14,13 @@ namespace Multilarr.Core.Tests.ViewModels
     {
         private const string Title = "Logs";
         private Mock<ILogger> _mockILogger;
-        private Mock<IDisplayAlertHelper> _mockDisplayAlertHelper;
+        private Mock<IDisplayAlertHelper> _mockIDisplayAlertHelper;
 
         [TestInitialize]
         public void SetUp()
         {
             _mockILogger = new Mock<ILogger>();
-            _mockDisplayAlertHelper = new Mock<IDisplayAlertHelper>();
+            _mockIDisplayAlertHelper = new Mock<IDisplayAlertHelper>();
         }
 
         [TestMethod]
@@ -27,7 +28,7 @@ namespace Multilarr.Core.Tests.ViewModels
         {
             {
                 // Arrange
-                var logsViewModel = new LogsViewModel(_mockILogger.Object, _mockDisplayAlertHelper.Object);
+                var logsViewModel = new LogsViewModel(_mockILogger.Object, _mockIDisplayAlertHelper.Object);
 
                 // Assert
                 Assert.AreEqual(Title, logsViewModel.Title);
@@ -44,7 +45,7 @@ namespace Multilarr.Core.Tests.ViewModels
                 var logModelList = LogModelFactory.CreateLogModels(noOfLogs);
                 var taskLogModelList = Task.FromResult(logModelList);
                 _mockILogger.Setup(x => x.GetLogsAsync()).Returns(taskLogModelList);
-                var logsViewModel = new LogsViewModel(_mockILogger.Object, _mockDisplayAlertHelper.Object);
+                var logsViewModel = new LogsViewModel(_mockILogger.Object, _mockIDisplayAlertHelper.Object);
 
                 // Act
                 logsViewModel.LoadItemsCommand.Execute(null);
@@ -64,7 +65,7 @@ namespace Multilarr.Core.Tests.ViewModels
 
                 // Arrange
                 _mockILogger.Setup(x => x.GetLogsAsync()).Throws(new Exception(exceptionMessage));
-                var logsViewModel = new LogsViewModel(_mockILogger.Object, _mockDisplayAlertHelper.Object);
+                var logsViewModel = new LogsViewModel(_mockILogger.Object, _mockIDisplayAlertHelper.Object);
 
                 // Act
                 logsViewModel.LoadItemsCommand.Execute(null);
@@ -72,7 +73,7 @@ namespace Multilarr.Core.Tests.ViewModels
                 // Assert
                 Assert.AreEqual(Title, logsViewModel.Title);
                 Assert.AreEqual(0, logsViewModel.Logs.Count);
-                _mockDisplayAlertHelper.Verify(x => x.CustomDisplayAlert("Error", exceptionMessage, "OK"), Times.Once);
+                _mockIDisplayAlertHelper.Verify(x => x.CustomDisplayAlert("Error", exceptionMessage, "OK"), Times.Once);
             }
         }
     }

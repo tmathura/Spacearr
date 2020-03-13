@@ -1,6 +1,6 @@
 ﻿using Multilarr.Common.Interfaces.Logger;
 using Multilarr.Common.Models;
-using Multilarr.Core.Helper;
+using Multilarr.Core.Helpers;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -10,17 +10,22 @@ namespace Multilarr.Core.ViewModels
 {
     public class NewSettingDetailViewModel : BaseViewModel
     {
-        private readonly Page _page;
         private readonly ILogger _logger;
+        private readonly INavigationPopModalHelper _navigationPopModalHelper;
+        private readonly IValidationHelper _validationHelper;
+        private readonly IDisplayAlertHelper _displayAlertHelper;
 
         public ICommand SaveCommand { get; }
         public ICommand CancelCommand { get; }
         public SettingModel SettingModel { get; set; } = new SettingModel();
 
-        public NewSettingDetailViewModel(Page page, ILogger logger)
+        public NewSettingDetailViewModel(ILogger logger, INavigationPopModalHelper navigationPopModalHelper, IValidationHelper validationHelper, IDisplayAlertHelper displayAlertHelper)
         {
-            _page = page;
             _logger = logger;
+            _navigationPopModalHelper = navigationPopModalHelper;
+            _validationHelper = validationHelper;
+            _displayAlertHelper = displayAlertHelper;
+
             Title = "New Setting";
 
             SaveCommand = new Command(async () => await SaveAsync());
@@ -38,25 +43,25 @@ namespace Multilarr.Core.ViewModels
 
             try
             {
-                if (ValidationHelper.IsFormValid(SettingModel, _page))
+                if (_validationHelper.IsFormValid(SettingModel))
                 {
                     var pusherValid = await Pusher.API.Pusher.Validate(SettingModel.PusherAppId, SettingModel.PusherKey, SettingModel.PusherSecret, SettingModel.PusherCluster);
                     if (pusherValid)
                     {
                         await _logger.LogSettingAsync(SettingModel);
-                        await _page.DisplayAlert("Success", "Setting saved!", "OK");
-                        await _page.Navigation.PopModalAsync();
+                        await _displayAlertHelper.CustomDisplayAlert("Success", "Setting saved!", "OK");
+                        await _navigationPopModalHelper.CustomPopModalAsync();
                     }
                     else
                     {
-                        await _page.DisplayAlert("Error", "Pusher details invalid!", "OK");
+                        await _displayAlertHelper.CustomDisplayAlert("Error", "Pusher details invalid!", "OK");
                     }
                 }
             }
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex.Message, ex.StackTrace);
-                _page?.DisplayAlert("Error", ex.Message, "OK");
+                await _displayAlertHelper.CustomDisplayAlert("Error", ex.Message, "OK");
             }
             finally
             {
@@ -75,12 +80,12 @@ namespace Multilarr.Core.ViewModels
 
             try
             {
-                await _page.Navigation.PopModalAsync();
+                await _navigationPopModalHelper.CustomPopModalAsync();
             }
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex.Message, ex.StackTrace);
-                _page?.DisplayAlert("Error", ex.Message, "OK");
+                await _displayAlertHelper.CustomDisplayAlert("Error", ex.Message, "OK");
             }
             finally
             {

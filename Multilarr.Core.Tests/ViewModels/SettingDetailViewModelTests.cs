@@ -60,5 +60,21 @@ namespace Multilarr.Core.Tests.ViewModels
             _mockIDisplayAlertHelper.Verify(x => x.CustomDisplayAlert("Success", "Setting saved!", "OK"), Times.Once);
             _mockINavigationPopHelper.Verify(x => x.CustomPopAsync(), Times.Once);
         }
+
+        [TestMethod]
+        public void UpdateCommand_Exception()
+        {
+            // Arrange
+            _mockIValidationHelper.Setup(x => x.IsFormValid(It.IsAny<object>())).Returns(true);
+            _mockIPusherValidation.Setup(x => x.Validate(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(false);
+            var newSettingDetailViewModel = new SettingDetailViewModel(_mockILogger.Object, _mockIPusherValidation.Object, _mockINavigationPopHelper.Object, _mockIValidationHelper.Object, _mockIDisplayAlertHelper.Object, _settingModel);
+
+            // Act
+            newSettingDetailViewModel.UpdateCommand.Execute(null);
+
+            // Assert
+            Assert.AreEqual(Title, newSettingDetailViewModel.Title);
+            _mockIDisplayAlertHelper.Verify(x => x.CustomDisplayAlert("Error", "Pusher details invalid!", "OK"), Times.Once);
+        }
     }
 }

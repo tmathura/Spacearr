@@ -1,6 +1,7 @@
 ﻿using Multilarr.Common.Interfaces.Logger;
 using Multilarr.Common.Models;
 using Multilarr.Core.ViewModels;
+using Multilarr.Pusher.API.Interfaces;
 using System.ComponentModel;
 using Xamarin.Forms;
 
@@ -10,15 +11,17 @@ namespace Multilarr.Core.Views
     public partial class SettingsPage : ContentPage
     {
         private readonly ILogger _logger;
+        private readonly IPusherValidation _pusherValidation;
         private readonly SettingsViewModel _viewModel;
 
-        public SettingsPage(ILogger logger)
+        public SettingsPage(ILogger logger, IPusherValidation pusherValidation)
         {
             _logger = logger;
+            _pusherValidation = pusherValidation;
 
             InitializeComponent();
 
-            BindingContext = _viewModel = new SettingsViewModel(this, logger);
+            BindingContext = _viewModel = new SettingsViewModel(this, logger, pusherValidation);
         }
 
         private async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
@@ -29,7 +32,7 @@ namespace Multilarr.Core.Views
                 return;
             }
 
-            await Navigation.PushAsync(new SettingDetailPage(_logger, settingModel));
+            await Navigation.PushAsync(new SettingDetailPage(_logger, _pusherValidation, settingModel));
 
             SettingsListView.SelectedItem = null;
         }

@@ -29,55 +29,49 @@ namespace Multilarr.Core.Tests.ViewModels
         [TestMethod]
         public void ComputerDrivesViewModel()
         {
-            {
-                // Arrange
-                var computerDriveDetailViewModel = new ComputerDrivesViewModel(_mockILogger.Object, _mockIDisplayAlertHelper.Object, _mockIComputerDriveService.Object);
+            // Arrange
+            var computerDriveDetailViewModel = new ComputerDrivesViewModel(_mockILogger.Object, _mockIDisplayAlertHelper.Object, _mockIComputerDriveService.Object);
 
-                // Assert
-                Assert.AreEqual(Title, computerDriveDetailViewModel.Title);
-            }
+            // Assert
+            Assert.AreEqual(Title, computerDriveDetailViewModel.Title);
         }
 
         [TestMethod]
         public void LoadItemsCommand()
         {
-            {
-                const int noOfComputerDriveModels = 9;
+            const int noOfComputerDriveModels = 9;
 
-                // Arrange
-                var computerDriveModelList = ComputerDriveModelFactory.CreateComputerDriveModels(noOfComputerDriveModels);
-                var taskComputerDriveModelList = Task.FromResult(computerDriveModelList);
-                _mockIComputerDriveService.Setup(x => x.GetComputerDrivesAsync()).Returns(taskComputerDriveModelList);
-                var computerDriveDetailViewModel = new ComputerDrivesViewModel(_mockILogger.Object, _mockIDisplayAlertHelper.Object, _mockIComputerDriveService.Object);
-                
-                // Act
-                computerDriveDetailViewModel.LoadItemsCommand.Execute(null);
+            // Arrange
+            var computerDriveModelList = ComputerDriveModelFactory.CreateComputerDriveModels(noOfComputerDriveModels);
+            var taskComputerDriveModelList = Task.FromResult(computerDriveModelList);
+            _mockIComputerDriveService.Setup(x => x.GetComputerDrivesAsync()).Returns(taskComputerDriveModelList);
+            var computerDriveDetailViewModel = new ComputerDrivesViewModel(_mockILogger.Object, _mockIDisplayAlertHelper.Object, _mockIComputerDriveService.Object);
+            
+            // Act
+            computerDriveDetailViewModel.LoadItemsCommand.Execute(null);
 
-                // Assert
-                Assert.AreEqual(Title, computerDriveDetailViewModel.Title);
-                Assert.IsNotNull(computerDriveDetailViewModel.ComputerDrives);
-                Assert.AreEqual(noOfComputerDriveModels, computerDriveDetailViewModel.ComputerDrives.Count);
-            }
+            // Assert
+            Assert.AreEqual(Title, computerDriveDetailViewModel.Title);
+            Assert.IsNotNull(computerDriveDetailViewModel.ComputerDrives);
+            Assert.AreEqual(noOfComputerDriveModels, computerDriveDetailViewModel.ComputerDrives.Count);
         }
 
         [TestMethod]
         public void LoadItemsCommand_Exception()
         {
-            {
-                const string exceptionMessage = "GetComputerDrivesAsync took too long!";
+            const string exceptionMessage = "GetComputerDrivesAsync took too long!";
 
-                // Arrange
-                _mockIComputerDriveService.Setup(x => x.GetComputerDrivesAsync()).Throws(new Exception(exceptionMessage));
-                var computerDriveDetailViewModel = new ComputerDrivesViewModel(_mockILogger.Object, _mockIDisplayAlertHelper.Object, _mockIComputerDriveService.Object);
-                
-                // Act
-                computerDriveDetailViewModel.LoadItemsCommand.Execute(null);
+            // Arrange
+            _mockIComputerDriveService.Setup(x => x.GetComputerDrivesAsync()).Throws(new Exception(exceptionMessage));
+            var computerDriveDetailViewModel = new ComputerDrivesViewModel(_mockILogger.Object, _mockIDisplayAlertHelper.Object, _mockIComputerDriveService.Object);
+            
+            // Act
+            computerDriveDetailViewModel.LoadItemsCommand.Execute(null);
 
-                // Assert
-                Assert.AreEqual(Title, computerDriveDetailViewModel.Title);
-                Assert.AreEqual(0, computerDriveDetailViewModel.ComputerDrives.Count);
-                _mockIDisplayAlertHelper.Verify(x => x.CustomDisplayAlert("Error", exceptionMessage, "OK"), Times.Once);
-            }
+            // Assert
+            Assert.AreEqual(Title, computerDriveDetailViewModel.Title);
+            Assert.AreEqual(0, computerDriveDetailViewModel.ComputerDrives.Count);
+            _mockIDisplayAlertHelper.Verify(x => x.CustomDisplayAlert("Error", exceptionMessage, "OK"), Times.Once);
         }
     }
 }

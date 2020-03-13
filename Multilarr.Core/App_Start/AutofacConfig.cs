@@ -19,6 +19,7 @@ namespace Multilarr.Core
             builder.Register(c => new Logger(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "MultilarrSQLite.db3"))).As<ILogger>().SingleInstance();
 
             builder.RegisterType<Pusher.API.Pusher>().As<IPusher>().SingleInstance();
+            builder.RegisterType<PusherValidation>().As<IPusherValidation>().SingleInstance();
             builder.RegisterType<Setting>().As<ISetting>().SingleInstance();
             builder.RegisterType<WorkerServiceReceiver>().As<IWorkerServiceReceiver>().SingleInstance();
             builder.RegisterType<ComputerDriveService>().As<IComputerDriveService>().SingleInstance();

@@ -1,8 +1,9 @@
 ﻿using Multilarr.Common.Interfaces.Logger;
 using Multilarr.Common.Models;
-using Multilarr.Pusher.API.Interfaces.Service;
 using Multilarr.Core.Models;
 using Multilarr.Core.Notifications;
+using Multilarr.Pusher.API.Interfaces;
+using Multilarr.Pusher.API.Interfaces.Service;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
@@ -15,9 +16,10 @@ namespace Multilarr.Core.Views
     {
         private readonly IComputerDriveService _computerDriveService;
         private readonly ILogger _logger;
+        private readonly IPusherValidation _pusherValidation;
         private readonly Dictionary<int, NavigationPage> _menuPages = new Dictionary<int, NavigationPage>();
 
-        public MainPage(IComputerDriveService computerDriveService, ILogger logger)
+        public MainPage(IComputerDriveService computerDriveService, ILogger logger, IPusherValidation pusherValidation)
         {
             InitializeComponent();
 
@@ -33,6 +35,7 @@ namespace Multilarr.Core.Views
 
             _computerDriveService = computerDriveService;
             _logger = logger;
+            _pusherValidation = pusherValidation;
 
             MasterBehavior = MasterBehavior.Popover;
 
@@ -55,7 +58,7 @@ namespace Multilarr.Core.Views
                         _menuPages.Add(id, new NavigationPage(new LogsPage(_logger)));
                         break;
                     case (int)MenuItemType.Settings:
-                        _menuPages.Add(id, new NavigationPage(new SettingsPage(_logger)));
+                        _menuPages.Add(id, new NavigationPage(new SettingsPage(_logger, _pusherValidation)));
                         break;
                 }
             }

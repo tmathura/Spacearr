@@ -1,6 +1,7 @@
 ﻿using Multilarr.Common.Interfaces.Logger;
 using Multilarr.Common.Models;
 using Multilarr.Core.Helpers;
+using Multilarr.Pusher.API.Interfaces;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -11,6 +12,7 @@ namespace Multilarr.Core.ViewModels
     public class SettingDetailViewModel : BaseViewModel
     {
         private readonly ILogger _logger;
+        private readonly IPusherValidation _pusherValidation;
         private readonly INavigationPopHelper _navigationPopHelper;
         private readonly IValidationHelper _validationHelper;
         private readonly IDisplayAlertHelper _displayAlertHelper;
@@ -19,9 +21,11 @@ namespace Multilarr.Core.ViewModels
         public ICommand UpdateCommand { get; }
         public SettingModel SettingModel { get; set; }
 
-        public SettingDetailViewModel(ILogger logger, INavigationPopHelper navigationPopHelper, IValidationHelper validationHelper, IDisplayAlertHelper displayAlertHelper, SettingModel settingModel)
+        public SettingDetailViewModel(ILogger logger, IPusherValidation pusherValidation, INavigationPopHelper navigationPopHelper, IValidationHelper validationHelper,
+            IDisplayAlertHelper displayAlertHelper, SettingModel settingModel)
         {
             _logger = logger;
+            _pusherValidation = pusherValidation;
             _navigationPopHelper = navigationPopHelper;
             _validationHelper = validationHelper;
             _displayAlertHelper = displayAlertHelper;
@@ -72,7 +76,7 @@ namespace Multilarr.Core.ViewModels
             {
                 if (_validationHelper.IsFormValid(SettingModel))
                 {
-                    var pusherValid = await Pusher.API.Pusher.Validate(SettingModel.PusherAppId, SettingModel.PusherKey, SettingModel.PusherSecret, SettingModel.PusherCluster);
+                    var pusherValid = await _pusherValidation.Validate(SettingModel.PusherAppId, SettingModel.PusherKey, SettingModel.PusherSecret, SettingModel.PusherCluster);
                     if (pusherValid)
                     {
                         await _logger.UpdateSettingAsync(SettingModel);

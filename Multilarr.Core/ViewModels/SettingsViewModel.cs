@@ -1,6 +1,7 @@
 ﻿using Multilarr.Common.Interfaces.Logger;
 using Multilarr.Common.Models;
 using Multilarr.Core.Views;
+using Multilarr.Pusher.API.Interfaces;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -13,15 +14,17 @@ namespace Multilarr.Core.ViewModels
     {
         private readonly Page _page;
         private readonly ILogger _logger;
+        private readonly IPusherValidation _pusherValidation;
 
         public ICommand LoadItemsCommand { get; set; }
         public ICommand AddCommand { get; }
         public ObservableCollection<SettingModel> Settings { get; set; }
 
-        public SettingsViewModel(Page page, ILogger logger)
+        public SettingsViewModel(Page page, ILogger logger, IPusherValidation pusherValidation)
         {
             _page = page;
             _logger = logger;
+            _pusherValidation = pusherValidation;
 
             Title = "Settings";
             Settings = new ObservableCollection<SettingModel>();
@@ -67,7 +70,7 @@ namespace Multilarr.Core.ViewModels
 
             try
             {
-                await _page.Navigation.PushModalAsync(new NavigationPage(new NewSettingPage(_logger)));
+                await _page.Navigation.PushModalAsync(new NavigationPage(new NewSettingPage(_logger, _pusherValidation)));
             }
             catch (Exception ex)
             {

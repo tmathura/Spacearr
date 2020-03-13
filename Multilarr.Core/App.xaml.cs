@@ -1,7 +1,8 @@
 ﻿using Autofac;
 using Multilarr.Common.Interfaces.Logger;
-using Multilarr.Pusher.API.Interfaces.Service;
 using Multilarr.Core.Views;
+using Multilarr.Pusher.API.Interfaces;
+using Multilarr.Pusher.API.Interfaces.Service;
 using Xamarin.Forms;
 
 namespace Multilarr.Core
@@ -21,7 +22,7 @@ namespace Multilarr.Core
                 DependencyService.Get<INotificationManager>().Initialize();
             #endif
 
-            MainPage = new MainPage(container.Resolve<IComputerDriveService>(), container.Resolve<ILogger>());
+            MainPage = new MainPage(container.Resolve<IComputerDriveService>(), container.Resolve<ILogger>(), container.Resolve<IPusherValidation>());
         }
 
         protected override void OnStart()

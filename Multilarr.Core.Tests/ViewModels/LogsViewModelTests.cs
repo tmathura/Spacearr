@@ -26,55 +26,49 @@ namespace Multilarr.Core.Tests.ViewModels
         [TestMethod]
         public void LogsViewModel()
         {
-            {
-                // Arrange
-                var logsViewModel = new LogsViewModel(_mockILogger.Object, _mockIDisplayAlertHelper.Object);
+            // Arrange
+            var logsViewModel = new LogsViewModel(_mockILogger.Object, _mockIDisplayAlertHelper.Object);
 
-                // Assert
-                Assert.AreEqual(Title, logsViewModel.Title);
-            }
+            // Assert
+            Assert.AreEqual(Title, logsViewModel.Title);
         }
 
         [TestMethod]
         public void LoadItemsCommand()
         {
-            {
-                const int noOfLogs = 7;
+            const int noOfLogs = 7;
 
-                // Arrange
-                var logModelList = LogModelFactory.CreateLogModels(noOfLogs);
-                var taskLogModelList = Task.FromResult(logModelList);
-                _mockILogger.Setup(x => x.GetLogsAsync()).Returns(taskLogModelList);
-                var logsViewModel = new LogsViewModel(_mockILogger.Object, _mockIDisplayAlertHelper.Object);
+            // Arrange
+            var logModelList = LogModelFactory.CreateLogModels(noOfLogs);
+            var taskLogModelList = Task.FromResult(logModelList);
+            _mockILogger.Setup(x => x.GetLogsAsync()).Returns(taskLogModelList);
+            var logsViewModel = new LogsViewModel(_mockILogger.Object, _mockIDisplayAlertHelper.Object);
 
-                // Act
-                logsViewModel.LoadItemsCommand.Execute(null);
+            // Act
+            logsViewModel.LoadItemsCommand.Execute(null);
 
-                // Assert
-                Assert.AreEqual(Title, logsViewModel.Title);
-                Assert.IsNotNull(logsViewModel.Logs);
-                Assert.AreEqual(noOfLogs, logsViewModel.Logs.Count);
-            }
+            // Assert
+            Assert.AreEqual(Title, logsViewModel.Title);
+            Assert.IsNotNull(logsViewModel.Logs);
+            Assert.AreEqual(noOfLogs, logsViewModel.Logs.Count);
         }
 
         [TestMethod]
         public void LoadItemsCommand_Exception()
         {
-            {
-                const string exceptionMessage = "Error on GetLogsAsync!";
+            const string exceptionMessage = "Error on GetLogsAsync!";
 
-                // Arrange
-                _mockILogger.Setup(x => x.GetLogsAsync()).Throws(new Exception(exceptionMessage));
-                var logsViewModel = new LogsViewModel(_mockILogger.Object, _mockIDisplayAlertHelper.Object);
+            // Arrange
+            _mockILogger.Setup(x => x.GetLogsAsync()).Throws(new Exception(exceptionMessage));
+            var logsViewModel = new LogsViewModel(_mockILogger.Object, _mockIDisplayAlertHelper.Object);
 
-                // Act
-                logsViewModel.LoadItemsCommand.Execute(null);
+            // Act
+            logsViewModel.LoadItemsCommand.Execute(null);
 
-                // Assert
-                Assert.AreEqual(Title, logsViewModel.Title);
-                Assert.AreEqual(0, logsViewModel.Logs.Count);
-                _mockIDisplayAlertHelper.Verify(x => x.CustomDisplayAlert("Error", exceptionMessage, "OK"), Times.Once);
-            }
+            // Assert
+            Assert.AreEqual(Title, logsViewModel.Title);
+            Assert.AreEqual(0, logsViewModel.Logs.Count);
+            _mockIDisplayAlertHelper.Verify(x => x.CustomDisplayAlert("Error", exceptionMessage, "OK"), Times.Once);
         }
     }
 }

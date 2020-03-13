@@ -50,6 +50,7 @@ namespace Multilarr.Core.Tests.ViewModels
 
             // Assert
             Assert.AreEqual(Title, newSettingDetailViewModel.Title);
+            _mockILogger.Verify(x => x.LogSettingAsync(newSettingDetailViewModel.SettingModel), Times.Once);
             _mockIDisplayAlertHelper.Verify(x => x.CustomDisplayAlert("Success", "Setting saved!", "OK"), Times.Once);
             _mockINavigationPopModalHelper.Verify(x => x.CustomPopModalAsync(), Times.Once);
         }

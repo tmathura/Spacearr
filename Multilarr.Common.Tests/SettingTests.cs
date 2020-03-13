@@ -29,9 +29,7 @@ namespace Multilarr.Common.Tests
             const string cluster = "The cluster";
 
             // Arrange
-            var settingList = SettingModelFactory.Default(appId, key, secret, cluster);
-            var taskSettingList = Task.FromResult(settingList);
-            _mockILogger.Setup(x => x.GetSettingsAsync()).Returns(taskSettingList);
+            _mockILogger.Setup(x => x.GetSettingsAsync()).ReturnsAsync(SettingModelFactory.Default(appId, key, secret, cluster));
             _setting = new Setting(_mockILogger.Object);
 
             // Act
@@ -66,9 +64,7 @@ namespace Multilarr.Common.Tests
             const string cluster = "The cluster";
 
             // Arrange
-            var settingList = SettingModelFactory.CreateSettingModels(5, appId, key, secret, cluster, false);
-            var taskSettingList = Task.FromResult(settingList);
-            _mockILogger.Setup(x => x.GetSettingsAsync()).Returns(taskSettingList);
+            _mockILogger.Setup(x => x.GetSettingsAsync()).ReturnsAsync(SettingModelFactory.CreateSettingModels(5, appId, key, secret, cluster, false));
             _setting = new Setting(_mockILogger.Object);
 
             // Act

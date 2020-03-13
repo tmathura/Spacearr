@@ -42,9 +42,7 @@ namespace Multilarr.Core.Tests.ViewModels
             const int noOfComputerDriveModels = 9;
 
             // Arrange
-            var computerDriveModelList = ComputerDriveModelFactory.CreateComputerDriveModels(noOfComputerDriveModels);
-            var taskComputerDriveModelList = Task.FromResult(computerDriveModelList);
-            _mockIComputerDriveService.Setup(x => x.GetComputerDrivesAsync()).Returns(taskComputerDriveModelList);
+            _mockIComputerDriveService.Setup(x => x.GetComputerDrivesAsync()).ReturnsAsync(ComputerDriveModelFactory.CreateComputerDriveModels(noOfComputerDriveModels));
             var computerDriveDetailViewModel = new ComputerDrivesViewModel(_mockILogger.Object, _mockIDisplayAlertHelper.Object, _mockIComputerDriveService.Object);
             
             // Act

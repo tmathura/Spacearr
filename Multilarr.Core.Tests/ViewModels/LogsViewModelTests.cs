@@ -39,9 +39,7 @@ namespace Multilarr.Core.Tests.ViewModels
             const int noOfLogs = 7;
 
             // Arrange
-            var logModelList = LogModelFactory.CreateLogModels(noOfLogs);
-            var taskLogModelList = Task.FromResult(logModelList);
-            _mockILogger.Setup(x => x.GetLogsAsync()).Returns(taskLogModelList);
+            _mockILogger.Setup(x => x.GetLogsAsync()).ReturnsAsync(LogModelFactory.CreateLogModels(noOfLogs));
             var logsViewModel = new LogsViewModel(_mockILogger.Object, _mockIDisplayAlertHelper.Object);
 
             // Act

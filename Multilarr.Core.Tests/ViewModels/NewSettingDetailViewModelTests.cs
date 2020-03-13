@@ -4,6 +4,7 @@ using Multilarr.Common.Interfaces.Logger;
 using Multilarr.Core.Helpers;
 using Multilarr.Core.ViewModels;
 using Multilarr.Pusher.API.Interfaces;
+using System;
 
 namespace Multilarr.Core.Tests.ViewModels
 {
@@ -56,7 +57,7 @@ namespace Multilarr.Core.Tests.ViewModels
         }
 
         [TestMethod]
-        public void SaveCommand_Exception()
+        public void SaveCommand_ExceptionTestCase1()
         {
             // Arrange
             _mockIValidationHelper.Setup(x => x.IsFormValid(It.IsAny<object>())).Returns(true);
@@ -69,6 +70,23 @@ namespace Multilarr.Core.Tests.ViewModels
             // Assert
             Assert.AreEqual(Title, newSettingDetailViewModel.Title);
             _mockIDisplayAlertHelper.Verify(x => x.CustomDisplayAlert("Error", "Pusher details invalid!", "OK"), Times.Once);
+        }
+
+        [TestMethod]
+        public void SaveCommand_ExceptionTestCase2()
+        {
+            const string exceptionMessage = "Error on ValidationHelper!";
+
+            // Arrange
+            _mockIValidationHelper.Setup(x => x.IsFormValid(It.IsAny<object>())).Throws(new Exception(exceptionMessage));
+            var newSettingDetailViewModel = new NewSettingDetailViewModel(_mockILogger.Object, _mockIPusherValidation.Object, _mockINavigationPopModalHelper.Object, _mockIValidationHelper.Object, _mockIDisplayAlertHelper.Object);
+
+            // Act
+            newSettingDetailViewModel.SaveCommand.Execute(null);
+
+            // Assert
+            Assert.AreEqual(Title, newSettingDetailViewModel.Title);
+            _mockIDisplayAlertHelper.Verify(x => x.CustomDisplayAlert("Error", exceptionMessage, "OK"), Times.Once);
         }
     }
 }

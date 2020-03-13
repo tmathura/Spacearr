@@ -6,7 +6,6 @@ using Multilarr.Core.Tests.Factories;
 using Multilarr.Core.ViewModels;
 using Multilarr.Pusher.API.Interfaces.Service;
 using System;
-using System.Threading.Tasks;
 
 namespace Multilarr.Core.Tests.ViewModels
 {

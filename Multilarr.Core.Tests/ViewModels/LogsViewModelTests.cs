@@ -5,7 +5,6 @@ using Multilarr.Core.Helpers;
 using Multilarr.Core.Tests.Factories;
 using Multilarr.Core.ViewModels;
 using System;
-using System.Threading.Tasks;
 
 namespace Multilarr.Core.Tests.ViewModels
 {

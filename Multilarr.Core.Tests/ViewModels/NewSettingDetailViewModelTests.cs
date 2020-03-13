@@ -88,5 +88,36 @@ namespace Multilarr.Core.Tests.ViewModels
             Assert.AreEqual(Title, newSettingDetailViewModel.Title);
             _mockIDisplayAlertHelper.Verify(x => x.CustomDisplayAlert("Error", exceptionMessage, "OK"), Times.Once);
         }
+
+        [TestMethod]
+        public void CancelCommand()
+        {
+            // Arrange
+            var newSettingDetailViewModel = new NewSettingDetailViewModel(_mockILogger.Object, _mockIPusherValidation.Object, _mockINavigationPopModalHelper.Object, _mockIValidationHelper.Object, _mockIDisplayAlertHelper.Object);
+
+            // Act
+            newSettingDetailViewModel.CancelCommand.Execute(null);
+
+            // Assert
+            Assert.AreEqual(Title, newSettingDetailViewModel.Title);
+            _mockINavigationPopModalHelper.Verify(x => x.CustomPopModalAsync(), Times.Once);
+        }
+
+        [TestMethod]
+        public void CancelCommand_Exception()
+        {
+            const string exceptionMessage = "Error on CustomPopModalAsync!";
+
+            // Arrange
+            _mockINavigationPopModalHelper.Setup(x => x.CustomPopModalAsync()).Throws(new Exception(exceptionMessage));
+            var newSettingDetailViewModel = new NewSettingDetailViewModel(_mockILogger.Object, _mockIPusherValidation.Object, _mockINavigationPopModalHelper.Object, _mockIValidationHelper.Object, _mockIDisplayAlertHelper.Object);
+
+            // Act
+            newSettingDetailViewModel.CancelCommand.Execute(null);
+
+            // Assert
+            Assert.AreEqual(Title, newSettingDetailViewModel.Title);
+            _mockIDisplayAlertHelper.Verify(x => x.CustomDisplayAlert("Error", exceptionMessage, "OK"), Times.Once);
+        }
     }
 }

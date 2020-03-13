@@ -1,0 +1,62 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Common\**" />
+    <EmbeddedResource Remove="Common\**" />
+    <None Remove="Common\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.9.4" />
+    <PackageReference Include="Microcharts" Version="0.8.5-pre" />
+    <PackageReference Include="Microcharts.Forms" Version="0.8.5-pre" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
+    <PackageReference Include="Xamarin.Forms" Version="4.3.0.908675" />  
+    <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\ComputerDriveDetailPage.xaml.cs">
+      <DependentUpon>ComputerDriveDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\HomePage.xaml.cs">
+      <DependentUpon>HomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\NewSettingPage.xaml.cs">
+      <DependentUpon>NewSettingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SettingDetailPage.xaml.cs">
+      <DependentUpon>SettingDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\LogDetailPage.xaml.cs">
+      <DependentUpon>LogDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\LogsPage.xaml.cs">
+      <DependentUpon>LogsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ComputerDrivesPage.xaml.cs">
+      <DependentUpon>ComputerDrivesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\NotificationDetailPage.xaml.cs">
+      <DependentUpon>NotificationDetailPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Spacearr.Common\Spacearr.Common.csproj" />
+    <ProjectReference Include="..\Spacearr.Pusher.API\Spacearr.Pusher.API.csproj" />
+  </ItemGroup>
+</Project>

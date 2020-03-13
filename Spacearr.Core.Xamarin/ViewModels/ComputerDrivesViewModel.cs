@@ -1,0 +1,59 @@
+﻿using Spacearr.Common.Interfaces.Logger;
+using Spacearr.Common.Models;
+using Spacearr.Core.Xamarin.Helpers;
+using Spacearr.Pusher.API.Interfaces.Service;
+using System;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using Xamarin.Forms;
+
+namespace Spacearr.Core.Xamarin.ViewModels
+{
+    public class ComputerDrivesViewModel : BaseViewModel
+    {
+        private readonly ILogger _logger;
+        private readonly IDisplayAlertHelper _displayAlertHelper;
+        private readonly IComputerDriveService _computerDriveService;
+
+        public ObservableCollection<ComputerDriveModel> ComputerDrives { get; set; }
+        public Command LoadItemsCommand { get; set; }
+
+        public ComputerDrivesViewModel(ILogger logger, IDisplayAlertHelper displayAlertHelper, IComputerDriveService computerDriveService)
+        {
+            _logger = logger;
+            _displayAlertHelper = displayAlertHelper;
+            _computerDriveService = computerDriveService;
+
+            Title = "Computer Drives";
+            ComputerDrives = new ObservableCollection<ComputerDriveModel>();
+            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+        }
+
+        private async Task ExecuteLoadItemsCommand()
+        {
+            if (IsBusy)
+                return;
+
+            IsBusy = true;
+
+            try
+            {
+                ComputerDrives.Clear();
+                var computerDrives = await _computerDriveService.GetComputerDrivesAsync();
+                foreach (var computerDrive in computerDrives)
+                {
+                    ComputerDrives.Add(computerDrive);
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex.Message, ex.StackTrace);
+                await _displayAlertHelper.CustomDisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+    }
+}

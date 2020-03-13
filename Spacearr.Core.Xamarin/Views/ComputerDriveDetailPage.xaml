@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms" 
+             xmlns:viewModels="clr-namespace:Spacearr.Core.Xamarin.ViewModels;assembly=Spacearr.Core.Xamarin"
+             mc:Ignorable="d"
+             x:Class="Spacearr.Core.Xamarin.Views.ComputerDriveDetailPage"
+             Title="{Binding Title}" x:DataType="viewModels:ComputerDriveDetailViewModel">
+
+    <ScrollView>
+        <StackLayout Spacing="20" Padding="15">
+            <microcharts:ChartView x:Name="chartView" HeightRequest="200" VerticalOptions="FillAndExpand" />
+            <Label Text="Name:" FontSize="Medium" />
+            <Label Text="{Binding ComputerDriveModel.Name}" d:Text="Computer drive name label" FontSize="Small" />
+            <Label Text="Volume Label:" FontSize="Medium" />
+            <Label Text="{Binding ComputerDriveModel.VolumeLabel}" d:Text="Computer drive volume label" FontSize="Small" />
+            <Label Text="Drive Type:" FontSize="Medium" />
+            <Label Text="{Binding ComputerDriveModel.DriveType}" d:Text="Computer drive type label" FontSize="Small" />
+            <Label Text="Is Ready:" FontSize="Medium" />
+            <CheckBox IsChecked="{Binding ComputerDriveModel.IsReady}" IsEnabled="False" />
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>

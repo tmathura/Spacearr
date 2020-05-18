@@ -11,7 +11,6 @@ namespace Spacearr.WorkerService.Windows
         public Worker(IPusher pusher, INotificationTimer notificationTimer)
         {
             pusher.ComputerDrivesCommandReceiverConnect();
-
             notificationTimer.Instantiate();
         }
 

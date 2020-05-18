@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spacearr.Common.Tests", "Sp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spacearr.Core.Xamarin.Tests", "Spacearr.Core.Xamarin.Tests\Spacearr.Core.Xamarin.Tests.csproj", "{58760884-F453-4751-821B-9CEBCD3C588D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spacearr.WorkerService.Windows", "Spacearr.WorkerService.Windows\Spacearr.WorkerService.Windows.csproj", "{1A5E164A-D885-4F25-8AB5-3E2480ED5200}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spacearr.WorkerService.Windows", "Spacearr.WorkerService.Windows\Spacearr.WorkerService.Windows.csproj", "{1A5E164A-D885-4F25-8AB5-3E2480ED5200}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

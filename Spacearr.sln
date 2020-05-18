@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spacearr.UWP", "Spacearr.UW
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spacearr.Android", "Spacearr.Android\Spacearr.Android.csproj", "{68DF6F8D-0EFB-4616-83AF-6AFC6A446A1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spacearr.iOS", "Spacearr.iOS\Spacearr.iOS.csproj", "{10D3CC97-E227-4314-8F6F-BDC03605BDCF}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spacearr.Core.Xamarin", "Spacearr.Core.Xamarin\Spacearr.Core.Xamarin.csproj", "{8CB8FECD-0779-444B-A21C-7DFC554C111D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spacearr.Common", "Spacearr.Common\Spacearr.Common.csproj", "{07955D9E-746B-4274-B1E5-B233D577E437}"
@@ -109,42 +107,6 @@ Global
 		{68DF6F8D-0EFB-4616-83AF-6AFC6A446A1E}.Release|x86.ActiveCfg = Release|Any CPU
 		{68DF6F8D-0EFB-4616-83AF-6AFC6A446A1E}.Release|x86.Build.0 = Release|Any CPU
 		{68DF6F8D-0EFB-4616-83AF-6AFC6A446A1E}.Release|x86.Deploy.0 = Release|Any CPU
-		{10D3CC97-E227-4314-8F6F-BDC03605BDCF}.Debug|Any CPU.ActiveCfg = Debug|iPhone
-		{10D3CC97-E227-4314-8F6F-BDC03605BDCF}.Debug|Any CPU.Build.0 = Debug|iPhone
-		{10D3CC97-E227-4314-8F6F-BDC03605BDCF}.Debug|Any CPU.Deploy.0 = Debug|iPhone
-		{10D3CC97-E227-4314-8F6F-BDC03605BDCF}.Debug|ARM.ActiveCfg = Debug|iPhoneSimulator
-		{10D3CC97-E227-4314-8F6F-BDC03605BDCF}.Debug|ARM.Build.0 = Debug|iPhoneSimulator
-		{10D3CC97-E227-4314-8F6F-BDC03605BDCF}.Debug|ARM.Deploy.0 = Debug|iPhoneSimulator
-		{10D3CC97-E227-4314-8F6F-BDC03605BDCF}.Debug|iPhone.ActiveCfg = Debug|iPhone
-		{10D3CC97-E227-4314-8F6F-BDC03605BDCF}.Debug|iPhone.Build.0 = Debug|iPhone
-		{10D3CC97-E227-4314-8F6F-BDC03605BDCF}.Debug|iPhone.Deploy.0 = Debug|iPhone
-		{10D3CC97-E227-4314-8F6F-BDC03605BDCF}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
-		{10D3CC97-E227-4314-8F6F-BDC03605BDCF}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
-		{10D3CC97-E227-4314-8F6F-BDC03605BDCF}.Debug|iPhoneSimulator.Deploy.0 = Debug|iPhoneSimulator
-		{10D3CC97-E227-4314-8F6F-BDC03605BDCF}.Debug|x64.ActiveCfg = Debug|iPhone
-		{10D3CC97-E227-4314-8F6F-BDC03605BDCF}.Debug|x64.Build.0 = Debug|iPhone
-		{10D3CC97-E227-4314-8F6F-BDC03605BDCF}.Debug|x64.Deploy.0 = Debug|iPhone
-		{10D3CC97-E227-4314-8F6F-BDC03605BDCF}.Debug|x86.ActiveCfg = Debug|iPhone
-		{10D3CC97-E227-4314-8F6F-BDC03605BDCF}.Debug|x86.Build.0 = Debug|iPhone
-		{10D3CC97-E227-4314-8F6F-BDC03605BDCF}.Debug|x86.Deploy.0 = Debug|iPhone
-		{10D3CC97-E227-4314-8F6F-BDC03605BDCF}.Release|Any CPU.ActiveCfg = Release|iPhone
-		{10D3CC97-E227-4314-8F6F-BDC03605BDCF}.Release|Any CPU.Build.0 = Release|iPhone
-		{10D3CC97-E227-4314-8F6F-BDC03605BDCF}.Release|Any CPU.Deploy.0 = Release|iPhone
-		{10D3CC97-E227-4314-8F6F-BDC03605BDCF}.Release|ARM.ActiveCfg = Release|iPhone
-		{10D3CC97-E227-4314-8F6F-BDC03605BDCF}.Release|ARM.Build.0 = Release|iPhone
-		{10D3CC97-E227-4314-8F6F-BDC03605BDCF}.Release|ARM.Deploy.0 = Release|iPhone
-		{10D3CC97-E227-4314-8F6F-BDC03605BDCF}.Release|iPhone.ActiveCfg = Release|iPhone
-		{10D3CC97-E227-4314-8F6F-BDC03605BDCF}.Release|iPhone.Build.0 = Release|iPhone
-		{10D3CC97-E227-4314-8F6F-BDC03605BDCF}.Release|iPhone.Deploy.0 = Release|iPhone
-		{10D3CC97-E227-4314-8F6F-BDC03605BDCF}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
-		{10D3CC97-E227-4314-8F6F-BDC03605BDCF}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
-		{10D3CC97-E227-4314-8F6F-BDC03605BDCF}.Release|iPhoneSimulator.Deploy.0 = Release|iPhoneSimulator
-		{10D3CC97-E227-4314-8F6F-BDC03605BDCF}.Release|x64.ActiveCfg = Release|iPhone
-		{10D3CC97-E227-4314-8F6F-BDC03605BDCF}.Release|x64.Build.0 = Release|iPhone
-		{10D3CC97-E227-4314-8F6F-BDC03605BDCF}.Release|x64.Deploy.0 = Release|iPhone
-		{10D3CC97-E227-4314-8F6F-BDC03605BDCF}.Release|x86.ActiveCfg = Release|iPhone
-		{10D3CC97-E227-4314-8F6F-BDC03605BDCF}.Release|x86.Build.0 = Release|iPhone
-		{10D3CC97-E227-4314-8F6F-BDC03605BDCF}.Release|x86.Deploy.0 = Release|iPhone
 		{8CB8FECD-0779-444B-A21C-7DFC554C111D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8CB8FECD-0779-444B-A21C-7DFC554C111D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CB8FECD-0779-444B-A21C-7DFC554C111D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU

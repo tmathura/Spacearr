@@ -9,7 +9,6 @@ using Spacearr.Common.Logger;
 using Spacearr.Pusher.API;
 using Spacearr.Pusher.API.Interfaces;
 using System;
-using System.Diagnostics;
 using System.IO;
 
 namespace Spacearr.Windows.Service

@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spacearr.WorkerService.Wind
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spacearr.Windows.Service", "Spacearr.Windows.Service\Spacearr.Windows.Service.csproj", "{82106F34-1406-4226-B11E-E67E7766E612}"
 EndProject
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Spacearr.Windows.Service.Setup", "Spacearr.Windows.Service.Setup\Spacearr.Windows.Service.Setup.wixproj", "{D9E54427-101E-4176-98C4-1342AE97651B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -289,6 +291,20 @@ Global
 		{82106F34-1406-4226-B11E-E67E7766E612}.Release|x64.Build.0 = Release|Any CPU
 		{82106F34-1406-4226-B11E-E67E7766E612}.Release|x86.ActiveCfg = Release|Any CPU
 		{82106F34-1406-4226-B11E-E67E7766E612}.Release|x86.Build.0 = Release|Any CPU
+		{D9E54427-101E-4176-98C4-1342AE97651B}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{D9E54427-101E-4176-98C4-1342AE97651B}.Debug|ARM.ActiveCfg = Debug|x86
+		{D9E54427-101E-4176-98C4-1342AE97651B}.Debug|iPhone.ActiveCfg = Debug|x86
+		{D9E54427-101E-4176-98C4-1342AE97651B}.Debug|iPhoneSimulator.ActiveCfg = Debug|x86
+		{D9E54427-101E-4176-98C4-1342AE97651B}.Debug|x64.ActiveCfg = Debug|x86
+		{D9E54427-101E-4176-98C4-1342AE97651B}.Debug|x86.ActiveCfg = Debug|x86
+		{D9E54427-101E-4176-98C4-1342AE97651B}.Debug|x86.Build.0 = Debug|x86
+		{D9E54427-101E-4176-98C4-1342AE97651B}.Release|Any CPU.ActiveCfg = Release|x86
+		{D9E54427-101E-4176-98C4-1342AE97651B}.Release|ARM.ActiveCfg = Release|x86
+		{D9E54427-101E-4176-98C4-1342AE97651B}.Release|iPhone.ActiveCfg = Release|x86
+		{D9E54427-101E-4176-98C4-1342AE97651B}.Release|iPhoneSimulator.ActiveCfg = Release|x86
+		{D9E54427-101E-4176-98C4-1342AE97651B}.Release|x64.ActiveCfg = Release|x86
+		{D9E54427-101E-4176-98C4-1342AE97651B}.Release|x86.ActiveCfg = Release|x86
+		{D9E54427-101E-4176-98C4-1342AE97651B}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

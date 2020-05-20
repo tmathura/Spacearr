@@ -36,14 +36,15 @@
 <?define System.Threading.Tasks.Extensions.dll = "System.Threading.Tasks.Extensions.dll" ?>
 <?define System.ValueTuple.dll = "System.ValueTuple.dll" ?>
 <?define WebSocket4Net.dll = "WebSocket4Net.dll" ?>
+<?define e_sqlite3.dll = "e_sqlite3.dll" ?>
 
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <Product Id="*" UpgradeCode="$(var.UpgradeCode)" Version="$(var.VersionNumber)" Language="1033" Name="$(var.Name)" Manufacturer="$(var.Manufacturer)">
-    <Package InstallerVersion="300" Compressed="yes" />
+    <Package InstallerVersion="300" InstallScope="perMachine" InstallPrivileges="elevated" Compressed="yes" />
     <Media Id="1" Cabinet="Spacearr.Windows.Service.cab" EmbedCab="yes" />
 
     <!-- Allow upgrades and prevent downgrades -->
-    <MajorUpgrade DowngradeErrorMessage="A later version of [ProductName] is already installed. Setup will now exit." />
+    <MajorUpgrade DowngradeErrorMessage="A later version of [ProductName] is already installed. Setup will now exit." AllowSameVersionUpgrades="yes" AllowDowngrades="no" Schedule="afterInstallInitialize" />
 
     <!-- Define the directory structure -->
     <Directory Id="TARGETDIR" Name="SourceDir">
@@ -172,6 +173,9 @@
       <Component Id="$(var.WebSocket4Net.dll)" Guid="7C4B679B-DA2F-41C9-8C84-918C6169A2B0">
         <File Id="$(var.WebSocket4Net.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.WebSocket4Net.dll)" KeyPath="yes" />
       </Component>
+      <Component Id="$(var.e_sqlite3.dll)" Guid="4394A5E7-C81B-40C6-B7FE-5ECDCC2504BF">
+        <File Id="$(var.e_sqlite3.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)x86\$(var.e_sqlite3.dll)" KeyPath="yes" />
+      </Component>
     </DirectoryRef>
 
     <!-- Tell WiX to install the files -->
@@ -211,6 +215,7 @@
       <ComponentRef Id="$(var.System.Threading.Tasks.Extensions.dll)" />
       <ComponentRef Id="$(var.System.ValueTuple.dll)" />
       <ComponentRef Id="$(var.WebSocket4Net.dll)" />
+      <ComponentRef Id="$(var.e_sqlite3.dll)" />
     </Feature>
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />
   </Product>

@@ -9,12 +9,9 @@ jobs:
       name: windows/default
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - dotnet-packages-v1-{{ checksum "Spacearr.sln" }}
       - run:
           name: "Install project dependencies"
-          command: dotnet.exe restore
+          command: msbuild restore
       - run:
-          name: "Build Application according to some given configuration"
-          command: dotnet.exe build --configuration Release
+          name: "Build in release given configuration"
+          command: msbuild build --configuration Release

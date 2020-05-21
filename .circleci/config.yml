@@ -4,24 +4,17 @@ orbs:
   windows: circleci/windows@2.2.0
 
 jobs:
-  test:
-    description: Setup
+  build:
     executor:
       name: windows/default
     steps:
       - checkout
       - restore_cache:
           keys:
-            - dotnet-packages-v1-{{ checksum "Spacearr.Common/Spacearr.Common.csproj" }}
+            - dotnet-packages-v1-{{ checksum "Spacearr.sln" }}
       - run:
           name: "Install project dependencies"
           command: dotnet.exe restore
-  build:
-    description: Build application with Release configuration
-    executor:
-      name: windows/default
-    steps:
-      - checkout
       - run:
           name: "Build Application according to some given configuration"
           command: dotnet.exe build --configuration Release

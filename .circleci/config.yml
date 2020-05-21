@@ -14,4 +14,4 @@ jobs:
           command: msbuild nuget restore Spacearr.sln
       - run:
           name: "Build in release configuration"
-          command: msbuild build --configuration Release
+          command: msbuild Spacearr.sln /p:Configuration=Release

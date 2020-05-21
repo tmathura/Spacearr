@@ -11,7 +11,7 @@ jobs:
       - checkout
       - run:
           name: "Install project dependencies"
-          command: msbuild restore
+          command: msbuild nuget restore Spacearr.sln
       - run:
-          name: "Build in release given configuration"
+          name: "Build in release configuration"
           command: msbuild build --configuration Release

@@ -14,4 +14,4 @@ jobs:
           command: msbuild -t:restore
       - run:
           name: "Build in release configuration"
-          command: msbuild build
+          command: msbuild Spacearr.sln

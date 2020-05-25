@@ -17,7 +17,7 @@ namespace Spacearr.Windows.Service
     {
         public static void Configure(ContainerBuilder builder)
         {
-            builder.Register(c => new Logger(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SpacearrSQLite.db3"))).As<ILogger>().SingleInstance();
+            builder.Register(c => new Logger(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Spacearr.Windows.Service.SQLite.db3"))).As<ILogger>().SingleInstance();
             
             var configurationBuilder = new ConfigurationBuilder()
                 .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)

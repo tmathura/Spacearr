@@ -40,10 +40,10 @@
 <?define Spacearr.WorkerService.Windows.exe = "Spacearr.WorkerService.Windows.exe" ?>
 <?define Spacearr.WorkerService.Windows.runtimeconfig.json = "Spacearr.WorkerService.Windows.runtimeconfig.json" ?>
 <?define SQLiteNet.dll = "SQLiteNet.dll" ?> <!-- "SQLite-net.dll" does not like the '-' -->
-<?define SQLitePCLRaw.batteries_green.dll = "SQLitePCLRaw.batteries_green.dll" ?>
 <?define SQLitePCLRaw.batteries_v2.dll = "SQLitePCLRaw.batteries_v2.dll" ?>
 <?define SQLitePCLRaw.core.dll = "SQLitePCLRaw.core.dll" ?>
-<?define SQLitePCLRaw.provider.e_sqlite3.dll = "SQLitePCLRaw.provider.e_sqlite3.dll" ?>
+<?define SQLitePCLRaw.nativelibrary.dll = "SQLitePCLRaw.nativelibrary.dll" ?>
+<?define SQLitePCLRaw.provider.dynamic_cdecl.dll = "SQLitePCLRaw.provider.dynamic_cdecl.dll" ?>
 <?define SuperSocket.ClientEngine.dll = "SuperSocket.ClientEngine.dll" ?>
 <?define System.ComponentModel.Annotations.dll = "System.ComponentModel.Annotations.dll" ?>
 <?define System.Diagnostics.EventLog.dll = "System.Diagnostics.EventLog.dll" ?>
@@ -226,17 +226,17 @@
       <Component Id="$(var.SQLiteNet.dll)" Guid="EB585D7B-2AB4-4ABB-973D-B184A689663D">
         <File Id="$(var.SQLiteNet.dll)" Source="$(var.Spacearr.WorkerService.Windows.TargetDir)SQLite-net.dll" KeyPath="yes" /> <!-- "SQLite-net.dll" manually specified because it does not like the '-' -->
       </Component>
-      <Component Id="$(var.SQLitePCLRaw.batteries_green.dll)" Guid="84D20880-FAA0-4005-939E-612CD891A404">
-        <File Id="$(var.SQLitePCLRaw.batteries_green.dll)" Source="$(var.Spacearr.WorkerService.Windows.TargetDir)$(var.SQLitePCLRaw.batteries_green.dll)" KeyPath="yes" />
-      </Component>
       <Component Id="$(var.SQLitePCLRaw.batteries_v2.dll)" Guid="E72D3E8A-9DEE-4A4F-8937-71CB960950FC">
         <File Id="$(var.SQLitePCLRaw.batteries_v2.dll)" Source="$(var.Spacearr.WorkerService.Windows.TargetDir)$(var.SQLitePCLRaw.batteries_v2.dll)" KeyPath="yes" />
       </Component>
       <Component Id="$(var.SQLitePCLRaw.core.dll)" Guid="26C2B0F1-4D14-405C-BF90-7806AD05785E">
         <File Id="$(var.SQLitePCLRaw.core.dll)" Source="$(var.Spacearr.WorkerService.Windows.TargetDir)$(var.SQLitePCLRaw.core.dll)" KeyPath="yes" />
       </Component>
-      <Component Id="$(var.SQLitePCLRaw.provider.e_sqlite3.dll)" Guid="17F618DC-30DF-48BC-A143-50799F08A22A">
-        <File Id="$(var.SQLitePCLRaw.provider.e_sqlite3.dll)" Source="$(var.Spacearr.WorkerService.Windows.TargetDir)$(var.SQLitePCLRaw.provider.e_sqlite3.dll)" KeyPath="yes" />
+      <Component Id="$(var.SQLitePCLRaw.nativelibrary.dll)" Guid="17F618DC-30DF-48BC-A143-50799F08A22A">
+        <File Id="$(var.SQLitePCLRaw.nativelibrary.dll)" Source="$(var.Spacearr.WorkerService.Windows.TargetDir)$(var.SQLitePCLRaw.nativelibrary.dll)" KeyPath="yes" />
+      </Component>
+      <Component Id="$(var.SQLitePCLRaw.provider.dynamic_cdecl.dll)" Guid="1B14AB68-5BBD-4F7C-8FC7-B96EBDDA832D">
+        <File Id="$(var.SQLitePCLRaw.provider.dynamic_cdecl.dll)" Source="$(var.Spacearr.WorkerService.Windows.TargetDir)$(var.SQLitePCLRaw.provider.dynamic_cdecl.dll)" KeyPath="yes" />
       </Component>
       <Component Id="$(var.SuperSocket.ClientEngine.dll)" Guid="39D115D6-4C5E-4D1E-88D6-86DC8CA5CB10">
         <File Id="$(var.SuperSocket.ClientEngine.dll)" Source="$(var.Spacearr.WorkerService.Windows.TargetDir)$(var.SuperSocket.ClientEngine.dll)" KeyPath="yes" />
@@ -290,12 +290,12 @@
         <File Id="$(var.netstandard2.0.System.ServiceProcess.ServiceController.dll)" Source="$(var.Spacearr.WorkerService.Windows.TargetDir)runtimes\win\lib\netstandard2.0\$(var.System.ServiceProcess.ServiceController.dll)" KeyPath="yes" />
       </Component>
     </DirectoryRef>
-    <DirectoryRef Id="win_x64">
+    <DirectoryRef Id="native_x64">
       <Component Id="$(var.x64_e_sqlite3.dll)" Guid="E94B56E0-27CD-484B-8E98-4FCFB0A2060E">
         <File Id="$(var.x64_e_sqlite3.dll)" Source="$(var.Spacearr.WorkerService.Windows.TargetDir)runtimes\win-x64\native\$(var.e_sqlite3.dll)" KeyPath="yes" />
       </Component>
     </DirectoryRef>
-    <DirectoryRef Id="win_x86">
+    <DirectoryRef Id="native_x86">
       <Component Id="$(var.x86_e_sqlite3.dll)" Guid="4394A5E7-C81B-40C6-B7FE-5ECDCC2504BF">
         <File Id="$(var.x86_e_sqlite3.dll)" Source="$(var.Spacearr.WorkerService.Windows.TargetDir)runtimes\win-x86\native\$(var.e_sqlite3.dll)" KeyPath="yes" />
       </Component>
@@ -342,10 +342,10 @@
       <ComponentRef Id="$(var.Spacearr.WorkerService.Windows.exe)" />
       <ComponentRef Id="$(var.Spacearr.WorkerService.Windows.runtimeconfig.json)" />
       <ComponentRef Id="$(var.SQLiteNet.dll)" />
-      <ComponentRef Id="$(var.SQLitePCLRaw.batteries_green.dll)" />
       <ComponentRef Id="$(var.SQLitePCLRaw.batteries_v2.dll)" />
       <ComponentRef Id="$(var.SQLitePCLRaw.core.dll)" />
-      <ComponentRef Id="$(var.SQLitePCLRaw.provider.e_sqlite3.dll)" />
+      <ComponentRef Id="$(var.SQLitePCLRaw.nativelibrary.dll)" />
+      <ComponentRef Id="$(var.SQLitePCLRaw.provider.dynamic_cdecl.dll)" />
       <ComponentRef Id="$(var.SuperSocket.ClientEngine.dll)" />
       <ComponentRef Id="$(var.System.ComponentModel.Annotations.dll)" />
       <ComponentRef Id="$(var.System.Diagnostics.EventLog.dll)" />

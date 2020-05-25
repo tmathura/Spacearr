@@ -25,7 +25,7 @@ namespace Spacearr.WorkerService.Windows
                 .UseWindowsService()
                 .ConfigureServices((hostContext, services) =>
                 {
-                    services.AddSingleton<ILogger, Logger>(serviceProvider => new Logger(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "SpacearrWorkerServiceSQLite.db3")));
+                    services.AddSingleton<ILogger, Logger>(serviceProvider => new Logger(Path.Combine(AppDomain.CurrentDomain.BaseDirectory ?? Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Spacearr.WorkerService.Windows.SQLite.db3")));
 
                     services.AddHostedService<Worker>();
                     services.AddSingleton<IPusher, Pusher.API.Pusher>();

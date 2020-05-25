@@ -16,7 +16,7 @@ namespace Spacearr.Core.Xamarin
     {
         public static void Configure(ContainerBuilder builder)
         {
-            builder.Register(c => new Logger(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "SpacearrSQLite.db3"))).As<ILogger>().SingleInstance();
+            builder.Register(c => new Logger(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Spacearr.Core.Xamarin.SQLite.db3"))).As<ILogger>().SingleInstance();
 
             builder.RegisterType<Pusher.API.Pusher>().As<IPusher>().SingleInstance();
             builder.RegisterType<PusherValidation>().As<IPusherValidation>().SingleInstance();

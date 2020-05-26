@@ -37,6 +37,9 @@ jobs:
       name: windows/default
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - msbuild-packages-v1-{{ checksum "Spacearr.sln" }}
       - run:
           name: "Build Application according to some given configuration"
           command: msbuild Spacearr.Common\Spacearr.Common.csproj /p:Configuration="Release"

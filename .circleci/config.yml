@@ -5,7 +5,7 @@ orbs:
 
 jobs:
   test:
-    description: Setup and run tests
+    description: Run tests
     executor:
       name: windows/default
     steps:
@@ -34,8 +34,8 @@ jobs:
           name: "Install project dependencies"
           command: msbuild -t:restore
       - run:
-          name: "Build Application according to some given configuration"
-          command: msbuild Spacearr.Common\Spacearr.Common.csproj
+          name: "Build application"
+          command: msbuild Spacearr.Windows.Service\Spacearr.Windows.Service.csproj /p:Configuration="Release"
 workflows:
   test_and_build:
     jobs:

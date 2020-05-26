@@ -10,16 +10,9 @@ jobs:
       name: windows/default
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - msbuild-packages-v1-{{ checksum "Spacearr.sln" }}
       - run:
           name: "Install project dependencies"
           command: msbuild -t:restore
-      - save_cache:
-          paths:
-            - C:\Users\circleci\.nuget\packages
-          key: msbuild-packages-v1-{{ checksum "Spacearr.sln" }}
       - run:
           name: "Run Spacearr Common Tests"
           command: dotnet.exe test Spacearr.Common.Tests/Spacearr.Common.Tests.csproj -v n --results-directory:test_coverage --collect:"Code Coverage"
@@ -37,9 +30,9 @@ jobs:
       name: windows/default
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - msbuild-packages-v1-{{ checksum "Spacearr.sln" }}
+      - run:
+          name: "Install project dependencies"
+          command: msbuild -t:restore
       - run:
           name: "Build Application according to some given configuration"
           command: msbuild Spacearr.Common\Spacearr.Common.csproj

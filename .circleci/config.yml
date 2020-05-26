@@ -42,13 +42,7 @@ jobs:
             - msbuild-packages-v1-{{ checksum "Spacearr.sln" }}
       - run:
           name: "Build Application according to some given configuration"
-          command: msbuild Spacearr.Common\Spacearr.Common.csproj /p:Configuration="Release"
-      - run:
-          name: "Build Application according to some given configuration"
-          command: msbuild Spacearr.Pusher.API\Spacearr.Pusher.API.csproj /p:Configuration="Release"
-      - run:
-          name: "Build Application according to some given configuration"
-          command: msbuild Spacearr.Windows.Service\Spacearr.Windows.Service.csproj /p:Configuration="Release"
+          command: msbuild Spacearr.Common\Spacearr.Common.csproj
 workflows:
   test_and_build:
     jobs:

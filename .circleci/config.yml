@@ -5,7 +5,7 @@ orbs:
 
 jobs:
   test:
-    description: Setup and run application tests
+    description: Setup and run tests
     executor:
       name: windows/default
     steps:
@@ -21,8 +21,10 @@ jobs:
             - C:\Users\circleci\.nuget\packages
           key: msbuild-packages-v1-{{ checksum "Spacearr.sln" }}
       - run:
-          name: "Run Application Tests"
+          name: "Run Spacearr Common Tests"
           command: dotnet.exe test Spacearr.Common.Tests/Spacearr.Common.Tests.csproj -v n --results-directory:test_coverage --collect:"Code Coverage"
+      - run:
+          name: "Run Spacearr Core Xamarin Tests"
           command: dotnet.exe test Spacearr.Core.Xamarin.Tests/Spacearr.Core.Xamarin.Tests.csproj -v n --results-directory:test_coverage --collect:"Code Coverage"
       - run:
           name: "Print Working Directory"

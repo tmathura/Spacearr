@@ -39,7 +39,7 @@ jobs:
       - checkout
       - run:
           name: "Build Application according to some given configuration"
-          command: msbuild Spacearr.sln
+          command: msbuild Spacearr.sln /t:Spacearr.Windows.Service.csproj;Spacearr.WorkerService.Windows.csproj /p:Configuration="Release"
 workflows:
   test_and_build:
     jobs:

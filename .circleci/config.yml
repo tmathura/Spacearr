@@ -23,6 +23,7 @@ jobs:
       - run:
           name: "Run Application Tests"
           command: dotnet.exe test Spacearr.Common.Tests/Spacearr.Common.Tests.csproj -v n --results-directory:test_coverage --collect:"Code Coverage"
+          command: dotnet.exe test Spacearr.Core.Xamarin.Tests/Spacearr.Core.Xamarin.Tests.csproj -v n --results-directory:test_coverage --collect:"Code Coverage"
       - run:
           name: "Print Working Directory"
           command: pwd

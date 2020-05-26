@@ -35,7 +35,7 @@ jobs:
           command: msbuild -t:restore
       - run:
           name: "Build application"
-          command: msbuild Spacearr.WorkerService.Windows.Setup\Spacearr.WorkerService.Windows.Setup.csproj /p:Configuration="Release"
+          command: msbuild Spacearr.Windows.Service.Setup\Spacearr.Windows.Service.Setup.wixproj /p:Configuration="Release"
 workflows:
   test_and_build:
     jobs:

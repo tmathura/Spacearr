@@ -13,3 +13,6 @@ before_build:
 build:
   project: Spacearr.sln
   verbosity: minimal
+artifacts:
+- path: Spacearr.Windows.Service.Setup\bin\Debug\
+  name: Spacearr.Windows.Service v$(appveyor_build_version)

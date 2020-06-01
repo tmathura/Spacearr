@@ -8,7 +8,7 @@
 
   <Identity
     Name="658dcc45-0ef3-4ca2-821d-bb2e121dfa2d"
-    Publisher="CN=e267ede2-2567-44e7-bfd6-0957bd52326c"
+    Publisher="CN=Spacearr.UWP"
     Version="1.0.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="ec0cc741-fd3e-485c-81be-68815c480690" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>

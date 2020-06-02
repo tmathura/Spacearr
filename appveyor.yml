@@ -43,3 +43,9 @@ artifacts:
 - path: Spacearr.WorkerService.Windows\bin\$(configuration)
   name: Spacearr.WorkerService.Windows v$(appveyor_build_version)
   type: zip
+deploy:
+- provider: GitHub
+  auth_token:
+    secure: UZlJS4I1Uhwz3+gT51KJTXF3jLAvdaH8UeS6NyZdxcN/qTQyanLmobxOk+psRlJ9
+  on:
+    branch: master

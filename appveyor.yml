@@ -1,0 +1,45 @@
+version: 1.0.0.{build}
+pull_requests:
+  do_not_increment_build_number: true
+skip_tags: true
+image: Visual Studio 2019
+configuration: Release
+assembly_info:
+  patch: true
+  file: '**\AssemblyInfo.*'
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}'
+dotnet_csproj:
+  patch: true
+  file: '**\*.csproj'
+  version: '{version}'
+  version_prefix: '{version}'
+  package_version: '{version}'
+  assembly_version: '{version}'
+  file_version: '{version}'
+  informational_version: '{version}'
+before_build:
+- cmd: nuget restore Spacearr.sln
+build:
+  verbosity: minimal
+test_script:
+- cmd: >-
+    nuget install Appveyor.TestLogger -Version 2.0.0
+
+    dotnet test Spacearr.Common.Tests\Spacearr.Common.Tests.csproj --configuration Release --no-build --test-adapter-path:. --logger:Appveyor
+
+    dotnet test Spacearr.Core.Xamarin.Tests\Spacearr.Core.Xamarin.Tests.csproj --configuration Release --no-build --test-adapter-path:. --logger:Appveyor
+artifacts:
+- path: Spacearr.Android\bin\$(configuration)\*-Signed.apk
+  name: Spacearr.Android v$(appveyor_build_version)
+  type: zip
+- path: Spacearr.UWP\AppPackages
+  name: Spacearr.UWP v$(appveyor_build_version)
+  type: zip
+- path: Spacearr.Windows.Service.Setup\bin\$(configuration)
+  name: Spacearr.Windows.Service v$(appveyor_build_version)
+  type: zip
+- path: Spacearr.WorkerService.Windows\bin\$(configuration)
+  name: Spacearr.WorkerService.Windows v$(appveyor_build_version)
+  type: zip

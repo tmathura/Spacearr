@@ -25,7 +25,7 @@ before_build:
 - cmd: >-
     cd Spacearr.Android\Properties
 
-    powershell -Command "(gc AndroidManifest.xml) -replace '1.0', %APPVEYOR_BUILD_VERSION% | Out-File -encoding ASCII AndroidManifest.xml"
+    powershell -Command "(gc AndroidManifest.xml) -replace '1.0', $env:APPVEYOR_BUILD_VERSION | Out-File -encoding ASCII AndroidManifest.xml"
 
     more AndroidManifest.xml
 build:

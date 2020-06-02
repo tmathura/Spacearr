@@ -21,6 +21,7 @@ dotnet_csproj:
   informational_version: '{version}'
 before_build:
 - cmd: nuget restore Spacearr.sln
+- cmd: echo %APPVEYOR_BUILD_VERSION%
 - cmd: >-
     cd Spacearr.Android\Properties
 

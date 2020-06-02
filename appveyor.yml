@@ -21,13 +21,18 @@ dotnet_csproj:
   informational_version: '{version}'
 before_build:
 - cmd: nuget restore Spacearr.sln
-- cmd: echo %APPVEYOR_BUILD_VERSION%
 - cmd: >-
     cd Spacearr.Android\Properties
 
-    powershell -Command "(gc AndroidManifest.xml) -replace '1.0', $env:APPVEYOR_BUILD_VERSION | Out-File -encoding ASCII AndroidManifest.xml"
+    powershell -Command "(gc AndroidManifest.xml) -replace 'android:versionName=""""1.0""""', 'android:versionName=""""$env:APPVEYOR_BUILD_VERSION""""' | Out-File -encoding ASCII AndroidManifest.xml"
 
     more AndroidManifest.xml
+- cmd: >-
+    cd Spacearr.UWP
+
+    powershell -Command "(gc Package.appxmanifest) -replace 'Version=""""1.0.0.0""""', 'Version=""""$env:APPVEYOR_BUILD_VERSION""""' | Out-File -encoding ASCII Package.appxmanifest"
+
+    more Package.appxmanifest
 build:
   verbosity: minimal
 test_script:

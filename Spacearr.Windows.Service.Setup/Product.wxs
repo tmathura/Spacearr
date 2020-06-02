@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <?define Name = "Spacearr.Windows.Service" ?>
 <?define Manufacturer = "Spacearr" ?>
-<?define UpgradeCode = "{A6B49E17-7820-49ED-91A0-4C147B291EFD}" ?>
+<?define UpgradeCode = "{5797E088-8A4F-451B-AF25-D336104BFEE9}" ?>
 <?define Spacearr.Windows.Service.Config = "Spacearr.Windows.Service.exe.config" ?>
 <?define AppSettings.json = "appsettings.json" ?>
 <?define Autofac.dll = "Autofac.dll" ?>

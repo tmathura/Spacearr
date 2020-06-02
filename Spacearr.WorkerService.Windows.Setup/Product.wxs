@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <?define Name = "Spacearr.WorkerService.Windows" ?>
 <?define Manufacturer = "Spacearr" ?>
-<?define UpgradeCode = "{A6B49E17-7820-49ED-91A0-4C147B291EFD}" ?>
+<?define UpgradeCode = "{56B333FF-84B5-4949-80DF-6D3CFA572075}" ?>
 <?define AppSettings.json = "appsettings.json" ?>
 <?define Microsoft.Bcl.AsyncInterfaces.dll = "Microsoft.Bcl.AsyncInterfaces.dll" ?>
 <?define Microsoft.Extensions.Configuration.Abstractions.dll = "Microsoft.Extensions.Configuration.Abstractions.dll" ?>

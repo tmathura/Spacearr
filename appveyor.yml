@@ -22,7 +22,7 @@ dotnet_csproj:
 before_build:
 - cmd: nuget restore Spacearr.sln
 build:
-  verbosity: minimal
+  verbosity: detailed
 test_script:
 - cmd: >-
     nuget install Appveyor.TestLogger -Version 2.0.0

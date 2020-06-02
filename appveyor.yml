@@ -7,18 +7,18 @@ configuration: Release
 assembly_info:
   patch: true
   file: '**\AssemblyInfo.*'
-  assembly_version: '%APPVEYOR_BUILD_VERSION%'
-  assembly_file_version: '%APPVEYOR_BUILD_VERSION%'
-  assembly_informational_version: '%APPVEYOR_BUILD_VERSION%'
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}'
 dotnet_csproj:
   patch: true
   file: '**\*.csproj'
-  version: '%APPVEYOR_BUILD_VERSION%'
-  version_prefix: '%APPVEYOR_BUILD_VERSION%'
-  package_version: '%APPVEYOR_BUILD_VERSION%'
-  assembly_version: '%APPVEYOR_BUILD_VERSION%'
-  file_version: '%APPVEYOR_BUILD_VERSION%'
-  informational_version: '%APPVEYOR_BUILD_VERSION%'
+  version: '{version}'
+  version_prefix: '{version}'
+  package_version: '{version}'
+  assembly_version: '{version}'
+  file_version: '{version}'
+  informational_version: '{version}'
 before_build:
 - cmd: nuget restore Spacearr.sln
 build:
@@ -33,16 +33,12 @@ test_script:
 artifacts:
 - path: Spacearr.Android\bin\$(configuration)\*-Signed.apk
   name: Spacearr.Android v$(appveyor_build_version)
-  type: zip
 - path: Spacearr.UWP\AppPackages
   name: Spacearr.UWP v$(appveyor_build_version)
-  type: zip
 - path: Spacearr.Windows.Service.Setup\bin\$(configuration)
   name: Spacearr.Windows.Service v$(appveyor_build_version)
-  type: zip
-- path: Spacearr.WorkerService.Windows\bin\$(configuration)
+- path: Spacearr.WorkerService.Windows.Setup\bin\$(configuration)
   name: Spacearr.WorkerService.Windows v$(appveyor_build_version)
-  type: zip
 deploy:
 - provider: GitHub
   auth_token:

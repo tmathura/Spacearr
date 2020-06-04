@@ -28,7 +28,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Spacearr.WorkerService.Windows\Spacearr.WorkerService.Windows.csproj">
       <Name>Spacearr.WorkerService.Windows</Name>
-      <Project>{1a5e164a-d885-4f25-8ab5-3e2480ed5200}</Project>
+      <Project>{d6d581a8-7492-4eac-b71c-e6844c751547}</Project>
       <Private>True</Private>
       <DoNotHarvest>True</DoNotHarvest>
       <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>

@@ -21,6 +21,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <SuppressPdbOutput>True</SuppressPdbOutput>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Product.wxs" />
@@ -83,4 +84,22 @@
     <Exec Command="Explorer.exe $(TargetDir)" IgnoreExitCode="true" ContinueOnError="true">
     </Exec>
   </Target>
+  <PropertyGroup>
+    <PreBuildEvent>rd /s /q "$(TargetDir)"</PreBuildEvent>
+  </PropertyGroup>
+  <Target Name="PostBuildMacros">
+    <GetAssemblyIdentity AssemblyFiles="..\Spacearr.Windows.Service\bin\$(Configuration)\Spacearr.Windows.Service.exe">
+      <Output TaskParameter="Assemblies" ItemName="Targets" />
+    </GetAssemblyIdentity>
+    <ItemGroup>
+      <VersionNumber Include="@(Targets->'%(Version)')"/>
+    </ItemGroup>
+  </Target>
+  <PropertyGroup>
+    <PostBuildEventDependsOn>
+      $(PostBuildEventDependsOn);
+      PostBuildMacros;
+    </PostBuildEventDependsOn>
+    <PostBuildEvent>rename $(TargetDir)Spacearr-$(Platform)-@(VersionNumber).msi $(TargetName)-$(Platform)-@(VersionNumber).msi</PostBuildEvent>
+  </PropertyGroup>
 </Project>

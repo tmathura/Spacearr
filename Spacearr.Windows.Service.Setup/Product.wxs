@@ -52,7 +52,7 @@
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramFilesFolder">
         <Directory Id="ROOTDIRECTORY" Name="$(var.Manufacturer)">
-          <Directory Id="APPLICATIONROOTDIRECTORY" Name="$(var.Name)">
+          <Directory Id="INSTALLDIR" Name="$(var.Name)">
             <Directory Id="runtimes" Name="runtimes">
               <Directory Id="win_x64" Name="win-x64">
                 <Directory Id="native_x64" Name="native" />
@@ -66,8 +66,23 @@
       </Directory>
     </Directory>
 
+    <!-- Show Wix InstallDir step -->
+    <UIRef Id="WixUI_InstallDir" />
+
+    <!-- Show the custom Licence Agreement to display during install -->
+    <WixVariable Id="WixUILicenseRtf" Value="$(var.Spacearr.Windows.Service.TargetDir)LicenceAgreement.rtf" />
+
+    <!-- Set the InstallDir variable so that it can be passed to the Custom Action -->
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
+
+    <!-- Tell WiX to do the custom action -->
+    <InstallExecuteSequence>
+      <Custom Action="GetInstallDirectory" Before="ShowUpdateAppSettingsConfigurationAction" />
+      <Custom Action='ShowUpdateAppSettingsConfigurationAction' After='InstallFiles'>NOT Installed</Custom>
+    </InstallExecuteSequence>
+
     <!-- Add files to your installer package -->
-    <DirectoryRef Id="APPLICATIONROOTDIRECTORY">
+    <DirectoryRef Id="INSTALLDIR">
       <Component Id="$(var.Spacearr.Windows.Service.TargetFileName)" Guid="{54AAA2B6-C8DE-41D2-93C3-170A780EAB9B}">
         <File Id="$(var.Spacearr.Windows.Service.TargetFileName)" Source="$(var.Spacearr.Windows.Service.TargetPath)" KeyPath="yes" />
 
@@ -239,4 +254,11 @@
     </Feature>
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />
   </Product>
+
+  <!-- Set up the Custom Action -->
+  <Fragment>
+    <Binary Id="CustomActionBinary" SourceFile="$(var.Spacearr.WixToolset.CustomAction.TargetDir)$(var.Spacearr.WixToolset.CustomAction.TargetName).CA.dll"/>
+    <CustomAction Id="GetInstallDirectory" Property="ShowUpdateAppSettingsConfigurationAction" Value="InstallDirectory=[INSTALLDIR]"/>
+    <CustomAction Id="ShowUpdateAppSettingsConfigurationAction" BinaryKey="CustomActionBinary" DllEntry="ShowUpdateAppSettingsConfigurationScreens" Execute="deferred" Return="check" Impersonate="no"/>
+  </Fragment>
 </Wix>

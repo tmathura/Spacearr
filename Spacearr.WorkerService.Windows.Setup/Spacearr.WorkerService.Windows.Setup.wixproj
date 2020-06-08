@@ -4,7 +4,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>3.8</ProductVersion>
-    <ProjectGuid>{fd2537a2-711d-42ea-953d-a373a5f36845}</ProjectGuid>
+    <ProjectGuid>{f24e1544-45f7-42bf-b9eb-fa6f6a966063}</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
     <OutputName>Spacearr.WorkerService.Windows</OutputName>
     <OutputType>Package</OutputType>
@@ -26,6 +26,20 @@
     <Compile Include="Product.wxs" />
   </ItemGroup>
   <ItemGroup>
+    <WixExtension Include="WixUIExtension">
+      <HintPath>$(WixExtDir)\WixUIExtension.dll</HintPath>
+      <Name>WixUIExtension</Name>
+    </WixExtension>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Spacearr.WixToolset.CustomAction\Spacearr.WixToolset.CustomAction.csproj">
+      <Name>Spacearr.WixToolset.CustomAction</Name>
+      <Project>{d170ee1b-499b-495e-be79-3861dd86a87b}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
     <ProjectReference Include="..\Spacearr.WorkerService.Windows\Spacearr.WorkerService.Windows.csproj">
       <Name>Spacearr.WorkerService.Windows</Name>
       <Project>{d6d581a8-7492-4eac-b71c-e6844c751547}</Project>

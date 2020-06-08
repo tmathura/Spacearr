@@ -10,7 +10,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="LicenceAgreement.rtf" />
     <None Remove="SpacearrWorkerServiceSQLite.db3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="LicenceAgreement.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

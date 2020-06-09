@@ -40,7 +40,6 @@ This is the Windows worker service that you will install onto the computer so th
 | Service  | Master                      | Develop                      |
 |----------|:---------------------------:|:----------------------------:|
 | AppVeyor | [![Build status](https://ci.appveyor.com/api/projects/status/v6fykek56q66lwqm/branch/master?svg=true)](https://ci.appveyor.com/project/tmathura/Spacearr/branch/master) | [![Build status](https://ci.appveyor.com/api/projects/status/v6fykek56q66lwqm/branch/dev?svg=true)](https://ci.appveyor.com/project/tmathura/Spacearr/branch/dev) |
-|
 
 ## Features
 

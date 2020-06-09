@@ -37,7 +37,7 @@ This is the Windows worker service that you will install onto the computer so th
 [![Github Releases](https://img.shields.io/github/downloads/tmathura/Spacearr/total.svg?maxAge=60&style=flat-square)](https://github.com/tmathura/Spacearr/releases/)
 [![Changelog](https://img.shields.io/github/commit-activity/w/tmathura/Spacearr.svg?style=flat-square)](/CHANGELOG.md#unreleased)
 
-| Service  | Master                      | Develop                      |
+| Service  | Master                      | Dev                      |
 |----------|:---------------------------:|:----------------------------:|
 | AppVeyor | [![Build status](https://ci.appveyor.com/api/projects/status/v6fykek56q66lwqm/branch/master?svg=true)](https://ci.appveyor.com/project/tmathura/Spacearr/branch/master) | [![Build status](https://ci.appveyor.com/api/projects/status/v6fykek56q66lwqm/branch/dev?svg=true)](https://ci.appveyor.com/project/tmathura/Spacearr/branch/dev) |
 

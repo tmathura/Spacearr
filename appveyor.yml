@@ -41,6 +41,17 @@ before_build:
     cd..
 build:
   verbosity: minimal
+after_build:
+- cmd: >-
+    cd Spacearr.Android\bin\$(configuration)
+
+    rename com.Spacearr.Android-Signed.apk com.Spacearr.Android-Signed-%APPVEYOR_BUILD_VERSION%.apk
+
+    cd..
+
+    cd..
+
+    cd..
 test_script:
 - cmd: >-
     nuget install Appveyor.TestLogger -Version 2.0.0

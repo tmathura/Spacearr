@@ -43,7 +43,7 @@ build:
   verbosity: minimal
 after_build:
 - cmd: >-
-    cd Spacearr.Android\bin\$(configuration)
+    cd Spacearr.Android\bin\%CONFIGURATION%
 
     rename com.Spacearr.Android-Signed.apk com.Spacearr.Android-Signed-%APPVEYOR_BUILD_VERSION%.apk
 

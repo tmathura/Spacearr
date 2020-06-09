@@ -60,7 +60,7 @@ test_script:
 
     dotnet test Spacearr.Core.Xamarin.Tests\Spacearr.Core.Xamarin.Tests.csproj --configuration Release --no-build --test-adapter-path:. --logger:Appveyor
 artifacts:
-- path: Spacearr.Android\bin\$(configuration)\*-Signed.apk
+- path: Spacearr.Android\bin\$(configuration)\*-Signed*.apk
   name: Spacearr.Android v$(appveyor_build_version)
 - path: Spacearr.UWP\AppPackages
   name: Spacearr.UWP v$(appveyor_build_version)

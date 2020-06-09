@@ -41,6 +41,17 @@ before_build:
     cd..
 build:
   verbosity: minimal
+after_build:
+- cmd: >-
+    cd Spacearr.Android\bin\%CONFIGURATION%
+
+    rename com.Spacearr.Android-Signed.apk com.Spacearr.Android-Signed-%APPVEYOR_BUILD_VERSION%.apk
+
+    cd..
+
+    cd..
+
+    cd..
 test_script:
 - cmd: >-
     nuget install Appveyor.TestLogger -Version 2.0.0
@@ -49,7 +60,7 @@ test_script:
 
     dotnet test Spacearr.Core.Xamarin.Tests\Spacearr.Core.Xamarin.Tests.csproj --configuration Release --no-build --test-adapter-path:. --logger:Appveyor
 artifacts:
-- path: Spacearr.Android\bin\$(configuration)\*-Signed.apk
+- path: Spacearr.Android\bin\$(configuration)\*-Signed*.apk
   name: Spacearr.Android v$(appveyor_build_version)
 - path: Spacearr.UWP\AppPackages
   name: Spacearr.UWP v$(appveyor_build_version)

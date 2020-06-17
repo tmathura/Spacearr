@@ -17,6 +17,7 @@ namespace Spacearr.Common.Logger
             _database.CreateTableAsync<LogModel>().Wait();
             _database.CreateTableAsync<NotificationModel>().Wait();
             _database.CreateTableAsync<SettingModel>().Wait();
+            _database.CreateTableAsync<XamarinSettingModel>().Wait();
         }
 
         #region Logs
@@ -104,6 +105,30 @@ namespace Spacearr.Common.Logger
         public async Task DeleteLogAsync(SettingModel record)
         {
             await _database.DeleteAsync(record);
+        }
+
+        #endregion
+
+        #region XamarinSetting
+
+        public async Task<List<XamarinSettingModel>> GetXamarinSettingAsync()
+        {
+            return await _database.Table<XamarinSettingModel>().ToListAsync();
+        }
+
+        public async Task LogXamarinSettingAsync(XamarinSettingModel record)
+        {
+
+            record.CreatedDate = DateTime.Now;
+            record.UpdatedDate = DateTime.Now;
+
+            await _database.InsertAsync(record);
+        }
+
+        public async Task UpdateXamarinSettingAsync(XamarinSettingModel record)
+        {
+            record.UpdatedDate = DateTime.Now;
+            await _database.UpdateAsync(record);
         }
 
         #endregion

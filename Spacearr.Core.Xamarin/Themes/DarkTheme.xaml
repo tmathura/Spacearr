@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    x:Class="Spacearr.Core.Xamarin.Themes.DarkTheme">
+
+    <Color x:Key="ThemeColor">Black</Color>
+    <Color x:Key="ThemeTextColor">White</Color>
+    <Style TargetType="ContentPage">
+        <Setter Property="BackgroundColor" Value="{StaticResource ThemeColor}" />
+    </Style>
+    <Style TargetType="NavigationPage">
+        <Setter Property="BarBackgroundColor" Value="{StaticResource ThemeColor}" />
+        <Setter Property="BarTextColor" Value="{StaticResource ThemeTextColor}" />
+    </Style>
+    <Style TargetType="StackLayout">
+        <Setter Property="BackgroundColor" Value="{StaticResource ThemeColor}" />
+    </Style>
+    <Style TargetType="Grid">
+        <Setter Property="BackgroundColor" Value="{StaticResource ThemeColor}" />
+    </Style>
+    <Style TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource ThemeTextColor}" />
+    </Style>
+
+</ResourceDictionary>
+
+

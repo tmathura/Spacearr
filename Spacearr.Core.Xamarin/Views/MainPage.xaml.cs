@@ -37,6 +37,8 @@ namespace Spacearr.Core.Xamarin.Views
             _logger = logger;
             _pusherValidation = pusherValidation;
 
+            Master = new MenuPage(_logger);
+
             MasterBehavior = MasterBehavior.Popover;
 
             _menuPages.Add((int)MenuItemType.Home, (NavigationPage)Detail);

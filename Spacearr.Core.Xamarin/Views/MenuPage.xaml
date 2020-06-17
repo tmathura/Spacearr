@@ -9,8 +9,7 @@
              Title="Menu">
              
     <StackLayout VerticalOptions="FillAndExpand">
-        <ListView x:Name="ListViewMenu"
-                    HasUnevenRows="True">
+        <ListView x:Name="ListViewMenu" HasUnevenRows="True" SeparatorVisibility="None">
             <d:ListView.ItemsSource>
                 <x:Array Type="{x:Type models:HomeMenuItemModel}">
                     <models:HomeMenuItemModel Id = "1" Title="Title 1"/>
@@ -27,6 +26,17 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <Grid VerticalOptions="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Label VerticalTextAlignment="Center" Grid.Row="0" Grid.Column="0" x:Name="DarkThemeText"></Label>
+            <Switch Grid.Row="0" Grid.Column="1" VerticalOptions="Center" x:Name="DarkTheme" Toggled="OnToggled"/>
+        </Grid>
     </StackLayout>
 
 </ContentPage>

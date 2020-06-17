@@ -28,5 +28,13 @@ namespace Spacearr.Common.Interfaces.Logger
         Task DeleteLogAsync(SettingModel record);
 
         #endregion
+
+        #region XamarinSetting
+
+        Task<List<XamarinSettingModel>> GetXamarinSettingAsync();
+        Task LogXamarinSettingAsync(XamarinSettingModel record);
+        Task UpdateXamarinSettingAsync(XamarinSettingModel record);
+
+        #endregion
     }
 }

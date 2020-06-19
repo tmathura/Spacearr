@@ -43,10 +43,8 @@
     </Style>
     <Style TargetType="controls:FloatingEntry">
         <Setter Property="TextColor" Value="{StaticResource ThemeTextColor}" />
-        <Setter Property="EntryPlaceholderColor" Value="{StaticResource ThemeTextColor}" />
+        <Setter Property="EntryPlaceholderColor" Value="{StaticResource ThemeLightColor}" />
         <Setter Property="EntryBackgroundColor" Value="{StaticResource ThemeBackgroundColor}" />
     </Style>
 
 </ResourceDictionary>
-
-

@@ -39,7 +39,7 @@
                     <Switch Grid.Row="0" Grid.Column="1" VerticalOptions="Center" IsToggled="{Binding SettingModel.IsDefault}"/>
                 </Grid>
             </StackLayout>
-            </ScrollView>
+        </ScrollView>
     </ContentPage.Content>
 
 </ContentPage>

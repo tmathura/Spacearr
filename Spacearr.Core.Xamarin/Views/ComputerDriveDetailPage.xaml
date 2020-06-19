@@ -45,7 +45,7 @@
                                     <RowDefinition Height="40"/>
                                 </Grid.RowDefinitions>
                                 <Label VerticalTextAlignment="Center" Grid.Row="0" Grid.Column="0" Text="Is Ready:" FontSize="Medium"></Label>
-                                <Switch Grid.Row="0" Grid.Column="1" VerticalOptions="Center" IsToggled="{Binding ComputerDriveModel.IsReady}"/>
+                                <Switch Grid.Row="0" Grid.Column="1" VerticalOptions="Center" IsEnabled="False" IsToggled="{Binding ComputerDriveModel.IsReady}"/>
                             </Grid>
                         </Grid>
                     </Grid>

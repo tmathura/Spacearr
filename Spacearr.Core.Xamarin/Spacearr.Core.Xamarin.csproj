@@ -29,6 +29,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Controls\FloatingLabel.xaml.cs">
+      <DependentUpon>FloatingLabel.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Controls\FloatingEntry.xaml.cs">
       <DependentUpon>FloatingEntry.xaml</DependentUpon>
     </Compile>

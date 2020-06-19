@@ -46,5 +46,9 @@
         <Setter Property="EntryPlaceholderColor" Value="{StaticResource ThemeLightColor}" />
         <Setter Property="EntryBackgroundColor" Value="{StaticResource ThemeBackgroundColor}" />
     </Style>
+    <Style TargetType="controls:FloatingLabel">
+        <Setter Property="TextColor" Value="{StaticResource ThemeTextColor}" />
+        <Setter Property="LabelBackgroundColor" Value="{StaticResource ThemeLightColor}" />
+    </Style>
 
 </ResourceDictionary>

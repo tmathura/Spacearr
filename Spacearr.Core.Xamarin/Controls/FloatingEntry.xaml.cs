@@ -1,11 +1,22 @@
-﻿using System.Threading.Tasks;
+﻿using System.ComponentModel;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Spacearr.Core.Xamarin.Controls
 {
+    [DesignTimeVisible(false)]
     public partial class FloatingEntry : ContentView
     {
-        public static BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(FloatingEntry), defaultBindingMode: BindingMode.TwoWay);
+        public static BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(FloatingEntry), defaultBindingMode: BindingMode.TwoWay, propertyChanged: (bindable, oldVal, newValue) => {
+            var floatingEntry = (FloatingEntry)bindable;
+
+            if (!string.IsNullOrWhiteSpace((string)newValue))
+            {
+                floatingEntry.HiddenLabel.IsVisible = true;
+                floatingEntry.HiddenLabel.TranslationY = -21;
+                floatingEntry.EntryField.Placeholder = null;
+            }
+        });
         public static BindableProperty PlaceholderProperty = BindableProperty.Create(nameof(Placeholder), typeof(string), typeof(FloatingEntry), defaultBindingMode: BindingMode.TwoWay, propertyChanged: (bindable, oldVal, newValue) => {
             var floatingEntry = (FloatingEntry)bindable;
             floatingEntry.EntryField.Placeholder = (string)newValue;
@@ -73,6 +84,7 @@ namespace Spacearr.Core.Xamarin.Controls
                 HiddenLabel.IsVisible = true;
                 if (string.IsNullOrEmpty(EntryField.Text))
                 {
+                    HiddenLabel.Margin = new Thickness(0, 15, 0, 10);
                     await Task.WhenAll(HiddenLabel.FadeTo(1, 120), HiddenLabel.TranslateTo(HiddenLabel.TranslationX, EntryField.Y - EntryField.Height, 200, Easing.BounceIn));
                     EntryField.Placeholder = null;
                 }

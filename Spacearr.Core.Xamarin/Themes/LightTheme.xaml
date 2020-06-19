@@ -9,9 +9,12 @@
     <Color x:Key="ThemeDarkColor">#ac1900</Color>
     <Color x:Key="ThemeTextColor">#000000</Color>
     <Color x:Key="ThemeBackgroundColor">#ffffff</Color>
-    <Color x:Key="ThemeSwitchLightColor">#383838</Color>
-    <Color x:Key="ThemeSwitchNormalColor">#121212</Color>
-    <Color x:Key="ErrorTextColor">Red</Color>
+    <Color x:Key="ThemeSwitchLightColor">#e65100</Color>
+    <Color x:Key="ThemeSwitchNormalColor">#ac1900</Color>
+    <Color x:Key="ErrorTextColor">#b71c1c</Color>
+    <Color x:Key="MicroChartsFreeSpaceColor">#ffffff</Color>
+    <Color x:Key="MicroChartsUsedSpaceColor">#e65100</Color>
+    <Color x:Key="ProgressBarColor">#e65100</Color>
     <Style TargetType="ContentPage">
         <Setter Property="BackgroundColor" Value="{StaticResource ThemeDarkColor}" />
     </Style>

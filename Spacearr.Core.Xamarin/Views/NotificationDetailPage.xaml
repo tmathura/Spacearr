@@ -9,11 +9,28 @@
              Title="{Binding Title}" x:DataType="viewModels:NotificationDetailViewModel">
 
     <ScrollView>
-        <StackLayout Spacing="20" Padding="15">
-            <Label Text="Title:" FontSize="Medium" />
-            <Label Text="{Binding Notification.Title}" d:Text="Title label" FontSize="Small" />
-            <Label Text="Message:" FontSize="Medium" />
-            <Label Text="{Binding Notification.Message}" d:Text="Message label" FontSize="Small" />
+        <StackLayout>
+            <Frame Margin="5" HasShadow="True" CornerRadius="2">
+                <StackLayout>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Text="Title:" FontSize="Medium" />
+                            <Label Grid.Row="1" Text="{Binding Notification.Title}" d:Text="Title label" FontSize="Small" />
+                            <Label Grid.Row="2" Text="Message:" FontSize="Medium" />
+                            <Label Grid.Row="3" Text="{Binding Notification.Message}" d:Text="Message label" FontSize="Small" />
+                        </Grid>
+                    </Grid>
+                </StackLayout>
+            </Frame>
         </StackLayout>
     </ScrollView>
 

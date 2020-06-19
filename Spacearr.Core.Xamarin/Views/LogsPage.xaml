@@ -30,12 +30,11 @@
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:LogModel">
                     <ViewCell>
-                        <Frame Margin="5" HasShadow="True" CornerRadius="5">
+                        <Frame Margin="5" HasShadow="True" CornerRadius="2">
                             <StackLayout>
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*"/>
-                                        <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
                                     <Grid Grid.Row="0">
                                         <Grid.RowDefinitions>

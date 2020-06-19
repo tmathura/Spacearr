@@ -29,12 +29,11 @@
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:ComputerDriveModel">
                     <ViewCell>
-                        <Frame Margin="5" HasShadow="True" CornerRadius="5">
+                        <Frame Margin="5" HasShadow="True" CornerRadius="2">
                             <StackLayout>
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*"/>
-                                        <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
                                     <Grid>
                                         <Grid.RowDefinitions>
@@ -42,7 +41,7 @@
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
                                         <Label FontAttributes="Bold" Grid.Row="0" Text="{Binding Name}" />
-                                        <ProgressBar Grid.Row="1" Progress="{Binding ProgressBarValue}" />
+                                        <ProgressBar Grid.Row="1" Progress="{Binding ProgressBarValue}" ProgressColor="{DynamicResource ProgressBarColor}" />
                                     </Grid>
                                 </Grid>
                             </StackLayout>

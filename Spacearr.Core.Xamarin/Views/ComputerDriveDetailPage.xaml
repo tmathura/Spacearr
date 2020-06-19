@@ -10,16 +10,47 @@
              Title="{Binding Title}" x:DataType="viewModels:ComputerDriveDetailViewModel">
 
     <ScrollView>
-        <StackLayout Spacing="20" Padding="15">
-            <microcharts:ChartView x:Name="chartView" HeightRequest="200" VerticalOptions="FillAndExpand" />
-            <Label Text="Name:" FontSize="Medium" />
-            <Label Text="{Binding ComputerDriveModel.Name}" d:Text="Computer drive name label" FontSize="Small" />
-            <Label Text="Volume Label:" FontSize="Medium" />
-            <Label Text="{Binding ComputerDriveModel.VolumeLabel}" d:Text="Computer drive volume label" FontSize="Small" />
-            <Label Text="Drive Type:" FontSize="Medium" />
-            <Label Text="{Binding ComputerDriveModel.DriveType}" d:Text="Computer drive type label" FontSize="Small" />
-            <Label Text="Is Ready:" FontSize="Medium" />
-            <CheckBox IsChecked="{Binding ComputerDriveModel.IsReady}" IsEnabled="False" />
+        <StackLayout>
+            <Frame Margin="5" HasShadow="True" CornerRadius="2">
+                <StackLayout>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <microcharts:ChartView Grid.Row="0"  x:Name="chartView" HeightRequest="200" VerticalOptions="FillAndExpand" />
+                            <Label Grid.Row="1" Text="Name:" FontSize="Medium" />
+                            <Label Grid.Row="2" Text="{Binding ComputerDriveModel.Name}" d:Text="Computer drive name label" FontSize="Small" />
+                            <Label Grid.Row="3" Text="Volume Label:" FontSize="Medium" />
+                            <Label Grid.Row="4" Text="{Binding ComputerDriveModel.VolumeLabel}" d:Text="Computer drive volume label" FontSize="Small" />
+                            <Label Grid.Row="5" Text="Drive Type:" FontSize="Medium" />
+                            <Label Grid.Row="6" Text="{Binding ComputerDriveModel.DriveType}" d:Text="Computer drive type label" FontSize="Small" />
+                            <Grid Grid.Row="7" Padding="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="40"/>
+                                </Grid.RowDefinitions>
+                                <Label VerticalTextAlignment="Center" Grid.Row="0" Grid.Column="0" Text="Is Ready:" FontSize="Medium"></Label>
+                                <Switch Grid.Row="0" Grid.Column="1" VerticalOptions="Center" IsToggled="{Binding ComputerDriveModel.IsReady}"/>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </StackLayout>
+            </Frame>
         </StackLayout>
     </ScrollView>
 

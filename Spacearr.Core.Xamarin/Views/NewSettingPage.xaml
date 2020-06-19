@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:controls="clr-namespace:Spacearr.Core.Xamarin.Controls;assembly=Spacearr.Core.Xamarin"
              xmlns:viewModels="clr-namespace:Spacearr.Core.Xamarin.ViewModels;assembly=Spacearr.Core.Xamarin"
              mc:Ignorable="d"
              x:Class="Spacearr.Core.Xamarin.Views.NewSettingPage"
@@ -16,23 +17,27 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Spacing="20" Padding="15">
-                <Label Text="Computer Name:" FontSize="Medium" />
-                <Entry Text="{Binding SettingModel.ComputerName}" d:Text="Computer name" FontSize="Small" />
-                <Label x:Name="SettingModel_ComputerNameError" IsVisible="False" TextColor="Red" />
-                <Label Text="Pusher App Id:" FontSize="Medium" />
-                <Entry Text="{Binding SettingModel.PusherAppId}" d:Text="Pusher app id" FontSize="Small" />
-                <Label x:Name="SettingModel_PusherAppIdError" IsVisible="False" TextColor="Red" />
-                <Label Text="Pusher Key:" FontSize="Medium" />
-                <Entry Text="{Binding SettingModel.PusherKey}" d:Text="Pusher key" FontSize="Small" />
-                <Label x:Name="SettingModel_PusherKeyError" IsVisible="False" TextColor="Red" />
-                <Label Text="Pusher Secret:" FontSize="Medium" />
-                <Entry Text="{Binding SettingModel.PusherSecret}" d:Text="Pusher secret" FontSize="Small" />
-                <Label x:Name="SettingModel_PusherSecretError" IsVisible="False" TextColor="Red" />
-                <Label Text="Pusher Cluster:" FontSize="Medium" />
-                <Entry Text="{Binding SettingModel.PusherCluster}" d:Text="Pusher cluster" FontSize="Small" />
-                <Label x:Name="SettingModel_PusherClusterError" IsVisible="False" TextColor="Red" />
-                <Label Text="Is Default:" FontSize="Medium" />
-                <CheckBox IsChecked="{Binding SettingModel.IsDefault}" />
+                <controls:FloatingEntry Text="{Binding SettingModel.ComputerName}" Placeholder="Computer Name"/>
+                <Label x:Name="SettingModel_ComputerNameError" IsVisible="False" TextColor="{DynamicResource ErrorTextColor}" />
+                <controls:FloatingEntry Text="{Binding SettingModel.PusherAppId}" Placeholder="Pusher App Id"/>
+                <Label x:Name="SettingModel_PusherAppIdError" IsVisible="False" TextColor="{DynamicResource ErrorTextColor}" />
+                <controls:FloatingEntry Text="{Binding SettingModel.PusherKey}" Placeholder="Pusher Key"/>
+                <Label x:Name="SettingModel_PusherKeyError" IsVisible="False" TextColor="{DynamicResource ErrorTextColor}" />
+                <controls:FloatingEntry Text="{Binding SettingModel.PusherSecret}" Placeholder="Pusher Secret"/>
+                <Label x:Name="SettingModel_PusherSecretError" IsVisible="False" TextColor="{DynamicResource ErrorTextColor}" />
+                <controls:FloatingEntry Text="{Binding SettingModel.PusherCluster}" Placeholder="Pusher Cluster"/>
+                <Label x:Name="SettingModel_PusherClusterError" IsVisible="False" TextColor="{DynamicResource ErrorTextColor}" />
+                <Grid Padding="10" BackgroundColor="{DynamicResource ThemeBackgroundColor}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    <Label VerticalTextAlignment="Center" Grid.Row="0" Grid.Column="0" Text="Is Default:" FontSize="Medium"></Label>
+                    <Switch Grid.Row="0" Grid.Column="1" VerticalOptions="Center" IsToggled="{Binding SettingModel.IsDefault}"/>
+                </Grid>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

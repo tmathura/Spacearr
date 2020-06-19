@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:models="clr-namespace:Spacearr.Common.Models;assembly=Spacearr.Common"
              xmlns:viewModels="clr-namespace:Spacearr.Core.Xamarin.ViewModels;assembly=Spacearr.Core.Xamarin"
              mc:Ignorable="d"
@@ -15,35 +15,57 @@
     </ContentPage.ToolbarItems>
 
     <StackLayout>
-        <ListView x:Name="SettingsListView"
-                  ItemsSource="{Binding Settings}"
-                  VerticalOptions="FillAndExpand"
-                  HasUnevenRows="true"
-                  RefreshCommand="{Binding LoadItemsCommand}"
-                  IsPullToRefreshEnabled="true"
-                  IsRefreshing="{Binding IsBusy, Mode=OneWay}"
-                  CachingStrategy="RecycleElement"
-                  ItemSelected="OnItemSelected" x:DataType="viewModels:SettingsViewModel">
+        <ListView x:Name="SettingsListView" 
+                ItemsSource="{Binding Settings}"
+                VerticalOptions="FillAndExpand"
+                HasUnevenRows="true"
+                RefreshCommand="{Binding LoadItemsCommand}"
+                IsPullToRefreshEnabled="true"
+                IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                CachingStrategy="RecycleElement"
+                ItemSelected="OnItemSelected"
+                x:DataType="viewModels:SettingsViewModel">
             <d:ListView.ItemsSource>
                 <x:Array Type="{x:Type models:SettingModel}">
-                    <models:SettingModel ComputerName = "Computer name 1" />
-                    <models:SettingModel ComputerName = "Computer name 2" />
+                    <models:SettingModel ComputerName = "Computer name 1" UpdatedDate = "2020/01/01" />
+                    <models:SettingModel ComputerName = "Computer name 2" UpdatedDate = "2020/01/02" />
                 </x:Array>
             </d:ListView.ItemsSource>
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:SettingModel">
                     <ViewCell>
-                        <StackLayout Padding="10">
-                            <Label Text="{Binding ComputerName}" 
-                                d:Text="{Binding ComputerName}"
-                                LineBreakMode="NoWrap" 
-                                Style="{DynamicResource ListItemTextStyle}" 
-                                FontSize="16" />
-                        </StackLayout>
+                        <Frame Margin="5" HasShadow="True" CornerRadius="5">
+                            <StackLayout>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Label FontAttributes="Bold" Grid.Row="0" Text="{Binding ComputerName}" />
+                                        <Grid Grid.Row="1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Grid.Row="0" Grid.Column="0" Text="Updated on:"/>
+                                            <Label Grid.Row="0" Grid.Column="1"  Text="{Binding UpdatedDate}"/>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </StackLayout>
+                        </Frame>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
     </StackLayout>
-    
+
 </ContentPage>

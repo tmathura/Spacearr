@@ -3,11 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:viewModels="clr-namespace:Spacearr.Core.Xamarin.ViewModels;assembly=Spacearr.Core.Xamarin"
              xmlns:controls="clr-namespace:Spacearr.Core.Xamarin.Controls;assembly=Spacearr.Core.Xamarin"
+             xmlns:viewModels="clr-namespace:Spacearr.Core.Xamarin.ViewModels;assembly=Spacearr.Core.Xamarin"
              mc:Ignorable="d"
              x:Class="Spacearr.Core.Xamarin.Views.LogDetailPage"
-             Title="{Binding Title}" x:DataType="viewModels:LogDetailViewModel">
+             Title="{Binding Title}"
+             x:DataType="viewModels:LogDetailViewModel">
 
     <ScrollView>
         <StackLayout>
@@ -20,67 +21,16 @@
                         <Grid Grid.Row="0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <controls:FloatingLabel Grid.Row="0" LabelTopText="Id" LabelBottomText="{Binding Log.Id}"/>
-                        </Grid>
-                    </Grid>
-                </StackLayout>
-            </Frame>
-            <Frame Margin="5" HasShadow="True" CornerRadius="2">
-                <StackLayout>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <controls:FloatingLabel Grid.Row="0" LabelTopText="Log Message" LabelBottomText="{Binding Log.LogMessage}"/>
-                        </Grid>
-                    </Grid>
-                </StackLayout>
-            </Frame>
-            <Frame Margin="5" HasShadow="True" CornerRadius="2">
-                <StackLayout>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <controls:FloatingLabel Grid.Row="0" LabelTopText="Stack Trace" LabelBottomText="{Binding Log.LogStackTrace}"/>
-                        </Grid>
-                    </Grid>
-                </StackLayout>
-            </Frame>
-            <Frame Margin="5" HasShadow="True" CornerRadius="2">
-                <StackLayout>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0">
-                            <Grid.RowDefinitions>
-                            </Grid.RowDefinitions>
-                            <controls:FloatingLabel Grid.Row="0" LabelTopText="Log Type" LabelBottomText="{Binding Log.LogType}"/>
-                        </Grid>
-                    </Grid>
-                </StackLayout>
-            </Frame>
-            <Frame Margin="5" HasShadow="True" CornerRadius="2">
-                <StackLayout>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <controls:FloatingLabel Grid.Row="0" LabelTopText="Log Date" LabelBottomText="{Binding Log.LogDate}"/>
+                            <controls:FloatingLabel Grid.Row="1" LabelTopText="Log Message" LabelBottomText="{Binding Log.LogMessage}"/>
+                            <controls:FloatingLabel Grid.Row="2" LabelTopText="Stack Trace" LabelBottomText="{Binding Log.LogStackTrace}"/>
+                            <controls:FloatingLabel Grid.Row="3" LabelTopText="Log Type" LabelBottomText="{Binding Log.LogType}"/>
+                            <controls:FloatingLabel Grid.Row="4" LabelTopText="Log Date" LabelBottomText="{Binding Log.LogDate}"/>
                         </Grid>
                     </Grid>
                 </StackLayout>

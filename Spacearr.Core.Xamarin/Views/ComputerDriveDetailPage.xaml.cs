@@ -48,7 +48,7 @@ namespace Spacearr.Core.Xamarin.Views
             };
             var chart = new PieChart { Entries = entries, BackgroundColor = SKColor.Parse(themeLightColor.ToHex()) };
 
-            this.chartView.Chart = chart;
+            Chart.Chart = chart;
         }
     }
 }

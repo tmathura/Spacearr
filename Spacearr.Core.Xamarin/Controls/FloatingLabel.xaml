@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             mc:Ignorable="d"
              x:Class="Spacearr.Core.Xamarin.Controls.FloatingLabel">
 
     <ContentView.Content>
@@ -9,8 +12,8 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Label x:Name="LabelTop" FontSize="10" Margin="0,15,0,10"/>
-            <Label Grid.Row="0" x:Name="LabelBottom" Margin="0,12,0,0"/>
+            <Label x:Name="LabelTop" d:Text="Top Label" FontSize="10" Margin="0,15,0,10"/>
+            <Label Grid.Row="0" x:Name="LabelBottom" d:Text="Bottom Label"  Margin="0,12,0,0"/>
         </Grid>
     </ContentView.Content>
 

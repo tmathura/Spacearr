@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:models="clr-namespace:Spacearr.Common.Models;assembly=Spacearr.Common"
              xmlns:viewModels="clr-namespace:Spacearr.Core.Xamarin.ViewModels;assembly=Spacearr.Core.Xamarin"
              mc:Ignorable="d"
@@ -19,27 +19,48 @@
                 IsPullToRefreshEnabled="true"
                 IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                 CachingStrategy="RecycleElement"
-                ItemSelected="OnLogSelected" x:DataType="viewModels:LogsViewModel">
+                ItemSelected="OnLogSelected"
+                x:DataType="viewModels:LogsViewModel">
             <d:ListView.ItemsSource>
                 <x:Array Type="{x:Type models:LogModel}">
-                    <models:LogModel LogMessage = "Log message 1" />
-                    <models:LogModel LogMessage = "Log message 2" />
+                    <models:LogModel LogMessage = "Log message 1" LogDate = "2020/01/01" />
+                    <models:LogModel LogMessage = "Log message 2" LogDate = "2020/01/02" />
                 </x:Array>
             </d:ListView.ItemsSource>
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:LogModel">
                     <ViewCell>
-                        <StackLayout Padding="10">
-                            <Label Text="{Binding LogMessage}" 
-                                d:Text="{Binding LogMessage}"
-                                LineBreakMode="NoWrap" 
-                                Style="{DynamicResource ListItemTextStyle}" 
-                                FontSize="16" />
-                        </StackLayout>
+                        <Frame Margin="5" HasShadow="True" CornerRadius="2">
+                            <StackLayout>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Label FontAttributes="Bold" Grid.Row="0" Text="{Binding LogMessage}" />
+                                        <Grid Grid.Row="1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Grid.Row="0" Grid.Column="0" Text="Log date:"/>
+                                            <Label Grid.Row="0" Grid.Column="1"  Text="{Binding LogDate}"/>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </StackLayout>
+                        </Frame>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
     </StackLayout>
-    
+
 </ContentPage>

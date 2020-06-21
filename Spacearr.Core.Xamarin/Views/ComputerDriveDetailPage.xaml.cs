@@ -23,26 +23,32 @@ namespace Spacearr.Core.Xamarin.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            
+
+            var themeTextColor = (Color)Application.Current.Resources["ThemeTextColor"];
+            var themeLightColor = (Color)Application.Current.Resources["ThemeLightColor"];
+            var microChartsFreeSpaceColor = (Color)Application.Current.Resources["MicroChartsFreeSpaceColor"];
+            var microChartsUsedSpaceColor = (Color)Application.Current.Resources["MicroChartsUsedSpaceColor"];
+
             var entries = new[]
             {
                 new ChartEntry(_viewModel.ComputerDriveModel.TotalUsedSpace)
                 {
                     Label = "Used Space",
                     ValueLabel = $"{_viewModel.ComputerDriveModel.TotalUsedSpaceString}",
-                    Color = SKColor.Parse("#68B9C0")
+                    Color = SKColor.Parse(microChartsUsedSpaceColor.ToHex()),
+                    TextColor = SKColor.Parse(themeTextColor.ToHex())
                 },
                 new ChartEntry(_viewModel.ComputerDriveModel.TotalFreeSpace)
                 {
                     Label = "Total Free Space",
                     ValueLabel = $"{_viewModel.ComputerDriveModel.TotalFreeSpaceString}",
-                    Color = SKColor.Parse("#90D585"),
+                    Color = SKColor.Parse(microChartsFreeSpaceColor.ToHex()),
+                    TextColor = SKColor.Parse(themeTextColor.ToHex())
                 }
             };
+            var chart = new PieChart { Entries = entries, BackgroundColor = SKColor.Parse(themeLightColor.ToHex()) };
 
-            var chart = new PieChart { Entries = entries };
-
-            this.chartView.Chart = chart;
+            Chart.Chart = chart;
         }
     }
 }

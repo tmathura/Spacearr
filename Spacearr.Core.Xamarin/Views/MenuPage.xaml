@@ -1,42 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:models="clr-namespace:Spacearr.Core.Xamarin.Models;assembly=Spacearr.Core.Xamarin"
              mc:Ignorable="d"
              x:Class="Spacearr.Core.Xamarin.Views.MenuPage"
              Title="Menu">
-             
-    <StackLayout VerticalOptions="FillAndExpand">
-        <ListView x:Name="ListViewMenu" HasUnevenRows="True" SeparatorVisibility="None">
-            <d:ListView.ItemsSource>
-                <x:Array Type="{x:Type models:HomeMenuItemModel}">
-                    <models:HomeMenuItemModel Id = "1" Title="Title 1"/>
-                    <models:HomeMenuItemModel Id = "2" Title="Title 2"/>
-                </x:Array>
-            </d:ListView.ItemsSource>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell x:DataType="models:HomeMenuItemModel">
-                        <Grid Padding="10">
-                            <Label Text="{Binding Title}" d:Text="{Binding Title}" FontSize="20"/>
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <Grid VerticalOptions="Center">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="40"/>
-            </Grid.RowDefinitions>
-            <Label VerticalTextAlignment="Center" Grid.Row="0" Grid.Column="0" x:Name="DarkThemeText"></Label>
-            <Switch Grid.Row="0" Grid.Column="1" VerticalOptions="Center" x:Name="DarkTheme" Toggled="OnToggled"/>
-        </Grid>
-    </StackLayout>
+
+    <Frame BackgroundColor="{DynamicResource ThemeNormalColor}" BorderColor="{DynamicResource ThemeDarkColor}" HasShadow="True" CornerRadius="0">
+        <StackLayout VerticalOptions="FillAndExpand" BackgroundColor="{DynamicResource ThemeNormalColor}">
+            <ListView x:Name="ListViewMenu" HasUnevenRows="True" BackgroundColor="{DynamicResource ThemeNormalColor}">
+                <d:ListView.ItemsSource>
+                    <x:Array Type="{x:Type models:HomeMenuItemModel}">
+                        <models:HomeMenuItemModel Id = "1" Title="Title 1"/>
+                        <models:HomeMenuItemModel Id = "2" Title="Title 2"/>
+                    </x:Array>
+                </d:ListView.ItemsSource>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell x:DataType="models:HomeMenuItemModel">
+                            <Grid Padding="10" BackgroundColor="{DynamicResource ThemeNormalColor}">
+                                <Label Text="{Binding Title}" d:Text="{Binding Title}" FontSize="20"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Grid Padding="10" BackgroundColor="{DynamicResource ThemeNormalColor}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <Label VerticalTextAlignment="Center" Grid.Row="0" Grid.Column="0" x:Name="DarkThemeText"></Label>
+                <Switch Grid.Row="0" Grid.Column="1" VerticalOptions="Center" x:Name="DarkTheme" Toggled="OnToggled"/>
+            </Grid>
+        </StackLayout>
+    </Frame>
 
 </ContentPage>

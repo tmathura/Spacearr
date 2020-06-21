@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             mc:Ignorable="d"
+             x:Class="Spacearr.Core.Xamarin.Controls.FloatingEntry">
+
+    <ContentView.Content>
+        <Grid BackgroundColor="{DynamicResource ThemeBackgroundColor}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label x:Name="HiddenLabel" d:Text="Hidden Label" FontSize="10" IsVisible="False" Margin="0,15,0,10"/>
+            <Entry Grid.Row="0" x:Name="EntryField" d:Text="Entry Field" Text="{Binding Text, Mode=TwoWay}" Margin="0,12,0,0"/>
+        </Grid>
+    </ContentView.Content>
+
+</ContentView>

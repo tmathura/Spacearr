@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:models="clr-namespace:Spacearr.Common.Models;assembly=Spacearr.Common"
              xmlns:viewModels="clr-namespace:Spacearr.Core.Xamarin.ViewModels;assembly=Spacearr.Core.Xamarin"
              mc:Ignorable="d"
@@ -29,18 +29,27 @@
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:ComputerDriveModel">
                     <ViewCell>
-                        <StackLayout Padding="10">
-                            <Label Text="{Binding Name}" 
-                                d:Text="{Binding Name}"
-                                LineBreakMode="NoWrap" 
-                                Style="{DynamicResource ListItemTextStyle}" 
-                                FontSize="16" />
-                            <ProgressBar Progress="{Binding ProgressBarValue}" />
-                        </StackLayout>
+                        <Frame Margin="5" HasShadow="True" CornerRadius="2">
+                            <StackLayout>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Label FontAttributes="Bold" Grid.Row="0" Text="{Binding Name}" />
+                                        <ProgressBar Grid.Row="1" Progress="{Binding ProgressBarValue}" ProgressColor="{DynamicResource ProgressBarColor}" />
+                                    </Grid>
+                                </Grid>
+                            </StackLayout>
+                        </Frame>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
     </StackLayout>
-    
+
 </ContentPage>

@@ -1,25 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms" 
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              xmlns:viewModels="clr-namespace:Spacearr.Core.Xamarin.ViewModels;assembly=Spacearr.Core.Xamarin"
+             xmlns:controls="clr-namespace:Spacearr.Core.Xamarin.Controls;assembly=Spacearr.Core.Xamarin"
              mc:Ignorable="d"
              x:Class="Spacearr.Core.Xamarin.Views.ComputerDriveDetailPage"
              Title="{Binding Title}" x:DataType="viewModels:ComputerDriveDetailViewModel">
 
     <ScrollView>
-        <StackLayout Spacing="20" Padding="15">
-            <microcharts:ChartView x:Name="chartView" HeightRequest="200" VerticalOptions="FillAndExpand" />
-            <Label Text="Name:" FontSize="Medium" />
-            <Label Text="{Binding ComputerDriveModel.Name}" d:Text="Computer drive name label" FontSize="Small" />
-            <Label Text="Volume Label:" FontSize="Medium" />
-            <Label Text="{Binding ComputerDriveModel.VolumeLabel}" d:Text="Computer drive volume label" FontSize="Small" />
-            <Label Text="Drive Type:" FontSize="Medium" />
-            <Label Text="{Binding ComputerDriveModel.DriveType}" d:Text="Computer drive type label" FontSize="Small" />
-            <Label Text="Is Ready:" FontSize="Medium" />
-            <CheckBox IsChecked="{Binding ComputerDriveModel.IsReady}" IsEnabled="False" />
+        <StackLayout>
+            <Frame Margin="5" HasShadow="True" CornerRadius="2">
+                <StackLayout>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <microcharts:ChartView Grid.Row="0"  x:Name="Chart" HeightRequest="200" VerticalOptions="FillAndExpand" />
+                            <controls:FloatingLabel Grid.Row="1" LabelTopText="Name" LabelBottomText="{Binding ComputerDriveModel.Name}"/>
+                            <controls:FloatingLabel Grid.Row="2" LabelTopText="Volume Label" LabelBottomText="{Binding ComputerDriveModel.VolumeLabel}"/>
+                            <controls:FloatingLabel Grid.Row="3" LabelTopText="Drive Type" LabelBottomText="{Binding ComputerDriveModel.DriveType}"/>
+                        </Grid>
+                    </Grid>
+                </StackLayout>
+            </Frame>
         </StackLayout>
     </ScrollView>
 

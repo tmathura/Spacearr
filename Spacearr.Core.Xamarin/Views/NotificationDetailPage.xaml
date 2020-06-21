@@ -1,19 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:controls="clr-namespace:Spacearr.Core.Xamarin.Controls;assembly=Spacearr.Core.Xamarin"
              xmlns:viewModels="clr-namespace:Spacearr.Core.Xamarin.ViewModels;assembly=Spacearr.Core.Xamarin"
              mc:Ignorable="d"
              x:Class="Spacearr.Core.Xamarin.Views.NotificationDetailPage"
              Title="{Binding Title}" x:DataType="viewModels:NotificationDetailViewModel">
 
     <ScrollView>
-        <StackLayout Spacing="20" Padding="15">
-            <Label Text="Title:" FontSize="Medium" />
-            <Label Text="{Binding Notification.Title}" d:Text="Title label" FontSize="Small" />
-            <Label Text="Message:" FontSize="Medium" />
-            <Label Text="{Binding Notification.Message}" d:Text="Message label" FontSize="Small" />
+        <StackLayout>
+            <Frame Margin="5" HasShadow="True" CornerRadius="2">
+                <StackLayout>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <controls:FloatingLabel Grid.Row="0" LabelTopText="{Binding Notification.Title}" LabelBottomText="{Binding Notification.Message}"/>
+                        </Grid>
+                    </Grid>
+                </StackLayout>
+            </Frame>
         </StackLayout>
     </ScrollView>
 

@@ -3,11 +3,13 @@ using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
+using Android.Views;
 using AndroidX.Work;
 using Java.Util.Concurrent;
 using Spacearr.Core.Xamarin.Notifications;
 using Spacearr.Droid.Notifications;
 using Xamarin.Forms;
+using Xamarin.Forms.Platform.Android;
 
 namespace Spacearr.Droid
 {
@@ -32,6 +34,15 @@ namespace Spacearr.Droid
             builder.SetConstraints(Constraints.None);
             var workRequest = builder.Build();
             WorkManager.Instance.EnqueueUniquePeriodicWork(taskId, ExistingPeriodicWorkPolicy.Keep, workRequest);
+
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
+            {
+                var themeDarkColor = (Color)Xamarin.Forms.Application.Current.Resources["ThemeDarkColor"];
+
+                Window.ClearFlags(WindowManagerFlags.TranslucentStatus);
+                Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
+                Window.SetStatusBarColor(themeDarkColor.ToAndroid());
+            }
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)

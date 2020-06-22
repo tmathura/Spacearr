@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Microsoft.Extensions.Configuration;
 using Spacearr.Common.Interfaces;
 using Spacearr.Pusher.API.Interfaces;
 using System;
@@ -19,7 +20,7 @@ namespace Spacearr.Windows.Service
 
                 var servicesToRun = new ServiceBase[]
                 {
-                    new Service(container.Resolve<IPusher>(), container.Resolve<INotificationTimer>())
+                    new Service(container.Resolve<IConfiguration>(), container.Resolve<IPusher>(), container.Resolve<INotificationTimer>())
                 };
                 ServiceBase.Run(servicesToRun);
             }

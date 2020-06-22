@@ -38,7 +38,7 @@ namespace Spacearr.Core.Xamarin
                 ThemeLoaderHelper.LoadTheme(xamarinSettings.First().IsDarkTheme);
             }
 
-            MainPage = new MainPage(container.Resolve<IComputerDriveService>(), logger, container.Resolve<IPusherValidation>());
+            MainPage = new MainPage(container.Resolve<IComputerService>(), logger, container.Resolve<IPusherValidation>());
         }
 
         protected override void OnStart()

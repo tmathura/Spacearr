@@ -7,7 +7,7 @@ namespace Spacearr.Core.Xamarin.Tests.Factories
 {
     public static class ComputerDriveModelFactory
     {
-        public static IEnumerable<ComputerDriveModel> CreateComputerDriveModels(int total, DriveType? driveType = null)
+        public static List<ComputerDriveModel> CreateComputerDriveModels(int total, DriveType? driveType = null)
         {
             var computerDriveModels = new List<ComputerDriveModel>();
 

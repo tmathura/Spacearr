@@ -9,40 +9,42 @@ using Xamarin.Forms;
 
 namespace Spacearr.Core.Xamarin.ViewModels
 {
-    public class ComputerDrivesViewModel : BaseViewModel
+    public class ComputerViewModel : BaseViewModel
     {
         private readonly ILogger _logger;
         private readonly IDisplayAlertHelper _displayAlertHelper;
-        private readonly IComputerDriveService _computerDriveService;
+        private readonly IComputerService _computerDriveService;
 
-        public ObservableCollection<ComputerDriveModel> ComputerDrives { get; set; }
+        public ObservableCollection<ComputerModel> Computers { get; set; }
         public Command LoadItemsCommand { get; set; }
 
-        public ComputerDrivesViewModel(ILogger logger, IDisplayAlertHelper displayAlertHelper, IComputerDriveService computerDriveService)
+        public ComputerViewModel(ILogger logger, IDisplayAlertHelper displayAlertHelper, IComputerService computerDriveService)
         {
             _logger = logger;
             _displayAlertHelper = displayAlertHelper;
             _computerDriveService = computerDriveService;
 
             Title = "Computer Drives";
-            ComputerDrives = new ObservableCollection<ComputerDriveModel>();
+            Computers = new ObservableCollection<ComputerModel>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
         }
 
         private async Task ExecuteLoadItemsCommand()
         {
             if (IsBusy)
+            {
                 return;
+            }
 
             IsBusy = true;
 
             try
             {
-                ComputerDrives.Clear();
-                var computerDrives = await _computerDriveService.GetComputerDrivesAsync();
+                Computers.Clear();
+                var computerDrives = await _computerDriveService.GetComputersAsync();
                 foreach (var computerDrive in computerDrives)
                 {
-                    ComputerDrives.Add(computerDrive);
+                    Computers.Add(computerDrive);
                 }
             }
             catch (Exception ex)

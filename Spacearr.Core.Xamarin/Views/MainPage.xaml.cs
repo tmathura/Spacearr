@@ -14,12 +14,12 @@ namespace Spacearr.Core.Xamarin.Views
     [DesignTimeVisible(false)]
     public partial class MainPage : MasterDetailPage
     {
-        private readonly IComputerDriveService _computerDriveService;
+        private readonly IComputerService _computerDriveService;
         private readonly ILogger _logger;
         private readonly IPusherValidation _pusherValidation;
         private readonly Dictionary<int, NavigationPage> _menuPages = new Dictionary<int, NavigationPage>();
 
-        public MainPage(IComputerDriveService computerDriveService, ILogger logger, IPusherValidation pusherValidation)
+        public MainPage(IComputerService computerDriveService, ILogger logger, IPusherValidation pusherValidation)
         {
             InitializeComponent();
 
@@ -54,7 +54,7 @@ namespace Spacearr.Core.Xamarin.Views
                         _menuPages.Add(id, new NavigationPage(new HomePage()));
                         break;
                     case (int)MenuItemType.ComputerDrives:
-                        _menuPages.Add(id, new NavigationPage(new ComputerDrivesPage(_logger, _computerDriveService)));
+                        _menuPages.Add(id, new NavigationPage(new ComputersPage(_logger, _computerDriveService)));
                         break;
                     case (int)MenuItemType.Logs:
                         _menuPages.Add(id, new NavigationPage(new LogsPage(_logger)));

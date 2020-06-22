@@ -66,7 +66,9 @@ namespace Spacearr.Pusher.API
 
             foreach (var json in jsonList)
             {
-                _pusher.SendMessage(PusherChannel.SpacearrWorkerServiceWindowsNotificationChannel.ToString(), PusherEvent.WorkerServiceEvent.ToString(), json);
+                _pusher.SendMessage(PusherChannel.SpacearrWorkerServiceWindowsNotificationChannel.ToString(), PusherEvent.WorkerServiceEvent.ToString(), json,
+                    _configuration.GetSection("PusherAppId").Value, _configuration.GetSection("PusherKey").Value,
+                    _configuration.GetSection("PusherSecret").Value, _configuration.GetSection("PusherCluster").Value);
             }
         }
     }

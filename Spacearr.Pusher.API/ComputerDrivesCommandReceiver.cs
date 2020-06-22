@@ -41,7 +41,7 @@ namespace Spacearr.Pusher.API
         /// <param name="secret">The Pusher secret</param>
         /// <param name="cluster">The Pusher cluster</param>
         /// <returns></returns>
-        public async Task Connect(Action<ICommand, string, string> executeCommand, string appId, string key, string secret, string cluster)
+        public async Task Connect(Action<ICommand, string, string, string, string, string, string> executeCommand, string appId, string key, string secret, string cluster)
         {
             try
             {
@@ -58,7 +58,7 @@ namespace Spacearr.Pusher.API
                         if (deserializeObject.Command == CommandType.ComputerDrivesCommand)
                         {
                             var command = new ComputerDrivesCommand(_computerDrives);
-                            executeCommand(command, _channelNameSend, _eventNameSend);
+                            executeCommand(command, _channelNameSend, _eventNameSend, appId, key, secret, cluster);
                         }
                     });
 

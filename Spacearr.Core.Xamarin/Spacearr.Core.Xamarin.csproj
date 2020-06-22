@@ -35,8 +35,8 @@
     <Compile Update="Controls\FloatingEntry.xaml.cs">
       <DependentUpon>FloatingEntry.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\ComputerDriveDetailPage.xaml.cs">
-      <DependentUpon>ComputerDriveDetailPage.xaml</DependentUpon>
+    <Compile Update="Views\ComputerDrivesPage.xaml.cs">
+      <DependentUpon>ComputerDrivesPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
@@ -56,8 +56,8 @@
     <Compile Update="Views\LogsPage.xaml.cs">
       <DependentUpon>LogsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\ComputerDrivesPage.xaml.cs">
-      <DependentUpon>ComputerDrivesPage.xaml</DependentUpon>
+    <Compile Update="Views\ComputersPage.xaml.cs">
+      <DependentUpon>ComputersPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\NotificationDetailPage.xaml.cs">
       <DependentUpon>NotificationDetailPage.xaml</DependentUpon>

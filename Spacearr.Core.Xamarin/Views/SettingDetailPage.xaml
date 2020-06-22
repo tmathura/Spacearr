@@ -27,17 +27,6 @@
                 <Label x:Name="SettingModel_PusherSecretError" IsVisible="False" TextColor="{DynamicResource ErrorTextColor}" />
                 <controls:FloatingEntry Text="{Binding SettingModel.PusherCluster}" Placeholder="Pusher Cluster"/>
                 <Label x:Name="SettingModel_PusherClusterError" IsVisible="False" TextColor="{DynamicResource ErrorTextColor}" />
-                <Grid Padding="10" BackgroundColor="{DynamicResource ThemeBackgroundColor}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="40"/>
-                    </Grid.RowDefinitions>
-                    <Label VerticalTextAlignment="Center" Grid.Row="0" Grid.Column="0" Text="Is Default:" FontSize="Medium"></Label>
-                    <Switch Grid.Row="0" Grid.Column="1" VerticalOptions="Center" IsToggled="{Binding SettingModel.IsDefault}"/>
-                </Grid>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

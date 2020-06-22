@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Spacearr.Common.Models
 {
-	public class SettingModel
+    public class SettingModel
 	{
 		[PrimaryKey, AutoIncrement]
 		public int Id { get; set; }
@@ -29,8 +29,6 @@ namespace Spacearr.Common.Models
         [Display(Name = "Pusher Cluster")]
 		[Required]
 		public string PusherCluster { get; set; }
-
-		public bool IsDefault { get; set; }
 
         public DateTime CreatedDate { get; set; }
 

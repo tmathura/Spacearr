@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Spacearr.Common.Interfaces;
 using Spacearr.Pusher.API.Interfaces;
@@ -8,9 +9,10 @@ namespace Spacearr.WorkerService.Windows
 {
     public class Worker : BackgroundService
     {
-        public Worker(IPusher pusher, INotificationTimer notificationTimer)
+        public Worker(IConfiguration configuration, IPusher pusher, INotificationTimer notificationTimer)
         {
-            pusher.ComputerDrivesCommandReceiverConnect();
+            pusher.ComputerDrivesCommandReceiverConnect(configuration.GetSection("PusherAppId").Value, configuration.GetSection("PusherKey").Value,
+                configuration.GetSection("PusherSecret").Value, configuration.GetSection("PusherCluster").Value);
             notificationTimer.Instantiate();
         }
 

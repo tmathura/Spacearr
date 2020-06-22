@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:models="clr-namespace:Spacearr.Common.Models;assembly=Spacearr.Common"
+             xmlns:viewModels="clr-namespace:Spacearr.Core.Xamarin.ViewModels;assembly=Spacearr.Core.Xamarin"
+             mc:Ignorable="d"
+             x:Class="Spacearr.Core.Xamarin.Views.ComputersPage"
+             Title="{Binding Title}"
+             x:DataType="viewModels:ComputerViewModel">
+
+    <StackLayout>
+        <ListView x:Name="ComputerDrivesListView"
+                ItemsSource="{Binding Computers}"
+                VerticalOptions="FillAndExpand"
+                HasUnevenRows="true"
+                RefreshCommand="{Binding LoadItemsCommand}"
+                IsPullToRefreshEnabled="true"
+                IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                CachingStrategy="RecycleElement"
+                ItemSelected="OnComputerDriveSelected" x:DataType="viewModels:ComputerViewModel">
+            <d:ListView.ItemsSource>
+                <x:Array Type="{x:Type models:ComputerModel}">
+                    <models:ComputerModel Name = "Computer 1" />
+                    <models:ComputerModel Name = "Computer 2" />
+                </x:Array>
+            </d:ListView.ItemsSource>
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="models:ComputerModel">
+                    <ViewCell>
+                        <Frame Margin="5" HasShadow="True" CornerRadius="2">
+                            <StackLayout>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Label FontAttributes="Bold" Grid.Row="0" Text="{Binding Name}" />
+                                        <ProgressBar Grid.Row="1" Progress="{Binding ProgressBarValue}" ProgressColor="{DynamicResource ProgressBarColor}" />
+                                    </Grid>
+                                </Grid>
+                            </StackLayout>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+
+</ContentPage>

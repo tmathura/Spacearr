@@ -15,6 +15,6 @@ namespace Spacearr.Pusher.API.Interfaces
         /// <param name="secret">The Pusher secret</param>
         /// <param name="cluster">The Pusher cluster</param>
         /// <returns></returns>
-        Task Connect(Action<ICommand, string, string> executeCommand, string appId, string key, string secret, string cluster);
+        Task Connect(Action<ICommand, string, string, string, string, string, string> executeCommand, string appId, string key, string secret, string cluster);
     }
 }

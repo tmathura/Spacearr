@@ -5,6 +5,7 @@
 <?define Spacearr.Windows.Service.Config = "Spacearr.Windows.Service.exe.config" ?>
 <?define AppSettings.json = "appsettings.json" ?>
 <?define Autofac.dll = "Autofac.dll" ?>
+<?define Microcharts.dll = "Microcharts.dll" ?>
 <?define Microsoft.Bcl.AsyncInterfaces.dll = "Microsoft.Bcl.AsyncInterfaces.dll" ?>
 <?define Microsoft.Extensions.Configuration.Abstractions.dll = "Microsoft.Extensions.Configuration.Abstractions.dll" ?>
 <?define Microsoft.Extensions.Configuration.dll = "Microsoft.Extensions.Configuration.dll" ?>
@@ -18,6 +19,7 @@
 <?define PusherClient.dll = "PusherClient.dll" ?>
 <?define PusherServer.Core.dll = "PusherServer.Core.dll" ?>
 <?define PusherServer.dll = "PusherServer.dll" ?>
+<?define SkiaSharp.dll = "SkiaSharp.dll" ?>
 <?define Spacearr.Common.dll = "Spacearr.Common.dll" ?>
 <?define Spacearr.Pusher.API.dll = "Spacearr.Pusher.API.dll" ?>
 <?define SQLiteNet.dll = "SQLiteNet.dll" ?> <!-- "SQLite-net.dll" does not like the '-' -->
@@ -106,6 +108,9 @@
       <Component Id="$(var.Autofac.dll)" Guid="3139DD64-D2CE-4B3C-9207-F3A48FDB9A14">
         <File Id="$(var.Autofac.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.Autofac.dll)" KeyPath="yes" />
       </Component>
+      <Component Id="$(var.Microcharts.dll)" Guid="555D273A-69F6-4549-A9D0-FB336F23C0F4">
+        <File Id="$(var.Microcharts.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.Microcharts.dll)" KeyPath="yes" />
+      </Component>
       <Component Id="$(var.Microsoft.Bcl.AsyncInterfaces.dll)" Guid="F2F6114B-73E7-45A6-936A-E96454648415">
         <File Id="$(var.Microsoft.Bcl.AsyncInterfaces.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.Microsoft.Bcl.AsyncInterfaces.dll)" KeyPath="yes" />
       </Component>
@@ -144,6 +149,9 @@
       </Component>
       <Component Id="$(var.PusherServer.dll)" Guid="3AB1590F-AEAE-4697-A88E-3F6BACD8B1F4">
         <File Id="$(var.PusherServer.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.PusherServer.dll)" KeyPath="yes" />
+      </Component>
+      <Component Id="$(var.SkiaSharp.dll)" Guid="4CEACE17-89F6-403F-A1F4-30CF4310408A">
+        <File Id="$(var.SkiaSharp.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.SkiaSharp.dll)" KeyPath="yes" />
       </Component>
       <Component Id="$(var.Spacearr.Common.dll)" Guid="3BC582F5-2934-4A79-9C20-CDBF00D49490">
         <File Id="$(var.Spacearr.Common.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.Spacearr.Common.dll)" KeyPath="yes" />
@@ -217,6 +225,7 @@
       <ComponentRef Id="$(var.Spacearr.Windows.Service.Config)" />
       <ComponentRef Id="$(var.AppSettings.json)" />
       <ComponentRef Id="$(var.Autofac.dll)" />
+      <ComponentRef Id="$(var.Microcharts.dll)" />
       <ComponentRef Id="$(var.Microsoft.Bcl.AsyncInterfaces.dll)" />
       <ComponentRef Id="$(var.Microsoft.Extensions.Configuration.Abstractions.dll)" />
       <ComponentRef Id="$(var.Microsoft.Extensions.Configuration.dll)" />
@@ -230,6 +239,7 @@
       <ComponentRef Id="$(var.PusherClient.dll)" />
       <ComponentRef Id="$(var.PusherServer.Core.dll)" />
       <ComponentRef Id="$(var.PusherServer.dll)" />
+      <ComponentRef Id="$(var.SkiaSharp.dll)" />
       <ComponentRef Id="$(var.Spacearr.Common.dll)" />
       <ComponentRef Id="$(var.Spacearr.Pusher.API.dll)" />
       <ComponentRef Id="$(var.SQLiteNet.dll)" />

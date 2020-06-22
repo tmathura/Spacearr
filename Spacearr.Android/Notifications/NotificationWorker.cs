@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Spacearr.Common.Enums;
 using Spacearr.Common.Models;
+using Spacearr.Pusher.API;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,7 +22,7 @@ namespace Spacearr.Droid.Notifications
         public NotificationWorker(Context context, WorkerParameters workerParameters) : base(context, workerParameters)
         {
             _pusher = new List<Pusher.API.Pusher>();
-            _logger = new Logger(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "SpacearrSQLite.db3"));
+            _logger = new Logger(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Spacearr.Core.Xamarin.SQLite.db3"));
 
             try
             {
@@ -32,24 +33,13 @@ namespace Spacearr.Droid.Notifications
                 {
                     var pusherSend = new PusherServer.Pusher(setting.PusherAppId, setting.PusherKey, setting.PusherSecret, new PusherServer.PusherOptions { Cluster = setting.PusherCluster });
 
-                    var getResult = pusherSend.GetAsync<object>($"/channels/{PusherChannel.SpacearrWorkerServiceWindowsNotificationChannel.ToString()}").Result;
+                    var getResult = pusherSend.GetAsync<object>($"/channels/{PusherChannel.SpacearrWorkerServiceWindowsNotificationChannel}").Result;
                     var pusherSendRequestResultObject = JsonConvert.DeserializeObject<PusherSendRequestResultObjectModel>(((PusherServer.RequestResult)getResult).Body);
 
                     if (!pusherSendRequestResultObject.Occupied)
                     {
-
-                        var settingDictionary = new Dictionary<string, string>
-                        {
-                            { "PusherAppId", setting.PusherAppId },
-                            { "PusherKey", setting.PusherKey },
-                            { "PusherSecret", setting.PusherSecret },
-                            { "PusherCluster", setting.PusherCluster }
-                        };
-
-                        var configuration = new ConfigurationBuilder().AddInMemoryCollection(settingDictionary).Build();
-
-                        _pusher.Add(new Pusher.API.Pusher(_logger, configuration, null, null));
-                        _ = _pusher[pusherCount].NotificationReceiverConnect();
+                        _pusher.Add(new Pusher.API.Pusher(_logger, new NotificationReceiver(_logger)));
+                        _ = _pusher[pusherCount].NotificationReceiverConnect(setting.PusherAppId, setting.PusherKey, setting.PusherSecret, setting.PusherCluster);
                         pusherCount += 1;
                     }
                 }

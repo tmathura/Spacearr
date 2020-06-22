@@ -3,53 +3,56 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              xmlns:models="clr-namespace:Spacearr.Common.Models;assembly=Spacearr.Common"
              xmlns:viewModels="clr-namespace:Spacearr.Core.Xamarin.ViewModels;assembly=Spacearr.Core.Xamarin"
              mc:Ignorable="d"
              x:Class="Spacearr.Core.Xamarin.Views.ComputerDrivesPage"
              Title="{Binding Title}"
-             x:DataType="viewModels:ComputerDrivesViewModel">
+             x:DataType="viewModels:ComputerDriveViewModel">
 
-    <StackLayout>
-        <ListView x:Name="ComputerDrivesListView"
-                ItemsSource="{Binding ComputerDrives}"
+    <ScrollView>
+        <StackLayout>
+            <ListView x:Name="ComputerDrivesListView"
+                ItemsSource="{Binding ComputerDriveModel}"
                 VerticalOptions="FillAndExpand"
                 HasUnevenRows="true"
-                RefreshCommand="{Binding LoadItemsCommand}"
-                IsPullToRefreshEnabled="true"
+                IsPullToRefreshEnabled="False"
                 IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                 CachingStrategy="RecycleElement"
-                ItemSelected="OnComputerDriveSelected" x:DataType="viewModels:ComputerDrivesViewModel">
-            <d:ListView.ItemsSource>
-                <x:Array Type="{x:Type models:ComputerDriveModel}">
-                    <models:ComputerDriveModel Name = "Computer Drive 1" />
-                    <models:ComputerDriveModel Name = "Computer Drive 2" />
-                </x:Array>
-            </d:ListView.ItemsSource>
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="models:ComputerDriveModel">
-                    <ViewCell>
-                        <Frame Margin="5" HasShadow="True" CornerRadius="2">
-                            <StackLayout>
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*"/>
-                                    </Grid.RowDefinitions>
+                ItemSelected="OnComputerDriveSelected" 
+                x:DataType="viewModels:ComputerDriveViewModel">
+                <d:ListView.ItemsSource>
+                    <x:Array Type="{x:Type models:ComputerDriveModel}">
+                        <models:ComputerDriveModel Name = "Computer Drive 1" />
+                        <models:ComputerDriveModel Name = "Computer Drive 2" />
+                    </x:Array>
+                </d:ListView.ItemsSource>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="models:ComputerDriveModel">
+                        <ViewCell>
+                            <Frame Margin="5" HasShadow="True" CornerRadius="2">
+                                <StackLayout>
                                     <Grid>
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="*"/>
                                         </Grid.RowDefinitions>
-                                        <Label FontAttributes="Bold" Grid.Row="0" Text="{Binding Name}" />
-                                        <ProgressBar Grid.Row="1" Progress="{Binding ProgressBarValue}" ProgressColor="{DynamicResource ProgressBarColor}" />
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Grid.Row="0" FontAttributes="Bold" Text="{Binding Name}" />
+                                            <forms:ChartView Grid.Row="1" x:Name="Chart" HeightRequest="200" VerticalOptions="FillAndExpand" Chart="{Binding PieChart}"></forms:ChartView>
+                                        </Grid>
                                     </Grid>
-                                </Grid>
-                            </StackLayout>
-                        </Frame>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </StackLayout>
+                                </StackLayout>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ScrollView>
 
 </ContentPage>

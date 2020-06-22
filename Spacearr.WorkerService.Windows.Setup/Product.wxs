@@ -3,6 +3,7 @@
 <?define Manufacturer = "Spacearr" ?>
 <?define UpgradeCode = "{56B333FF-84B5-4949-80DF-6D3CFA572075}" ?>
 <?define AppSettings.json = "appsettings.json" ?>
+<?define Microcharts.dll = "Microcharts.dll" ?>
 <?define Microsoft.Bcl.AsyncInterfaces.dll = "Microsoft.Bcl.AsyncInterfaces.dll" ?>
 <?define Microsoft.Extensions.Configuration.Abstractions.dll = "Microsoft.Extensions.Configuration.Abstractions.dll" ?>
 <?define Microsoft.Extensions.Configuration.Binder.dll = "Microsoft.Extensions.Configuration.Binder.dll" ?>
@@ -34,6 +35,7 @@
 <?define Newtonsoft.Json.dll = "Newtonsoft.Json.dll" ?>
 <?define PusherClient.dll = "PusherClient.dll" ?>
 <?define PusherServer.Core.dll = "PusherServer.Core.dll" ?>
+<?define SkiaSharp.dll = "SkiaSharp.dll" ?>
 <?define Spacearr.Common.dll = "Spacearr.Common.dll" ?>
 <?define Spacearr.Pusher.API.dll = "Spacearr.Pusher.API.dll" ?>
 <?define Spacearr.WorkerService.Windows.deps.json = "Spacearr.WorkerService.Windows.deps.json" ?>
@@ -62,6 +64,7 @@
 <?define netstandard2.0.System.ServiceProcess.ServiceController.dll = "netstandard2.0.System.ServiceProcess.ServiceController.dll" ?>
 <?define e_sqlite3.dll = "e_sqlite3.dll" ?>
 <?define x64_e_sqlite3.dll = "x64_e_sqlite3.dll" ?>
+<?define libSkiaSharp.dll = "libSkiaSharp.dll" ?>
 <?define x86_e_sqlite3.dll = "x86_e_sqlite3.dll" ?>
 
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
@@ -132,6 +135,9 @@
 
       <Component Id="$(var.AppSettings.json)" Guid="C5A29C38-40D2-4BBB-BBC1-7E4CDC722388">
         <File Id="$(var.AppSettings.json)" Source="$(var.Spacearr.WorkerService.Windows.TargetDir)$(var.AppSettings.json)" KeyPath="yes" />
+      </Component>
+      <Component Id="$(var.Microcharts.dll)" Guid="555D273A-69F6-4549-A9D0-FB336F23C0F4">
+        <File Id="$(var.Microcharts.dll)" Source="$(var.Spacearr.WorkerService.Windows.TargetDir)$(var.Microcharts.dll)" KeyPath="yes" />
       </Component>
       <Component Id="$(var.Microsoft.Bcl.AsyncInterfaces.dll)" Guid="F2F6114B-73E7-45A6-936A-E96454648415">
         <File Id="$(var.Microsoft.Bcl.AsyncInterfaces.dll)" Source="$(var.Spacearr.WorkerService.Windows.TargetDir)$(var.Microsoft.Bcl.AsyncInterfaces.dll)" KeyPath="yes" />
@@ -226,6 +232,9 @@
       <Component Id="$(var.PusherServer.Core.dll)" Guid="3CFD5E91-18CC-4CAB-8573-A48603400FC7">
         <File Id="$(var.PusherServer.Core.dll)" Source="$(var.Spacearr.WorkerService.Windows.TargetDir)$(var.PusherServer.Core.dll)" KeyPath="yes" />
       </Component>
+      <Component Id="$(var.SkiaSharp.dll)" Guid="4CEACE17-89F6-403F-A1F4-30CF4310408A">
+        <File Id="$(var.SkiaSharp.dll)" Source="$(var.Spacearr.WorkerService.Windows.TargetDir)$(var.SkiaSharp.dll)" KeyPath="yes" />
+      </Component>
       <Component Id="$(var.Spacearr.Common.dll)" Guid="3BC582F5-2934-4A79-9C20-CDBF00D49490">
         <File Id="$(var.Spacearr.Common.dll)" Source="$(var.Spacearr.WorkerService.Windows.TargetDir)$(var.Spacearr.Common.dll)" KeyPath="yes" />
       </Component>
@@ -309,6 +318,9 @@
       <Component Id="$(var.x64_e_sqlite3.dll)" Guid="E94B56E0-27CD-484B-8E98-4FCFB0A2060E">
         <File Id="$(var.x64_e_sqlite3.dll)" Source="$(var.Spacearr.WorkerService.Windows.TargetDir)runtimes\win-x64\native\$(var.e_sqlite3.dll)" KeyPath="yes" />
       </Component>
+      <Component Id="$(var.libSkiaSharp.dll)" Guid="23B4E205-D4EA-4B50-BBFF-FCE41F62CDC6">
+        <File Id="$(var.libSkiaSharp.dll)" Source="$(var.Spacearr.WorkerService.Windows.TargetDir)runtimes\win-x64\native\$(var.libSkiaSharp.dll)" KeyPath="yes" />
+      </Component>
     </DirectoryRef>
     <DirectoryRef Id="native_x86">
       <Component Id="$(var.x86_e_sqlite3.dll)" Guid="4394A5E7-C81B-40C6-B7FE-5ECDCC2504BF">
@@ -320,6 +332,7 @@
     <Feature Id="MainApplication" Title="Spacearr Windows Service" Level="1">
       <ComponentRef Id="$(var.Spacearr.WorkerService.Windows.TargetFileName)" />
       <ComponentRef Id="$(var.AppSettings.json)" />
+      <ComponentRef Id="$(var.Microcharts.dll)" />
       <ComponentRef Id="$(var.Microsoft.Bcl.AsyncInterfaces.dll)" />
       <ComponentRef Id="$(var.Microsoft.Extensions.Configuration.Abstractions.dll)" />
       <ComponentRef Id="$(var.Microsoft.Extensions.Configuration.Binder.dll)" />
@@ -351,6 +364,7 @@
       <ComponentRef Id="$(var.Newtonsoft.Json.dll)" />
       <ComponentRef Id="$(var.PusherClient.dll)" />
       <ComponentRef Id="$(var.PusherServer.Core.dll)" />
+      <ComponentRef Id="$(var.SkiaSharp.dll)" />
       <ComponentRef Id="$(var.Spacearr.Common.dll)" />
       <ComponentRef Id="$(var.Spacearr.Pusher.API.dll)" />
       <ComponentRef Id="$(var.Spacearr.WorkerService.Windows.deps.json)" />
@@ -378,6 +392,7 @@
       <ComponentRef Id = "netstandard2.0.Microsoft.Win32.Registry.dll" />
       <ComponentRef Id = "netstandard2.0.System.ServiceProcess.ServiceController.dll" />
       <ComponentRef Id="$(var.x64_e_sqlite3.dll)" />
+      <ComponentRef Id="$(var.libSkiaSharp.dll)" />
       <ComponentRef Id="$(var.x86_e_sqlite3.dll)" />
     </Feature>
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />

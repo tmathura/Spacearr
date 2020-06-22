@@ -2,7 +2,7 @@
 using AndroidX.Work;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using Spacearr.Common;
+using Spacearr.Common.Enums;
 using Spacearr.Common.Models;
 using System;
 using System.Collections.Generic;
@@ -32,7 +32,7 @@ namespace Spacearr.Droid.Notifications
                 {
                     var pusherSend = new PusherServer.Pusher(setting.PusherAppId, setting.PusherKey, setting.PusherSecret, new PusherServer.PusherOptions { Cluster = setting.PusherCluster });
 
-                    var getResult = pusherSend.GetAsync<object>($"/channels/{Enumeration.PusherChannel.SpacearrWorkerServiceWindowsNotificationChannel.ToString()}").Result;
+                    var getResult = pusherSend.GetAsync<object>($"/channels/{PusherChannel.SpacearrWorkerServiceWindowsNotificationChannel.ToString()}").Result;
                     var pusherSendRequestResultObject = JsonConvert.DeserializeObject<PusherSendRequestResultObjectModel>(((PusherServer.RequestResult)getResult).Body);
 
                     if (!pusherSendRequestResultObject.Occupied)

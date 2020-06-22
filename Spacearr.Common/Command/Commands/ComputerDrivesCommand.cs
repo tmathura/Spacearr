@@ -15,6 +15,10 @@ namespace Spacearr.Common.Command.Commands
             _computerDrives = computerDrives;
         }
 
+        /// <summary>
+        /// Returns all the computer hard disks.
+        /// </summary>
+        /// <returns>Returns a list of ComputerDriveModels serialized as Json</returns>
         public string Execute()
         {
             var computerDrives = new List<ComputerDriveModel>();

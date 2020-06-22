@@ -1,4 +1,4 @@
-﻿using Spacearr.Common;
+﻿using Spacearr.Common.Enums;
 using Spacearr.Common.Models;
 using System;
 using System.Collections.Generic;
@@ -13,9 +13,9 @@ namespace Spacearr.Core.Xamarin.Tests.Factories
 
             for (var i = 0; i < total; i++)
             {
-                var logType = Enum.GetValues(typeof(Enumeration.LogType));
+                var logType = Enum.GetValues(typeof(LogType));
                 var random = new Random();
-                var randomLogType = (Enumeration.LogType)logType.GetValue(random.Next(logType.Length));
+                var randomLogType = (LogType)logType.GetValue(random.Next(logType.Length));
 
                 logModels.Add(new LogModel
                 {

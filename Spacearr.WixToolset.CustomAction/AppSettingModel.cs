@@ -4,8 +4,8 @@ namespace Spacearr.WixToolset.CustomAction
 {
     public class AppSettingModel
     {
-        public Enumeration.Controls CurrentControl { get; set; }
-        public Dictionary<Enumeration.Controls, object> Form { get; set; }
+        public Enums.Controls CurrentControl { get; set; }
+        public Dictionary<Enums.Controls, object> Form { get; set; }
         public string InstallationDirectory { get; set; }
         public string LowComputerDriveGBValue { get; set; }
         public string NotificationTimerMinutesInterval { get; set; }

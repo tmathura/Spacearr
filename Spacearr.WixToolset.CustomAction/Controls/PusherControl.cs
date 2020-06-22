@@ -13,7 +13,7 @@
 
         public override void SetCurrentForm()
         {
-            _appSettingModel.CurrentControl = Enumeration.Controls.PusherControl;
+            _appSettingModel.CurrentControl = Enums.Controls.PusherControl;
         }
 
         public override bool ValidForm(out string errorMessage)

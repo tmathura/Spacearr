@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Spacearr.Common;
 using Spacearr.Common.Command.Commands;
+using Spacearr.Common.Enums;
 using Spacearr.Common.Interfaces;
 using Spacearr.Common.Interfaces.Command;
 using Spacearr.Pusher.API.Interfaces;
@@ -35,16 +35,27 @@ namespace Spacearr.Pusher.API
             _timer.Elapsed += ElapsedEventHandler;
         }
 
+        /// <summary>
+        /// Start the timer.
+        /// </summary>
         public void Instantiate()
         {
             _timer.Start();
         }
 
+        /// <summary>
+        /// Stop the timer.
+        /// </summary>
         public void DeInstantiate()
         {
             _timer.Stop();
         }
 
+        /// <summary>
+        /// The ElapsedEventHandler for the timer.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ElapsedEventHandler(object sender, ElapsedEventArgs e)
         {
             var command = new ComputerDrivesLowCommand(_configuration, _computerDrives);
@@ -55,7 +66,7 @@ namespace Spacearr.Pusher.API
 
             foreach (var json in jsonList)
             {
-                _pusher.SendMessage(Enumeration.PusherChannel.SpacearrWorkerServiceWindowsNotificationChannel.ToString(), Enumeration.PusherEvent.WorkerServiceEvent.ToString(), json);
+                _pusher.SendMessage(PusherChannel.SpacearrWorkerServiceWindowsNotificationChannel.ToString(), PusherEvent.WorkerServiceEvent.ToString(), json);
             }
         }
     }

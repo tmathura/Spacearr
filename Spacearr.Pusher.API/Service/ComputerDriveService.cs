@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using Spacearr.Common;
+using Spacearr.Common.Enums;
 using Spacearr.Common.Models;
 using Spacearr.Pusher.API.Interfaces;
 using Spacearr.Pusher.API.Interfaces.Service;
@@ -19,17 +19,21 @@ namespace Spacearr.Pusher.API.Service
         {
             _pusher = pusher;
         }
-        
+
+        /// <summary>
+        /// Returns all the computer hard disks.
+        /// </summary>
+        /// <returns>Returns a IEnumerable of ComputerDriveModel</returns>
         public async Task<IEnumerable<ComputerDriveModel>> GetComputerDrivesAsync()
         {
-            var channelNameReceive = $"{ Enumeration.CommandType.ComputerDrivesCommand }{ Enumeration.PusherChannel.SpacearrChannel.ToString() }";
-            var eventNameReceive = $"{ Enumeration.CommandType.ComputerDrivesCommand }{ Enumeration.PusherEvent.SpacearrEvent.ToString() }";
-            var channelNameSend = $"{ Enumeration.CommandType.ComputerDrivesCommand }{ Enumeration.PusherChannel.SpacearrWorkerServiceWindowsChannel.ToString() }";
-            var eventNameSend = $"{ Enumeration.CommandType.ComputerDrivesCommand }{ Enumeration.PusherEvent.WorkerServiceEvent.ToString() }";
+            var channelNameReceive = $"{ CommandType.ComputerDrivesCommand }{ PusherChannel.SpacearrChannel.ToString() }";
+            var eventNameReceive = $"{ CommandType.ComputerDrivesCommand }{ PusherEvent.SpacearrEvent.ToString() }";
+            var channelNameSend = $"{ CommandType.ComputerDrivesCommand }{ PusherChannel.SpacearrWorkerServiceWindowsChannel.ToString() }";
+            var eventNameSend = $"{ CommandType.ComputerDrivesCommand }{ PusherEvent.WorkerServiceEvent.ToString() }";
 
             await _pusher.WorkerServiceReceiverConnect(channelNameReceive, eventNameReceive);
 
-            var pusherSendMessage = new PusherSendMessageModel { Command = Enumeration.CommandType.ComputerDrivesCommand};
+            var pusherSendMessage = new PusherSendMessageModel { Command = CommandType.ComputerDrivesCommand};
             await _pusher.SendMessage(channelNameSend, eventNameSend, JsonConvert.SerializeObject(pusherSendMessage));
 
             var stopwatch = new Stopwatch();

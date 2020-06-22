@@ -22,6 +22,10 @@ namespace Spacearr.Common.Command.Commands
             _lowComputerDriveValue = Convert.ToInt64(configuration.GetSection("LowComputerDriveGBValue").Value);
         }
 
+        /// <summary>
+        /// Returns all the computers hard disk that are low, the low value is determined by the _lowComputerDriveValue.
+        /// </summary>
+        /// <returns>Returns a NotificationEventArgsModel serialized as Json</returns>
         public string Execute()
         {
             NotificationEventArgsModel notificationEventArgs = null;

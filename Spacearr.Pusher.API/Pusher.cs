@@ -35,29 +35,54 @@ namespace Spacearr.Pusher.API
             _notificationReceiver = new NotificationReceiver(_logger);
         }
 
+        /// <summary>
+        /// Connect the computer drives command receiver.
+        /// </summary>
+        /// <returns></returns>
         public async Task ComputerDrivesCommandReceiverConnect()
         {
             await _setting.PopulateSetting();
             await _computerDrivesCommandReceiver.Connect(ExecuteCommand, _setting.AppId, _setting.Key, _setting.Secret, _setting.Cluster);
         }
 
+        /// <summary>
+        /// Connect the worker service receiver.
+        /// </summary>
+        /// <param name="channelName">The channel name to connect to</param>
+        /// <param name="eventName">The event name to connect to</param>
+        /// <returns></returns>
         public async Task WorkerServiceReceiverConnect(string channelName, string eventName)
         {
             await _setting.PopulateSetting();
             await _workerServiceReceiver.Connect(channelName, eventName, _setting.AppId, _setting.Key, _setting.Secret, _setting.Cluster);
         }
 
+        /// <summary>
+        /// Disconnect the worker service receiver.
+        /// </summary>
+        /// <returns></returns>
         public async Task WorkerServiceReceiverDisconnect()
         {
             await _workerServiceReceiver.Disconnect();
         }
 
+        /// <summary>
+        /// Connect the notification receiver.
+        /// </summary>
+        /// <returns></returns>
         public async Task NotificationReceiverConnect()
         {
             await _setting.PopulateSetting();
             await _notificationReceiver.Connect(_setting.AppId, _setting.Key, _setting.Secret, _setting.Cluster);
         }
 
+        /// <summary>
+        /// Send a message to the Pusher Pub/Sub to a specific channel and event.
+        /// </summary>
+        /// <param name="channelName">The channel name to connect to</param>
+        /// <param name="eventName">The event name to connect to</param>
+        /// <param name="message">The message to send</param>
+        /// <returns></returns>
         public async Task SendMessage(string channelName, string eventName, string message)
         {
             await _setting.PopulateSetting();
@@ -74,6 +99,10 @@ namespace Spacearr.Pusher.API
             }
         }
 
+        /// <summary>
+        /// Command to send a message to the Pusher Pub/Sub to a specific channel and event.
+        /// </summary>
+        /// <returns></returns>
         public async void ExecuteCommand(ICommand command, string channelName, string eventName)
         {
             try

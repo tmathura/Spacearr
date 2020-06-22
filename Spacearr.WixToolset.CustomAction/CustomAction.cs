@@ -11,7 +11,7 @@ namespace Spacearr.WixToolset.CustomAction
         {
             var appSettingModel = new AppSettingModel
             {
-                Form = new Dictionary<Enumeration.Controls, object>(),
+                Form = new Dictionary<Enums.Controls, object>(),
                 InstallationDirectory = session.CustomActionData["InstallDirectory"]
             };
 

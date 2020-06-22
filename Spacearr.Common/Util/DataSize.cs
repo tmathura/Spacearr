@@ -6,6 +6,12 @@ namespace Spacearr.Common.Util
     {
         private static readonly string[] SizeSuffixes = {"bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"};
 
+        /// <summary>
+        /// This returns the unit of measurement for computers.
+        /// </summary>
+        /// <param name="value">The value to convert</param>
+        /// <param name="decimalPlaces">The number of decimal places</param>
+        /// <returns></returns>
         public static string SizeSuffix(long value, int decimalPlaces = 1)
         {
             if (decimalPlaces < 0) throw new ArgumentOutOfRangeException(nameof(decimalPlaces));

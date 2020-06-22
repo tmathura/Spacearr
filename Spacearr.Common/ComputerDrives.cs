@@ -12,6 +12,10 @@ namespace Spacearr.Common
             _computerDrive = computerDrive;
         }
 
+        /// <summary>
+        /// Returns all the computer hard disks.
+        /// </summary>
+        /// <returns>Returns a list of ComputerDriveInfos</returns>
         public List<ComputerDriveInfo> GetComputerDrives()
         {
             return _computerDrive.GetComputerDrives();

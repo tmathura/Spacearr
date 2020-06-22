@@ -15,6 +15,10 @@ namespace Spacearr.Common
         public long TotalFreeSpace { get; set; }
         public long TotalSize { get; set; }
 
+        /// <summary>
+        /// Returns all the computer hard disks.
+        /// </summary>
+        /// <returns>Returns a list of ComputerDriveInfos</returns>
         public List<ComputerDriveInfo> GetComputerDrives()
         {
             var drives = DriveInfo.GetDrives();

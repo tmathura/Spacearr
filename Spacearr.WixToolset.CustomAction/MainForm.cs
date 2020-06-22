@@ -19,9 +19,9 @@ namespace Spacearr.WixToolset.CustomAction
             Application.EnableVisualStyles();
             TopMost = true;
 
-            _appSettingModel.Form.Add(Enumeration.Controls.LowComputerDriveGBValueControl, new LowComputerDriveGBValueControl(_appSettingModel));
-            _appSettingModel.Form.Add(Enumeration.Controls.NotificationTimerMinutesIntervalControl, new NotificationTimerMinutesIntervalControl(_appSettingModel));
-            _appSettingModel.Form.Add(Enumeration.Controls.PusherControl, new PusherControl(_appSettingModel));
+            _appSettingModel.Form.Add(Enums.Controls.LowComputerDriveGBValueControl, new LowComputerDriveGBValueControl(_appSettingModel));
+            _appSettingModel.Form.Add(Enums.Controls.NotificationTimerMinutesIntervalControl, new NotificationTimerMinutesIntervalControl(_appSettingModel));
+            _appSettingModel.Form.Add(Enums.Controls.PusherControl, new PusherControl(_appSettingModel));
 
             var control = _appSettingModel.Form[_appSettingModel.CurrentControl];
 
@@ -34,7 +34,7 @@ namespace Spacearr.WixToolset.CustomAction
 
             if (currentControl.ValidForm(out var errorMessage))
             {
-                var lastIndex = (Enum.GetValues(typeof(Enumeration.Controls)).Length - 1);
+                var lastIndex = (Enum.GetValues(typeof(Enums.Controls)).Length - 1);
                 var nextEnumIndex = (int) _appSettingModel.CurrentControl + 1;
 
                 if (nextEnumIndex > lastIndex)
@@ -51,14 +51,14 @@ namespace Spacearr.WixToolset.CustomAction
                 }
                 else
                 {
-                    var nextEnum = (Enumeration.Controls) nextEnumIndex;
+                    var nextEnum = (Enums.Controls) nextEnumIndex;
 
                     var newControlToShow = (BaseControl) _appSettingModel.Form[nextEnum];
                     newControlToShow.SetCurrentForm();
                     panelMain.Controls.Add(newControlToShow);
 
                     var previousEnumIndex = (int) _appSettingModel.CurrentControl - 1 < 0 ? 0 : (int) _appSettingModel.CurrentControl - 1;
-                    var previousEnum = ((Enumeration.Controls) previousEnumIndex);
+                    var previousEnum = ((Enums.Controls) previousEnumIndex);
                     var oldControlToHide = (BaseControl)_appSettingModel.Form[previousEnum];
                     panelMain.Controls.Remove(oldControlToHide);
                 }
@@ -75,7 +75,7 @@ namespace Spacearr.WixToolset.CustomAction
         {
             var currentControl = (BaseControl) _appSettingModel.Form[_appSettingModel.CurrentControl];
             var previousEnumIndex = (int) _appSettingModel.CurrentControl - 1 < 0 ? 0 : (int) _appSettingModel.CurrentControl - 1;
-            var previousEnum = (Enumeration.Controls) previousEnumIndex;
+            var previousEnum = (Enums.Controls) previousEnumIndex;
 
             var newControlToShow = (BaseControl) _appSettingModel.Form[previousEnum];
             newControlToShow.SetCurrentForm();

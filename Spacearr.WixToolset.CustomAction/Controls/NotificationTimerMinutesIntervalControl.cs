@@ -15,7 +15,7 @@ namespace Spacearr.WixToolset.CustomAction.Controls
 
         public override void SetCurrentForm()
         {
-            _appSettingModel.CurrentControl = Enumeration.Controls.NotificationTimerMinutesIntervalControl;
+            _appSettingModel.CurrentControl = Enums.Controls.NotificationTimerMinutesIntervalControl;
         }
 
         public override bool ValidForm(out string errorMessage)

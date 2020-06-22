@@ -15,7 +15,7 @@ namespace Spacearr.WixToolset.CustomAction.Controls
 
         public override void SetCurrentForm()
         {
-            _appSettingModel.CurrentControl = Enumeration.Controls.LowComputerDriveGBValueControl;
+            _appSettingModel.CurrentControl = Enums.Controls.LowComputerDriveGBValueControl;
         }
 
         public override bool ValidForm(out string errorMessage)

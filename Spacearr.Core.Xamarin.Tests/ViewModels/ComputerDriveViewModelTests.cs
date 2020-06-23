@@ -24,7 +24,7 @@ namespace Spacearr.Core.Xamarin.Tests.ViewModels
 
             // Assert
             Assert.AreEqual(computerModel.Name, computerDriveViewModel.Title);
-            Assert.AreEqual(computerModel, computerDriveViewModel.ComputerDriveModel);
+            Assert.AreEqual(computerModel.ComputerDrives, computerDriveViewModel.ComputerDriveModel);
         }
     }
 }

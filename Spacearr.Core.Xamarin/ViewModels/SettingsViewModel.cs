@@ -5,6 +5,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Spacearr.Core.Xamarin.Interfaces.Helpers;
 using Xamarin.Forms;
 
 namespace Spacearr.Core.Xamarin.ViewModels
@@ -12,20 +13,18 @@ namespace Spacearr.Core.Xamarin.ViewModels
     public class SettingsViewModel : BaseViewModel
     {
         private readonly ILogger _logger;
-        private readonly IDisplayAlertHelper _displayAlertHelper;
-        private readonly INavigationPushModalHelper _navigationPushModalHelper;
-        private readonly Page _newSettingPage;
+        private readonly ISettingsPageHelper _settingsPageHelper;
+        private readonly Page _page;
 
         public ICommand LoadItemsCommand { get; set; }
         public ICommand AddCommand { get; }
         public ObservableCollection<SettingModel> Settings { get; set; }
 
-        public SettingsViewModel(ILogger logger, IDisplayAlertHelper displayAlertHelper, INavigationPushModalHelper navigationPushModalHelper, Page newSettingPage)
+        public SettingsViewModel(ILogger logger, ISettingsPageHelper settingsPageHelper, Page page)
         {
             _logger = logger;
-            _displayAlertHelper = displayAlertHelper;
-            _navigationPushModalHelper = navigationPushModalHelper;
-            _newSettingPage = newSettingPage;
+            _settingsPageHelper = settingsPageHelper;
+            _page = page;
 
             Title = "Settings";
             Settings = new ObservableCollection<SettingModel>();
@@ -52,7 +51,7 @@ namespace Spacearr.Core.Xamarin.ViewModels
             }
             catch (Exception ex)
             {
-                await _displayAlertHelper.CustomDisplayAlert("Error", ex.Message, "OK");
+                await _settingsPageHelper.CustomDisplayAlert("Error", ex.Message, "OK");
             }
             finally
             {
@@ -71,12 +70,12 @@ namespace Spacearr.Core.Xamarin.ViewModels
 
             try
             {
-                await _navigationPushModalHelper.CustomPushModalAsync(_newSettingPage);
+                await _settingsPageHelper.CustomPushModalAsync(_page);
             }
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex.Message, ex.StackTrace);
-                await _displayAlertHelper.CustomDisplayAlert("Error", ex.Message, "OK");
+                await _settingsPageHelper.CustomDisplayAlert("Error", ex.Message, "OK");
             }
             finally
             {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Spacearr.Common.Interfaces.Logger;
-using Spacearr.Core.Xamarin.Helpers;
+using Spacearr.Core.Xamarin.Interfaces.Helpers;
 using Spacearr.Core.Xamarin.Tests.Factories;
 using Spacearr.Core.Xamarin.ViewModels;
 using Spacearr.Pusher.API.Interfaces.Service;
@@ -14,14 +14,14 @@ namespace Spacearr.Core.Xamarin.Tests.ViewModels
     {
         private const string Title = "Computer Drives";
         private Mock<ILogger> _mockILogger;
-        private Mock<IDisplayAlertHelper> _mockIDisplayAlertHelper;
+        private Mock<IComputersPageHelper> _mockIComputersPageHelper;
         private Mock<IComputerService> _mockIComputerService;
 
         [TestInitialize]
         public void SetUp()
         {
             _mockILogger = new Mock<ILogger>();
-            _mockIDisplayAlertHelper = new Mock<IDisplayAlertHelper>();
+            _mockIComputersPageHelper = new Mock<IComputersPageHelper>();
             _mockIComputerService = new Mock<IComputerService>();
         }
 
@@ -29,7 +29,7 @@ namespace Spacearr.Core.Xamarin.Tests.ViewModels
         public void ComputerViewModel()
         {
             // Arrange
-            var computerViewModel = new ComputerViewModel(_mockILogger.Object, _mockIDisplayAlertHelper.Object, _mockIComputerService.Object);
+            var computerViewModel = new ComputerViewModel(_mockILogger.Object, _mockIComputersPageHelper.Object, _mockIComputerService.Object);
 
             // Assert
             Assert.AreEqual(Title, computerViewModel.Title);
@@ -42,7 +42,7 @@ namespace Spacearr.Core.Xamarin.Tests.ViewModels
 
             // Arrange
             _mockIComputerService.Setup(x => x.GetComputersAsync()).ReturnsAsync(ComputerModelFactory.CreateComputerModels(noOfComputerModels));
-            var computerViewModel = new ComputerViewModel(_mockILogger.Object, _mockIDisplayAlertHelper.Object, _mockIComputerService.Object);
+            var computerViewModel = new ComputerViewModel(_mockILogger.Object, _mockIComputersPageHelper.Object, _mockIComputerService.Object);
             
             // Act
             computerViewModel.LoadItemsCommand.Execute(null);
@@ -60,7 +60,7 @@ namespace Spacearr.Core.Xamarin.Tests.ViewModels
 
             // Arrange
             _mockIComputerService.Setup(x => x.GetComputersAsync()).Throws(new Exception(exceptionMessage));
-            var computerViewModel = new ComputerViewModel(_mockILogger.Object, _mockIDisplayAlertHelper.Object, _mockIComputerService.Object);
+            var computerViewModel = new ComputerViewModel(_mockILogger.Object, _mockIComputersPageHelper.Object, _mockIComputerService.Object);
             
             // Act
             computerViewModel.LoadItemsCommand.Execute(null);
@@ -68,7 +68,7 @@ namespace Spacearr.Core.Xamarin.Tests.ViewModels
             // Assert
             Assert.AreEqual(Title, computerViewModel.Title);
             Assert.AreEqual(0, computerViewModel.Computers.Count);
-            _mockIDisplayAlertHelper.Verify(x => x.CustomDisplayAlert("Error", exceptionMessage, "OK"), Times.Once);
+            _mockIComputersPageHelper.Verify(x => x.CustomDisplayAlert("Error", exceptionMessage, "OK"), Times.Once);
         }
     }
 }

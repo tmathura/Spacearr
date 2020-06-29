@@ -10,12 +10,9 @@
              Title="{Binding Title}"
              x:DataType="viewModels:SettingsViewModel">
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" Command="{Binding AddCommand}" />
-    </ContentPage.ToolbarItems>
-
-    <StackLayout>
-        <ListView x:Name="SettingsListView" 
+    <AbsoluteLayout>
+        <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="SizeProportional">
+            <ListView x:Name="SettingsListView" 
                 ItemsSource="{Binding Settings}"
                 VerticalOptions="FillAndExpand"
                 HasUnevenRows="true"
@@ -25,46 +22,53 @@
                 CachingStrategy="RecycleElement"
                 ItemSelected="OnItemSelected"
                 x:DataType="viewModels:SettingsViewModel">
-            <d:ListView.ItemsSource>
-                <x:Array Type="{x:Type models:SettingModel}">
-                    <models:SettingModel ComputerName = "Computer name 1" UpdatedDate = "2020/01/01" />
-                    <models:SettingModel ComputerName = "Computer name 2" UpdatedDate = "2020/01/02" />
-                </x:Array>
-            </d:ListView.ItemsSource>
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="models:SettingModel">
-                    <ViewCell>
-                        <Frame Margin="5" HasShadow="True" CornerRadius="2">
-                            <StackLayout>
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*"/>
-                                    </Grid.RowDefinitions>
-                                    <Grid Grid.Row="0">
+                <d:ListView.ItemsSource>
+                    <x:Array Type="{x:Type models:SettingModel}">
+                        <models:SettingModel ComputerName = "Computer name 1" UpdatedDate = "2020/01/01" />
+                        <models:SettingModel ComputerName = "Computer name 2" UpdatedDate = "2020/01/02" />
+                    </x:Array>
+                </d:ListView.ItemsSource>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="models:SettingModel">
+                        <ViewCell>
+                            <Frame Margin="5" HasShadow="True" CornerRadius="2">
+                                <StackLayout>
+                                    <Grid>
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="*"/>
                                         </Grid.RowDefinitions>
-                                        <Label FontAttributes="Bold" Grid.Row="0" Text="{Binding ComputerName}" />
-                                        <Grid Grid.Row="1">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto" />
-                                                <ColumnDefinition Width="Auto" />
-                                            </Grid.ColumnDefinitions>
+                                        <Grid Grid.Row="0">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
                                             </Grid.RowDefinitions>
-                                            <Label Grid.Row="0" Grid.Column="0" Text="Updated on:"/>
-                                            <Label Grid.Row="0" Grid.Column="1"  Text="{Binding UpdatedDate}"/>
+                                            <Label FontAttributes="Bold" Grid.Row="0" Text="{Binding ComputerName}" />
+                                            <Grid Grid.Row="1">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+                                                <Label Grid.Row="0" Grid.Column="0" Text="Updated on:"/>
+                                                <Label Grid.Row="0" Grid.Column="1"  Text="{Binding UpdatedDate}"/>
+                                            </Grid>
                                         </Grid>
                                     </Grid>
-                                </Grid>
-                            </StackLayout>
-                        </Frame>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </StackLayout>
+                                </StackLayout>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+        <ImageButton x:Name="AddImageButton"
+                     AbsoluteLayout.LayoutBounds="0.95,0.95,50,50"
+                     AbsoluteLayout.LayoutFlags="PositionProportional"
+                     CornerRadius="40"
+                     Command="{Binding AddCommand}"
+                     Source="Assets/ic_add.png"/>
+    </AbsoluteLayout>
 
 </ContentPage>

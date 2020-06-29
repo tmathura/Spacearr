@@ -15,6 +15,7 @@
     <Color x:Key="MicroChartsFreeSpaceColor">#ffffff</Color>
     <Color x:Key="MicroChartsUsedSpaceColor">#e65100</Color>
     <Color x:Key="ProgressBarColor">#e65100</Color>
+    <Color x:Key="ImageButtonNormalColor">#e65100</Color>
     <Style TargetType="ContentPage">
         <Setter Property="BackgroundColor" Value="{StaticResource ThemeDarkColor}" />
     </Style>
@@ -49,6 +50,9 @@
     <Style TargetType="controls:FloatingLabel">
         <Setter Property="TextColor" Value="{StaticResource ThemeTextColor}" />
         <Setter Property="LabelBackgroundColor" Value="{StaticResource ThemeLightColor}" />
+    </Style>
+    <Style TargetType="ImageButton">
+        <Setter Property="BackgroundColor" Value="{StaticResource ImageButtonNormalColor}" />
     </Style>
 
 </ResourceDictionary>

@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Spacearr.Common.Interfaces.Logger;
-using Spacearr.Core.Xamarin.Helpers;
+using Spacearr.Core.Xamarin.Interfaces.Helpers;
 using Spacearr.Core.Xamarin.Tests.Factories;
 using Spacearr.Core.Xamarin.ViewModels;
 using System;
@@ -14,22 +14,20 @@ namespace Spacearr.Core.Xamarin.Tests.ViewModels
     {
         private const string Title = "Settings";
         private Mock<ILogger> _mockILogger;
-        private Mock<IDisplayAlertHelper> _mockIDisplayAlertHelper;
-        private Mock<INavigationPushModalHelper> _mockINavigationPushModalHelper;
+        private Mock<ISettingsPageHelper> _mockISettingsPageHelper;
 
         [TestInitialize]
         public void SetUp()
         {
             _mockILogger = new Mock<ILogger>();
-            _mockIDisplayAlertHelper = new Mock<IDisplayAlertHelper>();
-            _mockINavigationPushModalHelper = new Mock<INavigationPushModalHelper>();
+            _mockISettingsPageHelper = new Mock<ISettingsPageHelper>();
         }
 
         [TestMethod]
         public void SettingsViewModel()
         {
             // Arrange
-            var settingsViewModel = new SettingsViewModel(_mockILogger.Object, _mockIDisplayAlertHelper.Object, _mockINavigationPushModalHelper.Object, It.IsAny<Page>());
+            var settingsViewModel = new SettingsViewModel(_mockILogger.Object, _mockISettingsPageHelper.Object, It.IsAny<Page>());
 
             // Assert
             Assert.AreEqual(Title, settingsViewModel.Title);
@@ -42,7 +40,7 @@ namespace Spacearr.Core.Xamarin.Tests.ViewModels
 
             // Arrange
             _mockILogger.Setup(x => x.GetSettingsAsync()).ReturnsAsync(SettingModelFactory.CreateSettingModels(noOfSettings));
-            var settingsViewModel = new SettingsViewModel(_mockILogger.Object, _mockIDisplayAlertHelper.Object, _mockINavigationPushModalHelper.Object, It.IsAny<Page>());
+            var settingsViewModel = new SettingsViewModel(_mockILogger.Object, _mockISettingsPageHelper.Object, It.IsAny<Page>());
 
             // Act
             settingsViewModel.LoadItemsCommand.Execute(null);
@@ -60,7 +58,7 @@ namespace Spacearr.Core.Xamarin.Tests.ViewModels
 
             // Arrange
             _mockILogger.Setup(x => x.GetSettingsAsync()).Throws(new Exception(exceptionMessage));
-            var settingsViewModel = new SettingsViewModel(_mockILogger.Object, _mockIDisplayAlertHelper.Object, _mockINavigationPushModalHelper.Object, It.IsAny<Page>());
+            var settingsViewModel = new SettingsViewModel(_mockILogger.Object, _mockISettingsPageHelper.Object, It.IsAny<Page>());
 
             // Act
             settingsViewModel.LoadItemsCommand.Execute(null);
@@ -68,20 +66,20 @@ namespace Spacearr.Core.Xamarin.Tests.ViewModels
             // Assert
             Assert.AreEqual(Title, settingsViewModel.Title);
             Assert.AreEqual(0, settingsViewModel.Settings.Count);
-            _mockIDisplayAlertHelper.Verify(x => x.CustomDisplayAlert("Error", exceptionMessage, "OK"), Times.Once);
+            _mockISettingsPageHelper.Verify(x => x.CustomDisplayAlert("Error", exceptionMessage, "OK"), Times.Once);
         }
 
         [TestMethod]
         public void AddCommand()
         {
             // Arrange
-            var settingsViewModel = new SettingsViewModel(_mockILogger.Object, _mockIDisplayAlertHelper.Object, _mockINavigationPushModalHelper.Object, It.IsAny<Page>());
+            var settingsViewModel = new SettingsViewModel(_mockILogger.Object, _mockISettingsPageHelper.Object, It.IsAny<Page>());
 
             // Act
             settingsViewModel.AddCommand.Execute(null);
 
             // Assert
-            _mockINavigationPushModalHelper.Verify(x => x.CustomPushModalAsync(It.IsAny<Page>()), Times.Once);
+            _mockISettingsPageHelper.Verify(x => x.CustomPushModalAsync(It.IsAny<Page>()), Times.Once);
         }
 
         [TestMethod]
@@ -90,15 +88,15 @@ namespace Spacearr.Core.Xamarin.Tests.ViewModels
             const string exceptionMessage = "Error on CustomPushModalAsync!";
 
             // Arrange
-            _mockINavigationPushModalHelper.Setup(x => x.CustomPushModalAsync(It.IsAny<Page>())).Throws(new Exception(exceptionMessage));
-            var settingsViewModel = new SettingsViewModel(_mockILogger.Object, _mockIDisplayAlertHelper.Object, _mockINavigationPushModalHelper.Object, It.IsAny<Page>());
+            _mockISettingsPageHelper.Setup(x => x.CustomPushModalAsync(It.IsAny<Page>())).Throws(new Exception(exceptionMessage));
+            var settingsViewModel = new SettingsViewModel(_mockILogger.Object, _mockISettingsPageHelper.Object, It.IsAny<Page>());
 
             // Act
             settingsViewModel.AddCommand.Execute(null);
 
             // Assert
             Assert.AreEqual(Title, settingsViewModel.Title);
-            _mockIDisplayAlertHelper.Verify(x => x.CustomDisplayAlert("Error", exceptionMessage, "OK"), Times.Once);
+            _mockISettingsPageHelper.Verify(x => x.CustomDisplayAlert("Error", exceptionMessage, "OK"), Times.Once);
         }
     }
 }

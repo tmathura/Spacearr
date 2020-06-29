@@ -2,7 +2,7 @@
 using Moq;
 using Spacearr.Common.Interfaces.Logger;
 using Spacearr.Common.Models;
-using Spacearr.Core.Xamarin.Helpers;
+using Spacearr.Core.Xamarin.Interfaces.Helpers;
 using Spacearr.Core.Xamarin.ViewModels;
 using Spacearr.Pusher.API.Interfaces;
 using System;
@@ -16,9 +16,8 @@ namespace Spacearr.Core.Xamarin.Tests.ViewModels
         private SettingModel _settingModel;
         private Mock<ILogger> _mockILogger;
         private Mock<IPusherValidation> _mockIPusherValidation;
-        private Mock<INavigationPopHelper> _mockINavigationPopHelper;
+        private Mock<ISettingDetailPageHelper> _mockISettingDetailPageHelper;
         private Mock<IValidationHelper> _mockIValidationHelper;
-        private Mock<IDisplayAlertHelper> _mockIDisplayAlertHelper;
 
         [TestInitialize]
         public void SetUp()
@@ -30,16 +29,15 @@ namespace Spacearr.Core.Xamarin.Tests.ViewModels
 
             _mockILogger = new Mock<ILogger>();
             _mockIPusherValidation = new Mock<IPusherValidation>();
-            _mockINavigationPopHelper = new Mock<INavigationPopHelper>();
+            _mockISettingDetailPageHelper = new Mock<ISettingDetailPageHelper>();
             _mockIValidationHelper = new Mock<IValidationHelper>();
-            _mockIDisplayAlertHelper = new Mock<IDisplayAlertHelper>();
         }
 
         [TestMethod]
         public void SettingDetailViewModel()
         {
             // Arrange
-            var settingDetailViewModel = new SettingDetailViewModel(_mockILogger.Object, _mockIPusherValidation.Object, _mockINavigationPopHelper.Object, _mockIValidationHelper.Object, _mockIDisplayAlertHelper.Object, _settingModel);
+            var settingDetailViewModel = new SettingDetailViewModel(_mockILogger.Object, _mockIPusherValidation.Object, _mockISettingDetailPageHelper.Object, _mockIValidationHelper.Object, _settingModel);
 
             // Assert
             Assert.AreEqual(Title, settingDetailViewModel.Title);
@@ -51,7 +49,7 @@ namespace Spacearr.Core.Xamarin.Tests.ViewModels
             // Arrange
             _mockIValidationHelper.Setup(x => x.IsFormValid(It.IsAny<object>())).Returns(true);
             _mockIPusherValidation.Setup(x => x.Validate(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(true);
-            var settingDetailViewModel = new SettingDetailViewModel(_mockILogger.Object, _mockIPusherValidation.Object, _mockINavigationPopHelper.Object, _mockIValidationHelper.Object, _mockIDisplayAlertHelper.Object, _settingModel);
+            var settingDetailViewModel = new SettingDetailViewModel(_mockILogger.Object, _mockIPusherValidation.Object, _mockISettingDetailPageHelper.Object, _mockIValidationHelper.Object, _settingModel);
 
             // Act
             settingDetailViewModel.UpdateCommand.Execute(null);
@@ -59,8 +57,8 @@ namespace Spacearr.Core.Xamarin.Tests.ViewModels
             // Assert
             Assert.AreEqual(Title, settingDetailViewModel.Title);
             _mockILogger.Verify(x => x.UpdateSettingAsync(_settingModel), Times.Once);
-            _mockIDisplayAlertHelper.Verify(x => x.CustomDisplayAlert("Success", "Setting saved!", "OK"), Times.Once);
-            _mockINavigationPopHelper.Verify(x => x.CustomPopAsync(), Times.Once);
+            _mockISettingDetailPageHelper.Verify(x => x.CustomDisplayAlert("Success", "Setting saved!", "OK"), Times.Once);
+            _mockISettingDetailPageHelper.Verify(x => x.CustomPopAsync(), Times.Once);
         }
 
         [TestMethod]
@@ -69,14 +67,14 @@ namespace Spacearr.Core.Xamarin.Tests.ViewModels
             // Arrange
             _mockIValidationHelper.Setup(x => x.IsFormValid(It.IsAny<object>())).Returns(true);
             _mockIPusherValidation.Setup(x => x.Validate(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(false);
-            var newSettingDetailViewModel = new SettingDetailViewModel(_mockILogger.Object, _mockIPusherValidation.Object, _mockINavigationPopHelper.Object, _mockIValidationHelper.Object, _mockIDisplayAlertHelper.Object, _settingModel);
+            var newSettingDetailViewModel = new SettingDetailViewModel(_mockILogger.Object, _mockIPusherValidation.Object, _mockISettingDetailPageHelper.Object, _mockIValidationHelper.Object, _settingModel);
 
             // Act
             newSettingDetailViewModel.UpdateCommand.Execute(null);
 
             // Assert
             Assert.AreEqual(Title, newSettingDetailViewModel.Title);
-            _mockIDisplayAlertHelper.Verify(x => x.CustomDisplayAlert("Error", "Pusher details invalid!", "OK"), Times.Once);
+            _mockISettingDetailPageHelper.Verify(x => x.CustomDisplayAlert("Error", "Pusher details invalid!", "OK"), Times.Once);
         }
 
         [TestMethod]
@@ -86,21 +84,21 @@ namespace Spacearr.Core.Xamarin.Tests.ViewModels
 
             // Arrange
             _mockIValidationHelper.Setup(x => x.IsFormValid(It.IsAny<object>())).Throws(new Exception(exceptionMessage));
-            var newSettingDetailViewModel = new SettingDetailViewModel(_mockILogger.Object, _mockIPusherValidation.Object, _mockINavigationPopHelper.Object, _mockIValidationHelper.Object, _mockIDisplayAlertHelper.Object, _settingModel);
+            var newSettingDetailViewModel = new SettingDetailViewModel(_mockILogger.Object, _mockIPusherValidation.Object, _mockISettingDetailPageHelper.Object, _mockIValidationHelper.Object, _settingModel);
 
             // Act
             newSettingDetailViewModel.UpdateCommand.Execute(null);
 
             // Assert
             Assert.AreEqual(Title, newSettingDetailViewModel.Title);
-            _mockIDisplayAlertHelper.Verify(x => x.CustomDisplayAlert("Error", exceptionMessage, "OK"), Times.Once);
+            _mockISettingDetailPageHelper.Verify(x => x.CustomDisplayAlert("Error", exceptionMessage, "OK"), Times.Once);
         }
 
         [TestMethod]
         public void DeleteCommand()
         {
             // Arrange
-            var settingDetailViewModel = new SettingDetailViewModel(_mockILogger.Object, _mockIPusherValidation.Object, _mockINavigationPopHelper.Object, _mockIValidationHelper.Object, _mockIDisplayAlertHelper.Object, _settingModel);
+            var settingDetailViewModel = new SettingDetailViewModel(_mockILogger.Object, _mockIPusherValidation.Object, _mockISettingDetailPageHelper.Object, _mockIValidationHelper.Object, _settingModel);
 
             // Act
             settingDetailViewModel.DeleteCommand.Execute(null);
@@ -108,8 +106,8 @@ namespace Spacearr.Core.Xamarin.Tests.ViewModels
             // Assert
             Assert.AreEqual(Title, settingDetailViewModel.Title);
             _mockILogger.Verify(x => x.DeleteLogAsync(_settingModel), Times.Once);
-            _mockIDisplayAlertHelper.Verify(x => x.CustomDisplayAlert("Success", "Setting Deleted!", "OK"), Times.Once);
-            _mockINavigationPopHelper.Verify(x => x.CustomPopAsync(), Times.Once);
+            _mockISettingDetailPageHelper.Verify(x => x.CustomDisplayAlert("Success", "Setting Deleted!", "OK"), Times.Once);
+            _mockISettingDetailPageHelper.Verify(x => x.CustomPopAsync(), Times.Once);
         }
 
         [TestMethod]
@@ -119,14 +117,14 @@ namespace Spacearr.Core.Xamarin.Tests.ViewModels
 
             // Arrange
             _mockILogger.Setup(x => x.DeleteLogAsync(_settingModel)).Throws(new Exception(exceptionMessage));
-            var newSettingDetailViewModel = new SettingDetailViewModel(_mockILogger.Object, _mockIPusherValidation.Object, _mockINavigationPopHelper.Object, _mockIValidationHelper.Object, _mockIDisplayAlertHelper.Object, _settingModel);
+            var newSettingDetailViewModel = new SettingDetailViewModel(_mockILogger.Object, _mockIPusherValidation.Object, _mockISettingDetailPageHelper.Object, _mockIValidationHelper.Object, _settingModel);
 
             // Act
             newSettingDetailViewModel.DeleteCommand.Execute(null);
 
             // Assert
             Assert.AreEqual(Title, newSettingDetailViewModel.Title);
-            _mockIDisplayAlertHelper.Verify(x => x.CustomDisplayAlert("Error", exceptionMessage, "OK"), Times.Once);
+            _mockISettingDetailPageHelper.Verify(x => x.CustomDisplayAlert("Error", exceptionMessage, "OK"), Times.Once);
         }
     }
 }

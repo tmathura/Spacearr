@@ -1,4 +1,4 @@
-﻿namespace Spacearr.Core.Xamarin.Helpers
+﻿namespace Spacearr.Core.Xamarin.Interfaces.Helpers
 {
     public interface IValidationHelper
     {

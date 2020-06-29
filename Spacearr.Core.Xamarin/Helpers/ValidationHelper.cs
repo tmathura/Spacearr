@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
+using Spacearr.Core.Xamarin.Interfaces.Helpers;
 using Xamarin.Forms;
 
 namespace Spacearr.Core.Xamarin.Helpers

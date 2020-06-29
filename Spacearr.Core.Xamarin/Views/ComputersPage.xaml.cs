@@ -5,12 +5,13 @@ using Spacearr.Core.Xamarin.ViewModels;
 using Spacearr.Pusher.API.Interfaces.Service;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using Spacearr.Core.Xamarin.Interfaces.Helpers;
 using Xamarin.Forms;
 
 namespace Spacearr.Core.Xamarin.Views
 {
     [DesignTimeVisible(false)]
-    public partial class ComputersPage : ContentPage, IDisplayAlertHelper
+    public partial class ComputersPage : ContentPage, IComputersPageHelper
     {
         private readonly ComputerViewModel _viewModel;
 

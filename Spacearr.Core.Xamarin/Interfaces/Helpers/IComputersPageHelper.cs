@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 
-namespace Spacearr.Core.Xamarin.Helpers
+namespace Spacearr.Core.Xamarin.Interfaces.Helpers
 {
-    public interface IDisplayAlertHelper
+    public interface IComputersPageHelper
     {
         Task CustomDisplayAlert(string title, string message, string cancelText);
     }

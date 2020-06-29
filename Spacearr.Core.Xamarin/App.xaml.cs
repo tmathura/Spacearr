@@ -6,6 +6,7 @@ using Spacearr.Pusher.API.Interfaces;
 using Spacearr.Pusher.API.Interfaces.Service;
 using System.Linq;
 using System.Threading.Tasks;
+using Spacearr.Core.Xamarin.Notifications;
 using Xamarin.Forms;
 
 namespace Spacearr.Core.Xamarin
@@ -21,9 +22,10 @@ namespace Spacearr.Core.Xamarin
             AutofacConfig.Configure(builder);
             var container = builder.Build();
 
-            #if __ANDROID__
+            if (Device.RuntimePlatform == Device.Android)
+            {
                 DependencyService.Get<INotificationManager>().Initialize();
-            #endif
+            }
 
             var logger = container.Resolve<ILogger>();
 

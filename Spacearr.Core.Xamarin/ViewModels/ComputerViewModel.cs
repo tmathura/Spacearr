@@ -5,6 +5,7 @@ using Spacearr.Pusher.API.Interfaces.Service;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using Spacearr.Core.Xamarin.Interfaces.Helpers;
 using Xamarin.Forms;
 
 namespace Spacearr.Core.Xamarin.ViewModels
@@ -12,16 +13,16 @@ namespace Spacearr.Core.Xamarin.ViewModels
     public class ComputerViewModel : BaseViewModel
     {
         private readonly ILogger _logger;
-        private readonly IDisplayAlertHelper _displayAlertHelper;
+        private readonly IComputersPageHelper _computersPageHelper;
         private readonly IComputerService _computerDriveService;
 
         public ObservableCollection<ComputerModel> Computers { get; set; }
         public Command LoadItemsCommand { get; set; }
 
-        public ComputerViewModel(ILogger logger, IDisplayAlertHelper displayAlertHelper, IComputerService computerDriveService)
+        public ComputerViewModel(ILogger logger, IComputersPageHelper computersPageHelper, IComputerService computerDriveService)
         {
             _logger = logger;
-            _displayAlertHelper = displayAlertHelper;
+            _computersPageHelper = computersPageHelper;
             _computerDriveService = computerDriveService;
 
             Title = "Computer Drives";
@@ -50,7 +51,7 @@ namespace Spacearr.Core.Xamarin.ViewModels
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex.Message, ex.StackTrace);
-                await _displayAlertHelper.CustomDisplayAlert("Error", ex.Message, "OK");
+                await _computersPageHelper.CustomDisplayAlert("Error", ex.Message, "OK");
             }
             finally
             {

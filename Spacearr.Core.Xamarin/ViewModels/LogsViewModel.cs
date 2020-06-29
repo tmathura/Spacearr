@@ -4,6 +4,7 @@ using Spacearr.Core.Xamarin.Helpers;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using Spacearr.Core.Xamarin.Interfaces.Helpers;
 using Xamarin.Forms;
 
 namespace Spacearr.Core.Xamarin.ViewModels
@@ -11,15 +12,15 @@ namespace Spacearr.Core.Xamarin.ViewModels
     public class LogsViewModel : BaseViewModel
     {
         private readonly ILogger _logger;
-        private readonly IDisplayAlertHelper _displayAlertHelper;
+        private readonly ILogsPageHelper _logsPageHelper;
 
         public ObservableCollection<LogModel> Logs { get; set; }
         public Command LoadItemsCommand { get; set; }
 
-        public LogsViewModel(ILogger logger, IDisplayAlertHelper displayAlertHelper)
+        public LogsViewModel(ILogger logger, ILogsPageHelper logsPageHelper)
         {
             _logger = logger;
-            _displayAlertHelper = displayAlertHelper;
+            _logsPageHelper = logsPageHelper;
 
             Title = "Logs";
             Logs = new ObservableCollection<LogModel>();
@@ -44,7 +45,7 @@ namespace Spacearr.Core.Xamarin.ViewModels
             }
             catch (Exception ex)
             {
-                await _displayAlertHelper.CustomDisplayAlert("Error", ex.Message, "OK");
+                await _logsPageHelper.CustomDisplayAlert("Error", ex.Message, "OK");
             }
             finally
             {

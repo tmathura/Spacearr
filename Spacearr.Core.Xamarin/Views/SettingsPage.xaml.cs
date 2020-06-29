@@ -5,12 +5,13 @@ using Spacearr.Core.Xamarin.ViewModels;
 using Spacearr.Pusher.API.Interfaces;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using Spacearr.Core.Xamarin.Interfaces.Helpers;
 using Xamarin.Forms;
 
 namespace Spacearr.Core.Xamarin.Views
 {
     [DesignTimeVisible(false)]
-    public partial class SettingsPage : ContentPage, IDisplayAlertHelper, INavigationPushModalHelper
+    public partial class SettingsPage : ContentPage, ISettingsPageHelper
     {
         private readonly ILogger _logger;
         private readonly IPusherValidation _pusherValidation;
@@ -23,12 +24,12 @@ namespace Spacearr.Core.Xamarin.Views
 
             InitializeComponent();
 
-            BindingContext = _viewModel = new SettingsViewModel(logger, this, this, new NavigationPage(new NewSettingPage(_logger, _pusherValidation)));
+            BindingContext = _viewModel = new SettingsViewModel(logger, this, new NavigationPage(new NewSettingPage(_logger, _pusherValidation)));
         }
 
         private async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            var settingModel = (SettingModel) args.SelectedItem;
+            var settingModel = (SettingModel)args.SelectedItem;
             if (settingModel == null)
             {
                 return;

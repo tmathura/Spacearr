@@ -5,17 +5,14 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:controls="clr-namespace:Spacearr.Core.Xamarin.Controls;assembly=Spacearr.Core.Xamarin"
              xmlns:viewModels="clr-namespace:Spacearr.Core.Xamarin.ViewModels;assembly=Spacearr.Core.Xamarin"
+             xmlns:android="clr-namespace:Spacearr.Core.Xamarin.Controls.Android;assembly=Spacearr.Core.Xamarin"
              mc:Ignorable="d"
              x:Class="Spacearr.Core.Xamarin.Views.NewSettingPage"
              Title="{Binding Title}" x:DataType="viewModels:NewSettingDetailViewModel">
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Cancel" Command="{Binding CancelCommand}" />
-        <ToolbarItem Text="Save" Command="{Binding SaveCommand}" />
-    </ContentPage.ToolbarItems>
-
     <ContentPage.Content>
-        <ScrollView>
+        <AbsoluteLayout>
+            <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="SizeProportional">
             <StackLayout Spacing="20" Padding="15">
                 <controls:FloatingEntry Text="{Binding SettingModel.ComputerName}" Placeholder="Computer Name"/>
                 <Label x:Name="SettingModel_ComputerNameError" IsVisible="False" TextColor="{DynamicResource ErrorTextColor}" />
@@ -27,8 +24,40 @@
                 <Label x:Name="SettingModel_PusherSecretError" IsVisible="False" TextColor="{DynamicResource ErrorTextColor}" />
                 <controls:FloatingEntry Text="{Binding SettingModel.PusherCluster}" Placeholder="Pusher Cluster"/>
                 <Label x:Name="SettingModel_PusherClusterError" IsVisible="False" TextColor="{DynamicResource ErrorTextColor}" />
-            </StackLayout>
-        </ScrollView>
+                </StackLayout>
+            </ScrollView>
+            <ImageButton x:Name="CancelImageButton"
+                         AbsoluteLayout.LayoutBounds="0.95,0.95,50,50"
+                         AbsoluteLayout.LayoutFlags="PositionProportional"
+                         CornerRadius="40"
+                         IsVisible="False"
+                         Opacity="0"
+                         Command="{Binding CancelCommand}"
+                         Source="Assets/ic_arrow_back.png"/>
+            <ImageButton x:Name="SaveImageButton"
+                         AbsoluteLayout.LayoutBounds="0.95,0.95,50,50"
+                         AbsoluteLayout.LayoutFlags="PositionProportional"
+                         CornerRadius="40"
+                         IsVisible="False"
+                         Opacity="0"
+                         Command="{Binding SaveCommand}"
+                         Source="Assets/ic_save_alt.png"/>
+            <ImageButton x:Name="ViewComfyImageButton"
+                         AbsoluteLayout.LayoutBounds="0.95,0.95,50,50"
+                         AbsoluteLayout.LayoutFlags="PositionProportional"
+                         CornerRadius="40"
+                         Source="Assets/ic_view_comfy.png"
+                         Command="{Binding TransitionCommand}"/>
+            <Entry x:Name="UwpEntryField"
+                   AbsoluteLayout.LayoutBounds="150,150.95,50,50"
+                   AbsoluteLayout.LayoutFlags="PositionProportional"
+                   Unfocused="CustomEntryField_OnUnfocused"/>
+            <android:CustomEntry x:Name="AndroidEntryField"
+                                 CanShowVirtualKeyboard="False"
+                                 AbsoluteLayout.LayoutBounds="150,150.95,50,50"
+                                 AbsoluteLayout.LayoutFlags="PositionProportional"
+                                 Unfocused="CustomEntryField_OnUnfocused"/>
+        </AbsoluteLayout>
     </ContentPage.Content>
 
 </ContentPage>

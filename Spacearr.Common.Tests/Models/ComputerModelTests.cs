@@ -26,6 +26,8 @@ namespace Spacearr.Common.Tests.Models
 
             // Assert
             Assert.AreEqual(0, model.ProgressBarValue);
+            Assert.AreEqual(true, model.Online);
+            Assert.AreEqual(false, model.HasError);
         }
 
         [TestMethod]
@@ -46,6 +48,23 @@ namespace Spacearr.Common.Tests.Models
 
             // Assert
             Assert.AreEqual(0.5, model.ProgressBarValue);
+            Assert.AreEqual(true, model.Online);
+            Assert.AreEqual(false, model.HasError);
+        }
+
+        [TestMethod]
+        public void Validate_TestCase3()
+        {
+            // Arrange
+            var model = new ComputerModel
+            {
+                Error = "There is an error."
+            };
+
+            // Assert
+            Assert.AreEqual(0, model.ProgressBarValue);
+            Assert.AreEqual(false, model.Online);
+            Assert.AreEqual(true, model.HasError);
         }
     }
 }

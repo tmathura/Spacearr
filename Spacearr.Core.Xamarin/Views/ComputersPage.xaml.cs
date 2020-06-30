@@ -21,17 +21,20 @@ namespace Spacearr.Core.Xamarin.Views
             BindingContext = _viewModel = new ComputerViewModel(logger, this, computerDriveService);
         }
 
-        private async void OnComputerDriveSelected(object sender, SelectedItemChangedEventArgs args)
+        private async void OnSelected(object sender, SelectedItemChangedEventArgs args)
         {
+            ComputerDrivesListView.SelectedItem = null;
+
             var computerModel = (ComputerModel) args.SelectedItem;
             if (computerModel == null)
             {
                 return;
             }
 
-            await Navigation.PushAsync(new ComputerDrivesPage(computerModel));
-
-            ComputerDrivesListView.SelectedItem = null;
+            if (computerModel.Online)
+            {
+                await Navigation.PushAsync(new ComputerDrivesPage(computerModel));
+            }
         }
 
         protected override void OnAppearing()

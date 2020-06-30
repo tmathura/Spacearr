@@ -79,7 +79,7 @@ namespace Spacearr.Core.Xamarin.Tests.ViewModels
             settingsViewModel.AddCommand.Execute(null);
 
             // Assert
-            _mockISettingsPageHelper.Verify(x => x.CustomPushModalAsync(It.IsAny<Page>()), Times.Once);
+            _mockISettingsPageHelper.Verify(x => x.CustomPushAsync(It.IsAny<Page>()), Times.Once);
         }
 
         [TestMethod]
@@ -88,7 +88,7 @@ namespace Spacearr.Core.Xamarin.Tests.ViewModels
             const string exceptionMessage = "Error on CustomPushModalAsync!";
 
             // Arrange
-            _mockISettingsPageHelper.Setup(x => x.CustomPushModalAsync(It.IsAny<Page>())).Throws(new Exception(exceptionMessage));
+            _mockISettingsPageHelper.Setup(x => x.CustomPushAsync(It.IsAny<Page>())).Throws(new Exception(exceptionMessage));
             var settingsViewModel = new SettingsViewModel(_mockILogger.Object, _mockISettingsPageHelper.Object, It.IsAny<Page>());
 
             // Act

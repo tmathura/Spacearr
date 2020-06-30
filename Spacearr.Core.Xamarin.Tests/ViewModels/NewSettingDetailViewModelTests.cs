@@ -51,7 +51,7 @@ namespace Spacearr.Core.Xamarin.Tests.ViewModels
             Assert.AreEqual(Title, newSettingDetailViewModel.Title);
             _mockILogger.Verify(x => x.LogSettingAsync(newSettingDetailViewModel.SettingModel), Times.Once);
             _mockINewSettingPageHelper.Verify(x => x.CustomDisplayAlert("Success", "Setting saved!", "OK"), Times.Once);
-            _mockINewSettingPageHelper.Verify(x => x.CustomPopModalAsync(), Times.Once);
+            _mockINewSettingPageHelper.Verify(x => x.CustomPopAsync(), Times.Once);
         }
 
         [TestMethod]
@@ -81,37 +81,6 @@ namespace Spacearr.Core.Xamarin.Tests.ViewModels
 
             // Act
             newSettingDetailViewModel.SaveCommand.Execute(null);
-
-            // Assert
-            Assert.AreEqual(Title, newSettingDetailViewModel.Title);
-            _mockINewSettingPageHelper.Verify(x => x.CustomDisplayAlert("Error", exceptionMessage, "OK"), Times.Once);
-        }
-
-        [TestMethod]
-        public void CancelCommand()
-        {
-            // Arrange
-            var newSettingDetailViewModel = new NewSettingDetailViewModel(_mockILogger.Object, _mockIPusherValidation.Object, _mockINewSettingPageHelper.Object, _mockIValidationHelper.Object);
-
-            // Act
-            newSettingDetailViewModel.CancelCommand.Execute(null);
-
-            // Assert
-            Assert.AreEqual(Title, newSettingDetailViewModel.Title);
-            _mockINewSettingPageHelper.Verify(x => x.CustomPopModalAsync(), Times.Once);
-        }
-
-        [TestMethod]
-        public void CancelCommand_Exception()
-        {
-            const string exceptionMessage = "Error on CustomPopModalAsync!";
-
-            // Arrange
-            _mockINewSettingPageHelper.Setup(x => x.CustomPopModalAsync()).Throws(new Exception(exceptionMessage));
-            var newSettingDetailViewModel = new NewSettingDetailViewModel(_mockILogger.Object, _mockIPusherValidation.Object, _mockINewSettingPageHelper.Object, _mockIValidationHelper.Object);
-
-            // Act
-            newSettingDetailViewModel.CancelCommand.Execute(null);
 
             // Assert
             Assert.AreEqual(Title, newSettingDetailViewModel.Title);

@@ -40,32 +40,45 @@ namespace Spacearr.Pusher.API.Service
 
             foreach (var setting in settings)
             {
-                await _pusher.WorkerServiceReceiverConnect(channelNameReceive, eventNameReceive, setting.PusherAppId, setting.PusherKey, setting.PusherSecret, setting.PusherCluster);
-
-                var pusherSendMessage = new PusherSendMessageModel { Command = CommandType.ComputerDrivesCommand };
-                await _pusher.SendMessage(channelNameSend, eventNameSend, JsonConvert.SerializeObject(pusherSendMessage), setting.PusherAppId, setting.PusherKey, setting.PusherSecret, setting.PusherCluster);
-
-                var stopwatch = new Stopwatch();
-                stopwatch.Start();
-
-                while (_pusher.ReturnData == null)
+                try
                 {
-                    if (stopwatch.ElapsedMilliseconds > 10000)
+                    await _pusher.WorkerServiceReceiverConnect(channelNameReceive, eventNameReceive, setting.PusherAppId, setting.PusherKey, setting.PusherSecret, setting.PusherCluster);
+
+                    var pusherSendMessage = new PusherSendMessageModel { Command = CommandType.ComputerDrivesCommand };
+                    await _pusher.SendMessage(channelNameSend, eventNameSend, JsonConvert.SerializeObject(pusherSendMessage), setting.PusherAppId, setting.PusherKey, setting.PusherSecret, setting.PusherCluster);
+
+                    var stopwatch = new Stopwatch();
+                    stopwatch.Start();
+
+                    while (_pusher.ReturnData == null)
                     {
-                        throw new Exception("GetComputersAsync took too long!");
+                        if (stopwatch.ElapsedMilliseconds > 10000)
+                        {
+                            throw new Exception("GetComputersAsync took too long!");
+                        }
                     }
+
+                    _computerDrives = JsonConvert.DeserializeObject<List<ComputerDriveModel>>(_pusher.ReturnData);
+
+                    result.Add(new ComputerModel
+                    {
+                        Name = setting.ComputerName,
+                        ComputerDrives = await Task.FromResult(_computerDrives)
+                    });
+                    _computerDrives = null;
+
+                    await _pusher.WorkerServiceReceiverDisconnect();
                 }
-
-                _computerDrives = JsonConvert.DeserializeObject<List<ComputerDriveModel>>(_pusher.ReturnData);
-
-                result.Add(new ComputerModel
+                catch (Exception ex)
                 {
-                    Name = setting.ComputerName, 
-                    ComputerDrives = await Task.FromResult(_computerDrives)
-                });
-                _computerDrives = null;
-
-                await _pusher.WorkerServiceReceiverDisconnect();
+                    result.Add(new ComputerModel
+                    {
+                        Name = setting.ComputerName,
+                        ComputerDrives = new List<ComputerDriveModel>(),
+                        Error = $"UNAVAILABLE: {ex.Message}"
+                    });
+                    await _logger.LogErrorAsync(ex.Message, ex.StackTrace);
+                }
             }
 
             return result;

@@ -19,7 +19,7 @@
                 IsPullToRefreshEnabled="true"
                 IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                 CachingStrategy="RecycleElement"
-                ItemSelected="OnComputerDriveSelected" x:DataType="viewModels:ComputerViewModel">
+                ItemSelected="OnSelected" x:DataType="viewModels:ComputerViewModel">
             <d:ListView.ItemsSource>
                 <x:Array Type="{x:Type models:ComputerModel}">
                     <models:ComputerModel Name = "Computer 1" />
@@ -39,9 +39,11 @@
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>
                                             <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
                                         <Label FontAttributes="Bold" Grid.Row="0" Text="{Binding Name}" />
-                                        <ProgressBar Grid.Row="1" Progress="{Binding ProgressBarValue}" ProgressColor="{DynamicResource ProgressBarColor}" />
+                                        <ProgressBar Grid.Row="1" Progress="{Binding ProgressBarValue}" ProgressColor="{DynamicResource ProgressBarColor}" IsVisible="{Binding Online}"/>
+                                        <Label FontAttributes="Bold" TextColor="{DynamicResource ErrorTextColor}" Grid.Row="2" Text="{Binding Error}"  IsVisible="{Binding HasError}"/>
                                     </Grid>
                                 </Grid>
                             </StackLayout>

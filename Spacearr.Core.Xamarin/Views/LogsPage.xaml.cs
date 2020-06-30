@@ -20,7 +20,7 @@ namespace Spacearr.Core.Xamarin.Views
             BindingContext = _viewModel = new LogsViewModel(logger, this);
         }
 
-        private async void OnLogSelected(object sender, SelectedItemChangedEventArgs args)
+        private async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
             var log = (LogModel) args.SelectedItem;
             if (log == null)

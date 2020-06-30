@@ -10,7 +10,8 @@
              Title="{Binding Title}"
              x:DataType="viewModels:ComputerViewModel">
 
-    <StackLayout>
+    <AbsoluteLayout>
+        <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="SizeProportional">
         <ListView x:Name="ComputerDrivesListView"
                 ItemsSource="{Binding Computers}"
                 VerticalOptions="FillAndExpand"
@@ -19,7 +20,7 @@
                 IsPullToRefreshEnabled="true"
                 IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                 CachingStrategy="RecycleElement"
-                ItemSelected="OnSelected" x:DataType="viewModels:ComputerViewModel">
+                ItemSelected="OnItemSelected" x:DataType="viewModels:ComputerViewModel">
             <d:ListView.ItemsSource>
                 <x:Array Type="{x:Type models:ComputerModel}">
                     <models:ComputerModel Name = "Computer 1" />
@@ -53,5 +54,12 @@
             </ListView.ItemTemplate>
         </ListView>
     </StackLayout>
+    <ImageButton x:Name="RefreshImageButton"
+                 AbsoluteLayout.LayoutBounds="0.95,0.95,50,50"
+                 AbsoluteLayout.LayoutFlags="PositionProportional"
+                 CornerRadius="40"
+                 Command="{Binding LoadItemsCommand}"
+                 Source="Assets/ic_refresh.png"/>
+    </AbsoluteLayout>
 
 </ContentPage>

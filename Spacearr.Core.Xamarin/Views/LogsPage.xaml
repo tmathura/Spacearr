@@ -19,7 +19,7 @@
                 IsPullToRefreshEnabled="true"
                 IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                 CachingStrategy="RecycleElement"
-                ItemSelected="OnLogSelected"
+                ItemSelected="OnItemSelected"
                 x:DataType="viewModels:LogsViewModel">
             <d:ListView.ItemsSource>
                 <x:Array Type="{x:Type models:LogModel}">

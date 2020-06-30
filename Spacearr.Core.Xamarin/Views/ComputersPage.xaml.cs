@@ -21,7 +21,7 @@ namespace Spacearr.Core.Xamarin.Views
             BindingContext = _viewModel = new ComputerViewModel(logger, this, computerDriveService);
         }
 
-        private async void OnSelected(object sender, SelectedItemChangedEventArgs args)
+        private async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
             ComputerDrivesListView.SelectedItem = null;
 

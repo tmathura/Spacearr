@@ -20,7 +20,7 @@
                 IsPullToRefreshEnabled="False"
                 IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                 CachingStrategy="RecycleElement"
-                ItemSelected="OnComputerDriveSelected" 
+                ItemSelected="OnItemSelected" 
                 x:DataType="viewModels:ComputerDriveViewModel">
                 <d:ListView.ItemsSource>
                     <x:Array Type="{x:Type models:ComputerDriveModel}">

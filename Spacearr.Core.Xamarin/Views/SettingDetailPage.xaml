@@ -27,36 +27,36 @@
                 </StackLayout>
             </ScrollView>
             <ImageButton x:Name="UpdateImageButton"
-                     AbsoluteLayout.LayoutBounds="0.95,0.95,50,50"
-                     AbsoluteLayout.LayoutFlags="PositionProportional"
-                     CornerRadius="40"
-                     IsVisible="False"
-                     Opacity="0"
-                     Command="{Binding UpdateCommand}"
-                     Source="Assets/ic_update.png"/>
+                         AbsoluteLayout.LayoutBounds="0.95,0.95,50,50"
+                         AbsoluteLayout.LayoutFlags="PositionProportional"
+                         CornerRadius="40"
+                         IsVisible="False"
+                         Opacity="0"
+                         Command="{Binding UpdateCommand}"
+                         Source="Assets/ic_update.png"/>
             <ImageButton x:Name="DeleteImageButton"
-                     AbsoluteLayout.LayoutBounds="0.95,0.95,50,50"
-                     AbsoluteLayout.LayoutFlags="PositionProportional"
-                     CornerRadius="40"
-                     IsVisible="False"
-                     Opacity="0"
-                     Command="{Binding DeleteCommand}"
-                     Source="Assets/ic_delete.png"/>
+                         AbsoluteLayout.LayoutBounds="0.95,0.95,50,50"
+                         AbsoluteLayout.LayoutFlags="PositionProportional"
+                         CornerRadius="40"
+                         IsVisible="False"
+                         Opacity="0"
+                         Command="{Binding DeleteCommand}"
+                         Source="Assets/ic_delete.png"/>
             <ImageButton x:Name="ViewComfyImageButton"
-            AbsoluteLayout.LayoutBounds="0.95,0.95,50,50"
-            AbsoluteLayout.LayoutFlags="PositionProportional"
-            CornerRadius="40"
-            Source="Assets/ic_view_comfy.png"
-            Command="{Binding TransitionCommand}"/>
+                         AbsoluteLayout.LayoutBounds="0.95,0.95,50,50"
+                         AbsoluteLayout.LayoutFlags="PositionProportional"
+                         CornerRadius="40"
+                         Source="Assets/ic_view_comfy.png"
+                         Command="{Binding TransitionCommand}"/>
             <Entry x:Name="UwpEntryField"
-               AbsoluteLayout.LayoutBounds="150,150.95,50,50"
-               AbsoluteLayout.LayoutFlags="PositionProportional"
-               Unfocused="CustomEntryField_OnUnfocused"/>
+                   AbsoluteLayout.LayoutBounds="150,150.95,50,50"
+                   AbsoluteLayout.LayoutFlags="PositionProportional"
+                   Unfocused="CustomEntryField_OnUnfocused"/>
             <android:CustomEntry x:Name="AndroidEntryField"
-                              CanShowVirtualKeyboard="False"
-                              AbsoluteLayout.LayoutBounds="150,150.95,50,50"
-                              AbsoluteLayout.LayoutFlags="PositionProportional"
-                              Unfocused="CustomEntryField_OnUnfocused"/>
+                                 CanShowVirtualKeyboard="False"
+                                 AbsoluteLayout.LayoutBounds="150,150.95,50,50"
+                                 AbsoluteLayout.LayoutFlags="PositionProportional"
+                                 Unfocused="CustomEntryField_OnUnfocused"/>
         </AbsoluteLayout>
     </ContentPage.Content>
 

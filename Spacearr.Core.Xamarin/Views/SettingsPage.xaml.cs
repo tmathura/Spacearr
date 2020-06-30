@@ -1,11 +1,10 @@
 ﻿using Spacearr.Common.Interfaces.Logger;
 using Spacearr.Common.Models;
-using Spacearr.Core.Xamarin.Helpers;
+using Spacearr.Core.Xamarin.Interfaces.Helpers;
 using Spacearr.Core.Xamarin.ViewModels;
 using Spacearr.Pusher.API.Interfaces;
 using System.ComponentModel;
 using System.Threading.Tasks;
-using Spacearr.Core.Xamarin.Interfaces.Helpers;
 using Xamarin.Forms;
 
 namespace Spacearr.Core.Xamarin.Views
@@ -24,7 +23,7 @@ namespace Spacearr.Core.Xamarin.Views
 
             InitializeComponent();
 
-            BindingContext = _viewModel = new SettingsViewModel(logger, this, new NavigationPage(new NewSettingPage(_logger, _pusherValidation)));
+            BindingContext = _viewModel = new SettingsViewModel(logger, this, new NewSettingPage(_logger, _pusherValidation));
         }
 
         private async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
@@ -52,9 +51,9 @@ namespace Spacearr.Core.Xamarin.Views
             await DisplayAlert(title, message, cancelText);
         }
 
-        public async Task CustomPushModalAsync(Page page)
+        public async Task CustomPushAsync(Page page)
         {
-            await Navigation.PushModalAsync(page);
+            await Navigation.PushAsync(page);
         }
     }
 }

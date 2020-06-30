@@ -6,6 +6,6 @@ namespace Spacearr.Core.Xamarin.Interfaces.Helpers
     public interface ISettingsPageHelper
     {
         Task CustomDisplayAlert(string title, string message, string cancelText);
-        Task CustomPushModalAsync(Page page);
+        Task CustomPushAsync(Page page);
     }
 }

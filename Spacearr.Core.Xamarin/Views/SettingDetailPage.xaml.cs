@@ -46,16 +46,6 @@ namespace Spacearr.Core.Xamarin.Views
             await Navigation.PopAsync();
         }
 
-        public async Task CustomPopModalAsync()
-        {
-            await Navigation.PopModalAsync();
-        }
-
-        public async Task CustomPushModalAsync(Page page)
-        {
-            await Navigation.PushModalAsync(page);
-        }
-
         private void CustomEntryField_OnUnfocused(object sender, FocusEventArgs e)
         {
             _viewModel.TransitionCommand.Execute(null);

@@ -1,11 +1,10 @@
 ﻿using Spacearr.Common.Interfaces.Logger;
 using Spacearr.Common.Models;
-using Spacearr.Core.Xamarin.Helpers;
+using Spacearr.Core.Xamarin.Interfaces.Helpers;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Spacearr.Core.Xamarin.Interfaces.Helpers;
 using Xamarin.Forms;
 
 namespace Spacearr.Core.Xamarin.ViewModels
@@ -70,7 +69,7 @@ namespace Spacearr.Core.Xamarin.ViewModels
 
             try
             {
-                await _settingsPageHelper.CustomPushModalAsync(_page);
+                await _settingsPageHelper.CustomPushAsync(_page);
             }
             catch (Exception ex)
             {

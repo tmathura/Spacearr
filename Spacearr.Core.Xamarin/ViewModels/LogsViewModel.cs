@@ -1,10 +1,9 @@
 ﻿using Spacearr.Common.Interfaces.Logger;
 using Spacearr.Common.Models;
-using Spacearr.Core.Xamarin.Helpers;
+using Spacearr.Core.Xamarin.Interfaces.Helpers;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using Spacearr.Core.Xamarin.Interfaces.Helpers;
 using Xamarin.Forms;
 
 namespace Spacearr.Core.Xamarin.ViewModels

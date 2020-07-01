@@ -21,8 +21,8 @@ namespace Spacearr.Common.Models
         public long TotalSize { get; set; }
         public string TotalSizeString => DataSize.SizeSuffix(TotalSize, 2);
         public bool LoadPieChart { get; set; }
-        public Color ThemeTextColor { get; set; }
-        public Color ThemeLightColor { get; set; }
+        public Color TextColorPrimary { get; set; }
+        public Color ColorPrimaryLight { get; set; }
         public Color MicroChartsFreeSpaceColor { get; set; }
         public Color MicroChartsUsedSpaceColor { get; set; }
         public PieChart PieChart
@@ -38,17 +38,17 @@ namespace Spacearr.Common.Models
                             Label = "Used Space",
                             ValueLabel = $"{TotalUsedSpaceString}",
                             Color = SKColor.Parse(MicroChartsUsedSpaceColor.Name),
-                            TextColor = SKColor.Parse(ThemeTextColor.Name)
+                            TextColor = SKColor.Parse(TextColorPrimary.Name)
                         },
                         new ChartEntry(TotalFreeSpace)
                         {
                             Label = "Total Free Space",
                             ValueLabel = $"{TotalFreeSpaceString}",
                             Color = SKColor.Parse(MicroChartsFreeSpaceColor.Name),
-                            TextColor = SKColor.Parse(ThemeTextColor.Name)
+                            TextColor = SKColor.Parse(TextColorPrimary.Name)
                         }
                     };
-                    return new PieChart { Entries = entries, BackgroundColor = SKColor.Parse(ThemeLightColor.Name) };
+                    return new PieChart { Entries = entries, BackgroundColor = SKColor.Parse(ColorPrimaryLight.Name) };
                 }
 
                 return null;

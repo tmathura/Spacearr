@@ -24,8 +24,8 @@ namespace Spacearr.Core.Xamarin.Views
         {
             base.OnAppearing();
 
-            var themeTextColor = (Color)Application.Current.Resources["ThemeTextColor"];
-            var themeLightColor = (Color)Application.Current.Resources["ThemeLightColor"];
+            var textColorPrimary = (Color)Application.Current.Resources["TextColorPrimary"];
+            var colorPrimaryLight = (Color)Application.Current.Resources["ColorPrimaryLight"];
             var microChartsFreeSpaceColor = (Color)Application.Current.Resources["MicroChartsFreeSpaceColor"];
             var microChartsUsedSpaceColor = (Color)Application.Current.Resources["MicroChartsUsedSpaceColor"];
 
@@ -36,17 +36,17 @@ namespace Spacearr.Core.Xamarin.Views
                     Label = "Used Space",
                     ValueLabel = $"{_viewModel.ComputerDriveModel.TotalUsedSpaceString}",
                     Color = SKColor.Parse(microChartsUsedSpaceColor.ToHex()),
-                    TextColor = SKColor.Parse(themeTextColor.ToHex())
+                    TextColor = SKColor.Parse(textColorPrimary.ToHex())
                 },
                 new ChartEntry(_viewModel.ComputerDriveModel.TotalFreeSpace)
                 {
                     Label = "Total Free Space",
                     ValueLabel = $"{_viewModel.ComputerDriveModel.TotalFreeSpaceString}",
                     Color = SKColor.Parse(microChartsFreeSpaceColor.ToHex()),
-                    TextColor = SKColor.Parse(themeTextColor.ToHex())
+                    TextColor = SKColor.Parse(textColorPrimary.ToHex())
                 }
             };
-            var chart = new PieChart { Entries = entries, BackgroundColor = SKColor.Parse(themeLightColor.ToHex()) };
+            var chart = new PieChart { Entries = entries, BackgroundColor = SKColor.Parse(colorPrimaryLight.ToHex()) };
 
             Chart.Chart = chart;
         }

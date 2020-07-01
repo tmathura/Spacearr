@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              x:Class="Spacearr.Core.Xamarin.Views.HomePage"
              Title="{Binding Title}"
-             BackgroundColor="{DynamicResource ThemeBackgroundColor}">
+             BackgroundColor="{DynamicResource WindowBackground}">
 
     <Label Text="Welcome" FontSize="Large" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
 

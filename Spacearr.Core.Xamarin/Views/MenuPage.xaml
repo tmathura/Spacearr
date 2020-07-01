@@ -8,9 +8,9 @@
              x:Class="Spacearr.Core.Xamarin.Views.MenuPage"
              Title="Menu">
 
-    <Frame BackgroundColor="{DynamicResource ThemeNormalColor}" BorderColor="{DynamicResource ThemeDarkColor}" HasShadow="True" CornerRadius="0">
-        <StackLayout VerticalOptions="FillAndExpand" BackgroundColor="{DynamicResource ThemeNormalColor}">
-            <ListView x:Name="ListViewMenu" HasUnevenRows="True" BackgroundColor="{DynamicResource ThemeNormalColor}">
+    <Frame BackgroundColor="{DynamicResource ColorPrimary}" BorderColor="{DynamicResource ColorPrimaryDark}" HasShadow="True" CornerRadius="0">
+        <StackLayout VerticalOptions="FillAndExpand" BackgroundColor="{DynamicResource ColorPrimary}">
+            <ListView x:Name="ListViewMenu" HasUnevenRows="True" BackgroundColor="{DynamicResource ColorPrimary}">
                 <d:ListView.ItemsSource>
                     <x:Array Type="{x:Type models:HomeMenuItemModel}">
                         <models:HomeMenuItemModel Id = "1" Title="Title 1"/>
@@ -20,14 +20,14 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell x:DataType="models:HomeMenuItemModel">
-                            <Grid Padding="10" BackgroundColor="{DynamicResource ThemeNormalColor}">
+                            <Grid Padding="10" BackgroundColor="{DynamicResource ColorPrimary}">
                                 <Label Text="{Binding Title}" d:Text="{Binding Title}" FontSize="20"/>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Grid Padding="10" BackgroundColor="{DynamicResource ThemeNormalColor}">
+            <Grid Padding="10" BackgroundColor="{DynamicResource ColorPrimary}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />

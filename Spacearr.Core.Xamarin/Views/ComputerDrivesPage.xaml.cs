@@ -15,8 +15,8 @@ namespace Spacearr.Core.Xamarin.Views
             foreach (var computerDrive in computer.ComputerDrives)
             {
                 computerDrive.LoadPieChart = true;
-                computerDrive.ThemeTextColor = (Color)Application.Current.Resources["ThemeTextColor"];
-                computerDrive.ThemeLightColor = (Color)Application.Current.Resources["ThemeLightColor"];
+                computerDrive.TextColorPrimary = (Color)Application.Current.Resources["TextColorPrimary"];
+                computerDrive.ColorPrimaryLight = (Color)Application.Current.Resources["ColorPrimaryLight"];
                 computerDrive.MicroChartsFreeSpaceColor = (Color)Application.Current.Resources["MicroChartsFreeSpaceColor"];
                 computerDrive.MicroChartsUsedSpaceColor = (Color)Application.Current.Resources["MicroChartsUsedSpaceColor"];
             }

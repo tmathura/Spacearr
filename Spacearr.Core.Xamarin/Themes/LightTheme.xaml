@@ -4,55 +4,58 @@
                     xmlns:controls="clr-namespace:Spacearr.Core.Xamarin.Controls;assembly=Spacearr.Core.Xamarin"
                     x:Class="Spacearr.Core.Xamarin.Themes.LightTheme">
 
-    <Color x:Key="ThemeLightColor">#ff833a</Color>
-    <Color x:Key="ThemeNormalColor">#e65100</Color>
-    <Color x:Key="ThemeDarkColor">#ac1900</Color>
-    <Color x:Key="ThemeTextColor">#000000</Color>
-    <Color x:Key="ThemeBackgroundColor">#ffffff</Color>
-    <Color x:Key="ThemeSwitchLightColor">#e65100</Color>
-    <Color x:Key="ThemeSwitchNormalColor">#ac1900</Color>
-    <Color x:Key="ErrorTextColor">#b71c1c</Color>
+    <Color x:Key="ColorPrimaryLight">#ff833a</Color>
+    <Color x:Key="ColorPrimary">#e65100</Color>
+    <Color x:Key="ColorPrimaryDark">#ac1900</Color>
+    <Color x:Key="StatusBarColor">#ac1900</Color>
+    <Color x:Key="WindowBackground">#ffffff</Color>
+    <Color x:Key="TextColorPrimary">#000000</Color>
+    <Color x:Key="TextColorError">#b71c1c</Color>
     <Color x:Key="MicroChartsFreeSpaceColor">#ffffff</Color>
     <Color x:Key="MicroChartsUsedSpaceColor">#e65100</Color>
     <Color x:Key="ProgressBarColor">#e65100</Color>
-    <Color x:Key="ImageButtonNormalColor">#e65100</Color>
+    <Color x:Key="ColorPrimary2">#e65100</Color>
+
     <Style TargetType="ContentPage">
-        <Setter Property="BackgroundColor" Value="{StaticResource ThemeDarkColor}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource ColorPrimaryDark}" />
     </Style>
     <Style TargetType="NavigationPage">
-        <Setter Property="BarBackgroundColor" Value="{StaticResource ThemeDarkColor}" />
-        <Setter Property="BarTextColor" Value="{StaticResource ThemeTextColor}" />
+        <Setter Property="BarBackgroundColor" Value="{StaticResource ColorPrimaryDark}" />
+        <Setter Property="BarTextColor" Value="{StaticResource TextColorPrimary}" />
     </Style>
     <Style TargetType="StackLayout">
-        <Setter Property="BackgroundColor" Value="{StaticResource ThemeBackgroundColor}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource WindowBackground}" />
     </Style>
     <Style TargetType="ListView">
-        <Setter Property="BackgroundColor" Value="{StaticResource ThemeBackgroundColor}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource WindowBackground}" />
     </Style>
     <Style TargetType="Frame">
-        <Setter Property="BackgroundColor" Value="{StaticResource ThemeLightColor}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource ColorPrimaryLight}" />
     </Style>
     <Style TargetType="Grid">
-        <Setter Property="BackgroundColor" Value="{StaticResource ThemeLightColor}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource ColorPrimaryLight}" />
     </Style>
     <Style TargetType="Switch">
-        <Setter Property="OnColor" Value="{StaticResource ThemeSwitchLightColor}" />
-        <Setter Property="ThumbColor" Value="{StaticResource ThemeSwitchNormalColor}" />
+        <Setter Property="OnColor" Value="{StaticResource ColorPrimaryLight}" />
+        <Setter Property="ThumbColor" Value="{StaticResource ColorPrimary2}" />
     </Style>
     <Style TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource ThemeTextColor}" />
+        <Setter Property="TextColor" Value="{StaticResource TextColorPrimary}" />
     </Style>
     <Style TargetType="controls:FloatingEntry">
-        <Setter Property="TextColor" Value="{StaticResource ThemeTextColor}" />
-        <Setter Property="EntryPlaceholderColor" Value="{StaticResource ThemeLightColor}" />
-        <Setter Property="EntryBackgroundColor" Value="{StaticResource ThemeBackgroundColor}" />
+        <Setter Property="TextColor" Value="{StaticResource TextColorPrimary}" />
+        <Setter Property="EntryPlaceholderColor" Value="{StaticResource ColorPrimaryLight}" />
+        <Setter Property="EntryBackgroundColor" Value="{StaticResource WindowBackground}" />
     </Style>
     <Style TargetType="controls:FloatingLabel">
-        <Setter Property="TextColor" Value="{StaticResource ThemeTextColor}" />
-        <Setter Property="LabelBackgroundColor" Value="{StaticResource ThemeLightColor}" />
+        <Setter Property="TextColor" Value="{StaticResource TextColorPrimary}" />
+        <Setter Property="LabelBackgroundColor" Value="{StaticResource ColorPrimaryLight}" />
     </Style>
     <Style TargetType="ImageButton">
-        <Setter Property="BackgroundColor" Value="{StaticResource ImageButtonNormalColor}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource ColorPrimary2}" />
+    </Style>
+    <Style TargetType="ProgressBar">
+        <Setter Property="ProgressColor" Value="{StaticResource ProgressBarColor}" />
     </Style>
 
 </ResourceDictionary>

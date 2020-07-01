@@ -14,15 +14,15 @@
             <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="SizeProportional">
                 <StackLayout Spacing="20" Padding="15">
                     <controls:FloatingEntry Text="{Binding SettingModel.ComputerName}" Placeholder="Computer Name"/>
-                    <Label x:Name="SettingModel_ComputerNameError" IsVisible="False" TextColor="{DynamicResource ErrorTextColor}" />
+                    <Label x:Name="SettingModel_ComputerNameError" IsVisible="False" TextColor="{DynamicResource TextColorError}" />
                     <controls:FloatingEntry Text="{Binding SettingModel.PusherAppId}" Placeholder="Pusher App Id"/>
-                    <Label x:Name="SettingModel_PusherAppIdError" IsVisible="False" TextColor="{DynamicResource ErrorTextColor}" />
+                    <Label x:Name="SettingModel_PusherAppIdError" IsVisible="False" TextColor="{DynamicResource TextColorError}" />
                     <controls:FloatingEntry Text="{Binding SettingModel.PusherKey}" Placeholder="Pusher Key"/>
-                    <Label x:Name="SettingModel_PusherKeyError" IsVisible="False" TextColor="{DynamicResource ErrorTextColor}" />
+                    <Label x:Name="SettingModel_PusherKeyError" IsVisible="False" TextColor="{DynamicResource TextColorError}" />
                     <controls:FloatingEntry Text="{Binding SettingModel.PusherSecret}" Placeholder="Pusher Secret"/>
-                    <Label x:Name="SettingModel_PusherSecretError" IsVisible="False" TextColor="{DynamicResource ErrorTextColor}" />
+                    <Label x:Name="SettingModel_PusherSecretError" IsVisible="False" TextColor="{DynamicResource TextColorError}" />
                     <controls:FloatingEntry Text="{Binding SettingModel.PusherCluster}" Placeholder="Pusher Cluster"/>
-                    <Label x:Name="SettingModel_PusherClusterError" IsVisible="False" TextColor="{DynamicResource ErrorTextColor}" />
+                    <Label x:Name="SettingModel_PusherClusterError" IsVisible="False" TextColor="{DynamicResource TextColorError}" />
                 </StackLayout>
             </ScrollView>
             <ImageButton x:Name="SaveImageButton"

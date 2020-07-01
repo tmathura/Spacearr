@@ -43,8 +43,8 @@
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
                                         <Label FontAttributes="Bold" Grid.Row="0" Text="{Binding Name}" />
-                                        <ProgressBar Grid.Row="1" Progress="{Binding ProgressBarValue}" ProgressColor="{DynamicResource ProgressBarColor}" IsVisible="{Binding Online}"/>
-                                        <Label FontAttributes="Bold" TextColor="{DynamicResource ErrorTextColor}" Grid.Row="2" Text="{Binding Error}"  IsVisible="{Binding HasError}"/>
+                                        <ProgressBar Grid.Row="1" Progress="{Binding ProgressBarValue}" IsVisible="{Binding Online}"/>
+                                        <Label FontAttributes="Bold" TextColor="{DynamicResource TextColorError}" Grid.Row="2" Text="{Binding Error}"  IsVisible="{Binding HasError}"/>
                                     </Grid>
                                 </Grid>
                             </StackLayout>

@@ -37,11 +37,11 @@ namespace Spacearr.Droid
 
             if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
             {
-                var themeDarkColor = (Color)Xamarin.Forms.Application.Current.Resources["ThemeDarkColor"];
+                var statusBarColor = (Color)Xamarin.Forms.Application.Current.Resources["StatusBarColor"];
 
                 Window.ClearFlags(WindowManagerFlags.TranslucentStatus);
                 Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
-                Window.SetStatusBarColor(themeDarkColor.ToAndroid());
+                Window.SetStatusBarColor(statusBarColor.ToAndroid());
             }
         }
 

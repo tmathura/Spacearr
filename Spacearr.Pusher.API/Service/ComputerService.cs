@@ -37,6 +37,10 @@ namespace Spacearr.Pusher.API.Service
 
 
             var settings = Task.Run(() => _logger.GetSettingsAsync()).Result;
+            if (settings.Count == 0)
+            {
+                throw new Exception("No settings saved!");
+            }
 
             foreach (var setting in settings)
             {

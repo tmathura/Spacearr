@@ -7,7 +7,7 @@
              x:Class="Spacearr.Core.Xamarin.Controls.FloatingLabel">
 
     <ContentView.Content>
-        <Grid BackgroundColor="{DynamicResource ThemeLightColor}">
+        <Grid BackgroundColor="{DynamicResource ColorPrimaryLight}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>

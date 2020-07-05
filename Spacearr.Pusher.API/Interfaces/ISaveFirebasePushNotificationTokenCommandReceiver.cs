@@ -2,10 +2,10 @@
 
 namespace Spacearr.Pusher.API.Interfaces
 {
-    public interface INotificationReceiver
+    public interface ISaveFirebasePushNotificationTokenCommandReceiver
     {
         /// <summary>
-        /// Connect the notification receiver to the Pusher Pub/Sub..
+        /// Connect the save firebase push notification token command receiver to the Pusher Pub/Sub.
         /// </summary>
         /// <param name="appId">The Pusher app id</param>
         /// <param name="key">The Pusher key</param>

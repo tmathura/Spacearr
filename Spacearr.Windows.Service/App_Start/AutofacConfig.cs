@@ -29,8 +29,10 @@ namespace Spacearr.Windows.Service
             builder.RegisterType<Invoker>().As<IInvoker>().SingleInstance();
             builder.RegisterType<ComputerDrives>().As<IComputerDrives>().SingleInstance();
             builder.RegisterType<ComputerDriveInfo>().As<IComputerDriveInfo>().SingleInstance();
+            builder.RegisterType<SendFirebasePushNotification>().As<ISendFirebasePushNotification>().SingleInstance();
             builder.RegisterType<NotificationTimer>().As<INotificationTimer>().SingleInstance();
             builder.RegisterType<ComputerDrivesCommandReceiver>().As<IComputerDrivesCommandReceiver>().SingleInstance();
+            builder.RegisterType<SaveFirebasePushNotificationTokenCommandReceiver>().As<ISaveFirebasePushNotificationTokenCommandReceiver>().SingleInstance();
         }
     }
 }

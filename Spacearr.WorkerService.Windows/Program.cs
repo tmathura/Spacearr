@@ -32,8 +32,10 @@ namespace Spacearr.WorkerService.Windows
                     services.AddSingleton<IInvoker, Invoker>();
                     services.AddSingleton<IComputerDrives, ComputerDrives>();
                     services.AddSingleton<IComputerDriveInfo, ComputerDriveInfo>();
+                    services.AddSingleton<ISendFirebasePushNotification, SendFirebasePushNotification>();
                     services.AddSingleton<INotificationTimer, NotificationTimer>();
                     services.AddSingleton<IComputerDrivesCommandReceiver, ComputerDrivesCommandReceiver>();
+                    services.AddSingleton<ISaveFirebasePushNotificationTokenCommandReceiver, SaveFirebasePushNotificationTokenCommandReceiver>();
                 });
     }
 }

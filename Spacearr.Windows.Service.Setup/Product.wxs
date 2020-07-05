@@ -5,6 +5,14 @@
 <?define Spacearr.Windows.Service.Config = "Spacearr.Windows.Service.exe.config" ?>
 <?define AppSettings.json = "appsettings.json" ?>
 <?define Autofac.dll = "Autofac.dll" ?>
+<?define FirebaseAdmin.dll = "FirebaseAdmin.dll" ?>
+<?define Google.Api.Gax.dll = "Google.Api.Gax.dll" ?>
+<?define Google.Api.Gax.Rest.dll = "Google.Api.Gax.Rest.dll" ?>
+<?define Google.Apis.Auth.dll = "Google.Apis.Auth.dll" ?>
+<?define Google.Apis.Auth.PlatformServices.dll = "Google.Apis.Auth.PlatformServices.dll" ?>
+<?define Google.Apis.Core.dll = "Google.Apis.Core.dll" ?>
+<?define Google.Apis.dll = "Google.Apis.dll" ?>
+<?define Google.Apis.PlatformServices.dll = "Google.Apis.PlatformServices.dll" ?>
 <?define Microcharts.dll = "Microcharts.dll" ?>
 <?define Microsoft.Bcl.AsyncInterfaces.dll = "Microsoft.Bcl.AsyncInterfaces.dll" ?>
 <?define Microsoft.Extensions.Configuration.Abstractions.dll = "Microsoft.Extensions.Configuration.Abstractions.dll" ?>
@@ -29,6 +37,7 @@
 <?define SQLitePCLRaw.provider.dynamic_cdecl.dll = "SQLitePCLRaw.provider.dynamic_cdecl.dll" ?>
 <?define SuperSocket.ClientEngine.dll = "SuperSocket.ClientEngine.dll" ?>
 <?define System.Buffers.dll = "System.Buffers.dll" ?>
+<?define System.Collections.Immutable.dll = "System.Collections.Immutable.dll" ?>
 <?define System.ComponentModel.Annotations.dll = "System.ComponentModel.Annotations.dll" ?>
 <?define System.Memory.dll = "System.Memory.dll" ?>
 <?define System.Numerics.Vectors.dll = "System.Numerics.Vectors.dll" ?>
@@ -108,6 +117,30 @@
       <Component Id="$(var.Autofac.dll)" Guid="3139DD64-D2CE-4B3C-9207-F3A48FDB9A14">
         <File Id="$(var.Autofac.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.Autofac.dll)" KeyPath="yes" />
       </Component>
+      <Component Id="$(var.FirebaseAdmin.dll)" Guid="F5542469-D5B6-4A9D-9C71-26597D3A3DA4">
+        <File Id="$(var.FirebaseAdmin.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.FirebaseAdmin.dll)" KeyPath="yes" />
+      </Component>
+      <Component Id="$(var.Google.Api.Gax.dll)" Guid="0A6A8DAF-6A1B-4EAC-94F0-DCE1F4D87716">
+        <File Id="$(var.Google.Api.Gax.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.Google.Api.Gax.dll)" KeyPath="yes" />
+      </Component>
+      <Component Id="$(var.Google.Api.Gax.Rest.dll)" Guid="DA07BAB1-BE3D-413F-9C04-D60B4ADBFFAF">
+        <File Id="$(var.Google.Api.Gax.Rest.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.Google.Api.Gax.Rest.dll)" KeyPath="yes" />
+      </Component>
+      <Component Id="$(var.Google.Apis.Auth.dll)" Guid="093D7AF8-CBC8-4F0F-9A22-17419AEF7AD1">
+        <File Id="$(var.Google.Apis.Auth.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.Google.Apis.Auth.dll)" KeyPath="yes" />
+      </Component>
+      <Component Id="$(var.Google.Apis.Auth.PlatformServices.dll)" Guid="A7B9BD7C-EEFC-4B57-A97E-88DF2CF947D1">
+        <File Id="$(var.Google.Apis.Auth.PlatformServices.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.Google.Apis.Auth.PlatformServices.dll)" KeyPath="yes" />
+      </Component>
+      <Component Id="$(var.Google.Apis.Core.dll)" Guid="4D756452-6668-4178-922A-4B08E1ABA246">
+        <File Id="$(var.Google.Apis.Core.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.Google.Apis.Core.dll)" KeyPath="yes" />
+      </Component>
+      <Component Id="$(var.Google.Apis.dll)" Guid="25250092-DE0E-4A6E-8E8C-906D24EB6872">
+        <File Id="$(var.Google.Apis.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.Google.Apis.dll)" KeyPath="yes" />
+      </Component>
+      <Component Id="$(var.Google.Apis.PlatformServices.dll)" Guid="F8A9228E-20DC-4A53-84AA-18293DBFD89E">
+        <File Id="$(var.Google.Apis.PlatformServices.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.Google.Apis.PlatformServices.dll)" KeyPath="yes" />
+      </Component>
       <Component Id="$(var.Microcharts.dll)" Guid="555D273A-69F6-4549-A9D0-FB336F23C0F4">
         <File Id="$(var.Microcharts.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.Microcharts.dll)" KeyPath="yes" />
       </Component>
@@ -180,6 +213,9 @@
       <Component Id="$(var.System.Buffers.dll)" Guid="44408DC9-811A-46D1-8605-7F882A2E3831">
         <File Id="$(var.System.Buffers.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.System.Buffers.dll)" KeyPath="yes" />
       </Component>
+      <Component Id="$(var.System.Collections.Immutable.dll)" Guid="4CC08D42-BE88-4454-B701-7342D2209720">
+        <File Id="$(var.System.Collections.Immutable.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.System.Collections.Immutable.dll)" KeyPath="yes" />
+      </Component>
       <Component Id="$(var.System.ComponentModel.Annotations.dll)" Guid="CD1110F7-2954-433C-B917-A36CE52CA476">
         <File Id="$(var.System.ComponentModel.Annotations.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.System.ComponentModel.Annotations.dll)" KeyPath="yes" />
       </Component>
@@ -225,6 +261,14 @@
       <ComponentRef Id="$(var.Spacearr.Windows.Service.Config)" />
       <ComponentRef Id="$(var.AppSettings.json)" />
       <ComponentRef Id="$(var.Autofac.dll)" />
+      <ComponentRef Id="$(var.FirebaseAdmin.dll)" />
+      <ComponentRef Id="$(var.Google.Api.Gax.dll)" />
+      <ComponentRef Id="$(var.Google.Api.Gax.Rest.dll)" />
+      <ComponentRef Id="$(var.Google.Apis.Auth.dll)" />
+      <ComponentRef Id="$(var.Google.Apis.Auth.PlatformServices.dll)" />
+      <ComponentRef Id="$(var.Google.Apis.Core.dll)" />
+      <ComponentRef Id="$(var.Google.Apis.dll)" />
+      <ComponentRef Id="$(var.Google.Apis.PlatformServices.dll)" />
       <ComponentRef Id="$(var.Microcharts.dll)" />
       <ComponentRef Id="$(var.Microsoft.Bcl.AsyncInterfaces.dll)" />
       <ComponentRef Id="$(var.Microsoft.Extensions.Configuration.Abstractions.dll)" />
@@ -249,6 +293,7 @@
       <ComponentRef Id="$(var.SQLitePCLRaw.provider.dynamic_cdecl.dll)" />
       <ComponentRef Id="$(var.SuperSocket.ClientEngine.dll)" />
       <ComponentRef Id="$(var.System.Buffers.dll)" />
+      <ComponentRef Id="$(var.System.Collections.Immutable.dll)" />
       <ComponentRef Id="$(var.System.ComponentModel.Annotations.dll)" />
       <ComponentRef Id="$(var.System.Memory.dll)" />
       <ComponentRef Id="$(var.System.Numerics.Vectors.dll)" />

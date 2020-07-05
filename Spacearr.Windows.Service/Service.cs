@@ -24,6 +24,8 @@ namespace Spacearr.Windows.Service
         {
             _pusher.ComputerDrivesCommandReceiverConnect(_configuration.GetSection("PusherAppId").Value, _configuration.GetSection("PusherKey").Value,
                 _configuration.GetSection("PusherSecret").Value, _configuration.GetSection("PusherCluster").Value);
+            _pusher.SaveFirebasePushNotificationTokenCommandReceiverConnect(_configuration.GetSection("PusherAppId").Value, _configuration.GetSection("PusherKey").Value,
+                _configuration.GetSection("PusherSecret").Value, _configuration.GetSection("PusherCluster").Value);
             _notificationTimer.Instantiate();
         }
 

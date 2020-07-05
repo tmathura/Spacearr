@@ -3,6 +3,13 @@
 <?define Manufacturer = "Spacearr" ?>
 <?define UpgradeCode = "{56B333FF-84B5-4949-80DF-6D3CFA572075}" ?>
 <?define AppSettings.json = "appsettings.json" ?>
+<?define FirebaseAdmin.dll = "FirebaseAdmin.dll" ?>
+<?define Google.Api.Gax.dll = "Google.Api.Gax.dll" ?>
+<?define Google.Api.Gax.Rest.dll = "Google.Api.Gax.Rest.dll" ?>
+<?define Google.Apis.Auth.dll = "Google.Apis.Auth.dll" ?>
+<?define Google.Apis.Auth.PlatformServices.dll = "Google.Apis.Auth.PlatformServices.dll" ?>
+<?define Google.Apis.Core.dll = "Google.Apis.Core.dll" ?>
+<?define Google.Apis.dll = "Google.Apis.dll" ?>
 <?define Microcharts.dll = "Microcharts.dll" ?>
 <?define Microsoft.Bcl.AsyncInterfaces.dll = "Microsoft.Bcl.AsyncInterfaces.dll" ?>
 <?define Microsoft.Extensions.Configuration.Abstractions.dll = "Microsoft.Extensions.Configuration.Abstractions.dll" ?>
@@ -49,6 +56,7 @@
 <?define SuperSocket.ClientEngine.dll = "SuperSocket.ClientEngine.dll" ?>
 <?define System.ComponentModel.Annotations.dll = "System.ComponentModel.Annotations.dll" ?>
 <?define System.Diagnostics.EventLog.dll = "System.Diagnostics.EventLog.dll" ?>
+<?define System.Interactive.Async.dll = "System.Interactive.Async.dll" ?>
 <?define System.Runtime.CompilerServices.Unsafe.dll = "System.Runtime.CompilerServices.Unsafe.dll" ?>
 <?define System.Security.AccessControl.dll = "System.Security.AccessControl.dll" ?>
 <?define System.Security.Principal.Windows.dll = "System.Security.Principal.Windows.dll" ?>
@@ -135,6 +143,27 @@
 
       <Component Id="$(var.AppSettings.json)" Guid="C5A29C38-40D2-4BBB-BBC1-7E4CDC722388">
         <File Id="$(var.AppSettings.json)" Source="$(var.Spacearr.WorkerService.Windows.TargetDir)$(var.AppSettings.json)" KeyPath="yes" />
+      </Component>
+      <Component Id="$(var.FirebaseAdmin.dll)" Guid="F5542469-D5B6-4A9D-9C71-26597D3A3DA4">
+        <File Id="$(var.FirebaseAdmin.dll)" Source="$(var.Spacearr.WorkerService.Windows.TargetDir)$(var.FirebaseAdmin.dll)" KeyPath="yes" />
+      </Component>
+      <Component Id="$(var.Google.Api.Gax.dll)" Guid="0A6A8DAF-6A1B-4EAC-94F0-DCE1F4D87716">
+        <File Id="$(var.Google.Api.Gax.dll)" Source="$(var.Spacearr.WorkerService.Windows.TargetDir)$(var.Google.Api.Gax.dll)" KeyPath="yes" />
+      </Component>
+      <Component Id="$(var.Google.Api.Gax.Rest.dll)" Guid="DA07BAB1-BE3D-413F-9C04-D60B4ADBFFAF">
+        <File Id="$(var.Google.Api.Gax.Rest.dll)" Source="$(var.Spacearr.WorkerService.Windows.TargetDir)$(var.Google.Api.Gax.Rest.dll)" KeyPath="yes" />
+      </Component>
+      <Component Id="$(var.Google.Apis.Auth.dll)" Guid="093D7AF8-CBC8-4F0F-9A22-17419AEF7AD1">
+        <File Id="$(var.Google.Apis.Auth.dll)" Source="$(var.Spacearr.WorkerService.Windows.TargetDir)$(var.Google.Apis.Auth.dll)" KeyPath="yes" />
+      </Component>
+      <Component Id="$(var.Google.Apis.Auth.PlatformServices.dll)" Guid="A7B9BD7C-EEFC-4B57-A97E-88DF2CF947D1">
+        <File Id="$(var.Google.Apis.Auth.PlatformServices.dll)" Source="$(var.Spacearr.WorkerService.Windows.TargetDir)$(var.Google.Apis.Auth.PlatformServices.dll)" KeyPath="yes" />
+      </Component>
+      <Component Id="$(var.Google.Apis.Core.dll)" Guid="4D756452-6668-4178-922A-4B08E1ABA246">
+        <File Id="$(var.Google.Apis.Core.dll)" Source="$(var.Spacearr.WorkerService.Windows.TargetDir)$(var.Google.Apis.Core.dll)" KeyPath="yes" />
+      </Component>
+      <Component Id="$(var.Google.Apis.dll)" Guid="25250092-DE0E-4A6E-8E8C-906D24EB6872">
+        <File Id="$(var.Google.Apis.dll)" Source="$(var.Spacearr.WorkerService.Windows.TargetDir)$(var.Google.Apis.dll)" KeyPath="yes" />
       </Component>
       <Component Id="$(var.Microcharts.dll)" Guid="555D273A-69F6-4549-A9D0-FB336F23C0F4">
         <File Id="$(var.Microcharts.dll)" Source="$(var.Spacearr.WorkerService.Windows.TargetDir)$(var.Microcharts.dll)" KeyPath="yes" />
@@ -271,6 +300,9 @@
       <Component Id="$(var.System.Diagnostics.EventLog.dll)" Guid="F126BF50-FC06-47D9-9654-153957E336E5">
         <File Id="$(var.System.Diagnostics.EventLog.dll)" Source="$(var.Spacearr.WorkerService.Windows.TargetDir)$(var.System.Diagnostics.EventLog.dll)" KeyPath="yes" />
       </Component>
+      <Component Id="$(var.System.Interactive.Async.dll)" Guid="8E258946-55CA-48B8-94FF-206D77150D94">
+        <File Id="$(var.System.Interactive.Async.dll)" Source="$(var.Spacearr.WorkerService.Windows.TargetDir)$(var.System.Interactive.Async.dll)" KeyPath="yes" />
+      </Component>
       <Component Id="$(var.System.Runtime.CompilerServices.Unsafe.dll)" Guid="612CF274-4CA3-4555-B046-E7209390DC2C">
         <File Id="$(var.System.Runtime.CompilerServices.Unsafe.dll)" Source="$(var.Spacearr.WorkerService.Windows.TargetDir)$(var.System.Runtime.CompilerServices.Unsafe.dll)" KeyPath="yes" />
       </Component>
@@ -332,6 +364,13 @@
     <Feature Id="MainApplication" Title="Spacearr Windows Service" Level="1">
       <ComponentRef Id="$(var.Spacearr.WorkerService.Windows.TargetFileName)" />
       <ComponentRef Id="$(var.AppSettings.json)" />
+      <ComponentRef Id="$(var.FirebaseAdmin.dll)" />
+      <ComponentRef Id="$(var.Google.Api.Gax.dll)" />
+      <ComponentRef Id="$(var.Google.Api.Gax.Rest.dll)" />
+      <ComponentRef Id="$(var.Google.Apis.Auth.dll)" />
+      <ComponentRef Id="$(var.Google.Apis.Auth.PlatformServices.dll)" />
+      <ComponentRef Id="$(var.Google.Apis.Core.dll)" />
+      <ComponentRef Id="$(var.Google.Apis.dll)" />
       <ComponentRef Id="$(var.Microcharts.dll)" />
       <ComponentRef Id="$(var.Microsoft.Bcl.AsyncInterfaces.dll)" />
       <ComponentRef Id="$(var.Microsoft.Extensions.Configuration.Abstractions.dll)" />
@@ -378,6 +417,7 @@
       <ComponentRef Id="$(var.SuperSocket.ClientEngine.dll)" />
       <ComponentRef Id="$(var.System.ComponentModel.Annotations.dll)" />
       <ComponentRef Id="$(var.System.Diagnostics.EventLog.dll)" />
+      <ComponentRef Id="$(var.System.Interactive.Async.dll)" />
       <ComponentRef Id="$(var.System.Runtime.CompilerServices.Unsafe.dll)" />
       <ComponentRef Id="$(var.System.Security.AccessControl.dll)" />
       <ComponentRef Id="$(var.System.Security.Principal.Windows.dll)" />

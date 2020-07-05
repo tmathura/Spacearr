@@ -10,9 +10,9 @@ namespace Spacearr.Pusher.API
     {
         private readonly ILogger _logger;
         private readonly IInvoker _invoker;
-        private readonly INotificationReceiver _notificationReceiver;
         private readonly IWorkerServiceReceiver _workerServiceReceiver;
         private readonly IComputerDrivesCommandReceiver _computerDrivesCommandReceiver;
+        private readonly ISaveFirebasePushNotificationTokenCommandReceiver _saveFirebasePushNotificationTokenCommandReceiver;
         public string ReturnData => _workerServiceReceiver?.ReturnData;
 
         public Pusher(ILogger logger, IWorkerServiceReceiver workerServiceReceiver)
@@ -21,17 +21,12 @@ namespace Spacearr.Pusher.API
             _workerServiceReceiver = workerServiceReceiver;
         }
 
-        public Pusher(ILogger logger, INotificationReceiver notificationReceiver)
-        {
-            _logger = logger;
-            _notificationReceiver = notificationReceiver;
-        }
-
-        public Pusher(ILogger logger, IInvoker invoker, IComputerDrivesCommandReceiver computerDrivesCommandReceiver)
+        public Pusher(ILogger logger, IInvoker invoker, IComputerDrivesCommandReceiver computerDrivesCommandReceiver, ISaveFirebasePushNotificationTokenCommandReceiver saveFirebasePushNotificationTokenCommandReceiver)
         {
             _logger = logger;
             _invoker = invoker;
             _computerDrivesCommandReceiver = computerDrivesCommandReceiver;
+            _saveFirebasePushNotificationTokenCommandReceiver = saveFirebasePushNotificationTokenCommandReceiver;
         }
 
         /// <summary>
@@ -45,6 +40,19 @@ namespace Spacearr.Pusher.API
         public async Task ComputerDrivesCommandReceiverConnect(string appId, string key, string secret, string cluster)
         {
             await _computerDrivesCommandReceiver.Connect(ExecuteCommand, appId, key, secret, cluster);
+        }
+
+        /// <summary>
+        /// Connect the save firebase push notification token command receiver.
+        /// </summary>
+        /// <param name="appId">The Pusher app id</param>
+        /// <param name="key">The Pusher key</param>
+        /// <param name="secret">The Pusher secret</param>
+        /// <param name="cluster">The Pusher cluster</param>
+        /// <returns></returns>
+        public async Task SaveFirebasePushNotificationTokenCommandReceiverConnect(string appId, string key, string secret, string cluster)
+        {
+            await _saveFirebasePushNotificationTokenCommandReceiver.Connect(appId, key, secret, cluster);
         }
 
         /// <summary>
@@ -69,19 +77,6 @@ namespace Spacearr.Pusher.API
         public async Task WorkerServiceReceiverDisconnect()
         {
             await _workerServiceReceiver.Disconnect();
-        }
-
-        /// <summary>
-        /// Connect the notification receiver.
-        /// </summary>
-        /// <param name="appId">The Pusher app id</param>
-        /// <param name="key">The Pusher key</param>
-        /// <param name="secret">The Pusher secret</param>
-        /// <param name="cluster">The Pusher cluster</param>
-        /// <returns></returns>
-        public async Task NotificationReceiverConnect(string appId, string key, string secret, string cluster)
-        {
-            await _notificationReceiver.Connect(appId, key, secret, cluster);
         }
 
         /// <summary>

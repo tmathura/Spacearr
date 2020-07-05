@@ -1,8 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
 using Spacearr.Common.Interfaces;
 using Spacearr.Common.Interfaces.Command;
-using Spacearr.Common.Models;
+using Spacearr.Common.Interfaces.Logger;
 using Spacearr.Common.Util;
 using System;
 using System.Collections.Generic;
@@ -14,11 +13,15 @@ namespace Spacearr.Common.Command.Commands
     {
         private readonly long _lowComputerDriveValue;
 
+        private readonly ILogger _logger;
         private readonly IComputerDrives _computerDrives;
+        private readonly ISendFirebasePushNotification _sendFirebasePushNotification;
 
-        public ComputerDrivesLowCommand(IConfiguration configuration, IComputerDrives computerDrives)
+        public ComputerDrivesLowCommand(IConfiguration configuration, ILogger logger, IComputerDrives computerDrives, ISendFirebasePushNotification sendFirebasePushNotification)
         {
+            _logger = logger;
             _computerDrives = computerDrives;
+            _sendFirebasePushNotification = sendFirebasePushNotification;
             _lowComputerDriveValue = Convert.ToInt64(configuration.GetSection("LowComputerDriveGBValue").Value);
         }
 
@@ -28,12 +31,11 @@ namespace Spacearr.Common.Command.Commands
         /// <returns>Returns a NotificationEventArgsModel serialized as Json</returns>
         public string Execute()
         {
-            NotificationEventArgsModel notificationEventArgs = null;
+            var notificationList = new List<string>();
             var lowDiskSpaceWarningGb = _lowComputerDriveValue;
 
             if (lowDiskSpaceWarningGb > 0)
             {
-                var notificationList = new List<string>();
                 if (_computerDrives.GetComputerDrives().Count > 0)
                 {
                     foreach (var drive in _computerDrives.GetComputerDrives())
@@ -47,17 +49,26 @@ namespace Spacearr.Common.Command.Commands
                     }
                 }
 
-                if (notificationList.Count > 0)
+                foreach (var notification in notificationList)
                 {
-                    notificationEventArgs = new NotificationEventArgsModel
+                    var deviceTokens = new List<string>();
+                    var firebasePushNotificationDevices = _logger.GetFirebasePushNotificationDevicesAsync().Result;
+                    foreach (var firebasePushNotificationDevice in firebasePushNotificationDevices)
                     {
-                        Title = "Computer Drives Low",
-                        Message = string.Join(Environment.NewLine, notificationList.ToArray())
-                    };
+                        if (!string.IsNullOrWhiteSpace(firebasePushNotificationDevice.Token))
+                        {
+                            deviceTokens.Add(firebasePushNotificationDevice.Token);
+                        }
+                    }
+
+                    if (deviceTokens.Count > 0)
+                    {
+                        _sendFirebasePushNotification.SendNotificationMultipleDevices(deviceTokens, "Computer Drives Low", notification);
+                    }
                 }
             }
 
-            return JsonConvert.SerializeObject(notificationEventArgs);
+            return string.Empty;
         }
     }
 }

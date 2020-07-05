@@ -1,14 +1,12 @@
-﻿using Spacearr.Common.Models;
-
-namespace Spacearr.Core.Xamarin.ViewModels
+﻿namespace Spacearr.Core.Xamarin.ViewModels
 {
     public class NotificationDetailViewModel : BaseViewModel
     {
-        public NotificationEventArgsModel Notification { get; set; }
-        public NotificationDetailViewModel(NotificationEventArgsModel notification = null)
+        public string Message { get; set; }
+        public NotificationDetailViewModel(string title, string message)
         {
-            Title = $"{notification?.Title}";
-            Notification = notification;
+            Title = title;
+            Message = message;
         }
     }
 }

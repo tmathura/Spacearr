@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FirebaseAdmin" Version="1.14.0" />
     <PackageReference Include="Microcharts" Version="0.8.5-pre" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0-preview.5.20278.1" />
     <PackageReference Include="PusherClient" Version="1.1.2" />

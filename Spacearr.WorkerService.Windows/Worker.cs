@@ -13,6 +13,8 @@ namespace Spacearr.WorkerService.Windows
         {
             pusher.ComputerDrivesCommandReceiverConnect(configuration.GetSection("PusherAppId").Value, configuration.GetSection("PusherKey").Value,
                 configuration.GetSection("PusherSecret").Value, configuration.GetSection("PusherCluster").Value);
+            pusher.SaveFirebasePushNotificationTokenCommandReceiverConnect(configuration.GetSection("PusherAppId").Value, configuration.GetSection("PusherKey").Value,
+                configuration.GetSection("PusherSecret").Value, configuration.GetSection("PusherCluster").Value);
             notificationTimer.Instantiate();
         }
 

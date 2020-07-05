@@ -1,4 +1,5 @@
 ﻿using Spacearr.Common.Models;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -32,14 +33,33 @@ namespace Spacearr.Common.Interfaces.Logger
         #endregion
 
         #region Notifications
+        
+        /// <summary>
+        /// Get a firebase push notification device.
+        /// </summary>
+        /// <returns>Return a FirebasePushNotificationDeviceModel</returns>
+        Task<FirebasePushNotificationDeviceModel> GetFirebasePushNotificationDeviceAsync(Guid deviceId);
 
         /// <summary>
-        /// Log a notification.
+        /// Get all the firebase push notification devices.
         /// </summary>
-        /// <param name="logTitle">The notification title</param>
-        /// <param name="logMessage">The notification message</param>
+        /// <returns>Return a list of FirebasePushNotificationDeviceModels</returns>
+        Task<List<FirebasePushNotificationDeviceModel>> GetFirebasePushNotificationDevicesAsync();
+
+        /// <summary>
+        /// Save a firebase push notification device.
+        /// </summary>
+        /// <param name="deviceId">The device id</param>
+        /// <param name="token">The device token</param>
         /// <returns>Returns a id</returns>
-        Task LogNotificationAsync(string logTitle, string logMessage);
+        Task SaveFirebasePushNotificationDeviceAsync(Guid deviceId, string token);
+
+        /// <summary>
+        /// Update a firebase push notification device record.
+        /// </summary>
+        /// <param name="record">The setting</param>
+        /// <returns>Returns a id</returns>
+        Task UpdateFirebasePushNotificationDeviceAsync(FirebasePushNotificationDeviceModel record);
 
         #endregion
 

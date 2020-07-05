@@ -4,10 +4,7 @@ using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
-using AndroidX.Work;
-using Java.Util.Concurrent;
-using Spacearr.Core.Xamarin.Notifications;
-using Spacearr.Droid.Notifications;
+using Plugin.FirebasePushNotification;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
@@ -27,14 +24,8 @@ namespace Spacearr.Droid
             Forms.Init(this, savedInstanceState);
             LoadApplication(new Core.Xamarin.App());
 
-            CreateNotificationFromIntent(Intent);
-
-            const string taskId = "NotificationWorker_TaskId";
-            var builder = new PeriodicWorkRequest.Builder(typeof(NotificationWorker), 15, TimeUnit.Minutes);
-            builder.SetConstraints(Constraints.None);
-            var workRequest = builder.Build();
-            WorkManager.Instance.EnqueueUniquePeriodicWork(taskId, ExistingPeriodicWorkPolicy.Keep, workRequest);
-
+            FirebasePushNotificationManager.ProcessIntent(this, Intent);
+            
             if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
             {
                 var statusBarColor = (Color)Xamarin.Forms.Application.Current.Resources["StatusBarColor"];
@@ -45,7 +36,7 @@ namespace Spacearr.Droid
             }
         }
 
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
@@ -54,19 +45,8 @@ namespace Spacearr.Droid
 
         protected override void OnNewIntent(Intent intent)
         {
-            CreateNotificationFromIntent(intent);
-        }
-
-        void CreateNotificationFromIntent(Intent intent)
-        {
-            if (intent?.Extras != null)
-            {
-                var id = intent.Extras.GetInt(AndroidNotificationManager.IdKey);
-                var title = intent.Extras.GetString(AndroidNotificationManager.TitleKey);
-                var message = intent.Extras.GetString(AndroidNotificationManager.MessageKey);
-
-                DependencyService.Get<INotificationManager>().ReceiveNotification(id, title, message);
-            }
+            base.OnNewIntent(intent);
+            FirebasePushNotificationManager.ProcessIntent(this, intent);
         }
     }
 }

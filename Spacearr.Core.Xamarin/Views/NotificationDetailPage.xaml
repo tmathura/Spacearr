@@ -24,7 +24,7 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <controls:FloatingLabel Grid.Row="0" LabelTopText="{Binding Notification.Title}" LabelBottomText="{Binding Notification.Message}"/>
+                            <controls:FloatingLabel Grid.Row="0" LabelTopText="{Binding Title}" LabelBottomText="{Binding Message}"/>
                         </Grid>
                     </Grid>
                 </StackLayout>

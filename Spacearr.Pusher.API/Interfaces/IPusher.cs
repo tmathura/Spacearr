@@ -17,6 +17,16 @@ namespace Spacearr.Pusher.API.Interfaces
         Task ComputerDrivesCommandReceiverConnect(string appId, string key, string secret, string cluster);
 
         /// <summary>
+        /// Connect the save firebase push notification token command receiver.
+        /// </summary>
+        /// <param name="appId">The Pusher app id</param>
+        /// <param name="key">The Pusher key</param>
+        /// <param name="secret">The Pusher secret</param>
+        /// <param name="cluster">The Pusher cluster</param>
+        /// <returns></returns>
+        Task SaveFirebasePushNotificationTokenCommandReceiverConnect(string appId, string key, string secret, string cluster);
+
+        /// <summary>
         /// Connect the worker service receiver.
         /// </summary>
         /// <param name="channelName">The channel name to connect to</param>

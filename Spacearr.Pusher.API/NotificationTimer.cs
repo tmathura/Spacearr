@@ -1,11 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Spacearr.Common.Command.Commands;
-using Spacearr.Common.Enums;
 using Spacearr.Common.Interfaces;
 using Spacearr.Common.Interfaces.Command;
-using Spacearr.Pusher.API.Interfaces;
+using Spacearr.Common.Interfaces.Logger;
 using System;
-using System.Collections.Generic;
 using System.Timers;
 using Timer = System.Timers.Timer;
 
@@ -14,18 +12,18 @@ namespace Spacearr.Pusher.API
     public class NotificationTimer : INotificationTimer
     {
         private readonly IConfiguration _configuration;
-        private readonly IInvoker _invoker;
-        private readonly IPusher _pusher;
+        private readonly ILogger _logger;
         private readonly IComputerDrives _computerDrives;
+        private readonly ISendFirebasePushNotification _sendFirebasePushNotification;
 
         private readonly Timer _timer;
 
-        public NotificationTimer(IConfiguration configuration, IInvoker invoker, IPusher pusher, IComputerDrives computerDrives)
+        public NotificationTimer(IConfiguration configuration, IInvoker invoker, ILogger logger, IComputerDrives computerDrives, ISendFirebasePushNotification sendFirebasePushNotification)
         {
             _configuration = configuration;
-            _invoker = invoker;
-            _pusher = pusher;
+            _logger = logger;
             _computerDrives = computerDrives;
+            _sendFirebasePushNotification = sendFirebasePushNotification;
 
             _timer = new Timer
             {
@@ -58,18 +56,8 @@ namespace Spacearr.Pusher.API
         /// <param name="e"></param>
         private void ElapsedEventHandler(object sender, ElapsedEventArgs e)
         {
-            var command = new ComputerDrivesLowCommand(_configuration, _computerDrives);
-            var jsonList = new List<string>
-            {
-                _invoker.Invoke(command)
-            };
-
-            foreach (var json in jsonList)
-            {
-                _pusher.SendMessage(PusherChannel.SpacearrWorkerServiceWindowsNotificationChannel.ToString(), PusherEvent.WorkerServiceEvent.ToString(), json,
-                    _configuration.GetSection("PusherAppId").Value, _configuration.GetSection("PusherKey").Value,
-                    _configuration.GetSection("PusherSecret").Value, _configuration.GetSection("PusherCluster").Value);
-            }
+            var command = new ComputerDrivesLowCommand(_configuration, _logger, _computerDrives, _sendFirebasePushNotification);
+            command.Execute();
         }
     }
 }

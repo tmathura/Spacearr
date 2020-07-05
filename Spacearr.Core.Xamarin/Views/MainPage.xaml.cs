@@ -1,7 +1,5 @@
 ﻿using Spacearr.Common.Interfaces.Logger;
-using Spacearr.Common.Models;
 using Spacearr.Core.Xamarin.Models;
-using Spacearr.Core.Xamarin.Notifications;
 using Spacearr.Pusher.API.Interfaces;
 using Spacearr.Pusher.API.Interfaces.Service;
 using System.Collections.Generic;
@@ -22,17 +20,7 @@ namespace Spacearr.Core.Xamarin.Views
         public MainPage(IComputerService computerDriveService, ILogger logger, IPusherValidation pusherValidation)
         {
             InitializeComponent();
-
-            var notificationManager = DependencyService.Get<INotificationManager>();
-            if (notificationManager != null)
-            {
-                notificationManager.NotificationReceived += (sender, eventArgs) =>
-                {
-                    var evtData = (NotificationEventArgsModel)eventArgs;
-                    ShowNotification(evtData.Id, evtData.Title, evtData.Message);
-                };
-            }
-
+            
             _computerDriveService = computerDriveService;
             _logger = logger;
             _pusherValidation = pusherValidation;
@@ -78,17 +66,6 @@ namespace Spacearr.Core.Xamarin.Views
 
                 IsPresented = false;
             }
-        }
-
-        private void ShowNotification(int id, string title, string message)
-        {
-            Device.BeginInvokeOnMainThread(() =>
-            {
-                var notification = new NotificationEventArgsModel { Id = id, Title = title, Message = message} ;
-                var newPage = new NavigationPage(new NotificationDetailPage(notification));
-                DependencyService.Get<IPushCancel>().CancelPush(id);
-                Detail = newPage;
-            });
         }
     }
 }

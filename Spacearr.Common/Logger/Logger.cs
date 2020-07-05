@@ -16,7 +16,7 @@ namespace Spacearr.Common.Logger
         {
             _database = new SQLiteAsyncConnection(databasePath);
             _database.CreateTableAsync<LogModel>().Wait();
-            _database.CreateTableAsync<NotificationModel>().Wait();
+            _database.CreateTableAsync<FirebasePushNotificationDeviceModel>().Wait();
             _database.CreateTableAsync<SettingModel>().Wait();
             _database.CreateTableAsync<XamarinSettingModel>().Wait();
         }
@@ -70,43 +70,54 @@ namespace Spacearr.Common.Logger
 
         #endregion
 
-        #region Notifications
+        #region FirebasePushNotificationDevices
 
         /// <summary>
-        /// Get all the notifications.
+        /// Get a firebase push notification device.
         /// </summary>
-        /// <returns>Return a list of NotificationModels</returns>
-        public async Task<List<NotificationModel>> GetNotificationLogsAsync()
+        /// <returns>Return a FirebasePushNotificationDeviceModel</returns>
+        public async Task<FirebasePushNotificationDeviceModel> GetFirebasePushNotificationDeviceAsync(Guid deviceId)
         {
-            return await _database.Table<NotificationModel>().ToListAsync();
+            return await _database.Table<FirebasePushNotificationDeviceModel>().Where(x => x.DeviceId == deviceId).FirstOrDefaultAsync(); ;
         }
 
         /// <summary>
-        /// Log a notification.
+        /// Get all the firebase push notification devices.
         /// </summary>
-        /// <param name="logTitle">The notification title</param>
-        /// <param name="logMessage">The notification message</param>
-        /// <returns>Returns a id</returns>
-        public async Task LogNotificationAsync(string logTitle, string logMessage)
+        /// <returns>Return a list of FirebasePushNotificationDeviceModels</returns>
+        public async Task<List<FirebasePushNotificationDeviceModel>> GetFirebasePushNotificationDevicesAsync()
         {
-            var record = new NotificationModel
+            return await _database.Table<FirebasePushNotificationDeviceModel>().ToListAsync();
+        }
+
+        /// <summary>
+        /// Save a firebase push notification device.
+        /// </summary>
+        /// <param name="deviceId">The device id</param>
+        /// <param name="token">The device token</param>
+        /// <returns>Returns a id</returns>
+        public async Task SaveFirebasePushNotificationDeviceAsync(Guid deviceId, string token)
+        {
+            var record = new FirebasePushNotificationDeviceModel
             {
-                LogTitle = logTitle,
-                LogMessage = logMessage,
-                LogDate = DateTime.Now
-            };
+                DeviceId = deviceId,
+                Token = token,
+                CreatedDate = DateTime.Now,
+                UpdatedDate = DateTime.Now
+        };
 
             await _database.InsertAsync(record);
         }
 
         /// <summary>
-        /// Delete a specific notification.
+        /// Update a firebase push notification device record.
         /// </summary>
-        /// <param name="record">The record to delete</param>
+        /// <param name="record">The setting</param>
         /// <returns>Returns a id</returns>
-        public async Task DeleteLogAsync(NotificationModel record)
+        public async Task UpdateFirebasePushNotificationDeviceAsync(FirebasePushNotificationDeviceModel record)
         {
-            await _database.DeleteAsync(record);
+            record.UpdatedDate = DateTime.Now;
+            await _database.UpdateAsync(record);
         }
 
         #endregion
@@ -177,7 +188,6 @@ namespace Spacearr.Common.Logger
         /// <returns>Returns a id</returns>
         public async Task LogXamarinSettingAsync(XamarinSettingModel record)
         {
-
             record.CreatedDate = DateTime.Now;
             record.UpdatedDate = DateTime.Now;
 

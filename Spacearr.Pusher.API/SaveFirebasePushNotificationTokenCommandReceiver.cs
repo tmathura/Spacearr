@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Spacearr.Common.Command.Commands;
 using Spacearr.Common.Enums;
 using Spacearr.Common.Interfaces.Logger;
 using Spacearr.Common.Models;
@@ -8,23 +9,23 @@ using System.Threading.Tasks;
 
 namespace Spacearr.Pusher.API
 {
-    public class NotificationReceiver : INotificationReceiver
+    public class SaveFirebasePushNotificationTokenCommandReceiver : ISaveFirebasePushNotificationTokenCommandReceiver
     {
         private readonly ILogger _logger;
 
         private readonly string _channelNameReceive;
         private readonly string _eventNameReceive;
 
-        public NotificationReceiver(ILogger logger)
+        public SaveFirebasePushNotificationTokenCommandReceiver(ILogger logger)
         {
             _logger = logger;
 
-           _channelNameReceive = PusherChannel.SpacearrWorkerServiceWindowsNotificationChannel.ToString();
-           _eventNameReceive = PusherEvent.WorkerServiceEvent.ToString();
+            _channelNameReceive = $"{ CommandType.SaveFirebasePushNotificationTokenCommand }{ PusherChannel.SpacearrWorkerServiceWindowsChannel.ToString() }";
+            _eventNameReceive = $"{ CommandType.SaveFirebasePushNotificationTokenCommand }{ PusherEvent.WorkerServiceEvent.ToString() }";
         }
 
         /// <summary>
-        /// Connect the notification receiver to the Pusher Pub/Sub..
+        /// Connect the save firebase push notification token command receiver to the Pusher Pub/Sub.
         /// </summary>
         /// <param name="appId">The Pusher app id</param>
         /// <param name="key">The Pusher key</param>
@@ -42,11 +43,15 @@ namespace Spacearr.Pusher.API
                     var myChannel = await pusherReceive.SubscribeAsync(_channelNameReceive);
                     myChannel.Bind(_eventNameReceive, (dynamic data) =>
                     {
-                        PusherReceiveMessageObjectModel pusherReceiveMessageObject = JsonConvert.DeserializeObject<PusherReceiveMessageObjectModel>(data.ToString());
-                        var pusherReceiveMessage = JsonConvert.DeserializeObject<PusherReceiveMessageModel>(pusherReceiveMessageObject.Data);
-                        var deserializeObject = JsonConvert.DeserializeObject<NotificationEventArgsModel>(pusherReceiveMessage.Message);
-
-                        _logger.LogNotificationAsync(deserializeObject.Title, deserializeObject.Message);
+                        PusherReceiveMessageObjectModel pusherReceiveMessage = JsonConvert.DeserializeObject<PusherReceiveMessageObjectModel>(data.ToString());
+                        var pusherMessage = JsonConvert.DeserializeObject<PusherReceiveMessageModel>(pusherReceiveMessage.Data);
+                        var deserializeObject = JsonConvert.DeserializeObject<PusherSendMessageModel>(pusherMessage.Message);
+                        if (deserializeObject.Command == CommandType.SaveFirebasePushNotificationTokenCommand)
+                        {
+                            var firebasePushNotificationDevice = JsonConvert.DeserializeObject<FirebasePushNotificationDevice>(deserializeObject.Values);
+                            var command = new SaveFirebasePushNotificationTokenCommand(_logger, firebasePushNotificationDevice);
+                            command.Execute();
+                        }
                     });
 
                     await pusherReceive.ConnectAsync();

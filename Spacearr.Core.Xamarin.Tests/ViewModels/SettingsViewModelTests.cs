@@ -66,9 +66,9 @@ namespace Spacearr.Core.Xamarin.Tests.ViewModels
             settingsViewModel.LoadItemsCommand.Execute(null);
 
             // Assert
-            await Task.Delay(1000);  //Need this when getting data locally on the device otherwise keeps showing loading icon on Android.
             Assert.AreEqual(Title, settingsViewModel.Title);
             Assert.AreEqual(0, settingsViewModel.Settings.Count);
+            await Task.Delay(2000);  //Need this when getting data locally on the device otherwise keeps showing loading icon on Android.
             _mockISettingsPageHelper.Verify(x => x.CustomDisplayAlert("Error", exceptionMessage, "OK"), Times.Once);
         }
 

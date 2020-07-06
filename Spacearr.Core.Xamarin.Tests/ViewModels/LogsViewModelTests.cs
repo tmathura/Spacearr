@@ -5,6 +5,7 @@ using Spacearr.Core.Xamarin.Interfaces.Helpers;
 using Spacearr.Core.Xamarin.Tests.Factories;
 using Spacearr.Core.Xamarin.ViewModels;
 using System;
+using System.Threading.Tasks;
 
 namespace Spacearr.Core.Xamarin.Tests.ViewModels
 {
@@ -33,7 +34,7 @@ namespace Spacearr.Core.Xamarin.Tests.ViewModels
         }
 
         [TestMethod]
-        public void LoadItemsCommand()
+        public async Task LoadItemsCommand()
         {
             const int noOfLogs = 7;
 
@@ -45,13 +46,14 @@ namespace Spacearr.Core.Xamarin.Tests.ViewModels
             logsViewModel.LoadItemsCommand.Execute(null);
 
             // Assert
+            await Task.Delay(1010);  //Need this when getting data locally on the device otherwise keeps showing loading icon on Android.
             Assert.AreEqual(Title, logsViewModel.Title);
             Assert.IsNotNull(logsViewModel.Logs);
             Assert.AreEqual(noOfLogs, logsViewModel.Logs.Count);
         }
 
         [TestMethod]
-        public void LoadItemsCommand_Exception()
+        public async Task LoadItemsCommand_Exception()
         {
             const string exceptionMessage = "Error on GetLogsAsync!";
 
@@ -63,6 +65,7 @@ namespace Spacearr.Core.Xamarin.Tests.ViewModels
             logsViewModel.LoadItemsCommand.Execute(null);
 
             // Assert
+            await Task.Delay(1000);  //Need this when getting data locally on the device otherwise keeps showing loading icon on Android.
             Assert.AreEqual(Title, logsViewModel.Title);
             Assert.AreEqual(0, logsViewModel.Logs.Count);
             _mockILogsPageHelper.Verify(x => x.CustomDisplayAlert("Error", exceptionMessage, "OK"), Times.Once);

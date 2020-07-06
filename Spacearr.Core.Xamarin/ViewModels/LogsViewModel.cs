@@ -39,7 +39,7 @@ namespace Spacearr.Core.Xamarin.ViewModels
             try
             {
                 Logs.Clear();
-                await Task.Delay(1000);  //Need this when getting data locally otherwise keeps loading icon on Android.
+                await Task.Delay(1000);  //Need this when getting data locally on the device otherwise keeps showing loading icon on Android.
                 var logs = await _logger.GetLogsAsync();
                 foreach (var log in logs.OrderByDescending(x => x.LogDate))
                 {

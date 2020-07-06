@@ -5,6 +5,7 @@ using Spacearr.Core.Xamarin.Interfaces.Helpers;
 using Spacearr.Core.Xamarin.Tests.Factories;
 using Spacearr.Core.Xamarin.ViewModels;
 using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Spacearr.Core.Xamarin.Tests.ViewModels
@@ -34,7 +35,7 @@ namespace Spacearr.Core.Xamarin.Tests.ViewModels
         }
 
         [TestMethod]
-        public void LoadItemsCommand()
+        public async Task LoadItemsCommand()
         {
             const int noOfSettings = 5;
 
@@ -46,13 +47,14 @@ namespace Spacearr.Core.Xamarin.Tests.ViewModels
             settingsViewModel.LoadItemsCommand.Execute(null);
 
             // Assert
+            await Task.Delay(1010);  //Need this when getting data locally on the device otherwise keeps showing loading icon on Android.
             Assert.AreEqual(Title, settingsViewModel.Title);
             Assert.IsNotNull(settingsViewModel.Settings);
             Assert.AreEqual(noOfSettings, settingsViewModel.Settings.Count);
         }
 
         [TestMethod]
-        public void LoadItemsCommand_Exception()
+        public async Task LoadItemsCommand_Exception()
         {
             const string exceptionMessage = "Error on GetSettingsAsync!";
 
@@ -64,6 +66,7 @@ namespace Spacearr.Core.Xamarin.Tests.ViewModels
             settingsViewModel.LoadItemsCommand.Execute(null);
 
             // Assert
+            await Task.Delay(1000);  //Need this when getting data locally on the device otherwise keeps showing loading icon on Android.
             Assert.AreEqual(Title, settingsViewModel.Title);
             Assert.AreEqual(0, settingsViewModel.Settings.Count);
             _mockISettingsPageHelper.Verify(x => x.CustomDisplayAlert("Error", exceptionMessage, "OK"), Times.Once);

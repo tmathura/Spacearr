@@ -14,11 +14,17 @@ namespace Spacearr.Core.Xamarin.Views
     {
         private readonly ComputerViewModel _viewModel;
 
-        public ComputersPage(ILogger logger, IComputerService computerDriveService)
+        public ComputersPage(ILogger logger, IGetComputerService getComputerService)
         {
             InitializeComponent();
 
-            BindingContext = _viewModel = new ComputerViewModel(logger, this, computerDriveService);
+            if (Device.RuntimePlatform == Device.Android)
+            {
+                RefreshImageButton.IsEnabled = false;
+                RefreshImageButton.IsVisible = false;
+            }
+
+            BindingContext = _viewModel = new ComputerViewModel(logger, this, getComputerService);
         }
 
         private async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)

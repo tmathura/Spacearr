@@ -13,16 +13,16 @@ namespace Spacearr.Core.Xamarin.ViewModels
     {
         private readonly ILogger _logger;
         private readonly IComputersPageHelper _computersPageHelper;
-        private readonly IComputerService _computerDriveService;
+        private readonly IGetComputerService _getComputerService;
 
         public ObservableCollection<ComputerModel> Computers { get; set; }
         public Command LoadItemsCommand { get; set; }
 
-        public ComputerViewModel(ILogger logger, IComputersPageHelper computersPageHelper, IComputerService computerDriveService)
+        public ComputerViewModel(ILogger logger, IComputersPageHelper computersPageHelper, IGetComputerService getComputerService)
         {
             _logger = logger;
             _computersPageHelper = computersPageHelper;
-            _computerDriveService = computerDriveService;
+            _getComputerService = getComputerService;
 
             Title = "Computer Drives";
             Computers = new ObservableCollection<ComputerModel>();
@@ -41,7 +41,7 @@ namespace Spacearr.Core.Xamarin.ViewModels
             try
             {
                 Computers.Clear();
-                var computerDrives = await _computerDriveService.GetComputersAsync();
+                var computerDrives = await _getComputerService.GetComputersAsync();
                 foreach (var computerDrive in computerDrives)
                 {
                     Computers.Add(computerDrive);

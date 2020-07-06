@@ -15,21 +15,21 @@ namespace Spacearr.Core.Xamarin.Tests.ViewModels
         private const string Title = "Computer Drives";
         private Mock<ILogger> _mockILogger;
         private Mock<IComputersPageHelper> _mockIComputersPageHelper;
-        private Mock<IComputerService> _mockIComputerService;
+        private Mock<IGetComputerService> _mockIGetComputerService;
 
         [TestInitialize]
         public void SetUp()
         {
             _mockILogger = new Mock<ILogger>();
             _mockIComputersPageHelper = new Mock<IComputersPageHelper>();
-            _mockIComputerService = new Mock<IComputerService>();
+            _mockIGetComputerService = new Mock<IGetComputerService>();
         }
 
         [TestMethod]
         public void ComputerViewModel()
         {
             // Arrange
-            var computerViewModel = new ComputerViewModel(_mockILogger.Object, _mockIComputersPageHelper.Object, _mockIComputerService.Object);
+            var computerViewModel = new ComputerViewModel(_mockILogger.Object, _mockIComputersPageHelper.Object, _mockIGetComputerService.Object);
 
             // Assert
             Assert.AreEqual(Title, computerViewModel.Title);
@@ -41,8 +41,8 @@ namespace Spacearr.Core.Xamarin.Tests.ViewModels
             const int noOfComputerModels = 9;
 
             // Arrange
-            _mockIComputerService.Setup(x => x.GetComputersAsync()).ReturnsAsync(ComputerModelFactory.CreateComputerModels(noOfComputerModels));
-            var computerViewModel = new ComputerViewModel(_mockILogger.Object, _mockIComputersPageHelper.Object, _mockIComputerService.Object);
+            _mockIGetComputerService.Setup(x => x.GetComputersAsync()).ReturnsAsync(ComputerModelFactory.CreateComputerModels(noOfComputerModels));
+            var computerViewModel = new ComputerViewModel(_mockILogger.Object, _mockIComputersPageHelper.Object, _mockIGetComputerService.Object);
             
             // Act
             computerViewModel.LoadItemsCommand.Execute(null);
@@ -59,8 +59,8 @@ namespace Spacearr.Core.Xamarin.Tests.ViewModels
             const string exceptionMessage = "GetComputersAsync took too long!";
 
             // Arrange
-            _mockIComputerService.Setup(x => x.GetComputersAsync()).Throws(new Exception(exceptionMessage));
-            var computerViewModel = new ComputerViewModel(_mockILogger.Object, _mockIComputersPageHelper.Object, _mockIComputerService.Object);
+            _mockIGetComputerService.Setup(x => x.GetComputersAsync()).Throws(new Exception(exceptionMessage));
+            var computerViewModel = new ComputerViewModel(_mockILogger.Object, _mockIComputersPageHelper.Object, _mockIGetComputerService.Object);
             
             // Act
             computerViewModel.LoadItemsCommand.Execute(null);

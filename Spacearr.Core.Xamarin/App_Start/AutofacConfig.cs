@@ -19,7 +19,7 @@ namespace Spacearr.Core.Xamarin
             builder.RegisterType<Pusher.API.Pusher>().As<IPusher>().SingleInstance();
             builder.RegisterType<PusherValidation>().As<IPusherValidation>().SingleInstance();
             builder.RegisterType<WorkerServiceReceiver>().As<IWorkerServiceReceiver>().SingleInstance();
-            builder.RegisterType<ComputerService>().As<IComputerService>().SingleInstance();
+            builder.RegisterType<GetComputerService>().As<IGetComputerService>().SingleInstance();
             builder.RegisterType<SaveFirebasePushNotificationTokenService>().As<ISaveFirebasePushNotificationTokenService>().SingleInstance();
         }
     }

@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 
 namespace Spacearr.Pusher.API.Service
 {
-    public class ComputerService : IComputerService
+    public class GetComputerService : IGetComputerService
     {
         private readonly ILogger _logger;
         private readonly IPusher _pusher;
         private List<ComputerDriveModel> _computerDrives;
 
-        public ComputerService(ILogger logger, IPusher pusher)
+        public GetComputerService(ILogger logger, IPusher pusher)
         {
             _logger = logger;
             _pusher = pusher;
@@ -58,7 +58,7 @@ namespace Spacearr.Pusher.API.Service
                     {
                         if (stopwatch.ElapsedMilliseconds > 10000)
                         {
-                            throw new Exception("GetComputersAsync took too long!");
+                            throw new Exception("Get computer information took too long!");
                         }
                     }
 

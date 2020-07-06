@@ -41,7 +41,7 @@ namespace Spacearr.Core.Xamarin
                 CrossFirebasePushNotificationActions(logger, container.Resolve<ISaveFirebasePushNotificationTokenService>());
             }
 
-            MainPage = new MainPage(container.Resolve<IComputerService>(), logger, container.Resolve<IPusherValidation>());
+            MainPage = new MainPage(container.Resolve<IGetComputerService>(), logger, container.Resolve<IPusherValidation>());
         }
 
         protected override void OnStart() { }

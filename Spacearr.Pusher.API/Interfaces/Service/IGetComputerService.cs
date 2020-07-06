@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Spacearr.Pusher.API.Interfaces.Service
 {
-    public interface IComputerService
+    public interface IGetComputerService
     {
         /// <summary>
         /// Returns all the computers and their hard disks.

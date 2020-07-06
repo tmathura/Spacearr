@@ -22,38 +22,28 @@ dotnet_csproj:
 before_build:
 - cmd: nuget restore Spacearr.sln
 - cmd: >-
-    cd Spacearr.Android\Properties
+    cd C:\projects\spacearr\Spacearr.Android\Properties
 
     powershell -Command "(gc AndroidManifest.xml) -replace 'android:versionName=""""1.0""""', ('android:versionName=""""' + $env:APPVEYOR_BUILD_VERSION + '""""') | Out-File -encoding ASCII AndroidManifest.xml"
 
     more AndroidManifest.xml
 - cmd: >-
-    cd..
-
-    cd..
-
-    cd Spacearr.UWP
+    cd C:\projects\spacearr\Spacearr.UWP
 
     powershell -Command "(gc Package.appxmanifest) -replace 'Version=""""1.0.0.0""""', ('Version=""""' + $env:APPVEYOR_BUILD_VERSION +'""""') | Out-File -encoding ASCII Package.appxmanifest"
 
     more Package.appxmanifest
-    
-    cd..
 build:
   verbosity: minimal
 after_build:
 - cmd: >-
-    cd Spacearr.Android\bin\%CONFIGURATION%
+    cd C:\projects\spacearr\Spacearr.Android\bin\%CONFIGURATION%
 
     rename com.Spacearr.Android-Signed.apk com.Spacearr.Android-Signed-%APPVEYOR_BUILD_VERSION%.apk
-
-    cd..
-
-    cd..
-
-    cd..
 test_script:
 - cmd: >-
+    cd C:\projects\spacearr
+    
     nuget install Appveyor.TestLogger -Version 2.0.0
 
     dotnet test Spacearr.Common.Tests\Spacearr.Common.Tests.csproj --configuration Release --no-build --test-adapter-path:. --logger:Appveyor

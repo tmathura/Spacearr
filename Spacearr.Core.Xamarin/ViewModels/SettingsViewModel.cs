@@ -35,13 +35,16 @@ namespace Spacearr.Core.Xamarin.ViewModels
         private async Task ExecuteLoadItemsCommand()
         {
             if (IsBusy)
+            {
                 return;
+            }
 
             IsBusy = true;
 
             try
             {
                 Settings.Clear();
+                await Task.Delay(1000);  //Need this when getting data locally otherwise keeps loading icon on Android.
                 var settings = await _logger.GetSettingsAsync();
                 foreach (var setting in settings)
                 {

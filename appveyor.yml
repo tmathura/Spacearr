@@ -1,4 +1,29 @@
 version: 1.0.0.{build}
+environment:
+  PROJECTNUMBER:
+    secure: EEu+8zvB6rNOMWiNUvNcxw==
+  FIREBASEURL:
+    secure: uuNFbuP4qTIPxPLQsE+dTU1q+3JRm2EkIZMUg4L7KkNf6purKC0c/axrIzT1gPz8
+  PROJECTID:
+    secure: JP4OhDGNWMaX35KRL7mtyw==
+  STORAGEBUCKET:
+    secure: a4cUmbXIi3OlvmfugO5ueeD52pThWfrhbtQ2vmj7B3w=
+  MOBILESDKAPPID:
+    secure: orP5N2AUzfAkgbWjVc2/R4GDUjMYnd5Fu8C3ViTwx3LN0LObbW4ydHnyEI5YUNM8
+  CLIENTID:
+    secure: g2QxJTOsZIdcJw9xbaaLcPMXV2XMdJONHuBYhwQvbgdPP0dXc7rFOacJLIdnvdV/sPbcLPnGOcSakUYLLCwZX+1TXn3JUSP/SdQhWwhrfJs=
+  CURRENTKEY:
+    secure: bC+Yo+afLcP6SubGlZAMUlCof3jzgNPYL27BnapHG2lmy/QlLTDkvRWWUqM7UyWh
+  PRIVATEKEYID:
+    secure: yls59NZUDuvxb5fXThyZIp5vnBBJ71XdPb1BF+p4gxS1xcciTpZmLq18IoNYAhc3
+  PRIVATEKEY:
+    secure: 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
+  CLIENTEMAIL:
+    secure: uYKw8pHnmvUrCByWzEXtj5pSwjqpATT/K/40W1gkNDII0E29hu9jeyQXPRFwz9ZLy+MYIe00VcU07vcKGBpg0w==
+  FIREBASEAPPCLIENTID:
+    secure: ip+MaKkov03vZVGeVh5fC6si6FbRfrWm56llWSSUWcE=
+  CLIENTX509CERTURL:
+    secure: QDaluQuWueG/zTleLmhEKx4AkwEC7eL+rb7Bh75lLewjVXEEN2qpTJ0dKPFkABcOmW0im4mT3dncgv4rmUMt7aD8YTSnvgLHSWyt+2S8L273X9GiVrwZ4tsCRr+SCSb8OewCJaC+iAEu7pd/KUdSA76UzWM+f+9cSFDPH4LHS4Y=
 pull_requests:
   do_not_increment_build_number: true
 skip_tags: true
@@ -20,7 +45,24 @@ dotnet_csproj:
   file_version: '{version}'
   informational_version: '{version}'
 before_build:
-- cmd: nuget restore Spacearr.sln
+- cmd: >-
+    cd C:\projects\spacearr\Spacearr.Android
+
+    powershell -Command "(gc google-services.json) -replace 'ProjectNumber', ($env:PROJECTNUMBER) | Out-File -encoding ASCII google-services.json"
+
+    powershell -Command "(gc google-services.json) -replace 'FirebaseUrl', ($env:FIREBASEURL) | Out-File -encoding ASCII google-services.json"
+
+    powershell -Command "(gc google-services.json) -replace 'ProjectId', ($env:PROJECTID) | Out-File -encoding ASCII google-services.json"
+
+    powershell -Command "(gc google-services.json) -replace 'StorageBucket', ($env:STORAGEBUCKET) | Out-File -encoding ASCII google-services.json"
+
+    powershell -Command "(gc google-services.json) -replace 'MobilesdkAppId', ($env:MOBILESDKAPPID) | Out-File -encoding ASCII google-services.json"
+
+    powershell -Command "(gc google-services.json) -replace 'ClientId', ($env:CLIENTID) | Out-File -encoding ASCII google-services.json"
+
+    powershell -Command "(gc google-services.json) -replace 'CurrentKey', ($env:CURRENTKEY) | Out-File -encoding ASCII google-services.json"
+
+    more google-services.json
 - cmd: >-
     cd C:\projects\spacearr\Spacearr.Android\Properties
 
@@ -28,11 +70,28 @@ before_build:
 
     more AndroidManifest.xml
 - cmd: >-
+    cd C:\projects\spacearr\Spacearr.Common
+
+    powershell -Command "(gc SendFirebasePushNotification.cs) -replace 'ProjectId', ($env:PROJECTID) | Out-File -encoding ASCII SendFirebasePushNotification.cs"
+
+    powershell -Command "(gc SendFirebasePushNotification.cs) -replace 'PrivateKeyId', ($env:PRIVATEKEYID) | Out-File -encoding ASCII SendFirebasePushNotification.cs"
+
+    powershell -Command "(gc SendFirebasePushNotification.cs) -replace 'PrivateKey', ($env:PRIVATEKEY) | Out-File -encoding ASCII SendFirebasePushNotification.cs"
+
+    powershell -Command "(gc SendFirebasePushNotification.cs) -replace 'ClientEmail', ($env:CLIENTEMAIL) | Out-File -encoding ASCII SendFirebasePushNotification.cs"
+
+    powershell -Command "(gc SendFirebasePushNotification.cs) -replace 'ClientId', ($env:FIREBASEAPPCLIENTID) | Out-File -encoding ASCII SendFirebasePushNotification.cs"
+
+    powershell -Command "(gc SendFirebasePushNotification.cs) -replace 'ClientX509CertUrl', ($env:CLIENTX509CERTURL) | Out-File -encoding ASCII SendFirebasePushNotification.cs"
+
+    more SendFirebasePushNotification.cs
+- cmd: >-
     cd C:\projects\spacearr\Spacearr.UWP
 
     powershell -Command "(gc Package.appxmanifest) -replace 'Version=""""1.0.0.0""""', ('Version=""""' + $env:APPVEYOR_BUILD_VERSION +'""""') | Out-File -encoding ASCII Package.appxmanifest"
 
     more Package.appxmanifest
+- cmd: nuget restore Spacearr.sln
 build:
   verbosity: minimal
 after_build:

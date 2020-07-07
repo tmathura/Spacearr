@@ -46,10 +46,6 @@ dotnet_csproj:
   informational_version: '{version}'
 before_build:
 - cmd: >-
-    echo project number is %PROJECTNUMBER%
-    
-    powershell -Command "Write-Output project number is $env:PROJECTNUMBER"
-- cmd: >-
     cd C:\projects\spacearr\Spacearr.Android
 
     powershell -Command "(gc google-services.json) -replace 'ProjectNumber', ($env:PROJECTNUMBER) | Out-File -encoding ASCII google-services.json"

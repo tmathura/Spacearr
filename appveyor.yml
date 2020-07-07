@@ -95,7 +95,10 @@ before_build:
     powershell -Command "(gc Package.appxmanifest) -replace 'Version=""""1.0.0.0""""', ('Version=""""' + $env:APPVEYOR_BUILD_VERSION +'""""') | Out-File -encoding ASCII Package.appxmanifest"
 
     more Package.appxmanifest
-- cmd: nuget restore Spacearr.sln
+- cmd: >-
+    cd C:\projects\spacearr
+
+    nuget restore Spacearr.sln
 build:
   verbosity: minimal
 after_build:

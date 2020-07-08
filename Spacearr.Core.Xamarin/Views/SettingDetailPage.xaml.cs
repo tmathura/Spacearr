@@ -14,7 +14,6 @@ namespace Spacearr.Core.Xamarin.Views
     [DesignTimeVisible(false)]
     public partial class SettingDetailPage : ContentPage, ISettingDetailPageHelper
     {
-
         public ImageButton UpdateButton { get; }
         public ImageButton DeleteButton { get; }
         public ImageButton ViewComfyButton { get; }

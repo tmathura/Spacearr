@@ -50,6 +50,8 @@ namespace Spacearr.Core.Xamarin.ViewModels
                 {
                     Settings.Add(setting);
                 }
+
+                _settingsPageHelper.NoRowsFrame.IsVisible = !(Settings.Count > 0);
             }
             catch (Exception ex)
             {

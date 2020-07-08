@@ -1,11 +1,7 @@
-﻿using Spacearr.Common.Interfaces.Logger;
-using Spacearr.Core.Xamarin.Helpers;
-using Spacearr.Core.Xamarin.Models;
+﻿using Spacearr.Core.Xamarin.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
-using Spacearr.Common.Models;
 using Xamarin.Forms;
 
 namespace Spacearr.Core.Xamarin.Views
@@ -13,21 +9,16 @@ namespace Spacearr.Core.Xamarin.Views
     [DesignTimeVisible(false)]
     public partial class MenuPage : ContentPage
     {
-        private readonly ILogger _logger;
         private static MainPage RootPage => Application.Current.MainPage as MainPage;
 
-        public MenuPage(ILogger logger)
+        public MenuPage()
         {
-            _logger = logger;
-
             InitializeComponent();
 
             var menuItems = new List<HomeMenuItemModel>
             {
                 new HomeMenuItemModel {Id = MenuItemType.Home, Title = "Home" },
-                new HomeMenuItemModel {Id = MenuItemType.ComputerDrives, Title = "Computer Drives" },
-                new HomeMenuItemModel {Id = MenuItemType.Logs, Title = "Logs" },
-                new HomeMenuItemModel {Id = MenuItemType.Settings, Title = "Settings" }
+                new HomeMenuItemModel {Id = MenuItemType.ComputerDrives, Title = "Computer Drives" }
             };
 
             ListViewMenu.ItemsSource = menuItems;
@@ -44,39 +35,56 @@ namespace Spacearr.Core.Xamarin.Views
                 await RootPage.NavigateFromMenu(id);
             };
 
-            var xamarinSettings = Task.Run(() => _logger.GetXamarinSettingAsync()).Result;
-
-            if (xamarinSettings == null || xamarinSettings.Count == 0)
+            if (Device.RuntimePlatform == Device.Android)
             {
-                DarkTheme.IsToggled = false;
-                DarkThemeText.Text = "Dark Theme Off";
+                SettingsImageButton.Margin = new Thickness(-8, 0, 0, 0);
+                SettingsLabel.Margin = new Thickness(20, 0, 0, 0);
+                LogsImageButton.Margin = new Thickness(-8, 0, 0, 0);
+                LogsLabel.Margin = new Thickness(20, 0, 0, 0);
             }
             else
             {
-                var isDarkTheme = xamarinSettings.First().IsDarkTheme;
-                DarkTheme.IsToggled = isDarkTheme;
-                DarkThemeText.Text = isDarkTheme ? "Dark Theme On" : "Dark Theme Off";
+                SettingsLabel.Margin = new Thickness(50, 0, 0, 0);
+                LogsLabel.Margin = new Thickness(50, 0, 0, 0);
             }
         }
 
-        private async void OnToggled(object sender, ToggledEventArgs e)
+        private async void SettingsButton_OnClicked(object sender, EventArgs e)
         {
-            var xamarinSettings = await _logger.GetXamarinSettingAsync();
-
-            if (xamarinSettings == null || xamarinSettings.Count == 0)
+            if (IsBusy)
             {
-                var xamarinSetting = new XamarinSettingModel { IsDarkTheme = e.Value };
-                await _logger.LogXamarinSettingAsync(xamarinSetting);
-            }
-            else
-            {
-                xamarinSettings.First().IsDarkTheme = e.Value;
-                await _logger.UpdateXamarinSettingAsync(xamarinSettings.First());
+                return;
             }
 
-            ThemeLoaderHelper.LoadTheme(e.Value);
+            IsBusy = true;
 
-            DarkThemeText.Text = e.Value ? "Dark Theme On" : "Dark Theme Off";
+            try
+            {
+                await RootPage.NavigateFromMenu((int) MenuItemType.Settings);
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+
+        private async void LogsButton_OnClicked(object sender, EventArgs e)
+        {
+            if (IsBusy)
+            {
+                return;
+            }
+
+            IsBusy = true;
+
+            try
+            {
+                await RootPage.NavigateFromMenu((int)MenuItemType.Logs);
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
     }
 }

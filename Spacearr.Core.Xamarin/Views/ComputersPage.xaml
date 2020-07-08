@@ -59,7 +59,7 @@
                  AbsoluteLayout.LayoutFlags="PositionProportional"
                  CornerRadius="40"
                  Command="{Binding LoadItemsCommand}"
-                 Source="Assets/ic_refresh.png"/>
+                 Source="Assets/ic_autorenew.png"/>
     </AbsoluteLayout>
 
 </ContentPage>

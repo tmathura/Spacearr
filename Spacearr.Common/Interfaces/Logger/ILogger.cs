@@ -93,30 +93,5 @@ namespace Spacearr.Common.Interfaces.Logger
         Task DeleteLogAsync(SettingModel record);
 
         #endregion
-
-        #region XamarinSetting
-
-        /// <summary>
-        /// Get all the xamarin settings.
-        /// </summary>
-        /// <returns>Return a list of XamarinSettingModels</returns>
-
-        Task<List<XamarinSettingModel>> GetXamarinSettingAsync();
-
-        /// <summary>
-        /// Log a xamarin setting.
-        /// </summary>
-        /// <param name="record">The setting</param>
-        /// <returns>Returns a id</returns>
-        Task LogXamarinSettingAsync(XamarinSettingModel record);
-
-        /// <summary>
-        /// Update a xamarin setting.
-        /// </summary>
-        /// <param name="record">The setting</param>
-        /// <returns>Returns a id</returns>
-        Task UpdateXamarinSettingAsync(XamarinSettingModel record);
-
-        #endregion
     }
 }

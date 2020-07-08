@@ -25,7 +25,7 @@ namespace Spacearr.Core.Xamarin.Views
             _logger = logger;
             _pusherValidation = pusherValidation;
 
-            Master = new MenuPage(_logger);
+            Master = new MenuPage();
 
             MasterBehavior = MasterBehavior.Popover;
 

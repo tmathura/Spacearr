@@ -15,6 +15,7 @@
     <Color x:Key="MicroChartsUsedSpaceColor">#ff833a</Color>
     <Color x:Key="ProgressBarColor">#ff833a</Color>
     <Color x:Key="ColorPrimary2">#e65100</Color>
+    <Color x:Key="ColorPrimaryLight2">#383838</Color>
 
     <Style TargetType="ContentPage">
         <Setter Property="BackgroundColor" Value="{StaticResource ColorPrimaryDark}" />
@@ -36,7 +37,7 @@
         <Setter Property="BackgroundColor" Value="{StaticResource ColorPrimaryLight}" />
     </Style>
     <Style TargetType="Switch">
-        <Setter Property="OnColor" Value="{StaticResource ColorPrimaryLight}" />
+        <Setter Property="OnColor" Value="{StaticResource ColorPrimaryDark}" />
         <Setter Property="ThumbColor" Value="{StaticResource ColorPrimary2}" />
     </Style>
     <Style TargetType="Label">
@@ -44,7 +45,7 @@
     </Style>
     <Style TargetType="controls:FloatingEntry">
         <Setter Property="TextColor" Value="{StaticResource TextColorPrimary}" />
-        <Setter Property="EntryPlaceholderColor" Value="{StaticResource ColorPrimaryLight}" />
+        <Setter Property="EntryPlaceholderColor" Value="{StaticResource ColorPrimaryLight2}" />
         <Setter Property="EntryBackgroundColor" Value="{StaticResource WindowBackground}" />
     </Style>
     <Style TargetType="controls:FloatingLabel">

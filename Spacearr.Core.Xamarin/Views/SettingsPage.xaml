@@ -12,6 +12,21 @@
 
     <AbsoluteLayout>
         <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="SizeProportional">
+            <Frame Margin="5" HasShadow="True" CornerRadius="2">
+                <StackLayout BackgroundColor="{DynamicResource ColorPrimaryLight}">
+                    <StackLayout Orientation="Horizontal" BackgroundColor="{DynamicResource ColorPrimaryLight}">
+                        <Label FontAttributes="Bold" Text="Device Id"/>
+                        <Label x:Name="DeviceId" HorizontalOptions="EndAndExpand"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" BackgroundColor="{DynamicResource ColorPrimaryLight}">
+                        <Label FontAttributes="Bold" Text="Dark Mode"/>
+                        <Switch x:Name="DarkModeSwitch" Toggled="DarkMode_OnToggled" HorizontalOptions="EndAndExpand"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+            <Frame x:Name="ListViewFrame" Margin="5" HasShadow="True" CornerRadius="2">
+                <Label FontAttributes="Bold" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="No Service Settings saved yet. Please use the add button below to add a setting."></Label>
+            </Frame>
             <ListView x:Name="SettingsListView" 
                 ItemsSource="{Binding Settings}"
                 VerticalOptions="FillAndExpand"

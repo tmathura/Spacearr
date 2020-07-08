@@ -18,7 +18,6 @@ namespace Spacearr.Common.Logger
             _database.CreateTableAsync<LogModel>().Wait();
             _database.CreateTableAsync<FirebasePushNotificationDeviceModel>().Wait();
             _database.CreateTableAsync<SettingModel>().Wait();
-            _database.CreateTableAsync<XamarinSettingModel>().Wait();
         }
 
         #region Logs
@@ -166,43 +165,6 @@ namespace Spacearr.Common.Logger
         public async Task DeleteLogAsync(SettingModel record)
         {
             await _database.DeleteAsync(record);
-        }
-
-        #endregion
-
-        #region XamarinSetting
-
-        /// <summary>
-        /// Get all the xamarin settings.
-        /// </summary>
-        /// <returns>Return a list of XamarinSettingModels</returns>
-        public async Task<List<XamarinSettingModel>> GetXamarinSettingAsync()
-        {
-            return await _database.Table<XamarinSettingModel>().ToListAsync();
-        }
-
-        /// <summary>
-        /// Log a xamarin setting.
-        /// </summary>
-        /// <param name="record">The setting</param>
-        /// <returns>Returns a id</returns>
-        public async Task LogXamarinSettingAsync(XamarinSettingModel record)
-        {
-            record.CreatedDate = DateTime.Now;
-            record.UpdatedDate = DateTime.Now;
-
-            await _database.InsertAsync(record);
-        }
-
-        /// <summary>
-        /// Update a xamarin setting.
-        /// </summary>
-        /// <param name="record">The setting</param>
-        /// <returns>Returns a id</returns>
-        public async Task UpdateXamarinSettingAsync(XamarinSettingModel record)
-        {
-            record.UpdatedDate = DateTime.Now;
-            await _database.UpdateAsync(record);
         }
 
         #endregion

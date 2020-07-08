@@ -1,14 +1,12 @@
 ﻿using Autofac;
 using Plugin.FirebasePushNotification;
 using Spacearr.Common.Interfaces.Logger;
-using Spacearr.Common.Models;
 using Spacearr.Core.Xamarin.Helpers;
 using Spacearr.Core.Xamarin.Views;
 using Spacearr.Pusher.API.Interfaces;
 using Spacearr.Pusher.API.Interfaces.Service;
 using System;
-using System.Linq;
-using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Spacearr.Core.Xamarin
@@ -22,26 +20,20 @@ namespace Spacearr.Core.Xamarin
             var builder = new ContainerBuilder();
             AutofacConfig.Configure(builder);
             var container = builder.Build();
+            
+            ThemeLoaderHelper.LoadTheme(Preferences.Get("DarkMode", false));
 
-            var logger = container.Resolve<ILogger>();
-
-            var xamarinSettings = Task.Run(() => logger.GetXamarinSettingAsync()).Result;
-
-            if (xamarinSettings == null || xamarinSettings.Count == 0)
+            if (!Preferences.ContainsKey("DeviceId"))
             {
-                ThemeLoaderHelper.LoadTheme(false);
-            }
-            else
-            {
-                ThemeLoaderHelper.LoadTheme(xamarinSettings.First().IsDarkTheme);
+                Preferences.Set("DeviceId", Guid.NewGuid().ToString());
             }
 
             if (Device.RuntimePlatform == Device.Android)
             {
-                CrossFirebasePushNotificationActions(logger, container.Resolve<ISaveFirebasePushNotificationTokenService>());
+                CrossFirebasePushNotificationActions(container.Resolve<ISaveFirebasePushNotificationTokenService>());
             }
 
-            MainPage = new MainPage(container.Resolve<IGetComputerService>(), logger, container.Resolve<IPusherValidation>());
+            MainPage = new MainPage(container.Resolve<IGetComputerService>(), container.Resolve<ILogger>(), container.Resolve<IPusherValidation>());
         }
 
         protected override void OnStart() { }
@@ -50,31 +42,19 @@ namespace Spacearr.Core.Xamarin
 
         protected override void OnResume() { }
 
-        public void CrossFirebasePushNotificationActions(ILogger logger, ISaveFirebasePushNotificationTokenService saveFirebasePushNotificationTokenService)
+        public void CrossFirebasePushNotificationActions(ISaveFirebasePushNotificationTokenService saveFirebasePushNotificationTokenService)
         {
             CrossFirebasePushNotification.Current.RegisterForPushNotifications();
-            SaveFirebasePushNotificationToken(logger, saveFirebasePushNotificationTokenService, CrossFirebasePushNotification.Current.Token);
+            SaveFirebasePushNotificationToken(saveFirebasePushNotificationTokenService, CrossFirebasePushNotification.Current.Token);
             CrossFirebasePushNotification.Current.OnTokenRefresh += (s, p) =>
             {
-                SaveFirebasePushNotificationToken(logger, saveFirebasePushNotificationTokenService, p.Token);
+                SaveFirebasePushNotificationToken(saveFirebasePushNotificationTokenService, p.Token);
             };
         }
 
-        public void SaveFirebasePushNotificationToken(ILogger logger, ISaveFirebasePushNotificationTokenService saveFirebasePushNotificationTokenService, string token)
+        public void SaveFirebasePushNotificationToken(ISaveFirebasePushNotificationTokenService saveFirebasePushNotificationTokenService, string token)
         {
-            var deviceId = Guid.NewGuid();
-            var xamarinSetting = Task.Run(() => logger.GetXamarinSettingAsync()).Result;
-
-            if (xamarinSetting == null || xamarinSetting.Count == 0)
-            {
-                var setting = new XamarinSettingModel { IsDarkTheme = false, DeviceId = deviceId };
-                logger.LogXamarinSettingAsync(setting);
-            }
-            else
-            {
-                deviceId = (Guid)xamarinSetting.First().DeviceId;
-            }
-
+            var deviceId = Guid.Parse(Preferences.Get("DeviceId", Guid.NewGuid().ToString()));
             saveFirebasePushNotificationTokenService.SaveFirebasePushNotificationToken(deviceId, token);
         }
     }

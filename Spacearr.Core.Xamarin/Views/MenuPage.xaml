@@ -27,16 +27,21 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Grid Padding="10" BackgroundColor="{DynamicResource ColorPrimary}">
+            <Grid BackgroundColor="{DynamicResource ColorPrimary}">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="20"/>
                 </Grid.RowDefinitions>
-                <Label VerticalTextAlignment="Center" Grid.Row="0" Grid.Column="0" x:Name="DarkThemeText"></Label>
-                <Switch Grid.Row="0" Grid.Column="1" VerticalOptions="Center" x:Name="DarkTheme" Toggled="OnToggled"/>
+                <ImageButton Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Source="Assets/ic_settings.png" HorizontalOptions="Start" x:Name="SettingsImageButton" BackgroundColor="{DynamicResource ColorPrimary}"/>
+                <Label Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" VerticalTextAlignment="Center" Text="Settings" d:Text="Settings" x:Name="SettingsLabel"/>
+                <Button Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" BackgroundColor="Transparent" TextColor="Transparent" Clicked="SettingsButton_OnClicked"/>
+                <ImageButton Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Source="Assets/ic_view_list.png" HorizontalOptions="Start" x:Name="LogsImageButton" BackgroundColor="{DynamicResource ColorPrimary}"/>
+                <Label Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" VerticalTextAlignment="Center" Text="Logs" d:Text="Logs" x:Name="LogsLabel"/>
+                <Button Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" BackgroundColor="Transparent" TextColor="Transparent" Clicked="LogsButton_OnClicked"/>
             </Grid>
         </StackLayout>
     </Frame>

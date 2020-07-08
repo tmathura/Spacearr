@@ -115,11 +115,14 @@
   <ItemGroup>
     <Content Include="Assets\ic_add.png" />
     <Content Include="Assets\ic_arrow_back.png" />
+    <Content Include="Assets\ic_autorenew.png" />
     <Content Include="Assets\ic_delete.png" />
     <Content Include="Assets\ic_refresh.png" />
     <Content Include="Assets\ic_save_alt.png" />
+    <Content Include="Assets\ic_settings.png" />
     <Content Include="Assets\ic_update.png" />
     <Content Include="Assets\ic_view_comfy.png" />
+    <Content Include="Assets\ic_view_list.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />

@@ -7,6 +7,6 @@ namespace Spacearr.Core.Xamarin.Interfaces.Helpers
     {
         Frame NoRowsFrame { get; }
         Task CustomDisplayAlert(string title, string message, string cancelText);
-        Task CustomPushAsync(Page page);
+        Task CustomPushAsyncToNewSetting();
     }
 }

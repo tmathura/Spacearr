@@ -43,7 +43,7 @@
                                                 <RowDefinition Height="Auto"/>
                                             </Grid.RowDefinitions>
                                             <Label Grid.Row="0" FontAttributes="Bold" Text="{Binding Name}" />
-                                            <forms:ChartView Grid.Row="1" x:Name="Chart" HeightRequest="200" VerticalOptions="FillAndExpand" Chart="{Binding PieChart}"></forms:ChartView>
+                                            <forms:ChartView Grid.Row="1" HeightRequest="200" VerticalOptions="FillAndExpand" Chart="{Binding PieChart}"/>
                                         </Grid>
                                     </Grid>
                                 </StackLayout>

@@ -34,7 +34,7 @@ namespace Spacearr.Core.Xamarin.Views
             DeviceId.Text = Preferences.Get("DeviceId", Guid.NewGuid().ToString());
             DarkModeSwitch.IsToggled = Preferences.Get("DarkMode", false);
 
-            BindingContext = _viewModel = new SettingsViewModel(logger, this, new NewSettingPage(_logger, _pusherValidation));
+            BindingContext = _viewModel = new SettingsViewModel(logger, this);
         }
 
         private async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
@@ -62,9 +62,9 @@ namespace Spacearr.Core.Xamarin.Views
             await DisplayAlert(title, message, cancelText);
         }
 
-        public async Task CustomPushAsync(Page page)
+        public async Task CustomPushAsyncToNewSetting()
         {
-            await Navigation.PushAsync(page);
+            await Navigation.PushAsync(new NewSettingPage(_logger, _pusherValidation));
         }
 
         private void DarkMode_OnToggled(object sender, ToggledEventArgs e)

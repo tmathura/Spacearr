@@ -1,4 +1,6 @@
-﻿using Spacearr.Common.Interfaces.Logger;
+﻿using Microcharts;
+using SkiaSharp;
+using Spacearr.Common.Interfaces.Logger;
 using Spacearr.Common.Models;
 using Spacearr.Core.Xamarin.Interfaces.Helpers;
 using Spacearr.Core.Xamarin.ViewModels;
@@ -39,6 +41,32 @@ namespace Spacearr.Core.Xamarin.Views
 
             if (computerModel.Online)
             {
+                foreach (var computerDrive in computerModel.ComputerDrives)
+                {
+                    var textColorPrimary = (Color)Application.Current.Resources["TextColorPrimary"];
+                    var colorPrimaryLight = (Color)Application.Current.Resources["ColorPrimaryLight"];
+                    var microChartsFreeSpaceColor = (Color)Application.Current.Resources["MicroChartsFreeSpaceColor"];
+                    var microChartsUsedSpaceColor = (Color)Application.Current.Resources["MicroChartsUsedSpaceColor"];
+                    var entries = new[]
+                    {
+                        new ChartEntry(computerDrive.TotalUsedSpace)
+                        {
+                            Label = "Used Space",
+                            ValueLabel = $"{computerDrive.TotalUsedSpaceString}",
+                            Color = SKColor.Parse(microChartsUsedSpaceColor.ToHex()),
+                            TextColor = SKColor.Parse(textColorPrimary.ToHex())
+                        },
+                        new ChartEntry(computerDrive.TotalFreeSpace)
+                        {
+                            Label = "Total Free Space",
+                            ValueLabel = $"{computerDrive.TotalFreeSpaceString}",
+                            Color = SKColor.Parse(microChartsFreeSpaceColor.ToHex()),
+                            TextColor = SKColor.Parse(textColorPrimary.ToHex())
+                        }
+                    };
+                    computerDrive.PieChart = new PieChart { Entries = entries, BackgroundColor = SKColor.Parse(colorPrimaryLight.ToHex()) };
+                }
+
                 await Navigation.PushAsync(new ComputerDrivesPage(computerModel));
             }
         }

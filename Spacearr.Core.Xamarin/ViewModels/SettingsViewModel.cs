@@ -13,17 +13,15 @@ namespace Spacearr.Core.Xamarin.ViewModels
     {
         private readonly ILogger _logger;
         private readonly ISettingsPageHelper _settingsPageHelper;
-        private readonly Page _page;
 
         public ICommand LoadItemsCommand { get; set; }
         public ICommand AddCommand { get; }
         public ObservableCollection<SettingModel> Settings { get; set; }
 
-        public SettingsViewModel(ILogger logger, ISettingsPageHelper settingsPageHelper, Page page)
+        public SettingsViewModel(ILogger logger, ISettingsPageHelper settingsPageHelper)
         {
             _logger = logger;
             _settingsPageHelper = settingsPageHelper;
-            _page = page;
 
             Title = "Settings";
             Settings = new ObservableCollection<SettingModel>();
@@ -74,7 +72,7 @@ namespace Spacearr.Core.Xamarin.ViewModels
 
             try
             {
-                await _settingsPageHelper.CustomPushAsync(_page);
+                await _settingsPageHelper.CustomPushAsyncToNewSetting();
             }
             catch (Exception ex)
             {

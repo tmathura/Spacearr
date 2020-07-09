@@ -46,9 +46,7 @@ namespace Spacearr.Core.Xamarin.Views
                     TextColor = SKColor.Parse(textColorPrimary.ToHex())
                 }
             };
-            var chart = new PieChart { Entries = entries, BackgroundColor = SKColor.Parse(colorPrimaryLight.ToHex()) };
-
-            Chart.Chart = chart;
+            _viewModel.ComputerDriveModel.PieChart = new PieChart { Entries = entries, BackgroundColor = SKColor.Parse(colorPrimaryLight.ToHex()) };
         }
     }
 }

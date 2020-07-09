@@ -63,6 +63,7 @@ namespace Spacearr.Core.Xamarin.Views
 
             try
             {
+                ListViewMenu.SelectedItem = null;
                 await RootPage.NavigateFromMenu((int) MenuItemType.Settings);
             }
             finally
@@ -82,6 +83,7 @@ namespace Spacearr.Core.Xamarin.Views
 
             try
             {
+                ListViewMenu.SelectedItem = null;
                 await RootPage.NavigateFromMenu((int)MenuItemType.Logs);
             }
             finally

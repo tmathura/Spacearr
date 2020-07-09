@@ -28,7 +28,7 @@ namespace Spacearr.Core.Xamarin.Tests.ViewModels
         public void SettingsViewModel()
         {
             // Arrange
-            var settingsViewModel = new SettingsViewModel(_mockILogger.Object, _mockISettingsPageHelper.Object, It.IsAny<Page>());
+            var settingsViewModel = new SettingsViewModel(_mockILogger.Object, _mockISettingsPageHelper.Object);
 
             // Assert
             Assert.AreEqual(Title, settingsViewModel.Title);
@@ -41,7 +41,7 @@ namespace Spacearr.Core.Xamarin.Tests.ViewModels
 
             // Arrange
             _mockILogger.Setup(x => x.GetSettingsAsync()).ReturnsAsync(SettingModelFactory.CreateSettingModels(noOfSettings));
-            var settingsViewModel = new SettingsViewModel(_mockILogger.Object, _mockISettingsPageHelper.Object, It.IsAny<Page>());
+            var settingsViewModel = new SettingsViewModel(_mockILogger.Object, _mockISettingsPageHelper.Object);
 
             // Act
             settingsViewModel.LoadItemsCommand.Execute(null);
@@ -60,7 +60,7 @@ namespace Spacearr.Core.Xamarin.Tests.ViewModels
 
             // Arrange
             _mockILogger.Setup(x => x.GetSettingsAsync()).Throws(new Exception(exceptionMessage));
-            var settingsViewModel = new SettingsViewModel(_mockILogger.Object, _mockISettingsPageHelper.Object, It.IsAny<Page>());
+            var settingsViewModel = new SettingsViewModel(_mockILogger.Object, _mockISettingsPageHelper.Object);
 
             // Act
             settingsViewModel.LoadItemsCommand.Execute(null);
@@ -76,13 +76,13 @@ namespace Spacearr.Core.Xamarin.Tests.ViewModels
         public void AddCommand()
         {
             // Arrange
-            var settingsViewModel = new SettingsViewModel(_mockILogger.Object, _mockISettingsPageHelper.Object, It.IsAny<Page>());
+            var settingsViewModel = new SettingsViewModel(_mockILogger.Object, _mockISettingsPageHelper.Object);
 
             // Act
             settingsViewModel.AddCommand.Execute(null);
 
             // Assert
-            _mockISettingsPageHelper.Verify(x => x.CustomPushAsync(It.IsAny<Page>()), Times.Once);
+            _mockISettingsPageHelper.Verify(x => x.CustomPushAsyncToNewSetting(), Times.Once);
         }
 
         [TestMethod]
@@ -91,8 +91,8 @@ namespace Spacearr.Core.Xamarin.Tests.ViewModels
             const string exceptionMessage = "Error on CustomPushModalAsync!";
 
             // Arrange
-            _mockISettingsPageHelper.Setup(x => x.CustomPushAsync(It.IsAny<Page>())).Throws(new Exception(exceptionMessage));
-            var settingsViewModel = new SettingsViewModel(_mockILogger.Object, _mockISettingsPageHelper.Object, It.IsAny<Page>());
+            _mockISettingsPageHelper.Setup(x => x.CustomPushAsyncToNewSetting()).Throws(new Exception(exceptionMessage));
+            var settingsViewModel = new SettingsViewModel(_mockILogger.Object, _mockISettingsPageHelper.Object);
 
             // Act
             settingsViewModel.AddCommand.Execute(null);

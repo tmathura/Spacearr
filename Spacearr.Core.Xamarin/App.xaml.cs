@@ -16,7 +16,9 @@ namespace Spacearr.Core.Xamarin
         public App()
         {
             InitializeComponent();
-            
+
+            VersionTracking.Track();
+
             var builder = new ContainerBuilder();
             AutofacConfig.Configure(builder);
             var container = builder.Build();

@@ -58,17 +58,10 @@
                                                 <RowDefinition Height="Auto"/>
                                             </Grid.RowDefinitions>
                                             <Label FontAttributes="Bold" Grid.Row="0" Text="{Binding ComputerName}" />
-                                            <Grid Grid.Row="1">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto" />
-                                                    <ColumnDefinition Width="Auto" />
-                                                </Grid.ColumnDefinitions>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="Auto"/>
-                                                </Grid.RowDefinitions>
-                                                <Label Grid.Row="0" Grid.Column="0" Text="Updated on:"/>
-                                                <Label Grid.Row="0" Grid.Column="1"  Text="{Binding UpdatedDate}"/>
-                                            </Grid>
+                                            <StackLayout Grid.Row="1" Orientation="Horizontal" BackgroundColor="{DynamicResource ColorPrimaryLight}">
+                                                <Label Text="Updated on:"/>
+                                                <Label Text="{Binding UpdatedDate}"/>
+                                            </StackLayout>
                                         </Grid>
                                     </Grid>
                                 </StackLayout>

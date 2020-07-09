@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Spacearr.Core.Xamarin.Views
@@ -14,6 +15,8 @@ namespace Spacearr.Core.Xamarin.Views
         public MenuPage()
         {
             InitializeComponent();
+
+            VersionNumberLabel.Text = VersionTracking.CurrentVersion;
 
             var menuItems = new List<HomeMenuItemModel>
             {

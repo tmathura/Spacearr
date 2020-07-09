@@ -43,6 +43,10 @@
                 <Label Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" VerticalTextAlignment="Center" Text="Logs" d:Text="Logs" x:Name="LogsLabel"/>
                 <Button Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" BackgroundColor="Transparent" TextColor="Transparent" Clicked="LogsButton_OnClicked"/>
             </Grid>
+            <StackLayout HeightRequest="8" Orientation="Horizontal" BackgroundColor="{DynamicResource ColorPrimary}">
+                <Label FontSize="7" Text="Version"/>
+                <Label FontSize="7" x:Name="VersionNumberLabel"/>
+            </StackLayout>
         </StackLayout>
     </Frame>
 

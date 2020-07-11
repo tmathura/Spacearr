@@ -2,6 +2,7 @@
 using Plugin.FirebasePushNotification;
 using Spacearr.Common.Interfaces.Logger;
 using Spacearr.Core.Xamarin.Helpers;
+using Spacearr.Core.Xamarin.Services.Interfaces;
 using Spacearr.Core.Xamarin.Views;
 using Spacearr.Pusher.API.Interfaces;
 using Spacearr.Pusher.API.Interfaces.Service;
@@ -35,7 +36,8 @@ namespace Spacearr.Core.Xamarin
                 CrossFirebasePushNotificationActions(container.Resolve<ISaveFirebasePushNotificationTokenService>());
             }
 
-            MainPage = new MainPage(container.Resolve<IGetComputerService>(), container.Resolve<ILogger>(), container.Resolve<IPusherValidation>());
+            MainPage = new MainPage(container.Resolve<IGetComputerService>(), container.Resolve<ILogger>(),
+                container.Resolve<IPusherValidation>(), container.Resolve<IDownloadService>());
         }
 
         protected override void OnStart() { }

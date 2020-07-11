@@ -1,5 +1,6 @@
 ﻿using Spacearr.Common.Interfaces.Logger;
 using Spacearr.Core.Xamarin.Models;
+using Spacearr.Core.Xamarin.Services.Interfaces;
 using Spacearr.Pusher.API.Interfaces;
 using Spacearr.Pusher.API.Interfaces.Service;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace Spacearr.Core.Xamarin.Views
         private readonly IPusherValidation _pusherValidation;
         private readonly Dictionary<int, NavigationPage> _menuPages = new Dictionary<int, NavigationPage>();
 
-        public MainPage(IGetComputerService getComputerService, ILogger logger, IPusherValidation pusherValidation)
+        public MainPage(IGetComputerService getComputerService, ILogger logger, IPusherValidation pusherValidation, IDownloadService downloadService)
         {
             InitializeComponent();
             
@@ -25,7 +26,7 @@ namespace Spacearr.Core.Xamarin.Views
             _logger = logger;
             _pusherValidation = pusherValidation;
 
-            Master = new MenuPage();
+            Master = new MenuPage(downloadService);
 
             MasterBehavior = MasterBehavior.Popover;
 

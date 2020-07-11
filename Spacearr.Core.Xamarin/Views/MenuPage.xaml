@@ -3,10 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:converters1="clr-namespace:Spacearr.Core.Xamarin.Converters;assembly=Spacearr.Core.Xamarin"
              xmlns:models="clr-namespace:Spacearr.Core.Xamarin.Models;assembly=Spacearr.Core.Xamarin"
+             xmlns:viewModels="clr-namespace:Spacearr.Core.Xamarin.ViewModels;assembly=Spacearr.Core.Xamarin"
              mc:Ignorable="d"
              x:Class="Spacearr.Core.Xamarin.Views.MenuPage"
+             x:DataType="viewModels:DownloadViewModel"
              Title="Menu">
+
+    <ContentPage.Resources>
+        <converters1:InverterBooleanConverter x:Key="InverterBooleanConverter" />
+        <converters1:ValueProgressBarConverter x:Key="ValueProgressBarConverter" />
+    </ContentPage.Resources>
 
     <Frame BackgroundColor="{DynamicResource ColorPrimary}" BorderColor="{DynamicResource ColorPrimaryDark}" HasShadow="True" CornerRadius="0">
         <StackLayout VerticalOptions="FillAndExpand" BackgroundColor="{DynamicResource ColorPrimary}">
@@ -33,8 +41,8 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="20"/>
-                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="10"/>
                 </Grid.RowDefinitions>
                 <ImageButton Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Source="Assets/ic_settings.png" HorizontalOptions="Start" x:Name="SettingsImageButton" BackgroundColor="{DynamicResource ColorPrimary}"/>
                 <Label Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" VerticalTextAlignment="Center" Text="Settings" d:Text="Settings" x:Name="SettingsLabel"/>
@@ -43,9 +51,17 @@
                 <Label Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" VerticalTextAlignment="Center" Text="Logs" d:Text="Logs" x:Name="LogsLabel"/>
                 <Button Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" BackgroundColor="Transparent" TextColor="Transparent" Clicked="LogsButton_OnClicked"/>
             </Grid>
-            <StackLayout HeightRequest="8" Orientation="Horizontal" BackgroundColor="{DynamicResource ColorPrimary}">
-                <Label FontSize="7" Text="Version"/>
-                <Label FontSize="7" x:Name="VersionNumberLabel"/>
+            <StackLayout x:Name="Version" VerticalOptions="EndAndExpand" Orientation="Horizontal" BackgroundColor="{DynamicResource ColorPrimary}">
+                <StackLayout VerticalOptions="Center" HeightRequest="8" Orientation="Horizontal" BackgroundColor="{DynamicResource ColorPrimary}">
+                    <Label VerticalOptions="Center" FontSize="7" Text="Version"/>
+                    <Label VerticalOptions="Center" FontSize="7" x:Name="VersionNumberLabel"/>
+                </StackLayout>
+                <ImageButton VerticalOptions="Center" Source="Assets/ic_update.png" x:Name="UpdateAppImageButton" BackgroundColor="{DynamicResource ColorPrimary}"
+                             Clicked="UpdateAppImageButton_OnClicked" IsEnabled="{Binding IsDownloading, Converter={StaticResource InverterBooleanConverter}}"/>
+                <StackLayout x:Name="UpdateProgress" IsVisible="{Binding IsDownloading}" Orientation="Horizontal" BackgroundColor="{DynamicResource ColorPrimary}">
+                    <ProgressBar WidthRequest="50" x:Name="UpdateProgressBar" ProgressColor="{DynamicResource TextColorPrimary}" Progress="{Binding ProgressValue, Converter={StaticResource ValueProgressBarConverter}}"/>
+                    <Label WidthRequest="25" FontSize="7" x:Name="UpdateLabel" Text="{Binding ProgressValue, StringFormat='{0:F2}%'}" VerticalOptions="Center" HorizontalOptions="EndAndExpand" />
+                </StackLayout>
             </StackLayout>
         </StackLayout>
     </Frame>

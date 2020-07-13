@@ -1,7 +1,7 @@
 ﻿using Octokit;
-using Spacearr.Core.Xamarin.Interfaces.Helpers;
+using Spacearr.Common.Services.Interfaces;
+using Spacearr.Core.Xamarin.Helpers.Interfaces;
 using Spacearr.Core.Xamarin.Models;
-using Spacearr.Core.Xamarin.Services.Interfaces;
 using Spacearr.Core.Xamarin.ViewModels;
 using System;
 using System.Collections.Generic;

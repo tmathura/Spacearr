@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Spacearr.Common.Interfaces;
-using Spacearr.Pusher.API.Interfaces;
+using Spacearr.Common.Services.Interfaces;
+using Spacearr.Pusher.API;
 using System.ServiceProcess;
 
 namespace Spacearr.Windows.Service
@@ -9,13 +9,13 @@ namespace Spacearr.Windows.Service
     {
         private readonly IConfiguration _configuration;
         private readonly IPusher _pusher;
-        private readonly INotificationTimer _notificationTimer;
+        private readonly INotificationTimerService _notificationTimerService;
 
-        public Service(IConfiguration configuration, IPusher pusher, INotificationTimer notificationTimer)
+        public Service(IConfiguration configuration, IPusher pusher, INotificationTimerService notificationTimerService)
         {
             _configuration = configuration;
             _pusher = pusher;
-            _notificationTimer = notificationTimer;
+            _notificationTimerService = notificationTimerService;
 
             InitializeComponent();
         }
@@ -26,7 +26,7 @@ namespace Spacearr.Windows.Service
                 _configuration.GetSection("PusherSecret").Value, _configuration.GetSection("PusherCluster").Value);
             _pusher.SaveFirebasePushNotificationTokenCommandReceiverConnect(_configuration.GetSection("PusherAppId").Value, _configuration.GetSection("PusherKey").Value,
                 _configuration.GetSection("PusherSecret").Value, _configuration.GetSection("PusherCluster").Value);
-            _notificationTimer.Instantiate();
+            _notificationTimerService.Instantiate();
         }
 
         protected override void OnStop()

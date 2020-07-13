@@ -1,11 +1,11 @@
 ﻿using Autofac;
 using Plugin.FirebasePushNotification;
-using Spacearr.Common.Interfaces.Logger;
-using Spacearr.Core.Xamarin.Helpers;
-using Spacearr.Core.Xamarin.Services.Interfaces;
+using Spacearr.Common.Logger.Interfaces;
+using Spacearr.Common.Services.Interfaces;
+using Spacearr.Core.Xamarin.Helpers.Implementations;
 using Spacearr.Core.Xamarin.Views;
-using Spacearr.Pusher.API.Interfaces;
-using Spacearr.Pusher.API.Interfaces.Service;
+using Spacearr.Pusher.API.Services.Interfaces;
+using Spacearr.Pusher.API.Validator.Interfaces;
 using System;
 using Xamarin.Essentials;
 using Xamarin.Forms;

@@ -1,10 +1,10 @@
 ﻿using Microcharts;
 using SkiaSharp;
-using Spacearr.Common.Interfaces.Logger;
+using Spacearr.Common.Logger.Interfaces;
 using Spacearr.Common.Models;
-using Spacearr.Core.Xamarin.Interfaces.Helpers;
+using Spacearr.Core.Xamarin.Helpers.Interfaces;
 using Spacearr.Core.Xamarin.ViewModels;
-using Spacearr.Pusher.API.Interfaces.Service;
+using Spacearr.Pusher.API.Services.Interfaces;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;

@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Spacearr.Common.Services.Interfaces;
 using Spacearr.Core.Xamarin.Models;
 using Spacearr.Core.Xamarin.Services.Interfaces;
 using System;

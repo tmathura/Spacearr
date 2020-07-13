@@ -1,9 +1,10 @@
-﻿using Spacearr.Common.Interfaces.Logger;
+﻿using Plugin.FirebasePushNotification;
+using Spacearr.Common.Logger.Interfaces;
 using Spacearr.Common.Models;
-using Spacearr.Core.Xamarin.Helpers;
-using Spacearr.Core.Xamarin.Interfaces.Helpers;
+using Spacearr.Core.Xamarin.Helpers.Implementations;
+using Spacearr.Core.Xamarin.Helpers.Interfaces;
 using Spacearr.Core.Xamarin.ViewModels;
-using Spacearr.Pusher.API.Interfaces;
+using Spacearr.Pusher.API.Validator.Interfaces;
 using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
@@ -34,6 +35,12 @@ namespace Spacearr.Core.Xamarin.Views
             DeviceId.Text = Preferences.Get("DeviceId", Guid.NewGuid().ToString());
             DarkModeSwitch.IsToggled = Preferences.Get("DarkMode", false);
 
+            if (Device.RuntimePlatform == Device.Android)
+            {
+                FirebaseTokenStackLayout.IsVisible = true;
+                FirebaseToken.Text = CrossFirebasePushNotification.Current.Token;
+            }
+
             BindingContext = _viewModel = new SettingsViewModel(logger, this);
         }
 
@@ -53,6 +60,11 @@ namespace Spacearr.Core.Xamarin.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
+
+            if (Device.RuntimePlatform == Device.Android)
+            {
+                FirebaseToken.Text = CrossFirebasePushNotification.Current.Token;
+            }
 
             _viewModel.LoadItemsCommand.Execute(null);
         }

@@ -1,8 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Newtonsoft.Json;
-using Spacearr.Common.Command.Commands;
-using Spacearr.Common.Interfaces;
+using Spacearr.Common.Command.Implementations.Commands;
+using Spacearr.Common.ComputerDrive.Interfaces;
 using Spacearr.Common.Models;
 using Spacearr.Common.Tests.Factories;
 using System.Collections.Generic;

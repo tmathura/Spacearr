@@ -67,24 +67,20 @@ before_build:
     cd C:\projects\spacearr\Spacearr.Android\Properties
 
     powershell -Command "(gc AndroidManifest.xml) -replace 'android:versionName=""""1.0""""', ('android:versionName=""""' + $env:APPVEYOR_BUILD_VERSION + '""""') | Out-File -encoding ASCII AndroidManifest.xml"
-
-    more AndroidManifest.xml
 - cmd: >-
     cd C:\projects\spacearr\Spacearr.Common
 
-    powershell -Command "(gc SendFirebasePushNotification.cs) -replace 'ProjectId', ($env:PROJECTID) | Out-File -encoding ASCII SendFirebasePushNotification.cs"
+    powershell -Command "(gc SendFirebasePushNotificationService.cs) -replace 'ProjectId', ($env:PROJECTID) | Out-File -encoding ASCII SendFirebasePushNotificationService.cs"
 
-    powershell -Command "(gc SendFirebasePushNotification.cs) -replace 'PrivateKeyId', ($env:PRIVATEKEYID) | Out-File -encoding ASCII SendFirebasePushNotification.cs"
+    powershell -Command "(gc SendFirebasePushNotificationService.cs) -replace 'PrivateKeyId', ($env:PRIVATEKEYID) | Out-File -encoding ASCII SendFirebasePushNotificationService.cs"
 
-    powershell -Command "(gc SendFirebasePushNotification.cs) -replace 'PrivateKey', ($env:PRIVATEKEY) | Out-File -encoding ASCII SendFirebasePushNotification.cs"
+    powershell -Command "(gc SendFirebasePushNotificationService.cs) -replace 'PrivateKey', ($env:PRIVATEKEY) | Out-File -encoding ASCII SendFirebasePushNotificationService.cs"
 
-    powershell -Command "(gc SendFirebasePushNotification.cs) -replace 'ClientEmail', ($env:CLIENTEMAIL) | Out-File -encoding ASCII SendFirebasePushNotification.cs"
+    powershell -Command "(gc SendFirebasePushNotificationService.cs) -replace 'ClientEmail', ($env:CLIENTEMAIL) | Out-File -encoding ASCII SendFirebasePushNotificationService.cs"
 
-    powershell -Command "(gc SendFirebasePushNotification.cs) -replace 'ClientId', ($env:FIREBASEAPPCLIENTID) | Out-File -encoding ASCII SendFirebasePushNotification.cs"
+    powershell -Command "(gc SendFirebasePushNotificationService.cs) -replace 'ClientId', ($env:FIREBASEAPPCLIENTID) | Out-File -encoding ASCII SendFirebasePushNotificationService.cs"
 
-    powershell -Command "(gc SendFirebasePushNotification.cs) -replace 'ClientX509CertUrl', ($env:CLIENTX509CERTURL) | Out-File -encoding ASCII SendFirebasePushNotification.cs"
-
-    more SendFirebasePushNotification.cs
+    powershell -Command "(gc SendFirebasePushNotificationService.cs) -replace 'ClientX509CertUrl', ($env:CLIENTX509CERTURL) | Out-File -encoding ASCII SendFirebasePushNotificationService.cs"
 - cmd: >-
     cd C:\projects\spacearr\Spacearr.UWP
 

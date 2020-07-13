@@ -174,13 +174,14 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Spacearr.Common\Spacearr.Common.csproj">
+      <Project>{07955d9e-746b-4274-b1e5-b233d577e437}</Project>
+      <Name>Spacearr.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Spacearr.Core.Xamarin\Spacearr.Core.Xamarin.csproj">
       <Project>{8CB8FECD-0779-444B-A21C-7DFC554C111D}</Project>
       <Name>Spacearr.Core.Xamarin</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Spacearr.UWP.pfx" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

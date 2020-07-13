@@ -1,4 +1,4 @@
-﻿using Spacearr.Core.Xamarin.Services.Interfaces;
+﻿using Spacearr.Common.Services.Interfaces;
 using Spacearr.Droid.Services;
 using Xamarin.Forms;
 

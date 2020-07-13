@@ -22,6 +22,10 @@
                         <Label FontAttributes="Bold" Text="Dark Mode"/>
                         <Switch x:Name="DarkModeSwitch" Toggled="DarkMode_OnToggled" HorizontalOptions="EndAndExpand"/>
                     </StackLayout>
+                    <StackLayout x:Name="FirebaseTokenStackLayout" IsVisible="False" Orientation="Horizontal" BackgroundColor="{DynamicResource ColorPrimaryLight}">
+                        <Label FontAttributes="Bold" Text="Firebase Token"/>
+                        <Label x:Name="FirebaseToken" HorizontalOptions="EndAndExpand"/>
+                    </StackLayout>
                 </StackLayout>
             </Frame>
             <Frame x:Name="ListViewFrame" Margin="5" HasShadow="True" CornerRadius="2">

@@ -1,7 +1,7 @@
-﻿using Spacearr.Common.Interfaces.Logger;
+﻿using Spacearr.Common.Logger.Interfaces;
 using Spacearr.Common.Models;
-using Spacearr.Core.Xamarin.Interfaces.Helpers;
-using Spacearr.Pusher.API.Interfaces.Service;
+using Spacearr.Core.Xamarin.Helpers.Interfaces;
+using Spacearr.Pusher.API.Services.Interfaces;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;

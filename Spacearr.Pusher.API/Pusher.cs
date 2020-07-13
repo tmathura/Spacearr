@@ -1,6 +1,6 @@
-﻿using Spacearr.Common.Interfaces.Command;
-using Spacearr.Common.Interfaces.Logger;
-using Spacearr.Pusher.API.Interfaces;
+﻿using Spacearr.Common.Command.Interfaces;
+using Spacearr.Common.Logger.Interfaces;
+using Spacearr.Pusher.API.Receivers.Interfaces;
 using System;
 using System.Threading.Tasks;
 

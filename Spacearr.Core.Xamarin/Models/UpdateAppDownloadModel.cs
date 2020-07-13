@@ -1,4 +1,4 @@
-﻿using Spacearr.Core.Xamarin.Interfaces.Helpers;
+﻿using Spacearr.Core.Xamarin.Helpers.Interfaces;
 
 namespace Spacearr.Core.Xamarin.Models
 {

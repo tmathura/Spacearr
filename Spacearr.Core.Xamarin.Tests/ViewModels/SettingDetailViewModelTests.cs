@@ -1,10 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using Spacearr.Common.Interfaces.Logger;
+using Spacearr.Common.Logger.Interfaces;
 using Spacearr.Common.Models;
-using Spacearr.Core.Xamarin.Interfaces.Helpers;
+using Spacearr.Core.Xamarin.Helpers.Interfaces;
 using Spacearr.Core.Xamarin.ViewModels;
-using Spacearr.Pusher.API.Interfaces;
+using Spacearr.Pusher.API.Validator.Interfaces;
 using System;
 
 namespace Spacearr.Core.Xamarin.Tests.ViewModels

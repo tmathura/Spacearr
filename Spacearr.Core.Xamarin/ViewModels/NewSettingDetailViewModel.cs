@@ -1,7 +1,7 @@
-﻿using Spacearr.Common.Interfaces.Logger;
+﻿using Spacearr.Common.Logger.Interfaces;
 using Spacearr.Common.Models;
-using Spacearr.Core.Xamarin.Interfaces.Helpers;
-using Spacearr.Pusher.API.Interfaces;
+using Spacearr.Core.Xamarin.Helpers.Interfaces;
+using Spacearr.Pusher.API.Validator.Interfaces;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;

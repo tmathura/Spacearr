@@ -51,7 +51,7 @@
                 <Label Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" VerticalTextAlignment="Center" Text="Logs" d:Text="Logs" x:Name="LogsLabel"/>
                 <Button Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" BackgroundColor="Transparent" TextColor="Transparent" Clicked="LogsButton_OnClicked"/>
             </Grid>
-            <StackLayout x:Name="Version" VerticalOptions="EndAndExpand" Orientation="Horizontal" BackgroundColor="{DynamicResource ColorPrimary}">
+            <StackLayout HeightRequest="30" x:Name="Version" VerticalOptions="EndAndExpand" Orientation="Horizontal" BackgroundColor="{DynamicResource ColorPrimary}">
                 <StackLayout VerticalOptions="Center" HeightRequest="8" Orientation="Horizontal" BackgroundColor="{DynamicResource ColorPrimary}">
                     <Label VerticalOptions="Center" FontSize="7" Text="Version"/>
                     <Label VerticalOptions="Center" FontSize="7" x:Name="VersionNumberLabel"/>

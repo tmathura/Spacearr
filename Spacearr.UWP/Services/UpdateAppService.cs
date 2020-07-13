@@ -15,6 +15,22 @@ namespace Spacearr.UWP.Services
     {
         public async Task Update(string versionNumber)
         {
+            var localFolderList = await ApplicationData.Current.LocalFolder.GetFoldersAsync();
+            foreach (var storageFolder in localFolderList)
+            {
+                await storageFolder.DeleteAsync();
+            }
+
+            var localFolderFileList = await ApplicationData.Current.LocalFolder.GetFilesAsync();
+            foreach (var storageFile in localFolderFileList)
+            {
+                if (storageFile.Name == "Spacearr.Core.Xamarin.SQLite.db3") { } 
+                else if (storageFile.Name == $"Spacearr.UWP.v{versionNumber}.zip") { }
+                else
+                {
+                    await storageFile.DeleteAsync();
+                }
+            }
             var uwpPath = Path.Combine(ApplicationData.Current.LocalFolder.Path, $"Spacearr.UWP.v{versionNumber}.zip");
             var unzipped = await UnzipFileAsync(uwpPath, ApplicationData.Current.LocalFolder.Path);
             if (unzipped)

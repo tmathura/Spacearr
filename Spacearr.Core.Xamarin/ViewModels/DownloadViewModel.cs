@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Spacearr.Core.Xamarin.Models;
 using Spacearr.Core.Xamarin.Services.Interfaces;
 using System;
 using System.Threading;
@@ -11,8 +12,6 @@ namespace Spacearr.Core.Xamarin.ViewModels
 {
     public class DownloadViewModel : ViewModelBase
     {
-        public string VersionNumber { get; set; }
-
         private double _progressValue;
         /// <summary>
         /// Gets or sets the progress value.
@@ -47,10 +46,17 @@ namespace Spacearr.Core.Xamarin.ViewModels
         /// <value>The start download command.</value>
         public ICommand StartDownloadCommand { get; }
 
+        /// <summary>
+        /// Gets the start update app download command.
+        /// </summary>
+        /// <value>The start download command.</value>
+        public ICommand StartUpdateAppDownloadCommand { get; }
+
         public DownloadViewModel(IDownloadService downloadService)
         {
             _downloadService = downloadService;
             StartDownloadCommand = new RelayCommand<string>(async (url) => await StartDownloadAsync(url));
+            StartUpdateAppDownloadCommand = new RelayCommand<UpdateAppDownloadModel>(async (updateAppDownloadModel) => await StartUpdateAppDownloadAsync(updateAppDownloadModel));
         }
 
         /// <summary>
@@ -75,7 +81,37 @@ namespace Spacearr.Core.Xamarin.ViewModels
             finally
             {
                 IsDownloading = false;
-                await DependencyService.Get<IUpdateAppService>().Update(VersionNumber);
+            }
+        }
+
+        /// <summary>
+        /// Starts the update app download async.
+        /// </summary>
+        /// <returns>The update app download async.</returns>
+        public async Task StartUpdateAppDownloadAsync(UpdateAppDownloadModel updateAppDownloadModel)
+        { 
+            var progressIndicator = new Progress<double>(ReportProgress);
+            var cts = new CancellationTokenSource();
+            try
+            {
+                IsDownloading = true;
+
+                await _downloadService.DownloadFileAsync(updateAppDownloadModel.Url, progressIndicator, cts.Token);
+            }
+            catch (OperationCanceledException ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+                //Manage cancellation here
+            }
+            finally
+            {
+                IsDownloading = false;
+                await DependencyService.Get<IUpdateAppService>().Update(updateAppDownloadModel.VersionNumber);
+
+                if (Device.RuntimePlatform == Device.UWP)
+                {
+                    await updateAppDownloadModel.MenuPage.CustomDisplayAlert("Update", "In the Windows Explorer that popped up, please run 'Add-AppDevPackage.ps1' with Windows 'PowerShell to update'", "Ok");
+                }
             }
         }
 

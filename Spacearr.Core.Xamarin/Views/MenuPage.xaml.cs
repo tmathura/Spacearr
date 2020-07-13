@@ -1,4 +1,5 @@
 ﻿using Octokit;
+using Spacearr.Core.Xamarin.Interfaces.Helpers;
 using Spacearr.Core.Xamarin.Models;
 using Spacearr.Core.Xamarin.Services.Interfaces;
 using Spacearr.Core.Xamarin.ViewModels;
@@ -6,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Application = Xamarin.Forms.Application;
@@ -13,7 +15,7 @@ using Application = Xamarin.Forms.Application;
 namespace Spacearr.Core.Xamarin.Views
 {
     [DesignTimeVisible(false)]
-    public partial class MenuPage : ContentPage
+    public partial class MenuPage : ContentPage, IMenuPageHelper
     {
         private readonly DownloadViewModel _viewModel;
         private static MainPage RootPage => Application.Current.MainPage as MainPage;
@@ -50,7 +52,6 @@ namespace Spacearr.Core.Xamarin.Views
                 SettingsLabel.Margin = new Thickness(20, 0, 0, 0);
                 LogsImageButton.Margin = new Thickness(-7, 0, 0, 0);
                 LogsLabel.Margin = new Thickness(20, 0, 0, 0);
-                Version.HeightRequest = 16;
                 UpdateProgressBar.WidthRequest = 50;
                 UpdateLabel.WidthRequest = 25;
             }
@@ -58,10 +59,11 @@ namespace Spacearr.Core.Xamarin.Views
             {
                 SettingsLabel.Margin = new Thickness(50, 0, 0, 0);
                 LogsLabel.Margin = new Thickness(50, 0, 0, 0);
-                Version.HeightRequest = 30;
             }
 
             BindingContext = _viewModel = new DownloadViewModel(downloadService);
+
+            _ = CheckForUpdate();
         }
 
         private async void SettingsButton_OnClicked(object sender, EventArgs e)
@@ -115,38 +117,45 @@ namespace Spacearr.Core.Xamarin.Views
 
             try
             {
-                var client = new GitHubClient(new ProductHeaderValue("Spacearr"));
-                var releases = await client.Repository.Release.GetAll("tmathura", "Spacearr");
-                var latest = releases[0];
-
-                if (VersionTracking.CurrentVersion == latest.TagName)
-                {
-                    await DisplayAlert("Update", "The latest version is already installed", "Yes", "No");
-                }
-                else
-                {
-                    var answer = await DisplayAlert("Update", "There is a new version available, do you want to update?", "Yes", "No");
-                    if (answer)
-                    {
-                        string url;
-                        if (Device.RuntimePlatform == Device.Android)
-                        {
-                            url = latest.Assets.FirstOrDefault(x => x.Name.ToLower().Contains("apk"))?.BrowserDownloadUrl;
-                        }
-                        else
-                        {
-                            url = latest.Assets.FirstOrDefault(x => x.Name.ToLower().Contains("uwp"))?.BrowserDownloadUrl;
-                        }
-
-                        _viewModel.VersionNumber = latest.TagName;
-                        _viewModel.StartDownloadCommand.Execute(url);
-                    }
-                }
+                await CheckForUpdate();
+            }
+            catch
+            {
+                await DisplayAlert("Error", "Error checking for update", "Ok");
             }
             finally
             {
                 IsBusy = false;
             }
+        }
+
+        public async Task CheckForUpdate()
+        {
+            var client = new GitHubClient(new ProductHeaderValue("Spacearr"));
+            var releases = await client.Repository.Release.GetAll("tmathura", "Spacearr");
+            var latest = releases[0];
+            var currentVersion = new Version(VersionTracking.CurrentVersion);
+            var latestVersion = new Version(latest.TagName);
+
+            if (latestVersion > currentVersion)
+            {
+                var answer = await DisplayAlert("Update", "There is a new version available, do you want to update?", "Yes", "No");
+                if (answer)
+                {
+                    var url = Device.RuntimePlatform == Device.Android ? latest.Assets.FirstOrDefault(x => x.Name.ToLower().Contains("apk"))?.BrowserDownloadUrl : latest.Assets.FirstOrDefault(x => x.Name.ToLower().Contains("uwp"))?.BrowserDownloadUrl;
+                    var updateAppDownloadModel = new UpdateAppDownloadModel { Url = url, VersionNumber = latest.TagName, MenuPage = this };
+                    _viewModel.StartUpdateAppDownloadCommand.Execute(updateAppDownloadModel);
+                }
+            }
+            else
+            {
+                await DisplayAlert("Update", "The latest version is already installed", "Ok");
+            }
+        }
+
+        public async Task CustomDisplayAlert(string title, string message, string cancelText)
+        {
+            await DisplayAlert(title, message, cancelText);
         }
     }
 }

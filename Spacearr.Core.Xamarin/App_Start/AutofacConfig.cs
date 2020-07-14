@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Octokit;
 using Spacearr.Common.Logger.Implementations;
 using Spacearr.Common.Logger.Interfaces;
 using Spacearr.Common.Services.Implementations;
@@ -22,6 +23,8 @@ namespace Spacearr.Core.Xamarin
         {
             builder.Register(c => new Logger(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Spacearr.Core.Xamarin.SQLite.db3"))).As<ILogger>().SingleInstance();
             builder.Register(c => DependencyService.Get<IFileService>()).As<IFileService>().SingleInstance();
+            builder.Register(c => new GitHubClient(new ProductHeaderValue("Spacearr"))).As<IGitHubClient>().SingleInstance();
+            builder.RegisterType<UpdateService>().As<IUpdateService>().SingleInstance();
             builder.RegisterType<DownloadService>().As<IDownloadService>().SingleInstance();
             builder.RegisterType<Pusher.API.Pusher>().As<IPusher>().SingleInstance();
             builder.RegisterType<PusherValidation>().As<IPusherValidation>().SingleInstance();

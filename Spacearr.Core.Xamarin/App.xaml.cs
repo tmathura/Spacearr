@@ -37,7 +37,7 @@ namespace Spacearr.Core.Xamarin
             }
 
             MainPage = new MainPage(container.Resolve<IGetComputerService>(), container.Resolve<ILogger>(),
-                container.Resolve<IPusherValidation>(), container.Resolve<IDownloadService>());
+                container.Resolve<IPusherValidation>(), container.Resolve<IDownloadService>(), container.Resolve<IUpdateService>());
         }
 
         protected override void OnStart() { }

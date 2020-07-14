@@ -18,7 +18,7 @@ namespace Spacearr.Core.Xamarin.Views
         private readonly IPusherValidation _pusherValidation;
         private readonly Dictionary<int, NavigationPage> _menuPages = new Dictionary<int, NavigationPage>();
 
-        public MainPage(IGetComputerService getComputerService, ILogger logger, IPusherValidation pusherValidation, IDownloadService downloadService)
+        public MainPage(IGetComputerService getComputerService, ILogger logger, IPusherValidation pusherValidation, IDownloadService downloadService, IUpdateService updateService)
         {
             InitializeComponent();
             
@@ -26,7 +26,7 @@ namespace Spacearr.Core.Xamarin.Views
             _logger = logger;
             _pusherValidation = pusherValidation;
 
-            Master = new MenuPage(downloadService);
+            Master = new MenuPage(downloadService, updateService);
 
             MasterBehavior = MasterBehavior.Popover;
 

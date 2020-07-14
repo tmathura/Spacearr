@@ -24,6 +24,7 @@
 <?define Microsoft.Extensions.FileSystemGlobbing.dll = "Microsoft.Extensions.FileSystemGlobbing.dll" ?>
 <?define Microsoft.Extensions.Primitives.dll = "Microsoft.Extensions.Primitives.dll" ?>
 <?define Newtonsoft.Json.dll = "Newtonsoft.Json.dll" ?>
+<?define Octokit.dll = "Octokit.dll" ?>
 <?define PusherClient.dll = "PusherClient.dll" ?>
 <?define PusherServer.Core.dll = "PusherServer.Core.dll" ?>
 <?define PusherServer.dll = "PusherServer.dll" ?>
@@ -174,6 +175,9 @@
       <Component Id="$(var.Newtonsoft.Json.dll)" Guid="3A35BEBC-84A2-4B1D-945D-E1AA4CC7A6C8">
         <File Id="$(var.Newtonsoft.Json.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.Newtonsoft.Json.dll)" KeyPath="yes" />
       </Component>
+      <Component Id="$(var.Octokit.dll)" Guid="4C60B71B-C732-4B1F-8F27-68A15DBD6675">
+        <File Id="$(var.Octokit.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.Octokit.dll)" KeyPath="yes" />
+      </Component>
       <Component Id="$(var.PusherClient.dll)" Guid="39A2E9EA-3C11-46EE-A9AE-0B8752447117">
         <File Id="$(var.PusherClient.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.PusherClient.dll)" KeyPath="yes" />
       </Component>
@@ -280,6 +284,7 @@
       <ComponentRef Id="$(var.Microsoft.Extensions.FileSystemGlobbing.dll)" />
       <ComponentRef Id="$(var.Microsoft.Extensions.Primitives.dll)" />
       <ComponentRef Id="$(var.Newtonsoft.Json.dll)" />
+      <ComponentRef Id="$(var.Octokit.dll)" />
       <ComponentRef Id="$(var.PusherClient.dll)" />
       <ComponentRef Id="$(var.PusherServer.Core.dll)" />
       <ComponentRef Id="$(var.PusherServer.dll)" />

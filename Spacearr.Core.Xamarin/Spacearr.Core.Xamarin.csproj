@@ -24,7 +24,6 @@
     <PackageReference Include="Microcharts" Version="0.8.5-pre" />
     <PackageReference Include="Microcharts.Forms" Version="0.8.5-pre" />
     <PackageReference Include="MvvmLightLibsStd10" Version="5.4.1.1" />
-    <PackageReference Include="Octokit" Version="0.48.0" />
     <PackageReference Include="Plugin.FirebasePushNotification" Version="3.3.13-beta" />
     <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
     <PackageReference Include="Xamarin.Forms" Version="4.7.0.848-pre3" />  

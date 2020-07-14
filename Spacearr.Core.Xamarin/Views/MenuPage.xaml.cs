@@ -1,4 +1,4 @@
-﻿using Octokit;
+﻿using Spacearr.Common.Enums;
 using Spacearr.Common.Services.Interfaces;
 using Spacearr.Core.Xamarin.Helpers.Interfaces;
 using Spacearr.Core.Xamarin.Models;
@@ -6,7 +6,6 @@ using Spacearr.Core.Xamarin.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -17,11 +16,14 @@ namespace Spacearr.Core.Xamarin.Views
     [DesignTimeVisible(false)]
     public partial class MenuPage : ContentPage, IMenuPageHelper
     {
+        private static IUpdateService _updateService;
         private readonly DownloadViewModel _viewModel;
         private static MainPage RootPage => Application.Current.MainPage as MainPage;
 
-        public MenuPage(IDownloadService downloadService)
+        public MenuPage(IDownloadService downloadService, IUpdateService updateService)
         {
+            _updateService = updateService;
+
             InitializeComponent();
 
             VersionNumberLabel.Text = VersionTracking.CurrentVersion;
@@ -131,19 +133,13 @@ namespace Spacearr.Core.Xamarin.Views
 
         public async Task CheckForUpdate()
         {
-            var client = new GitHubClient(new ProductHeaderValue("Spacearr"));
-            var releases = await client.Repository.Release.GetAll("tmathura", "Spacearr");
-            var latest = releases[0];
-            var currentVersion = new Version(VersionTracking.CurrentVersion);
-            var latestVersion = new Version(latest.TagName);
-
-            if (latestVersion > currentVersion)
+            if (await _updateService.CheckForUpdateAsync(VersionTracking.CurrentVersion))
             {
                 var answer = await DisplayAlert("Update", "There is a new version available, do you want to update?", "Yes", "No");
                 if (answer)
                 {
-                    var url = Device.RuntimePlatform == Device.Android ? latest.Assets.FirstOrDefault(x => x.Name.ToLower().Contains("apk"))?.BrowserDownloadUrl : latest.Assets.FirstOrDefault(x => x.Name.ToLower().Contains("uwp"))?.BrowserDownloadUrl;
-                    var updateAppDownloadModel = new UpdateAppDownloadModel { Url = url, VersionNumber = latest.TagName, MenuPage = this };
+                    var url = await _updateService.UpdateUrlOfLastUpdateCheck(Device.RuntimePlatform == Device.Android ? UpdateType.Android : UpdateType.Uwp);
+                    var updateAppDownloadModel = new UpdateAppDownloadModel { Url = url, VersionNumber = _updateService.LatestTagName, MenuPage = this };
                     _viewModel.StartUpdateAppDownloadCommand.Execute(updateAppDownloadModel);
                 }
             }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Spacearr.Core.Xamarin.Controls.Android
+namespace Spacearr.Core.Xamarin.Views.Controls.Android
 {
     public class GenericEventArgs<T> : EventArgs
     {

@@ -1,9 +1,9 @@
 ﻿using Spacearr.Common.Logger.Interfaces;
 using Spacearr.Common.Models;
-using Spacearr.Core.Xamarin.Controls.Android;
 using Spacearr.Core.Xamarin.Helpers.Implementations;
 using Spacearr.Core.Xamarin.Helpers.Interfaces;
 using Spacearr.Core.Xamarin.ViewModels;
+using Spacearr.Core.Xamarin.Views.Controls.Android;
 using Spacearr.Pusher.API.Validator.Interfaces;
 using System.ComponentModel;
 using System.Threading.Tasks;

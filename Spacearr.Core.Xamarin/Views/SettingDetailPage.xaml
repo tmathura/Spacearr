@@ -3,9 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:controls="clr-namespace:Spacearr.Core.Xamarin.Controls;assembly=Spacearr.Core.Xamarin"
              xmlns:viewModels="clr-namespace:Spacearr.Core.Xamarin.ViewModels;assembly=Spacearr.Core.Xamarin"
-             xmlns:android="clr-namespace:Spacearr.Core.Xamarin.Controls.Android;assembly=Spacearr.Core.Xamarin"
+             xmlns:android="clr-namespace:Spacearr.Core.Xamarin.Views.Controls.Android;assembly=Spacearr.Core.Xamarin"
+             xmlns:controls="clr-namespace:Spacearr.Core.Xamarin.Views.Controls;assembly=Spacearr.Core.Xamarin"
              mc:Ignorable="d"
              x:Class="Spacearr.Core.Xamarin.Views.SettingDetailPage"
              Title="{Binding Title}" x:DataType="viewModels:SettingDetailViewModel">

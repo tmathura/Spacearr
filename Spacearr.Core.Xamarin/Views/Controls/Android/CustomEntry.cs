@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace Spacearr.Core.Xamarin.Controls.Android
+namespace Spacearr.Core.Xamarin.Views.Controls.Android
 {
     public class FocusArgs
     {

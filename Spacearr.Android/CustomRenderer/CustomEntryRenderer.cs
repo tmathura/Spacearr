@@ -1,7 +1,6 @@
 ﻿using Android.Content;
 using Android.Views.InputMethods;
-using Spacearr.Core.Xamarin.Controls;
-using Spacearr.Core.Xamarin.Controls.Android;
+using Spacearr.Core.Xamarin.Views.Controls.Android;
 using Spacearr.Droid.CustomRenderer;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;

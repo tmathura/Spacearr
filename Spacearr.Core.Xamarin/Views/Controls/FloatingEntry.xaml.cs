@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace Spacearr.Core.Xamarin.Controls
+namespace Spacearr.Core.Xamarin.Views.Controls
 {
     [DesignTimeVisible(false)]
     public partial class FloatingEntry : ContentView

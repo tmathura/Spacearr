@@ -61,14 +61,14 @@ before_build:
     powershell -Command "(gc google-services.json) -replace 'ClientId', ($env:CLIENTID) | Out-File -encoding ASCII google-services.json"
 
     powershell -Command "(gc google-services.json) -replace 'CurrentKey', ($env:CURRENTKEY) | Out-File -encoding ASCII google-services.json"
-
-    more google-services.json
 - cmd: >-
     cd C:\projects\spacearr\Spacearr.Android\Properties
 
     powershell -Command "(gc AndroidManifest.xml) -replace 'android:versionName=""""1.0""""', ('android:versionName=""""' + $env:APPVEYOR_BUILD_VERSION + '""""') | Out-File -encoding ASCII AndroidManifest.xml"
+
+    more AndroidManifest.xml
 - cmd: >-
-    cd C:\projects\spacearr\Spacearr.Common
+    cd C:\projects\spacearr\Spacearr.Common\Services\Implementations
 
     powershell -Command "(gc SendFirebasePushNotificationService.cs) -replace 'ProjectId', ($env:PROJECTID) | Out-File -encoding ASCII SendFirebasePushNotificationService.cs"
 

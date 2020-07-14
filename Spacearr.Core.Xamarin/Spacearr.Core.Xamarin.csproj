@@ -32,10 +32,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Controls\FloatingLabel.xaml.cs">
+    <Compile Update="Views\Controls\FloatingLabel.xaml.cs">
       <DependentUpon>FloatingLabel.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Controls\FloatingEntry.xaml.cs">
+    <Compile Update="Views\Controls\FloatingEntry.xaml.cs">
       <DependentUpon>FloatingEntry.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\ComputerDrivesPage.xaml.cs">

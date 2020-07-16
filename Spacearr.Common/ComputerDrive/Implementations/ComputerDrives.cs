@@ -5,7 +5,7 @@ namespace Spacearr.Common.ComputerDrive.Implementations
 {
     public class ComputerDrives : IComputerDrives
     {
-        private static IComputerDriveInfo _computerDrive;
+        private readonly IComputerDriveInfo _computerDrive;
 
         public ComputerDrives(IComputerDriveInfo computerDrive)
         {

@@ -112,7 +112,7 @@ namespace Spacearr.Pusher.API
         {
             try
             {
-                var json = _invoker.Invoke(command);
+                var json = await _invoker.Invoke(command);
                 await SendMessage(channelName, eventName, json, appId, key, secret, cluster);
             }
             catch (Exception e)

@@ -27,6 +27,8 @@ Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Spacearr.WorkerService.Wind
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spacearr.WixToolset.CustomAction", "Spacearr.WixToolset.CustomAction\Spacearr.WixToolset.CustomAction.csproj", "{D170EE1B-499B-495E-BE79-3861DD86A87B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spacearr.WorkerService.Windows.Updater", "Spacearr.WorkerService.Windows.Updater\Spacearr.WorkerService.Windows.Updater.csproj", "{06B777AB-EA1D-4EE4-94FE-6B9BEFC9FD41}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -343,6 +345,30 @@ Global
 		{D170EE1B-499B-495E-BE79-3861DD86A87B}.Release|x64.ActiveCfg = Release|x86
 		{D170EE1B-499B-495E-BE79-3861DD86A87B}.Release|x86.ActiveCfg = Release|x86
 		{D170EE1B-499B-495E-BE79-3861DD86A87B}.Release|x86.Build.0 = Release|x86
+		{06B777AB-EA1D-4EE4-94FE-6B9BEFC9FD41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06B777AB-EA1D-4EE4-94FE-6B9BEFC9FD41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06B777AB-EA1D-4EE4-94FE-6B9BEFC9FD41}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{06B777AB-EA1D-4EE4-94FE-6B9BEFC9FD41}.Debug|ARM.Build.0 = Debug|Any CPU
+		{06B777AB-EA1D-4EE4-94FE-6B9BEFC9FD41}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{06B777AB-EA1D-4EE4-94FE-6B9BEFC9FD41}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{06B777AB-EA1D-4EE4-94FE-6B9BEFC9FD41}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{06B777AB-EA1D-4EE4-94FE-6B9BEFC9FD41}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{06B777AB-EA1D-4EE4-94FE-6B9BEFC9FD41}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{06B777AB-EA1D-4EE4-94FE-6B9BEFC9FD41}.Debug|x64.Build.0 = Debug|Any CPU
+		{06B777AB-EA1D-4EE4-94FE-6B9BEFC9FD41}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{06B777AB-EA1D-4EE4-94FE-6B9BEFC9FD41}.Debug|x86.Build.0 = Debug|Any CPU
+		{06B777AB-EA1D-4EE4-94FE-6B9BEFC9FD41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06B777AB-EA1D-4EE4-94FE-6B9BEFC9FD41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06B777AB-EA1D-4EE4-94FE-6B9BEFC9FD41}.Release|ARM.ActiveCfg = Release|Any CPU
+		{06B777AB-EA1D-4EE4-94FE-6B9BEFC9FD41}.Release|ARM.Build.0 = Release|Any CPU
+		{06B777AB-EA1D-4EE4-94FE-6B9BEFC9FD41}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{06B777AB-EA1D-4EE4-94FE-6B9BEFC9FD41}.Release|iPhone.Build.0 = Release|Any CPU
+		{06B777AB-EA1D-4EE4-94FE-6B9BEFC9FD41}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{06B777AB-EA1D-4EE4-94FE-6B9BEFC9FD41}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{06B777AB-EA1D-4EE4-94FE-6B9BEFC9FD41}.Release|x64.ActiveCfg = Release|Any CPU
+		{06B777AB-EA1D-4EE4-94FE-6B9BEFC9FD41}.Release|x64.Build.0 = Release|Any CPU
+		{06B777AB-EA1D-4EE4-94FE-6B9BEFC9FD41}.Release|x86.ActiveCfg = Release|Any CPU
+		{06B777AB-EA1D-4EE4-94FE-6B9BEFC9FD41}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

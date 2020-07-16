@@ -3,6 +3,7 @@ using Spacearr.Common.Command.Interfaces;
 using Spacearr.Common.ComputerDrive.Interfaces;
 using Spacearr.Common.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Spacearr.Common.Command.Implementations.Commands
 {
@@ -19,7 +20,7 @@ namespace Spacearr.Common.Command.Implementations.Commands
         /// Returns all the computer hard disks.
         /// </summary>
         /// <returns>Returns a list of ComputerDriveModels serialized as Json</returns>
-        public string Execute()
+        public async Task<string> Execute()
         {
             var computerDrives = new List<ComputerDriveModel>();
             if (_computerDrives.GetComputerDrives().Count > 0)
@@ -40,7 +41,7 @@ namespace Spacearr.Common.Command.Implementations.Commands
                 }
             }
 
-            return JsonConvert.SerializeObject(computerDrives);
+            return await Task.FromResult(JsonConvert.SerializeObject(computerDrives));
         }
     }
 }

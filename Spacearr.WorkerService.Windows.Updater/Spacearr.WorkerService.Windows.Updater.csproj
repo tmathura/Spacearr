@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UserSecretsId>dotnet-Spacearr.WorkerService.Windows.Updater-299D502D-FE94-4333-8761-61E9AD09E22C</UserSecretsId>
+    <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0-preview.5.20278.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="5.0.0-preview.5.20278.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Spacearr.Common\Spacearr.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.Deployment.Compression">
+      <HintPath>..\dlls\Microsoft.Deployment.Compression.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+    <Reference Include="Microsoft.Deployment.Compression.Cab">
+      <HintPath>..\dlls\Microsoft.Deployment.Compression.Cab.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+    <Reference Include="Microsoft.Deployment.WindowsInstaller">
+      <HintPath>..\dlls\Microsoft.Deployment.WindowsInstaller.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+    <Reference Include="Microsoft.Deployment.WindowsInstaller.Package">
+      <HintPath>..\dlls\Microsoft.Deployment.WindowsInstaller.Package.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+  </ItemGroup>
+</Project>

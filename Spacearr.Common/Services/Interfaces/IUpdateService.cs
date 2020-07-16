@@ -18,5 +18,18 @@ namespace Spacearr.Common.Services.Interfaces
         /// </summary>
         /// <returns></returns>
         Task<string> UpdateUrlOfLastUpdateCheck(UpdateType updateType);
+
+        /// <summary>
+        /// Get the update file name for a specific device type of the last CheckForUpdateAsync.
+        /// </summary>
+        /// <returns></returns>
+        Task<string> FileNameOfLastUpdateCheck(UpdateType updateType);
+        
+        /// <summary>
+        /// Do the update process.
+        /// </summary>
+        /// <param name="updateType"></param>
+        /// <returns></returns>
+        Task UpdateApp(UpdateType updateType);
     }
 }

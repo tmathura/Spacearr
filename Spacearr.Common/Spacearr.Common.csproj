@@ -16,6 +16,7 @@
     <PackageReference Include="PusherServer" Version="4.2.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0-preview.5.20278.1" />
+    <PackageReference Include="System.ServiceProcess.ServiceController" Version="5.0.0-preview.5.20278.1" />
   </ItemGroup>
 
 </Project>

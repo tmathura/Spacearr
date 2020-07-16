@@ -1,13 +1,14 @@
 ﻿using Spacearr.Common.Command.Interfaces;
+using System.Threading.Tasks;
 
 namespace Spacearr.Common.Command.Implementations
 {
     public class Invoker : IInvoker
     {
         public Invoker() { }
-        public string Invoke(ICommand command)
+        public async Task<string> Invoke(ICommand command)
         {
-            return command.Execute();
+            return await command.Execute();
         }
     }
 }

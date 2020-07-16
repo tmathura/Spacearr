@@ -8,6 +8,11 @@ namespace Spacearr.Droid.Services
 {
     public class UpdateAppService : IUpdateAppService
     {
+        /// <summary>
+        /// Update app.
+        /// </summary>
+        /// <param name="versionNumber"></param>
+        /// <returns></returns>
         public async Task Update(string versionNumber)
         {
             var apkPath = System.IO.Path.Combine(Plugin.XF.AppInstallHelper.CrossInstallHelper.Current.GetPublicDownloadPath(), $"com.Spacearr.Android-Signed-{versionNumber}.apk");

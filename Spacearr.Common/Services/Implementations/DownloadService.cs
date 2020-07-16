@@ -10,6 +10,12 @@ namespace Spacearr.Common.Services.Implementations
     public class DownloadService : IDownloadService
     {
         /// <summary>
+        /// Gets or sets a value indicating whether this is downloading.
+        /// </summary>
+        /// <value><c>true</c> if is downloading; otherwise, <c>false</c>.</value>
+        public bool IsDownloading { get; private set; }
+
+        /// <summary>
         /// The http client.
         /// </summary>
         private HttpClient _client;
@@ -42,6 +48,8 @@ namespace Spacearr.Common.Services.Implementations
         {
             try
             {
+                IsDownloading = true;
+
                 // Step 1 : Get call
                 var response = await _client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead, token);
 
@@ -58,7 +66,7 @@ namespace Spacearr.Common.Services.Implementations
                 var canSendProgress = totalData != -1L && progress != null;
 
                 // Step 4 : Get total of data
-                var filePath = Path.Combine(_fileService.GetStorageFolderPath(), fileName);
+                var filePath = Path.Combine(_fileService.GetUpdateAppStorageFolderPath(), fileName);
 
                 // Step 5 : Download data
                 using (var fileStream = OpenStream(filePath))
@@ -99,6 +107,10 @@ namespace Spacearr.Common.Services.Implementations
             {
                 // Manage the exception as you need here.
                 System.Diagnostics.Debug.WriteLine(e.ToString());
+            }
+            finally
+            {
+                IsDownloading = false;
             }
         }
 

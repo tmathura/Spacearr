@@ -16,7 +16,7 @@ namespace Spacearr.Core.Xamarin.Views
     [DesignTimeVisible(false)]
     public partial class MenuPage : ContentPage, IMenuPageHelper
     {
-        private static IUpdateService _updateService;
+        private readonly IUpdateService _updateService;
         private readonly DownloadViewModel _viewModel;
         private static MainPage RootPage => Application.Current.MainPage as MainPage;
 

@@ -7,6 +7,7 @@ using Spacearr.Common.Util;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace Spacearr.Common.Command.Implementations.Commands
 {
@@ -29,8 +30,8 @@ namespace Spacearr.Common.Command.Implementations.Commands
         /// <summary>
         /// Returns all the computers hard disk that are low, the low value is determined by the _lowComputerDriveValue.
         /// </summary>
-        /// <returns>Returns a NotificationEventArgsModel serialized as Json</returns>
-        public string Execute()
+        /// <returns>string.Empty</returns>
+        public async Task<string> Execute()
         {
             var notificationList = new List<string>();
             var lowDiskSpaceWarningGb = _lowComputerDriveValue;
@@ -53,7 +54,7 @@ namespace Spacearr.Common.Command.Implementations.Commands
                 foreach (var notification in notificationList)
                 {
                     var deviceTokens = new List<string>();
-                    var firebasePushNotificationDevices = _logger.GetFirebasePushNotificationDevicesAsync().Result;
+                    var firebasePushNotificationDevices = await _logger.GetFirebasePushNotificationDevicesAsync();
                     foreach (var firebasePushNotificationDevice in firebasePushNotificationDevices)
                     {
                         if (!string.IsNullOrWhiteSpace(firebasePushNotificationDevice.Token))
@@ -64,7 +65,7 @@ namespace Spacearr.Common.Command.Implementations.Commands
 
                     if (deviceTokens.Count > 0)
                     {
-                        _sendFirebasePushNotificationService.SendNotificationMultipleDevices(deviceTokens, "Computer Drives Low", notification);
+                        await _sendFirebasePushNotificationService.SendNotificationMultipleDevices(deviceTokens, "Computer Drives Low", notification);
                     }
                 }
             }

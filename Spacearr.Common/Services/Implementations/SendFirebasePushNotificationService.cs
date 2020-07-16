@@ -6,12 +6,13 @@ using Spacearr.Common.Logger.Interfaces;
 using Spacearr.Common.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Spacearr.Common.Services.Implementations
 {
     public class SendFirebasePushNotificationService : ISendFirebasePushNotificationService
     {
-        private static ILogger _logger;
+        private readonly ILogger _logger;
 
         public SendFirebasePushNotificationService(ILogger logger)
         {
@@ -42,7 +43,7 @@ namespace Spacearr.Common.Services.Implementations
         /// Send a firebase push notification one device.
         /// </summary>
         /// <returns></returns>
-        public void SendNotification(string token, string notificationTitle, string notificationMessage)
+        public async Task SendNotification(string token, string notificationTitle, string notificationMessage)
         {
             try
             {
@@ -56,11 +57,11 @@ namespace Spacearr.Common.Services.Implementations
                     Token = token
                 };
 
-                _ = FirebaseMessaging.DefaultInstance.SendAsync(message).Result;
+                await FirebaseMessaging.DefaultInstance.SendAsync(message);
             }
             catch (Exception ex)
             {
-                _logger.LogErrorAsync(ex.Message, ex.StackTrace);
+                await _logger.LogErrorAsync(ex.Message, ex.StackTrace);
             }
         }
 
@@ -68,7 +69,7 @@ namespace Spacearr.Common.Services.Implementations
         /// Send a firebase push notification to multiple devices.
         /// </summary>
         /// <returns></returns>
-        public void SendNotificationMultipleDevices(List<string> tokens, string notificationTitle, string notificationMessage)
+        public async Task SendNotificationMultipleDevices(List<string> tokens, string notificationTitle, string notificationMessage)
         {
             try
             {
@@ -82,11 +83,11 @@ namespace Spacearr.Common.Services.Implementations
                     Tokens = tokens
                 };
 
-                _ = FirebaseMessaging.DefaultInstance.SendMulticastAsync(message).Result;
+                await FirebaseMessaging.DefaultInstance.SendMulticastAsync(message);
             }
             catch (Exception ex)
             {
-                _logger.LogErrorAsync(ex.Message, ex.StackTrace);
+                await _logger.LogErrorAsync(ex.Message, ex.StackTrace);
             }
         }
     }

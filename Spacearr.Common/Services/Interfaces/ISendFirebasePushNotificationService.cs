@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Spacearr.Common.Services.Interfaces
 {
@@ -8,12 +9,12 @@ namespace Spacearr.Common.Services.Interfaces
         /// Send a firebase push notification one device.
         /// </summary>
         /// <returns></returns>
-        void SendNotification(string token, string notificationTitle, string notificationMessage);
+        Task SendNotification(string token, string notificationTitle, string notificationMessage);
 
         /// <summary>
         /// Send a firebase push notification to multiple devices.
         /// </summary>
         /// <returns></returns>
-        void SendNotificationMultipleDevices(List<string> tokens, string notificationTitle, string notificationMessage);
+        Task SendNotificationMultipleDevices(List<string> tokens, string notificationTitle, string notificationMessage);
     }
 }

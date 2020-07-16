@@ -1,7 +1,9 @@
-﻿namespace Spacearr.Common.Command.Interfaces
+﻿using System.Threading.Tasks;
+
+namespace Spacearr.Common.Command.Interfaces
 {
     public interface IInvoker
     {
-        string Invoke(ICommand command);
+        Task<string> Invoke(ICommand command);
     }
 }

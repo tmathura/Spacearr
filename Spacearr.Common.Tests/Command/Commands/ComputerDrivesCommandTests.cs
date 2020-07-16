@@ -6,6 +6,7 @@ using Spacearr.Common.ComputerDrive.Interfaces;
 using Spacearr.Common.Models;
 using Spacearr.Common.Tests.Factories;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Spacearr.Common.Tests.Command.Commands
 {
@@ -22,7 +23,7 @@ namespace Spacearr.Common.Tests.Command.Commands
         }
 
         [TestMethod]
-        public void Execute()
+        public async Task Execute()
         {
             const int noOfComputerDrives = 9;
 
@@ -31,7 +32,7 @@ namespace Spacearr.Common.Tests.Command.Commands
             _computerDrivesCommand = new ComputerDrivesCommand(_mockIComputerDrives.Object);
 
             // Act
-            var commandData = _computerDrivesCommand.Execute();
+            var commandData = await _computerDrivesCommand.Execute();
             var computerDrives = JsonConvert.DeserializeObject<List<ComputerDriveModel>>(commandData);
 
             // Assert
@@ -39,14 +40,14 @@ namespace Spacearr.Common.Tests.Command.Commands
         }
 
         [TestMethod]
-        public void Execute_ZeroComputerDrives()
+        public async Task Execute_ZeroComputerDrives()
         {
             // Arrange
             _mockIComputerDrives.Setup(x => x.GetComputerDrives()).Returns(ComputerDriveInfoFactory.CreateComputerDriveInfos(0));
             _computerDrivesCommand = new ComputerDrivesCommand(_mockIComputerDrives.Object);
 
             // Act
-            var commandData = _computerDrivesCommand.Execute();
+            var commandData = await _computerDrivesCommand.Execute();
             var computerDrives = JsonConvert.DeserializeObject<List<ComputerDriveModel>>(commandData);
 
             // Assert

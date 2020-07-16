@@ -13,6 +13,7 @@ namespace Spacearr.Common.Services.Implementations
     public class NotificationTimerService : INotificationTimerService
     {
         private readonly IConfiguration _configuration;
+        private readonly IInvoker _invoker;
         private readonly ILogger _logger;
         private readonly IComputerDrives _computerDrives;
         private readonly ISendFirebasePushNotificationService _sendFirebasePushNotificationService;
@@ -22,13 +23,14 @@ namespace Spacearr.Common.Services.Implementations
         public NotificationTimerService(IConfiguration configuration, IInvoker invoker, ILogger logger, IComputerDrives computerDrives, ISendFirebasePushNotificationService sendFirebasePushNotificationService)
         {
             _configuration = configuration;
+            _invoker = invoker;
             _logger = logger;
             _computerDrives = computerDrives;
             _sendFirebasePushNotificationService = sendFirebasePushNotificationService;
 
             _timer = new Timer
             {
-                Interval = TimeSpan.FromMinutes(Convert.ToDouble(configuration.GetSection("NotificationTimerMinutesInterval").Value)).TotalMilliseconds,
+                Interval = TimeSpan.FromMinutes(Convert.ToDouble(_configuration.GetSection("NotificationTimerMinutesInterval").Value)).TotalMilliseconds,
                 AutoReset = true
             };
             _timer.Elapsed += ElapsedEventHandler;
@@ -39,7 +41,10 @@ namespace Spacearr.Common.Services.Implementations
         /// </summary>
         public void Instantiate()
         {
-            _timer.Start();
+            if (Convert.ToBoolean(_configuration.GetSection("SendNotifications").Value))
+            {
+                _timer.Start();
+            }
         }
 
         /// <summary>
@@ -47,7 +52,10 @@ namespace Spacearr.Common.Services.Implementations
         /// </summary>
         public void DeInstantiate()
         {
-            _timer.Stop();
+            if (Convert.ToBoolean(_configuration.GetSection("SendNotifications").Value))
+            {
+                _timer.Stop();
+            }
         }
 
         /// <summary>
@@ -58,7 +66,7 @@ namespace Spacearr.Common.Services.Implementations
         private void ElapsedEventHandler(object sender, ElapsedEventArgs e)
         {
             var command = new ComputerDrivesLowCommand(_configuration, _logger, _computerDrives, _sendFirebasePushNotificationService);
-            command.Execute();
+            _invoker.Invoke(command);
         }
     }
 }

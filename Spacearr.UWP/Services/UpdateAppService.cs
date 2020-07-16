@@ -13,6 +13,11 @@ namespace Spacearr.UWP.Services
 {
     public class UpdateAppService : IUpdateAppService
     {
+        /// <summary>
+        /// Update app.
+        /// </summary>
+        /// <param name="versionNumber"></param>
+        /// <returns></returns>
         public async Task Update(string versionNumber)
         {
             var localFolderList = await ApplicationData.Current.LocalFolder.GetFoldersAsync();
@@ -48,6 +53,12 @@ namespace Spacearr.UWP.Services
             }
         }
 
+        /// <summary>
+        /// Unzip files.
+        /// </summary>
+        /// <param name="zipFilePath"></param>
+        /// <param name="unzipFolderPath"></param>
+        /// <returns></returns>
         private static async Task<bool> UnzipFileAsync(string zipFilePath, string unzipFolderPath)
         {
             try

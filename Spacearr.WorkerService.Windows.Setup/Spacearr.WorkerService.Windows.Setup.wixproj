@@ -24,7 +24,9 @@
     <SuppressPdbOutput>True</SuppressPdbOutput>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Product.wxs" />
+    <Compile Include="Product.wxs" /> <!-- This will be your default one -->
+    <Compile Include="SpacearrWorkerServiceWindowsHeatGeneratedFileList.wxs" /> <!-- This is the Heat created one -->
+    <Compile Include="SpacearrWorkerServiceWindowsUpdaterHeatGeneratedFileList.wxs" /> <!-- This is the Heat created one -->
   </ItemGroup>
   <ItemGroup>
     <WixExtension Include="WixUIExtension">
@@ -36,6 +38,14 @@
     <ProjectReference Include="..\Spacearr.WixToolset.CustomAction\Spacearr.WixToolset.CustomAction.csproj">
       <Name>Spacearr.WixToolset.CustomAction</Name>
       <Project>{d170ee1b-499b-495e-be79-3861dd86a87b}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\Spacearr.WorkerService.Windows.Updater\Spacearr.WorkerService.Windows.Updater.csproj">
+      <Name>Spacearr.WorkerService.Windows.Updater</Name>
+      <Project>{06b777ab-ea1d-4ee4-94fe-6b9befc9fd41}</Project>
       <Private>True</Private>
       <DoNotHarvest>True</DoNotHarvest>
       <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
@@ -79,6 +89,52 @@
     <CreateProperty Value="&#xD;&#xA;      Configuration=$(ConfigurationName);&#xD;&#xA;      OutDir=$(OutDir);&#xD;&#xA;      Platform=$(PlatformName);&#xD;&#xA;      ProjectDir=$(ProjectDir);&#xD;&#xA;      ProjectExt=$(ProjectExt);&#xD;&#xA;      ProjectFileName=$(ProjectFileName);&#xD;&#xA;      ProjectName=$(ProjectName);&#xD;&#xA;      ProjectPath=$(ProjectPath);&#xD;&#xA;      TargetDir=$(TargetDir);&#xD;&#xA;      TargetExt=$(TargetExt);&#xD;&#xA;      TargetFileName=$(TargetFileName);&#xD;&#xA;      TargetName=$(TargetName);&#xD;&#xA;      TargetPath=$(TargetPath);">
       <Output TaskParameter="Value" PropertyName="ProjectDefineConstants" />
     </CreateProperty>
+    <GetAssemblyIdentity AssemblyFiles="..\Spacearr.WorkerService.Windows.Updater\bin\$(Configuration)\netcoreapp3.0\Spacearr.WorkerService.Windows.Updater.dll">
+      <Output TaskParameter="Assemblies" ItemName="AsmInfo" />
+    </GetAssemblyIdentity>
+    <CreateProperty Value="%(AsmInfo.Version)">
+      <Output TaskParameter="Value" PropertyName="VersionNumber" />
+    </CreateProperty>
+    <CreateProperty Value="$(SolutionName)-$(Platform)-$(VersionNumber)">
+      <Output TaskParameter="Value" PropertyName="TargetName" />
+    </CreateProperty>
+    <CreateProperty Value="$(TargetName)$(TargetExt)">
+      <Output TaskParameter="Value" PropertyName="TargetFileName" />
+    </CreateProperty>
+    <CreateProperty Value="$(TargetName)$(TargetPdbExt)">
+      <Output TaskParameter="Value" PropertyName="TargetPdbName" />
+    </CreateProperty>
+    <CreateProperty Value="$(TargetDir)$(TargetFileName)">
+      <Output TaskParameter="Value" PropertyName="TargetPath" />
+    </CreateProperty>
+    <CreateProperty Value="$(TargetPdbDir)$(TargetPdbName)">
+      <Output TaskParameter="Value" PropertyName="TargetPdbPath" />
+    </CreateProperty>
+    <CreateProperty Value="&#xD;&#xA;      Configuration=$(ConfigurationName);&#xD;&#xA;      OutDir=$(OutDir);&#xD;&#xA;      Platform=$(PlatformName);&#xD;&#xA;      ProjectDir=$(ProjectDir);&#xD;&#xA;      ProjectExt=$(ProjectExt);&#xD;&#xA;      ProjectFileName=$(ProjectFileName);&#xD;&#xA;      ProjectName=$(ProjectName);&#xD;&#xA;      ProjectPath=$(ProjectPath);&#xD;&#xA;      TargetDir=$(TargetDir);&#xD;&#xA;      TargetExt=$(TargetExt);&#xD;&#xA;      TargetFileName=$(TargetFileName);&#xD;&#xA;      TargetName=$(TargetName);&#xD;&#xA;      TargetPath=$(TargetPath);">
+      <Output TaskParameter="Value" PropertyName="ProjectDefineConstants" />
+    </CreateProperty>
+    <HeatDirectory Directory="..\Spacearr.WorkerService.Windows\bin\$(Configuration)\netcoreapp3.0" 
+                   PreprocessorVariable="var.Spacearr.WorkerService.Windows.TargetDir" 
+                   OutputFile="SpacearrWorkerServiceWindowsHeatGeneratedFileList.wxs" 
+                   ComponentGroupName="SpacearrWorkerServiceWindowsHeatGenerated" 
+                   DirectoryRefId="INSTALLDIR" 
+                   AutogenerateGuids="true" 
+                   ToolPath="$(WixToolPath)" 
+                   Transforms="Transform.xsl" 
+                   SuppressFragments="true" 
+                   SuppressRegistry="true" 
+                   SuppressRootDirectory="true" />
+    <HeatDirectory Directory="..\Spacearr.WorkerService.Windows.Updater\bin\$(Configuration)\netcoreapp3.0" 
+                   PreprocessorVariable="var.Spacearr.WorkerService.Windows.Updater.TargetDir" 
+                   OutputFile="SpacearrWorkerServiceWindowsUpdaterHeatGeneratedFileList.wxs" 
+                   ComponentGroupName="SpacearrWorkerServiceWindowsUpdaterHeatGenerated" 
+                   DirectoryRefId="INSTALLDIR2" 
+                   AutogenerateGuids="true" 
+                   ToolPath="$(WixToolPath)" 
+                   Transforms="Transform.xsl" 
+                   SuppressFragments="true" 
+                   SuppressRegistry="true" 
+                   SuppressRootDirectory="true" />
   </Target>
   <Target Name="AfterBuild">
     <Exec Command="Explorer.exe $(TargetDir)" IgnoreExitCode="true" ContinueOnError="true">
@@ -92,7 +148,7 @@
       <Output TaskParameter="Assemblies" ItemName="Targets" />
     </GetAssemblyIdentity>
     <ItemGroup>
-      <VersionNumber Include="@(Targets->'%(Version)')"/>
+      <VersionNumber Include="@(Targets->'%(Version)')" />
     </ItemGroup>
   </Target>
   <PropertyGroup>

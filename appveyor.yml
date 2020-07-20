@@ -44,7 +44,7 @@ dotnet_csproj:
   assembly_version: '{version}'
   file_version: '{version}'
   informational_version: '{version}'
-build_script:
+before_build:
 - cmd: >-
     cd C:\projects\spacearr\Spacearr.Android
 
@@ -61,13 +61,13 @@ build_script:
     powershell -Command "(gc google-services.json) -replace 'ClientId', ($env:CLIENTID) | Out-File -encoding ASCII google-services.json"
 
     powershell -Command "(gc google-services.json) -replace 'CurrentKey', ($env:CURRENTKEY) | Out-File -encoding ASCII google-services.json"
-
+- cmd: >-
     cd C:\projects\spacearr\Spacearr.Android\Properties
 
     powershell -Command "(gc AndroidManifest.xml) -replace 'android:versionName=""""1.0""""', ('android:versionName=""""' + $env:APPVEYOR_BUILD_VERSION + '""""') | Out-File -encoding ASCII AndroidManifest.xml"
 
     more AndroidManifest.xml
-
+- cmd: >-
     cd C:\projects\spacearr\Spacearr.Common\Services\Implementations
 
     powershell -Command "(gc SendFirebasePushNotificationService.cs) -replace 'ProjectId', ($env:PROJECTID) | Out-File -encoding ASCII SendFirebasePushNotificationService.cs"
@@ -81,33 +81,20 @@ build_script:
     powershell -Command "(gc SendFirebasePushNotificationService.cs) -replace 'ClientId', ($env:FIREBASEAPPCLIENTID) | Out-File -encoding ASCII SendFirebasePushNotificationService.cs"
 
     powershell -Command "(gc SendFirebasePushNotificationService.cs) -replace 'ClientX509CertUrl', ($env:CLIENTX509CERTURL) | Out-File -encoding ASCII SendFirebasePushNotificationService.cs"
-
+- cmd: >-
     cd C:\projects\spacearr\Spacearr.UWP
 
     powershell -Command "(gc Package.appxmanifest) -replace 'Version=""""1.0.0.0""""', ('Version=""""' + $env:APPVEYOR_BUILD_VERSION +'""""') | Out-File -encoding ASCII Package.appxmanifest"
 
     more Package.appxmanifest
-
+- cmd: >-
     cd C:\projects\spacearr
 
     nuget restore Spacearr.sln
-
-    msbuild "C:\projects\spacearr\Spacearr.Common\Spacearr.Common.csproj" /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-
-    msbuild "C:\projects\spacearr\Spacearr.Pusher.API\Spacearr.Pusher.API.csproj" /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-
-    msbuild "C:\projects\spacearr\Spacearr.Core.Xamarin\Spacearr.Core.Xamarin.csproj" /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-
-    msbuild "C:\projects\spacearr\Spacearr.Windows.Service\Spacearr.Windows.Service.csproj" /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-
-    msbuild "C:\projects\spacearr\Spacearr.WorkerService.Windows\Spacearr.WorkerService.Windows.csproj" /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-
-    msbuild "C:\projects\spacearr\Spacearr.WixToolset.CustomAction\Spacearr.WixToolset.CustomAction.csproj" /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-
-    msbuild "C:\projects\spacearr\Spacearr.WorkerService.Windows.Updater\Spacearr.WorkerService.Windows.Updater.csproj" /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-
-    msbuild "C:\projects\spacearr\Spacearr.sln" /verbosity:minimal /p:BuildProjectReferences=true /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-
+build:
+  verbosity: minimal
+after_build:
+- cmd: >-
     cd C:\projects\spacearr\Spacearr.Android\bin\%CONFIGURATION%
 
     rename com.Spacearr.Android-Signed.apk com.Spacearr.Android-Signed-%APPVEYOR_BUILD_VERSION%.apk

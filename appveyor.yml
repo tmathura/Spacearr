@@ -92,7 +92,19 @@ build_script:
 
     nuget restore Spacearr.sln
 
-    msbuild "C:\projects\spacearr\Spacearr.sln" /verbosity:minimal /p:BuildProjectReferences=true /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+    msbuild "C:\projects\spacearr\Spacearr.Common\Spacearr.Common.csproj" /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+    msbuild "C:\projects\spacearr\Spacearr.Pusher.API\Spacearr.Pusher.API.csproj" /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+    msbuild "C:\projects\spacearr\Spacearr.Core.Xamarin\Spacearr.Core.Xamarin.csproj" /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+    msbuild "C:\projects\spacearr\Spacearr.Windows.Service\Spacearr.Windows.Service.csproj" /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+    msbuild "C:\projects\spacearr\Spacearr.WorkerService.Windows\Spacearr.WorkerService.Windows.csproj" /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+    msbuild "C:\projects\spacearr\Spacearr.WixToolset.CustomAction\Spacearr.WixToolset.CustomAction.csproj" /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+    msbuild "C:\projects\spacearr\Spacearr.WorkerService.Windows.Updater\Spacearr.WorkerService.Windows.Updater.csproj" /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+    msbuild "C:\projects\spacearr\Spacearr.UWP\Spacearr.UWP.csproj" /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+    msbuild "C:\projects\spacearr\Spacearr.AndroidUWP\Spacearr.Android.csproj" /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+    msbuild "C:\projects\spacearr\Spacearr.Common.Tests\Spacearr.Common.Tests.csproj" /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+    msbuild "C:\projects\spacearr\Spacearr.Core.Xamarin.Tests\Spacearr.Core.Xamarin.Tests.csproj" /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+    msbuild "C:\projects\spacearr\Spacearr.Windows.Service.Setup\Spacearr.Windows.Service.Setup.Tests.csproj" /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+    msbuild "C:\projects\spacearr\Spacearr.WorkerService.Windows.Setup\Spacearr.WorkerService.Windows.Setup.csproj" /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
     cd C:\projects\spacearr\Spacearr.Android\bin\%CONFIGURATION%
 

@@ -44,8 +44,6 @@
       <RefTargetDir>INSTALLFOLDER</RefTargetDir>
     </ProjectReference>
     <ProjectReference Include="..\Spacearr.WorkerService.Windows.Updater\Spacearr.WorkerService.Windows.Updater.csproj">
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-      <SkipGetTargetFrameworkProperties>true</SkipGetTargetFrameworkProperties>
       <Name>Spacearr.WorkerService.Windows.Updater</Name>
       <Project>{06b777ab-ea1d-4ee4-94fe-6b9befc9fd41}</Project>
       <Private>True</Private>
@@ -54,8 +52,6 @@
       <RefTargetDir>INSTALLFOLDER</RefTargetDir>
     </ProjectReference>
     <ProjectReference Include="..\Spacearr.WorkerService.Windows\Spacearr.WorkerService.Windows.csproj">
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-      <SkipGetTargetFrameworkProperties>true</SkipGetTargetFrameworkProperties>
       <Name>Spacearr.WorkerService.Windows</Name>
       <Project>{d6d581a8-7492-4eac-b71c-e6844c751547}</Project>
       <Private>True</Private>

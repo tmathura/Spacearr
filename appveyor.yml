@@ -92,7 +92,7 @@ before_build:
 
     nuget restore Spacearr.sln
 build:
-  verbosity: detailed
+  verbosity: minimal
 after_build:
 - cmd: >-
     cd C:\projects\spacearr\Spacearr.Android\bin\%CONFIGURATION%

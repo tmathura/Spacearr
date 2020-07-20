@@ -4,30 +4,43 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spacearr.UWP", "Spacearr.UWP\Spacearr.UWP.csproj", "{7EF11016-1C0B-4B6A-9F05-1D9BC13847B8}"
+    <Targets>Build</Targets>
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spacearr.Android", "Spacearr.Android\Spacearr.Android.csproj", "{68DF6F8D-0EFB-4616-83AF-6AFC6A446A1E}"
+    <Targets>Build</Targets>
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spacearr.Core.Xamarin", "Spacearr.Core.Xamarin\Spacearr.Core.Xamarin.csproj", "{8CB8FECD-0779-444B-A21C-7DFC554C111D}"
+    <Targets>Build</Targets>
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spacearr.Common", "Spacearr.Common\Spacearr.Common.csproj", "{07955D9E-746B-4274-B1E5-B233D577E437}"
+    <Targets>Build</Targets>
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spacearr.Pusher.API", "Spacearr.Pusher.API\Spacearr.Pusher.API.csproj", "{30304F6E-055D-47D8-88E4-6B8E306306D4}"
+    <Targets>Build</Targets>
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spacearr.Common.Tests", "Spacearr.Common.Tests\Spacearr.Common.Tests.csproj", "{AC851950-74A5-42F7-A967-5B1A024AB59E}"
+    <Targets>Build</Targets>
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spacearr.Core.Xamarin.Tests", "Spacearr.Core.Xamarin.Tests\Spacearr.Core.Xamarin.Tests.csproj", "{58760884-F453-4751-821B-9CEBCD3C588D}"
+    <Targets>Build</Targets>
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spacearr.Windows.Service", "Spacearr.Windows.Service\Spacearr.Windows.Service.csproj", "{FB8D5B85-FAE3-4B18-830D-AAEF94655FBF}"
+    <Targets>Build</Targets>
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Spacearr.Windows.Service.Setup", "Spacearr.Windows.Service.Setup\Spacearr.Windows.Service.Setup.wixproj", "{D9E54427-101E-4176-98C4-1342AE97651B}"
+    <Targets>Build</Targets>
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spacearr.WorkerService.Windows", "Spacearr.WorkerService.Windows\Spacearr.WorkerService.Windows.csproj", "{D6D581A8-7492-4EAC-B71C-E6844C751547}"
+    <Targets>Build</Targets>
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Spacearr.WorkerService.Windows.Setup", "Spacearr.WorkerService.Windows.Setup\Spacearr.WorkerService.Windows.Setup.wixproj", "{F24E1544-45F7-42BF-B9EB-FA6F6A966063}"
+    <Targets>Build</Targets>
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spacearr.WixToolset.CustomAction", "Spacearr.WixToolset.CustomAction\Spacearr.WixToolset.CustomAction.csproj", "{D170EE1B-499B-495E-BE79-3861DD86A87B}"
+    <Targets>Build</Targets>
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spacearr.WorkerService.Windows.Updater", "Spacearr.WorkerService.Windows.Updater\Spacearr.WorkerService.Windows.Updater.csproj", "{06B777AB-EA1D-4EE4-94FE-6B9BEFC9FD41}"
+    <Targets>Build</Targets>
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

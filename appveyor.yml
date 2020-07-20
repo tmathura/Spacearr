@@ -92,7 +92,7 @@ build_script:
 
     nuget restore Spacearr.sln
 
-    msbuild "C:\projects\spacearr\Spacearr.sln" /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+    msbuild "C:\projects\spacearr\Spacearr.sln" /verbosity:minimal /p:BuildProjectReferences=true /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
     cd C:\projects\spacearr\Spacearr.Android\bin\%CONFIGURATION%
 

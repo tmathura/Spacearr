@@ -156,6 +156,6 @@
       $(PostBuildEventDependsOn);
       PostBuildMacros;
     </PostBuildEventDependsOn>
-    <PostBuildEvent>rename $(TargetDir)Spacearr-$(Platform)-@(VersionNumber).msi $(TargetName)-$(Platform)-@(VersionNumber).msi</PostBuildEvent>
+    <PostBuildEvent>rename $(TargetDir)Spacearr-$(Platform)-1.0.0.0.msi $(TargetName)-$(Platform)-@(VersionNumber).msi</PostBuildEvent>
   </PropertyGroup>
 </Project>

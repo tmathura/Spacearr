@@ -92,7 +92,6 @@ before_build:
 
     nuget restore Spacearr.sln
 build:
-  parallel: true
   verbosity: minimal
 after_build:
 - cmd: >-

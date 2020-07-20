@@ -24,6 +24,11 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spacearr.WorkerService.Windows", "Spacearr.WorkerService.Windows\Spacearr.WorkerService.Windows.csproj", "{D6D581A8-7492-4EAC-B71C-E6844C751547}"
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Spacearr.WorkerService.Windows.Setup", "Spacearr.WorkerService.Windows.Setup\Spacearr.WorkerService.Windows.Setup.wixproj", "{F24E1544-45F7-42BF-B9EB-FA6F6A966063}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D170EE1B-499B-495E-BE79-3861DD86A87B} = {D170EE1B-499B-495E-BE79-3861DD86A87B}
+		{D6D581A8-7492-4EAC-B71C-E6844C751547} = {D6D581A8-7492-4EAC-B71C-E6844C751547}
+		{06B777AB-EA1D-4EE4-94FE-6B9BEFC9FD41} = {06B777AB-EA1D-4EE4-94FE-6B9BEFC9FD41}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spacearr.WixToolset.CustomAction", "Spacearr.WixToolset.CustomAction\Spacearr.WixToolset.CustomAction.csproj", "{D170EE1B-499B-495E-BE79-3861DD86A87B}"
 EndProject

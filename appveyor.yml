@@ -108,7 +108,7 @@ build_script:
 
     msbuild "C:\projects\spacearr\Spacearr.UWP\Spacearr.UWP.csproj" /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
-    msbuild "C:\projects\spacearr\Spacearr.AndroidUWP\Spacearr.Android.csproj" /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+    msbuild "C:\projects\spacearr\Spacearr.Android\Spacearr.Android.csproj" /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
     msbuild "C:\projects\spacearr\Spacearr.Common.Tests\Spacearr.Common.Tests.csproj" /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 

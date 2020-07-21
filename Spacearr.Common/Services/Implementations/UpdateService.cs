@@ -1,6 +1,9 @@
-﻿using Octokit;
+﻿using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
+using Octokit;
 using Spacearr.Common.Enums;
 using Spacearr.Common.Logger.Interfaces;
+using Spacearr.Common.Models;
 using Spacearr.Common.Services.Interfaces;
 using System;
 using System.IO;
@@ -173,7 +176,14 @@ namespace Spacearr.Common.Services.Implementations
 
             foreach (var filename in Directory.EnumerateFiles(updateFilesPath, "*", SearchOption.AllDirectories))
             {
-                await CopyFiles(filename, currentAppPath, updateFilesPath);
+                if (filename.ToLower().Contains("appsettings.json"))
+                {
+                    await UpdateConfigFile(filename, currentAppPath, updateFilesPath);
+                }
+                else
+                {
+                    await CopyFile(filename, currentAppPath, updateFilesPath);
+                }
             }
         }
 
@@ -184,7 +194,7 @@ namespace Spacearr.Common.Services.Implementations
         /// <param name="newPath"></param>
         /// <param name="oldParentPath"></param>
         /// <returns></returns>
-        private static async Task CopyFiles(string filePath, string newPath, string oldParentPath)
+        private static async Task CopyFile(string filePath, string newPath, string oldParentPath)
         {
             using (var sourceStream = File.Open(filePath, System.IO.FileMode.Open))
             {
@@ -193,6 +203,27 @@ namespace Spacearr.Common.Services.Implementations
                     await sourceStream.CopyToAsync(destinationStream);
                 }
             }
+        }
+
+        /// <summary>
+        /// Update config file.
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <param name="newPath"></param>
+        /// <param name="oldParentPath"></param>
+        /// <returns></returns>
+        private static async Task UpdateConfigFile(string filePath, string newPath, string oldParentPath)
+        {
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(newPath)
+                .AddJsonFile("appsettings.json").Build();
+
+            var appSettings = new AppSettings();
+
+            configuration.Bind(appSettings);
+
+            var updatedJsonString =  await Task.FromResult(JsonConvert.SerializeObject(appSettings, Formatting.Indented));
+            File.WriteAllText(filePath.Replace(oldParentPath, newPath), updatedJsonString);
         }
     }
 }

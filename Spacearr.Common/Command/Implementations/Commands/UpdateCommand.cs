@@ -53,8 +53,12 @@ namespace Spacearr.Common.Command.Implementations.Commands
                     await _downloadService.DownloadFileAsync(url, progressIndicator, cts.Token);
 
                     var controller = new ServiceController(appName);
-                    controller.Stop();
-                    controller.WaitForStatus(ServiceControllerStatus.Stopped);
+
+                    if (controller.Status != ServiceControllerStatus.StopPending && controller.Status != ServiceControllerStatus.Stopped)
+                    {
+                        controller.Stop();
+                        controller.WaitForStatus(ServiceControllerStatus.Stopped);
+                    }
 
                     await _updateService.UpdateApp(_updateType);
 

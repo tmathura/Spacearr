@@ -36,7 +36,7 @@ namespace Spacearr.Common.Command.Implementations.Commands
         {
             var appName = _updateType == UpdateType.WorkerService ? "Spacearr.WorkerService.Windows" : "Spacearr.Windows.Windows";
             var parentDirectory = Directory.GetParent(_fileService.GetUpdateAppStorageFolderPath()).Parent;
-            var currentAppPath = Path.Combine(parentDirectory?.FullName ?? string.Empty, appName);
+            var currentAppPath = Path.GetFullPath(parentDirectory?.FullName ?? string.Empty);
             var currentApp = Path.Combine(currentAppPath, $"{appName}.dll");
 
             var assemblyName = AssemblyName.GetAssemblyName(currentApp);

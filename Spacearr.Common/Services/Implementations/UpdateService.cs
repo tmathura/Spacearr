@@ -164,7 +164,7 @@ namespace Spacearr.Common.Services.Implementations
             var appName = updateType == UpdateType.WorkerService ? "Spacearr.WorkerService.Windows" : "Spacearr.Windows.Windows";
             var updateFilesPath = Path.Combine(_fileService.GetUpdateAppStorageFolderPath(), $@"Spacearr\{appName}");
             var parentDirectory = Directory.GetParent(_fileService.GetUpdateAppStorageFolderPath()).Parent;
-            var currentAppPath = Path.Combine(parentDirectory?.FullName ?? string.Empty, appName);
+            var currentAppPath = Path.GetFullPath(parentDirectory?.FullName ?? string.Empty);
 
             foreach (var dirPath in Directory.GetDirectories(updateFilesPath, "*", SearchOption.AllDirectories))
             {

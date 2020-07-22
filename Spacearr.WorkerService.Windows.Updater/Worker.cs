@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Hosting;
 using Spacearr.Common.Enums;
-using Spacearr.Common.Services.Interfaces;
+using Spacearr.Common.Timers.Interfaces;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -8,9 +8,9 @@ namespace Spacearr.WorkerService.Windows.Updater
 {
     public class Worker : BackgroundService
     {
-        public Worker(IUpdateTimerService updateTimerService)
+        public Worker(IUpdateAppTimer updateAppTimer)
         {
-            updateTimerService.Instantiate(UpdateType.WorkerService);
+            updateAppTimer.Instantiate(UpdateType.WorkerService);
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)

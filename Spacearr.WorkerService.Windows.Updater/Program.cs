@@ -7,6 +7,8 @@ using Spacearr.Common.Logger.Implementations;
 using Spacearr.Common.Logger.Interfaces;
 using Spacearr.Common.Services.Implementations;
 using Spacearr.Common.Services.Interfaces;
+using Spacearr.Common.Timers.Implementations;
+using Spacearr.Common.Timers.Interfaces;
 using Spacearr.WorkerService.Windows.Updater.Services.Implementations;
 using System;
 using System.IO;
@@ -33,7 +35,7 @@ namespace Spacearr.WorkerService.Windows.Updater
                     services.AddSingleton<IUpdateService, UpdateService>();
                     services.AddSingleton<IDownloadService, DownloadService>();
                     services.AddSingleton<IInvoker, Invoker>();
-                    services.AddSingleton<IUpdateTimerService, UpdateTimerService>();
+                    services.AddSingleton<IUpdateAppTimer, UpdateAppTimer>();
                 });
     }
 }

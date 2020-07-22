@@ -8,6 +8,8 @@ using Spacearr.Common.Logger.Implementations;
 using Spacearr.Common.Logger.Interfaces;
 using Spacearr.Common.Services.Implementations;
 using Spacearr.Common.Services.Interfaces;
+using Spacearr.Common.Timers.Implementations;
+using Spacearr.Common.Timers.Interfaces;
 using Spacearr.Pusher.API;
 using Spacearr.Pusher.API.Receivers.Implementations;
 using Spacearr.Pusher.API.Receivers.Interfaces;
@@ -35,7 +37,7 @@ namespace Spacearr.WorkerService.Windows
                     services.AddSingleton<IComputerDrives, ComputerDrives>();
                     services.AddSingleton<IComputerDriveInfo, ComputerDriveInfo>();
                     services.AddSingleton<ISendFirebasePushNotificationService, SendFirebasePushNotificationService>();
-                    services.AddSingleton<INotificationTimerService, NotificationTimerService>();
+                    services.AddSingleton<ILowSpaceTimer, LowSpaceTimer>();
                     services.AddSingleton<IComputerDrivesCommandReceiver, ComputerDrivesCommandReceiver>();
                     services.AddSingleton<ISaveFirebasePushNotificationTokenCommandReceiver, SaveFirebasePushNotificationTokenCommandReceiver>();
                 });

@@ -12,13 +12,13 @@ using System.IO;
 namespace Spacearr.Common.Tests.Command.Commands
 {
     [TestClass]
-    public class ComputerDrivesLowCommandTests
+    public class LowSpaceCommandTests
     {
         private Mock<IConfiguration> _mockIConfiguration;
         private Mock<ILogger> _mockILogger;
         private Mock<IComputerDrives> _mockIComputerDrives;
         private Mock<ISendFirebasePushNotificationService> _mockISendFirebasePushNotification;
-        private ComputerDrivesLowCommand _computerDrivesLowCommand;
+        private LowSpaceCommand _computerDrivesLowCommand;
 
         [TestInitialize]
         public void SetUp()
@@ -37,11 +37,11 @@ namespace Spacearr.Common.Tests.Command.Commands
             _mockILogger.Setup(x => x.GetFirebasePushNotificationDevicesAsync()).ReturnsAsync(FirebasePushNotificationDeviceModelFactory.CreateFirebasePushNotificationDeviceModels(2));
             var mockIConfigurationSection = new Mock<IConfigurationSection>();
             mockIConfigurationSection.Setup(a => a.Value).Returns("1");
-            _mockIConfiguration.Setup(a => a.GetSection("LowComputerDriveGBValue")).Returns(mockIConfigurationSection.Object);
+            _mockIConfiguration.Setup(a => a.GetSection("LowSpaceGBValue")).Returns(mockIConfigurationSection.Object);
             _mockIComputerDrives.Setup(x => x.GetComputerDrives()).Returns(ComputerDriveInfoFactory.CreateComputerDriveInfos(noOfComputerDriveInfos, DriveType.Fixed));
             _mockISendFirebasePushNotification.Setup(x => x.SendNotificationMultipleDevices(It.IsAny<List<string>>(), It.IsAny<string>(),
                 It.IsAny<string>()));
-            _computerDrivesLowCommand = new ComputerDrivesLowCommand(_mockIConfiguration.Object, _mockILogger.Object, _mockIComputerDrives.Object, _mockISendFirebasePushNotification.Object);
+            _computerDrivesLowCommand = new LowSpaceCommand(_mockIConfiguration.Object, _mockILogger.Object, _mockIComputerDrives.Object, _mockISendFirebasePushNotification.Object);
 
             // Act
             var commandData = _computerDrivesLowCommand.Execute();
@@ -57,9 +57,9 @@ namespace Spacearr.Common.Tests.Command.Commands
             // Arrange
             var mockIConfigurationSection = new Mock<IConfigurationSection>();
             mockIConfigurationSection.Setup(a => a.Value).Returns("0");
-            _mockIConfiguration.Setup(a => a.GetSection("LowComputerDriveGBValue")).Returns(mockIConfigurationSection.Object);
+            _mockIConfiguration.Setup(a => a.GetSection("LowSpaceGBValue")).Returns(mockIConfigurationSection.Object);
             _mockIComputerDrives.Setup(x => x.GetComputerDrives()).Returns(ComputerDriveInfoFactory.CreateComputerDriveInfoFixed);
-            _computerDrivesLowCommand = new ComputerDrivesLowCommand(_mockIConfiguration.Object, _mockILogger.Object, _mockIComputerDrives.Object, _mockISendFirebasePushNotification.Object);
+            _computerDrivesLowCommand = new LowSpaceCommand(_mockIConfiguration.Object, _mockILogger.Object, _mockIComputerDrives.Object, _mockISendFirebasePushNotification.Object);
 
             // Act
             var commandData = _computerDrivesLowCommand.Execute();

@@ -4,13 +4,14 @@ using Spacearr.Common.Command.Interfaces;
 using Spacearr.Common.Enums;
 using Spacearr.Common.Logger.Interfaces;
 using Spacearr.Common.Services.Interfaces;
+using Spacearr.Common.Timers.Interfaces;
 using System;
 using System.Timers;
 using Timer = System.Timers.Timer;
 
-namespace Spacearr.Common.Services.Implementations
+namespace Spacearr.Common.Timers.Implementations
 {
-    public class UpdateTimerService : IUpdateTimerService
+    public class UpdateAppTimer : IUpdateAppTimer
     {
         private UpdateType _updateType;
         private readonly IConfiguration _configuration;
@@ -22,7 +23,7 @@ namespace Spacearr.Common.Services.Implementations
 
         private readonly Timer _timer;
 
-        public UpdateTimerService(IConfiguration configuration, IInvoker invoker, ILogger logger, IUpdateService updateService, IDownloadService downloadService, IFileService fileService)
+        public UpdateAppTimer(IConfiguration configuration, IInvoker invoker, ILogger logger, IUpdateService updateService, IDownloadService downloadService, IFileService fileService)
         {
             _configuration = configuration;
             _invoker = invoker;
@@ -33,7 +34,7 @@ namespace Spacearr.Common.Services.Implementations
 
             _timer = new Timer
             {
-                Interval = TimeSpan.FromMinutes(Convert.ToDouble(_configuration.GetSection("UpdateTimerMinutesInterval").Value)).TotalMilliseconds,
+                Interval = TimeSpan.FromMinutes(Convert.ToDouble(_configuration.GetSection("UpdateAppInterval").Value)).TotalMilliseconds,
                 AutoReset = true
             };
             _timer.Elapsed += ElapsedEventHandler;

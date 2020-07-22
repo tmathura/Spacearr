@@ -4,13 +4,14 @@ using Spacearr.Common.Command.Interfaces;
 using Spacearr.Common.ComputerDrive.Interfaces;
 using Spacearr.Common.Logger.Interfaces;
 using Spacearr.Common.Services.Interfaces;
+using Spacearr.Common.Timers.Interfaces;
 using System;
 using System.Timers;
 using Timer = System.Timers.Timer;
 
-namespace Spacearr.Common.Services.Implementations
+namespace Spacearr.Common.Timers.Implementations
 {
-    public class NotificationTimerService : INotificationTimerService
+    public class LowSpaceTimer : ILowSpaceTimer
     {
         private readonly IConfiguration _configuration;
         private readonly IInvoker _invoker;
@@ -20,7 +21,7 @@ namespace Spacearr.Common.Services.Implementations
 
         private readonly Timer _timer;
 
-        public NotificationTimerService(IConfiguration configuration, IInvoker invoker, ILogger logger, IComputerDrives computerDrives, ISendFirebasePushNotificationService sendFirebasePushNotificationService)
+        public LowSpaceTimer(IConfiguration configuration, IInvoker invoker, ILogger logger, IComputerDrives computerDrives, ISendFirebasePushNotificationService sendFirebasePushNotificationService)
         {
             _configuration = configuration;
             _invoker = invoker;
@@ -30,7 +31,7 @@ namespace Spacearr.Common.Services.Implementations
 
             _timer = new Timer
             {
-                Interval = TimeSpan.FromMinutes(Convert.ToDouble(_configuration.GetSection("NotificationTimerMinutesInterval").Value)).TotalMilliseconds,
+                Interval = TimeSpan.FromMinutes(Convert.ToDouble(_configuration.GetSection("LowSpaceNotificationInterval").Value)).TotalMilliseconds,
                 AutoReset = true
             };
             _timer.Elapsed += ElapsedEventHandler;
@@ -41,7 +42,7 @@ namespace Spacearr.Common.Services.Implementations
         /// </summary>
         public void Instantiate()
         {
-            if (Convert.ToBoolean(_configuration.GetSection("SendNotifications").Value))
+            if (Convert.ToBoolean(_configuration.GetSection("SendLowSpaceNotification").Value))
             {
                 _timer.Start();
             }
@@ -52,7 +53,7 @@ namespace Spacearr.Common.Services.Implementations
         /// </summary>
         public void DeInstantiate()
         {
-            if (Convert.ToBoolean(_configuration.GetSection("SendNotifications").Value))
+            if (Convert.ToBoolean(_configuration.GetSection("SendLowSpaceNotification").Value))
             {
                 _timer.Stop();
             }
@@ -65,7 +66,7 @@ namespace Spacearr.Common.Services.Implementations
         /// <param name="e"></param>
         private void ElapsedEventHandler(object sender, ElapsedEventArgs e)
         {
-            var command = new ComputerDrivesLowCommand(_configuration, _logger, _computerDrives, _sendFirebasePushNotificationService);
+            var command = new LowSpaceCommand(_configuration, _logger, _computerDrives, _sendFirebasePushNotificationService);
             _invoker.Invoke(command);
         }
     }

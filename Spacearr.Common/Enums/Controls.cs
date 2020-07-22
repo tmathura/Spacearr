@@ -3,7 +3,7 @@
     public enum Controls
     {
         LowSpaceControl,
-        UpdateAppControl,
-        PusherControl
+        PusherControl,
+        UpdateAppControl
     }
 }

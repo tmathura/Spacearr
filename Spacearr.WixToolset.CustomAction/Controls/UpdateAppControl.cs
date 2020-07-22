@@ -13,6 +13,12 @@ namespace Spacearr.WixToolset.CustomAction.Controls
             _customActionModel = customActionModel;
 
             InitializeComponent();
+
+            lblUpdateAppInterval.Visible = _customActionModel.UpdaterAppSettingsModel.AutoUpdateApp;
+            txtUpdateAppInterval.Visible = _customActionModel.UpdaterAppSettingsModel.AutoUpdateApp;
+
+            chkAutoUpdateApp.Checked = _customActionModel.UpdaterAppSettingsModel.AutoUpdateApp;
+            txtUpdateAppInterval.Text = _customActionModel.UpdaterAppSettingsModel.UpdateAppInterval.ToString();
         }
 
         public override void SetCurrentForm()
@@ -22,21 +28,32 @@ namespace Spacearr.WixToolset.CustomAction.Controls
 
         public override bool ValidForm(out string errorMessage)
         {
-            if (string.IsNullOrEmpty(txtUpdateAppInterval.Text))
+            if (chkAutoUpdateApp.Checked)
             {
-                errorMessage = @"Please enter a value for 'Update App Interval'.";
-                return false;
+                if (string.IsNullOrEmpty(txtUpdateAppInterval.Text))
+                {
+                    errorMessage = @"Please enter a value for 'Update App Interval'.";
+                    return false;
+                }
+
+                if (!Regex.IsMatch(txtUpdateAppInterval.Text, @"^\d+$"))
+                {
+                    errorMessage = @"The value entered for 'Update App Interval' does not appear to be a valid number. Please try again.";
+                    return false;
+                }
             }
 
-            if (!Regex.IsMatch(txtUpdateAppInterval.Text, @"^\d+$"))
-            {
-                errorMessage = @"The value entered for 'Update App Interval' does not appear to be a valid number. Please try again.";
-                return false;
-            }
-
+            _customActionModel.UpdaterAppSettingsModel.AutoUpdateApp = chkAutoUpdateApp.Checked;
             _customActionModel.UpdaterAppSettingsModel.UpdateAppInterval = Convert.ToInt32(txtUpdateAppInterval.Text);
             errorMessage = null;
             return true;
+        }
+
+        private void chkAutoUpdateApp_CheckedChanged(object sender, EventArgs e)
+        {
+            lblUpdateAppInterval.Visible = chkAutoUpdateApp.Checked;
+            txtUpdateAppInterval.Visible = chkAutoUpdateApp.Checked;
+
         }
     }
 }

@@ -33,12 +33,14 @@
             this.lblUpdateAppInterval = new System.Windows.Forms.Label();
             this.lblSettingDescription = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.chkAutoUpdateApp = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.chkAutoUpdateApp);
             this.panel1.Controls.Add(this.txtUpdateAppInterval);
             this.panel1.Controls.Add(this.lblUpdateAppInterval);
             this.panel1.Controls.Add(this.lblSettingDescription);
@@ -51,7 +53,7 @@
             // 
             // txtUpdateAppInterval
             // 
-            this.txtUpdateAppInterval.Location = new System.Drawing.Point(144, 117);
+            this.txtUpdateAppInterval.Location = new System.Drawing.Point(144, 139);
             this.txtUpdateAppInterval.Name = "txtUpdateAppInterval";
             this.txtUpdateAppInterval.Size = new System.Drawing.Size(195, 22);
             this.txtUpdateAppInterval.TabIndex = 3;
@@ -59,7 +61,7 @@
             // lblUpdateAppInterval
             // 
             this.lblUpdateAppInterval.AutoSize = true;
-            this.lblUpdateAppInterval.Location = new System.Drawing.Point(16, 120);
+            this.lblUpdateAppInterval.Location = new System.Drawing.Point(16, 142);
             this.lblUpdateAppInterval.Name = "lblUpdateAppInterval";
             this.lblUpdateAppInterval.Size = new System.Drawing.Size(122, 14);
             this.lblUpdateAppInterval.TabIndex = 2;
@@ -84,6 +86,16 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Thank you for using Win App.";
             // 
+            // chkAutoUpdateApp
+            // 
+            this.chkAutoUpdateApp.Location = new System.Drawing.Point(19, 102);
+            this.chkAutoUpdateApp.Name = "chkAutoUpdateApp";
+            this.chkAutoUpdateApp.Size = new System.Drawing.Size(135, 18);
+            this.chkAutoUpdateApp.TabIndex = 0;
+            this.chkAutoUpdateApp.Text = "Auto Update App";
+            this.chkAutoUpdateApp.UseVisualStyleBackColor = true;
+            this.chkAutoUpdateApp.CheckedChanged += new System.EventHandler(this.chkAutoUpdateApp_CheckedChanged);
+            // 
             // UpdateAppControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -104,5 +116,6 @@
         private System.Windows.Forms.Label lblUpdateAppInterval;
         private System.Windows.Forms.Label lblSettingDescription;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox chkAutoUpdateApp;
     }
 }

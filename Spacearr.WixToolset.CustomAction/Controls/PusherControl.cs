@@ -11,6 +11,11 @@ namespace Spacearr.WixToolset.CustomAction.Controls
             _customActionModel = customActionModel;
 
             InitializeComponent();
+
+            txtPusherAppId.Text = _customActionModel.AppSettingsModel.PusherAppId;
+            txtPusherKey.Text = _customActionModel.AppSettingsModel.PusherKey;
+            txtPusherSecret.Text = _customActionModel.AppSettingsModel.PusherSecret;
+            txtPusherCluster.Text = _customActionModel.AppSettingsModel.PusherCluster;
         }
 
         public override void SetCurrentForm()

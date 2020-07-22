@@ -218,11 +218,11 @@ namespace Spacearr.Common.Services.Implementations
                 .SetBasePath(newPath)
                 .AddJsonFile("appsettings.json").Build();
 
-            var appSettings = new AppSettings();
+            var appSettingsModel = new AppSettingsModel();
 
-            configuration.Bind(appSettings);
+            configuration.Bind(appSettingsModel);
 
-            var updatedJsonString =  await Task.FromResult(JsonConvert.SerializeObject(appSettings, Formatting.Indented));
+            var updatedJsonString =  await Task.FromResult(JsonConvert.SerializeObject(appSettingsModel, Formatting.Indented));
             File.WriteAllText(filePath.Replace(oldParentPath, newPath), updatedJsonString);
         }
     }

@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Deployment.WindowsInstaller;
+using Spacearr.Common.Models;
+using System.Collections.Generic;
 using System.Windows.Forms;
-using Microsoft.Deployment.WindowsInstaller;
 
 namespace Spacearr.WixToolset.CustomAction
 {
@@ -9,10 +10,12 @@ namespace Spacearr.WixToolset.CustomAction
         [CustomAction]
         public static ActionResult ShowUpdateAppSettingsConfigurationScreens(Session session)
         {
-            var appSettingModel = new AppSettingModel
+            var appSettingModel = new CustomActionModel
             {
-                Form = new Dictionary<Enums.Controls, object>(),
-                InstallationDirectory = session.CustomActionData["InstallDirectory"]
+                Form = new Dictionary<Common.Enums.Controls, object>(),
+                InstallationDirectory = session.CustomActionData["InstallDirectory"],
+                AppSettingsModel = new AppSettingsModel(),
+                UpdaterAppSettingsModel = new UpdaterAppSettingsModel()
             };
 
             var notificationTimerMinutesIntervalForm = new MainForm(appSettingModel);

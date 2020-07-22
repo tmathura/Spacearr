@@ -1,6 +1,6 @@
 ﻿namespace Spacearr.Common.Models
 {
-    public class AppSettings
+    public class AppSettingsModel
     {
         public bool SendLowSpaceNotification { get; set; }
         public int LowSpaceGBValue { get; set; }

@@ -1,41 +1,41 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Spacearr.Common.Models;
+using Spacearr.WixToolset.CustomAction.Controls;
+using System;
 using System.IO;
 using System.Windows.Forms;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Spacearr.WixToolset.CustomAction.Controls;
 
 namespace Spacearr.WixToolset.CustomAction
 {
     public partial class MainForm : Form
     {
-        private readonly AppSettingModel _appSettingModel;
+        private readonly CustomActionModel _customActionModel;
 
-        public MainForm(AppSettingModel appSettingModel)
+        public MainForm(CustomActionModel customActionModel)
         {
-            _appSettingModel = appSettingModel;
+            _customActionModel = customActionModel;
 
             InitializeComponent();
             Application.EnableVisualStyles();
             TopMost = true;
 
-            _appSettingModel.Form.Add(Enums.Controls.LowComputerDriveGBValueControl, new LowComputerDriveGBValueControl(_appSettingModel));
-            _appSettingModel.Form.Add(Enums.Controls.NotificationTimerMinutesIntervalControl, new NotificationTimerMinutesIntervalControl(_appSettingModel));
-            _appSettingModel.Form.Add(Enums.Controls.PusherControl, new PusherControl(_appSettingModel));
+            _customActionModel.Form.Add(Common.Enums.Controls.LowSpaceControl, new LowSpaceControl(_customActionModel));
+            _customActionModel.Form.Add(Common.Enums.Controls.UpdateAppControl, new UpdateAppControl(_customActionModel));
+            _customActionModel.Form.Add(Common.Enums.Controls.PusherControl, new PusherControl(_customActionModel));
 
-            var control = _appSettingModel.Form[_appSettingModel.CurrentControl];
+            var control = _customActionModel.Form[_customActionModel.CurrentControl];
 
             panelMain.Controls.Add((BaseControl) control);
         }
 
         private void BtnNext_Click(object sender, EventArgs e)
         {
-            var currentControl = (BaseControl) _appSettingModel.Form[_appSettingModel.CurrentControl];
+            var currentControl = (BaseControl) _customActionModel.Form[_customActionModel.CurrentControl];
 
             if (currentControl.ValidForm(out var errorMessage))
             {
-                var lastIndex = (Enum.GetValues(typeof(Enums.Controls)).Length - 1);
-                var nextEnumIndex = (int) _appSettingModel.CurrentControl + 1;
+                var lastIndex = (Enum.GetValues(typeof(Common.Enums.Controls)).Length - 1);
+                var nextEnumIndex = (int) _customActionModel.CurrentControl + 1;
 
                 if (nextEnumIndex > lastIndex)
                 {
@@ -51,15 +51,15 @@ namespace Spacearr.WixToolset.CustomAction
                 }
                 else
                 {
-                    var nextEnum = (Enums.Controls) nextEnumIndex;
+                    var nextEnum = (Common.Enums.Controls) nextEnumIndex;
 
-                    var newControlToShow = (BaseControl) _appSettingModel.Form[nextEnum];
+                    var newControlToShow = (BaseControl) _customActionModel.Form[nextEnum];
                     newControlToShow.SetCurrentForm();
                     panelMain.Controls.Add(newControlToShow);
 
-                    var previousEnumIndex = (int) _appSettingModel.CurrentControl - 1 < 0 ? 0 : (int) _appSettingModel.CurrentControl - 1;
-                    var previousEnum = ((Enums.Controls) previousEnumIndex);
-                    var oldControlToHide = (BaseControl)_appSettingModel.Form[previousEnum];
+                    var previousEnumIndex = (int) _customActionModel.CurrentControl - 1 < 0 ? 0 : (int) _customActionModel.CurrentControl - 1;
+                    var previousEnum = ((Common.Enums.Controls) previousEnumIndex);
+                    var oldControlToHide = (BaseControl)_customActionModel.Form[previousEnum];
                     panelMain.Controls.Remove(oldControlToHide);
                 }
             }
@@ -73,11 +73,11 @@ namespace Spacearr.WixToolset.CustomAction
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            var currentControl = (BaseControl) _appSettingModel.Form[_appSettingModel.CurrentControl];
-            var previousEnumIndex = (int) _appSettingModel.CurrentControl - 1 < 0 ? 0 : (int) _appSettingModel.CurrentControl - 1;
-            var previousEnum = (Enums.Controls) previousEnumIndex;
+            var currentControl = (BaseControl) _customActionModel.Form[_customActionModel.CurrentControl];
+            var previousEnumIndex = (int) _customActionModel.CurrentControl - 1 < 0 ? 0 : (int) _customActionModel.CurrentControl - 1;
+            var previousEnum = (Common.Enums.Controls) previousEnumIndex;
 
-            var newControlToShow = (BaseControl) _appSettingModel.Form[previousEnum];
+            var newControlToShow = (BaseControl) _customActionModel.Form[previousEnum];
             newControlToShow.SetCurrentForm();
             panelMain.Controls.Add(newControlToShow);
 
@@ -90,30 +90,13 @@ namespace Spacearr.WixToolset.CustomAction
         {
             try
             {
-                var appSettingsJsonPath = $@"{_appSettingModel.InstallationDirectory}\appsettings.json";
-                var jsonString = File.ReadAllText(appSettingsJsonPath);
-                var jObject = JsonConvert.DeserializeObject(jsonString) as JObject;
+                var appSettingsPath = $@"{_customActionModel.InstallationDirectory}\appsettings.json";
+                var updaterAppSettingsPath = $@"{_customActionModel.InstallationDirectory}\Updater\appsettings.json";
+                var appSettingsJsonString = JsonConvert.SerializeObject(_customActionModel.AppSettingsModel, Formatting.Indented);
+                var updaterAppSettingsJsonString = JsonConvert.SerializeObject(_customActionModel.UpdaterAppSettingsModel, Formatting.Indented);
 
-                var lowComputerDriveGBValue = jObject?.SelectToken("LowComputerDriveGBValue");
-                lowComputerDriveGBValue?.Replace(_appSettingModel.LowComputerDriveGBValue);
-
-                var notificationTimerMinutesInterval = jObject?.SelectToken("NotificationTimerMinutesInterval");
-                notificationTimerMinutesInterval?.Replace(_appSettingModel.NotificationTimerMinutesInterval);
-
-                var pusherAppId = jObject?.SelectToken("PusherAppId");
-                pusherAppId?.Replace(_appSettingModel.PusherAppId);
-
-                var pusherKey = jObject?.SelectToken("PusherKey");
-                pusherKey?.Replace(_appSettingModel.PusherKey);
-
-                var pusherSecret = jObject?.SelectToken("PusherSecret");
-                pusherSecret?.Replace(_appSettingModel.PusherSecret);
-
-                var pusherCluster = jObject?.SelectToken("PusherCluster");
-                pusherCluster?.Replace(_appSettingModel.PusherCluster);
-
-                var updatedJsonString = jObject?.ToString();
-                File.WriteAllText(appSettingsJsonPath, updatedJsonString);
+                File.WriteAllText(appSettingsPath, appSettingsJsonString);
+                File.WriteAllText(updaterAppSettingsPath, updaterAppSettingsJsonString);
             }
             catch (Exception ex)
             {

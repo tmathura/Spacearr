@@ -24,7 +24,8 @@
     <SuppressPdbOutput>True</SuppressPdbOutput>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Product.wxs" />
+    <Compile Include="Product.wxs" /> <!-- This will be your default one -->
+    <Compile Include="SpacearrWindowsServiceHeatGeneratedFileList.wxs" /> <!-- This is the Heat created one -->
   </ItemGroup>
   <ItemGroup>
     <WixExtension Include="WixUIExtension">
@@ -79,6 +80,17 @@
     <CreateProperty Value="&#xD;&#xA;      Configuration=$(ConfigurationName);&#xD;&#xA;      OutDir=$(OutDir);&#xD;&#xA;      Platform=$(PlatformName);&#xD;&#xA;      ProjectDir=$(ProjectDir);&#xD;&#xA;      ProjectExt=$(ProjectExt);&#xD;&#xA;      ProjectFileName=$(ProjectFileName);&#xD;&#xA;      ProjectName=$(ProjectName);&#xD;&#xA;      ProjectPath=$(ProjectPath);&#xD;&#xA;      TargetDir=$(TargetDir);&#xD;&#xA;      TargetExt=$(TargetExt);&#xD;&#xA;      TargetFileName=$(TargetFileName);&#xD;&#xA;      TargetName=$(TargetName);&#xD;&#xA;      TargetPath=$(TargetPath);">
       <Output TaskParameter="Value" PropertyName="ProjectDefineConstants" />
     </CreateProperty>
+    <HeatDirectory Directory="..\Spacearr.Windows.Service\bin\$(Configuration)" 
+                   PreprocessorVariable="var.Spacearr.Windows.Service.TargetDir" 
+                   OutputFile="SpacearrWindowsServiceHeatGeneratedFileList.wxs" 
+                   ComponentGroupName="SpacearrWindowsServiceHeatGenerated" 
+                   DirectoryRefId="INSTALLDIR" 
+                   AutogenerateGuids="true" 
+                   ToolPath="$(WixToolPath)" 
+                   Transforms="Transform.xsl" 
+                   SuppressFragments="true" 
+                   SuppressRegistry="true" 
+                   SuppressRootDirectory="true" />
   </Target>
   <Target Name="AfterBuild">
     <Exec Command="Explorer.exe $(TargetDir)" IgnoreExitCode="true" ContinueOnError="true">

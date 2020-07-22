@@ -2,55 +2,6 @@
 <?define Name = "Spacearr.Windows.Service" ?>
 <?define Manufacturer = "Spacearr" ?>
 <?define UpgradeCode = "{5797E088-8A4F-451B-AF25-D336104BFEE9}" ?>
-<?define Spacearr.Windows.Service.Config = "Spacearr.Windows.Service.exe.config" ?>
-<?define AppSettings.json = "appsettings.json" ?>
-<?define Autofac.dll = "Autofac.dll" ?>
-<?define FirebaseAdmin.dll = "FirebaseAdmin.dll" ?>
-<?define Google.Api.Gax.dll = "Google.Api.Gax.dll" ?>
-<?define Google.Api.Gax.Rest.dll = "Google.Api.Gax.Rest.dll" ?>
-<?define Google.Apis.Auth.dll = "Google.Apis.Auth.dll" ?>
-<?define Google.Apis.Auth.PlatformServices.dll = "Google.Apis.Auth.PlatformServices.dll" ?>
-<?define Google.Apis.Core.dll = "Google.Apis.Core.dll" ?>
-<?define Google.Apis.dll = "Google.Apis.dll" ?>
-<?define Google.Apis.PlatformServices.dll = "Google.Apis.PlatformServices.dll" ?>
-<?define Microcharts.dll = "Microcharts.dll" ?>
-<?define Microsoft.Bcl.AsyncInterfaces.dll = "Microsoft.Bcl.AsyncInterfaces.dll" ?>
-<?define Microsoft.Extensions.Configuration.Abstractions.dll = "Microsoft.Extensions.Configuration.Abstractions.dll" ?>
-<?define Microsoft.Extensions.Configuration.dll = "Microsoft.Extensions.Configuration.dll" ?>
-<?define Microsoft.Extensions.Configuration.FileExtensions.dll = "Microsoft.Extensions.Configuration.FileExtensions.dll" ?>
-<?define Microsoft.Extensions.Configuration.Json.dll = "Microsoft.Extensions.Configuration.Json.dll" ?>
-<?define Microsoft.Extensions.FileProviders.Abstractions.dll = "Microsoft.Extensions.FileProviders.Abstractions.dll" ?>
-<?define Microsoft.Extensions.FileProviders.Physical.dll = "Microsoft.Extensions.FileProviders.Physical.dll" ?>
-<?define Microsoft.Extensions.FileSystemGlobbing.dll = "Microsoft.Extensions.FileSystemGlobbing.dll" ?>
-<?define Microsoft.Extensions.Primitives.dll = "Microsoft.Extensions.Primitives.dll" ?>
-<?define Newtonsoft.Json.dll = "Newtonsoft.Json.dll" ?>
-<?define Octokit.dll = "Octokit.dll" ?>
-<?define PusherClient.dll = "PusherClient.dll" ?>
-<?define PusherServer.Core.dll = "PusherServer.Core.dll" ?>
-<?define PusherServer.dll = "PusherServer.dll" ?>
-<?define SkiaSharp.dll = "SkiaSharp.dll" ?>
-<?define Spacearr.Common.dll = "Spacearr.Common.dll" ?>
-<?define Spacearr.Pusher.API.dll = "Spacearr.Pusher.API.dll" ?>
-<?define SQLiteNet.dll = "SQLiteNet.dll" ?> <!-- "SQLite-net.dll" does not like the '-' -->
-<?define SQLitePCLRaw.batteries_v2.dll = "SQLitePCLRaw.batteries_v2.dll" ?>
-<?define SQLitePCLRaw.core.dll = "SQLitePCLRaw.core.dll" ?>
-<?define SQLitePCLRaw.nativelibrary.dll = "SQLitePCLRaw.nativelibrary.dll" ?>
-<?define SQLitePCLRaw.provider.dynamic_cdecl.dll = "SQLitePCLRaw.provider.dynamic_cdecl.dll" ?>
-<?define SuperSocket.ClientEngine.dll = "SuperSocket.ClientEngine.dll" ?>
-<?define System.Buffers.dll = "System.Buffers.dll" ?>
-<?define System.Collections.Immutable.dll = "System.Collections.Immutable.dll" ?>
-<?define System.ComponentModel.Annotations.dll = "System.ComponentModel.Annotations.dll" ?>
-<?define System.Memory.dll = "System.Memory.dll" ?>
-<?define System.Numerics.Vectors.dll = "System.Numerics.Vectors.dll" ?>
-<?define System.Runtime.CompilerServices.Unsafe.dll = "System.Runtime.CompilerServices.Unsafe.dll" ?>
-<?define System.Text.Encodings.Web.dll = "System.Text.Encodings.Web.dll" ?>
-<?define System.Text.Json.dll = "System.Text.Json.dll" ?>
-<?define System.Threading.Tasks.Extensions.dll = "System.Threading.Tasks.Extensions.dll" ?>
-<?define System.ValueTuple.dll = "System.ValueTuple.dll" ?>
-<?define WebSocket4Net.dll = "WebSocket4Net.dll" ?>
-<?define e_sqlite3.dll = "e_sqlite3.dll" ?>
-<?define x64_e_sqlite3.dll = "x64_e_sqlite3.dll" ?>
-<?define x86_e_sqlite3.dll = "x86_e_sqlite3.dll" ?>
 
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <Product Id="*" UpgradeCode="$(var.UpgradeCode)" Version="$(var.VersionNumber)" Language="1033" Name="$(var.Name)" Manufacturer="$(var.Manufacturer)">
@@ -65,14 +16,6 @@
       <Directory Id="ProgramFilesFolder">
         <Directory Id="ROOTDIRECTORY" Name="$(var.Manufacturer)">
           <Directory Id="INSTALLDIR" Name="$(var.Name)">
-            <Directory Id="runtimes" Name="runtimes">
-              <Directory Id="win_x64" Name="win-x64">
-                <Directory Id="native_x64" Name="native" />
-              </Directory>
-              <Directory Id="win_x86" Name="win-x86">
-                <Directory Id="native_x86" Name="native" />
-              </Directory>
-            </Directory>
           </Directory>
         </Directory>
       </Directory>
@@ -95,7 +38,7 @@
 
     <!-- Add files to your installer package -->
     <DirectoryRef Id="INSTALLDIR">
-      <Component Id="$(var.Spacearr.Windows.Service.TargetFileName)" Guid="{54AAA2B6-C8DE-41D2-93C3-170A780EAB9B}">
+      <Component Id="$(var.Spacearr.Windows.Service.TargetFileName)" Guid="*">
         <File Id="$(var.Spacearr.Windows.Service.TargetFileName)" Source="$(var.Spacearr.Windows.Service.TargetPath)" KeyPath="yes" />
 
         <!-- Remove the all files on uninstall -->
@@ -107,210 +50,12 @@
         <!-- Tell WiX to start the Service -->
         <ServiceControl Id="StartService" Start="install" Stop="both" Remove="uninstall" Name="Spacearr.Windows.Service" Wait="yes" />
       </Component>
-
-      <Component Id="$(var.Spacearr.Windows.Service.Config)" Guid="{C53E8387-E447-4CF1-9869-E7D380DDBE9F}">
-        <File Id="$(var.Spacearr.Windows.Service.Config)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.Spacearr.Windows.Service.Config)" KeyPath="yes" />
-      </Component>
-
-      <Component Id="$(var.AppSettings.json)" Guid="C5A29C38-40D2-4BBB-BBC1-7E4CDC722388">
-        <File Id="$(var.AppSettings.json)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.AppSettings.json)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.Autofac.dll)" Guid="3139DD64-D2CE-4B3C-9207-F3A48FDB9A14">
-        <File Id="$(var.Autofac.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.Autofac.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.FirebaseAdmin.dll)" Guid="F5542469-D5B6-4A9D-9C71-26597D3A3DA4">
-        <File Id="$(var.FirebaseAdmin.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.FirebaseAdmin.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.Google.Api.Gax.dll)" Guid="0A6A8DAF-6A1B-4EAC-94F0-DCE1F4D87716">
-        <File Id="$(var.Google.Api.Gax.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.Google.Api.Gax.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.Google.Api.Gax.Rest.dll)" Guid="DA07BAB1-BE3D-413F-9C04-D60B4ADBFFAF">
-        <File Id="$(var.Google.Api.Gax.Rest.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.Google.Api.Gax.Rest.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.Google.Apis.Auth.dll)" Guid="093D7AF8-CBC8-4F0F-9A22-17419AEF7AD1">
-        <File Id="$(var.Google.Apis.Auth.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.Google.Apis.Auth.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.Google.Apis.Auth.PlatformServices.dll)" Guid="A7B9BD7C-EEFC-4B57-A97E-88DF2CF947D1">
-        <File Id="$(var.Google.Apis.Auth.PlatformServices.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.Google.Apis.Auth.PlatformServices.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.Google.Apis.Core.dll)" Guid="4D756452-6668-4178-922A-4B08E1ABA246">
-        <File Id="$(var.Google.Apis.Core.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.Google.Apis.Core.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.Google.Apis.dll)" Guid="25250092-DE0E-4A6E-8E8C-906D24EB6872">
-        <File Id="$(var.Google.Apis.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.Google.Apis.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.Google.Apis.PlatformServices.dll)" Guid="F8A9228E-20DC-4A53-84AA-18293DBFD89E">
-        <File Id="$(var.Google.Apis.PlatformServices.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.Google.Apis.PlatformServices.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.Microcharts.dll)" Guid="555D273A-69F6-4549-A9D0-FB336F23C0F4">
-        <File Id="$(var.Microcharts.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.Microcharts.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.Microsoft.Bcl.AsyncInterfaces.dll)" Guid="F2F6114B-73E7-45A6-936A-E96454648415">
-        <File Id="$(var.Microsoft.Bcl.AsyncInterfaces.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.Microsoft.Bcl.AsyncInterfaces.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.Microsoft.Extensions.Configuration.Abstractions.dll)" Guid="79C2138C-33E6-443B-B3EB-9A876391208A">
-        <File Id="$(var.Microsoft.Extensions.Configuration.Abstractions.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.Microsoft.Extensions.Configuration.Abstractions.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.Microsoft.Extensions.Configuration.dll)" Guid="41E929D0-AABC-4639-B27A-829E34290B14">
-        <File Id="$(var.Microsoft.Extensions.Configuration.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.Microsoft.Extensions.Configuration.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.Microsoft.Extensions.Configuration.FileExtensions.dll)" Guid="D006CA53-0A29-4751-B2A3-54A9458294F6">
-        <File Id="$(var.Microsoft.Extensions.Configuration.FileExtensions.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.Microsoft.Extensions.Configuration.FileExtensions.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.Microsoft.Extensions.Configuration.Json.dll)" Guid="264D5D6C-5939-4BDD-A8CA-5E04FF1C3F08">
-        <File Id="$(var.Microsoft.Extensions.Configuration.Json.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.Microsoft.Extensions.Configuration.Json.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.Microsoft.Extensions.FileProviders.Abstractions.dll)" Guid="61CF0184-1E77-43D0-9594-00690D909B9A">
-        <File Id="$(var.Microsoft.Extensions.FileProviders.Abstractions.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.Microsoft.Extensions.FileProviders.Abstractions.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.Microsoft.Extensions.FileProviders.Physical.dll)" Guid="97DA0CF3-5D25-4A39-B55C-E61D9F76CBD4">
-        <File Id="$(var.Microsoft.Extensions.FileProviders.Physical.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.Microsoft.Extensions.FileProviders.Physical.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.Microsoft.Extensions.FileSystemGlobbing.dll)" Guid="4F0D75F3-C16F-4F3D-9A51-AA32E133A53E">
-        <File Id="$(var.Microsoft.Extensions.FileSystemGlobbing.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.Microsoft.Extensions.FileSystemGlobbing.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.Microsoft.Extensions.Primitives.dll)" Guid="4CBE5B46-8B73-40C2-9DF9-91D986A9E792">
-        <File Id="$(var.Microsoft.Extensions.Primitives.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.Microsoft.Extensions.Primitives.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.Newtonsoft.Json.dll)" Guid="3A35BEBC-84A2-4B1D-945D-E1AA4CC7A6C8">
-        <File Id="$(var.Newtonsoft.Json.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.Newtonsoft.Json.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.Octokit.dll)" Guid="4C60B71B-C732-4B1F-8F27-68A15DBD6675">
-        <File Id="$(var.Octokit.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.Octokit.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.PusherClient.dll)" Guid="39A2E9EA-3C11-46EE-A9AE-0B8752447117">
-        <File Id="$(var.PusherClient.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.PusherClient.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.PusherServer.Core.dll)" Guid="3CFD5E91-18CC-4CAB-8573-A48603400FC7">
-        <File Id="$(var.PusherServer.Core.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.PusherServer.Core.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.PusherServer.dll)" Guid="3AB1590F-AEAE-4697-A88E-3F6BACD8B1F4">
-        <File Id="$(var.PusherServer.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.PusherServer.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.SkiaSharp.dll)" Guid="4CEACE17-89F6-403F-A1F4-30CF4310408A">
-        <File Id="$(var.SkiaSharp.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.SkiaSharp.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.Spacearr.Common.dll)" Guid="3BC582F5-2934-4A79-9C20-CDBF00D49490">
-        <File Id="$(var.Spacearr.Common.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.Spacearr.Common.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.Spacearr.Pusher.API.dll)" Guid="EB44F4CB-78F5-438B-9FD0-D9E2FF80D956">
-        <File Id="$(var.Spacearr.Pusher.API.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.Spacearr.Pusher.API.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.SQLiteNet.dll)" Guid="EB585D7B-2AB4-4ABB-973D-B184A689663D">
-        <File Id="$(var.SQLiteNet.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)SQLite-net.dll" KeyPath="yes" /> <!-- "SQLite-net.dll" manually specified because it does not like the '-' -->
-      </Component>
-      <Component Id="$(var.SQLitePCLRaw.batteries_v2.dll)" Guid="E72D3E8A-9DEE-4A4F-8937-71CB960950FC">
-        <File Id="$(var.SQLitePCLRaw.batteries_v2.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.SQLitePCLRaw.batteries_v2.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.SQLitePCLRaw.core.dll)" Guid="26C2B0F1-4D14-405C-BF90-7806AD05785E">
-        <File Id="$(var.SQLitePCLRaw.core.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.SQLitePCLRaw.core.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.SQLitePCLRaw.nativelibrary.dll)" Guid="17F618DC-30DF-48BC-A143-50799F08A22A">
-        <File Id="$(var.SQLitePCLRaw.nativelibrary.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.SQLitePCLRaw.nativelibrary.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.SQLitePCLRaw.provider.dynamic_cdecl.dll)" Guid="688810B6-7D42-44F0-85B4-782A8BE9BFCA">
-        <File Id="$(var.SQLitePCLRaw.provider.dynamic_cdecl.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.SQLitePCLRaw.provider.dynamic_cdecl.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.SuperSocket.ClientEngine.dll)" Guid="39D115D6-4C5E-4D1E-88D6-86DC8CA5CB10">
-        <File Id="$(var.SuperSocket.ClientEngine.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.SuperSocket.ClientEngine.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.System.Buffers.dll)" Guid="44408DC9-811A-46D1-8605-7F882A2E3831">
-        <File Id="$(var.System.Buffers.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.System.Buffers.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.System.Collections.Immutable.dll)" Guid="4CC08D42-BE88-4454-B701-7342D2209720">
-        <File Id="$(var.System.Collections.Immutable.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.System.Collections.Immutable.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.System.ComponentModel.Annotations.dll)" Guid="CD1110F7-2954-433C-B917-A36CE52CA476">
-        <File Id="$(var.System.ComponentModel.Annotations.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.System.ComponentModel.Annotations.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.System.Memory.dll)" Guid="F126BF50-FC06-47D9-9654-153957E336E5">
-        <File Id="$(var.System.Memory.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.System.Memory.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.System.Numerics.Vectors.dll)" Guid="C2D74A9A-332C-4524-A166-C59CC080AF77">
-        <File Id="$(var.System.Numerics.Vectors.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.System.Numerics.Vectors.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.System.Runtime.CompilerServices.Unsafe.dll)" Guid="612CF274-4CA3-4555-B046-E7209390DC2C">
-        <File Id="$(var.System.Runtime.CompilerServices.Unsafe.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.System.Runtime.CompilerServices.Unsafe.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.System.Text.Encodings.Web.dll)" Guid="8D4175F9-A1E4-439B-96C4-F1B5B6CDC919">
-        <File Id="$(var.System.Text.Encodings.Web.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.System.Text.Encodings.Web.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.System.Text.Json.dll)" Guid="F332C35B-41AA-40DF-8387-44446046EE7D">
-        <File Id="$(var.System.Text.Json.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.System.Text.Json.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.System.Threading.Tasks.Extensions.dll)" Guid="A4B8ED31-0C4B-4C70-A8E2-5B52A755F688">
-        <File Id="$(var.System.Threading.Tasks.Extensions.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.System.Threading.Tasks.Extensions.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.System.ValueTuple.dll)" Guid="1E322717-7DBD-446F-9476-C19E3ACDF411">
-        <File Id="$(var.System.ValueTuple.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.System.ValueTuple.dll)" KeyPath="yes" />
-      </Component>
-      <Component Id="$(var.WebSocket4Net.dll)" Guid="7C4B679B-DA2F-41C9-8C84-918C6169A2B0">
-        <File Id="$(var.WebSocket4Net.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)$(var.WebSocket4Net.dll)" KeyPath="yes" />
-      </Component>
-    </DirectoryRef>
-    <DirectoryRef Id="native_x64">
-      <Component Id="$(var.x64_e_sqlite3.dll)" Guid="E94B56E0-27CD-484B-8E98-4FCFB0A2060E">
-        <File Id="$(var.x64_e_sqlite3.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)runtimes\win-x64\native\$(var.e_sqlite3.dll)" KeyPath="yes" />
-      </Component>
-    </DirectoryRef>
-    <DirectoryRef Id="native_x86">
-      <Component Id="$(var.x86_e_sqlite3.dll)" Guid="4394A5E7-C81B-40C6-B7FE-5ECDCC2504BF">
-        <File Id="$(var.x86_e_sqlite3.dll)" Source="$(var.Spacearr.Windows.Service.TargetDir)runtimes\win-x86\native\$(var.e_sqlite3.dll)" KeyPath="yes" />
-      </Component>
     </DirectoryRef>
 
     <!-- Tell WiX to install the files -->
     <Feature Id="MainApplication" Title="Spacearr Windows Service" Level="1">
       <ComponentRef Id="$(var.Spacearr.Windows.Service.TargetFileName)" />
-      <ComponentRef Id="$(var.Spacearr.Windows.Service.Config)" />
-      <ComponentRef Id="$(var.AppSettings.json)" />
-      <ComponentRef Id="$(var.Autofac.dll)" />
-      <ComponentRef Id="$(var.FirebaseAdmin.dll)" />
-      <ComponentRef Id="$(var.Google.Api.Gax.dll)" />
-      <ComponentRef Id="$(var.Google.Api.Gax.Rest.dll)" />
-      <ComponentRef Id="$(var.Google.Apis.Auth.dll)" />
-      <ComponentRef Id="$(var.Google.Apis.Auth.PlatformServices.dll)" />
-      <ComponentRef Id="$(var.Google.Apis.Core.dll)" />
-      <ComponentRef Id="$(var.Google.Apis.dll)" />
-      <ComponentRef Id="$(var.Google.Apis.PlatformServices.dll)" />
-      <ComponentRef Id="$(var.Microcharts.dll)" />
-      <ComponentRef Id="$(var.Microsoft.Bcl.AsyncInterfaces.dll)" />
-      <ComponentRef Id="$(var.Microsoft.Extensions.Configuration.Abstractions.dll)" />
-      <ComponentRef Id="$(var.Microsoft.Extensions.Configuration.dll)" />
-      <ComponentRef Id="$(var.Microsoft.Extensions.Configuration.FileExtensions.dll)" />
-      <ComponentRef Id="$(var.Microsoft.Extensions.Configuration.Json.dll)" />
-      <ComponentRef Id="$(var.Microsoft.Extensions.FileProviders.Abstractions.dll)" />
-      <ComponentRef Id="$(var.Microsoft.Extensions.FileProviders.Physical.dll)" />
-      <ComponentRef Id="$(var.Microsoft.Extensions.FileSystemGlobbing.dll)" />
-      <ComponentRef Id="$(var.Microsoft.Extensions.Primitives.dll)" />
-      <ComponentRef Id="$(var.Newtonsoft.Json.dll)" />
-      <ComponentRef Id="$(var.Octokit.dll)" />
-      <ComponentRef Id="$(var.PusherClient.dll)" />
-      <ComponentRef Id="$(var.PusherServer.Core.dll)" />
-      <ComponentRef Id="$(var.PusherServer.dll)" />
-      <ComponentRef Id="$(var.SkiaSharp.dll)" />
-      <ComponentRef Id="$(var.Spacearr.Common.dll)" />
-      <ComponentRef Id="$(var.Spacearr.Pusher.API.dll)" />
-      <ComponentRef Id="$(var.SQLiteNet.dll)" />
-      <ComponentRef Id="$(var.SQLitePCLRaw.batteries_v2.dll)" />
-      <ComponentRef Id="$(var.SQLitePCLRaw.core.dll)" />
-      <ComponentRef Id="$(var.SQLitePCLRaw.nativelibrary.dll)" />
-      <ComponentRef Id="$(var.SQLitePCLRaw.provider.dynamic_cdecl.dll)" />
-      <ComponentRef Id="$(var.SuperSocket.ClientEngine.dll)" />
-      <ComponentRef Id="$(var.System.Buffers.dll)" />
-      <ComponentRef Id="$(var.System.Collections.Immutable.dll)" />
-      <ComponentRef Id="$(var.System.ComponentModel.Annotations.dll)" />
-      <ComponentRef Id="$(var.System.Memory.dll)" />
-      <ComponentRef Id="$(var.System.Numerics.Vectors.dll)" />
-      <ComponentRef Id="$(var.System.Runtime.CompilerServices.Unsafe.dll)" />
-      <ComponentRef Id="$(var.System.Text.Encodings.Web.dll)" />
-      <ComponentRef Id="$(var.System.Text.Json.dll)" />
-      <ComponentRef Id="$(var.System.Threading.Tasks.Extensions.dll)" />
-      <ComponentRef Id="$(var.System.ValueTuple.dll)" />
-      <ComponentRef Id="$(var.WebSocket4Net.dll)" />
-
-      <ComponentRef Id="$(var.x64_e_sqlite3.dll)" />
-      <ComponentRef Id="$(var.x86_e_sqlite3.dll)" />
+      <ComponentGroupRef Id="SpacearrWindowsServiceHeatGenerated" />
     </Feature>
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />
   </Product>

@@ -14,6 +14,7 @@ using Spacearr.Pusher.API;
 using Spacearr.Pusher.API.Receivers.Implementations;
 using Spacearr.Pusher.API.Receivers.Interfaces;
 using System;
+using System.Diagnostics;
 using System.IO;
 
 namespace Spacearr.WorkerService.Windows
@@ -22,7 +23,15 @@ namespace Spacearr.WorkerService.Windows
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            try
+            {
+                CreateHostBuilder(args).Build().Run();
+            }
+            catch (Exception ex)
+            {
+                using var eventLog = new EventLog("Application") { Source = "Spacearr WorkerService Service" };
+                eventLog.WriteEntry($"{ex}", EventLogEntryType.Error);
+            }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

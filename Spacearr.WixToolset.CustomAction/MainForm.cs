@@ -15,6 +15,17 @@ namespace Spacearr.WixToolset.CustomAction
         {
             _customActionModel = customActionModel;
 
+            var appSettingsJsonPath = $@"{_customActionModel.InstallationDirectory}\appsettings.json";
+            var appSettingsJson = File.ReadAllText(appSettingsJsonPath);
+            var appSettingsModel = JsonConvert.DeserializeObject<AppSettingsModel>(appSettingsJson);
+
+            var updaterAppSettingsJsonPath = $@"{_customActionModel.InstallationDirectory}\Updater\appsettings.json";
+            var updaterAppSettingsJson = File.ReadAllText(updaterAppSettingsJsonPath);
+            var updaterAppSettingsModel = JsonConvert.DeserializeObject<UpdaterAppSettingsModel>(updaterAppSettingsJson);
+
+            customActionModel.AppSettingsModel = appSettingsModel;
+            customActionModel.UpdaterAppSettingsModel = updaterAppSettingsModel;
+
             InitializeComponent();
             Application.EnableVisualStyles();
             TopMost = true;

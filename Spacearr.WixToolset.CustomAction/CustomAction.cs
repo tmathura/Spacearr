@@ -35,12 +35,7 @@ namespace Spacearr.WixToolset.CustomAction
                 using (var eventLog = new EventLog("Application"))
                 {
                     eventLog.Source = "Spacearr Installer";
-                    eventLog.WriteEntry($"{ex.Message}", EventLogEntryType.Error);
-                }
-                using (var eventLog = new EventLog("Application"))
-                {
-                    eventLog.Source = "Spacearr Installer";
-                    eventLog.WriteEntry($"{ex.StackTrace}", EventLogEntryType.Error);
+                    eventLog.WriteEntry($"{ex}", EventLogEntryType.Error);
                 }
 
                 return ActionResult.Failure;

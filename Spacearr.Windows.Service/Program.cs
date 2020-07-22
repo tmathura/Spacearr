@@ -29,12 +29,7 @@ namespace Spacearr.Windows.Service
                 using (var eventLog = new EventLog("Application"))
                 {
                     eventLog.Source = "Spacearr Windows Service";
-                    eventLog.WriteEntry($"{ex.Message}", EventLogEntryType.Error);
-                }
-                using (var eventLog = new EventLog("Application"))
-                {
-                    eventLog.Source = "Spacearr Windows Service";
-                    eventLog.WriteEntry($"{ex.StackTrace}", EventLogEntryType.Error);
+                    eventLog.WriteEntry($"{ex}", EventLogEntryType.Error);
                 }
             }
         }

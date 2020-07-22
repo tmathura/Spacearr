@@ -339,3 +339,6 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 /Spacearr.WorkerService.Windows/SpacearrWorkerServiceSQLite.db3
+SpacearrWorkerServiceWindowsHeatGeneratedFileList.wxs
+SpacearrWorkerServiceWindowsUpdaterHeatGeneratedFileList.wxs
+SpacearrWindowsServiceHeatGeneratedFileList.wxs

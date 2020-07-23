@@ -112,8 +112,6 @@ artifacts:
   name: Spacearr.Android v$(appveyor_build_version)
 - path: Spacearr.UWP\AppPackages
   name: Spacearr.UWP v$(appveyor_build_version)
-- path: Spacearr.Windows.Service.Setup\bin\$(configuration)\*.msi
-  name: Spacearr.Windows.Service v$(appveyor_build_version)
 - path: Spacearr.WorkerService.Windows.Setup\bin\$(configuration)\*.msi
   name: Spacearr.WorkerService.Windows v$(appveyor_build_version)
 deploy:

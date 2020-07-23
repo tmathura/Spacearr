@@ -11,6 +11,7 @@ using Spacearr.Common.Timers.Implementations;
 using Spacearr.Common.Timers.Interfaces;
 using Spacearr.WorkerService.Windows.Updater.Services.Implementations;
 using System;
+using System.Diagnostics;
 using System.IO;
 
 namespace Spacearr.WorkerService.Windows.Updater
@@ -19,7 +20,15 @@ namespace Spacearr.WorkerService.Windows.Updater
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            try
+            {
+                CreateHostBuilder(args).Build().Run();
+            }
+            catch (Exception ex)
+            {
+                using var eventLog = new EventLog("Application") { Source = "Spacearr Worker Service Windows Updater" };
+                eventLog.WriteEntry($"{ex}", EventLogEntryType.Error);
+            }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

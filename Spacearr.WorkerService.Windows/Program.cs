@@ -29,7 +29,7 @@ namespace Spacearr.WorkerService.Windows
             }
             catch (Exception ex)
             {
-                using var eventLog = new EventLog("Application") { Source = "Spacearr WorkerService Service" };
+                using var eventLog = new EventLog("Application") { Source = "Spacearr Worker Service Windows" };
                 eventLog.WriteEntry($"{ex}", EventLogEntryType.Error);
             }
         }

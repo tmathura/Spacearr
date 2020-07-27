@@ -1,12 +1,12 @@
-﻿using Octokit;
+﻿using Microsoft.Toolkit.Parsers.Markdown;
+using Microsoft.Toolkit.Parsers.Markdown.Blocks;
+using Octokit;
 using Spacearr.Common.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Toolkit.Parsers.Markdown;
-using Microsoft.Toolkit.Parsers.Markdown.Blocks;
 
 namespace Spacearr.Common.Services.Implementations
 {
@@ -125,8 +125,6 @@ namespace Spacearr.Common.Services.Implementations
             {
                 File.AppendAllLines(changelogPath, new[] { oldChangelog });
             }
-
-            var newChangelogText = File.ReadAllText(changelogPath);
         }
 
         /// <summary>

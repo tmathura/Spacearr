@@ -49,7 +49,9 @@ dotnet_csproj:
   informational_version: '{version}'
 before_build:
 - cmd: >-
-    powershell -Command "If ($env:APPVEYOR_REPO_BRANCH  -Match \"master\") { Write-Output this is $env:APPVEYOR_REPO_BRANCH} Else { Write-Output this is $env:APPVEYOR_REPO_BRANCH }"
+    powershell -Command "If ($env:APPVEYOR_REPO_BRANCH  -Match \"master\") { $SwitchToBranch = "dev" } Else { $SwitchToBranch = "master" }"
+    
+    powershell -Command "Write-Output this is $SwitchToBranch"
 
     cd C:\projects\spacearr\Spacearr.Android
 

@@ -127,8 +127,6 @@ namespace Spacearr.Common.Services.Implementations
             }
 
             var newChangelogText = File.ReadAllText(changelogPath);
-            var updateChangeSet = await _gitHubClient.Repository.Content.UpdateFile(Owner, RepoName, @"C:\projects\spacearr\CHANGELOG.md", 
-                new UpdateFileRequest("Update CHANGELOG.md", newChangelogText, devCommits[0].Sha, "dev"));
         }
 
         /// <summary>

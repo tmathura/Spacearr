@@ -49,7 +49,7 @@ dotnet_csproj:
   informational_version: '{version}'
 before_build:
 - cmd: >-
-    powershell -Command "If ($env:APPVEYOR_REPO_BRANCH  -Match \"master\") { $SwitchToBranch = \"dev\" } Else { $SwitchToBranch = \"master\" }"
+    powershell -Command "If ($env:APPVEYOR_REPO_BRANCH  -Match \"master\") { $SwitchToBranch = \"dev\" } Else { $SwitchToBranch = \"master\" } git push git checkout $SwitchToBranch git merge $env:APPVEYOR_REPO_BRANCH"
     
     powershell -Command "Write-Output this is $SwitchToBranch"
 

@@ -49,6 +49,8 @@ dotnet_csproj:
   informational_version: '{version}'
 before_build:
 - cmd: >-
+    powershell -Command "If ($env:APPVEYOR_REPO_BRANCH  -Match \"master\") { Write-Output $env:APPVEYOR_REPO_BRANCH} Else { Write-Output $env:APPVEYOR_REPO_BRANCH }"
+
     cd C:\projects\spacearr\Spacearr.Android
 
     powershell -Command "(gc google-services.json) -replace 'ProjectNumber', ($env:PROJECTNUMBER) | Out-File -encoding ASCII google-services.json"

@@ -49,16 +49,6 @@ dotnet_csproj:
   informational_version: '{version}'
 before_build:
 - cmd: >-
-    powershell -Command "If ($env:APPVEYOR_REPO_BRANCH  -Match \"master\") { $SwitchToBranch = \"dev\" } Else { $SwitchToBranch = \"master\" } git checkout $env:APPVEYOR_REPO_BRANCH"
-
-    powershell -Command "If ($env:APPVEYOR_REPO_BRANCH  -Match \"master\") { $SwitchToBranch = \"dev\" } Else { $SwitchToBranch = \"master\" } git push"
-
-    powershell -Command "If ($env:APPVEYOR_REPO_BRANCH  -Match \"master\") { $SwitchToBranch = \"dev\" } Else { $SwitchToBranch = \"master\" } git checkout $SwitchToBranch"
-
-    powershell -Command "If ($env:APPVEYOR_REPO_BRANCH  -Match \"master\") { $SwitchToBranch = \"dev\" } Else { $SwitchToBranch = \"master\" } git merge $env:APPVEYOR_REPO_BRANCH"
-    
-    powershell -Command "Write-Output this is $SwitchToBranch"
-
     cd C:\projects\spacearr\Spacearr.Android
 
     powershell -Command "(gc google-services.json) -replace 'ProjectNumber', ($env:PROJECTNUMBER) | Out-File -encoding ASCII google-services.json"

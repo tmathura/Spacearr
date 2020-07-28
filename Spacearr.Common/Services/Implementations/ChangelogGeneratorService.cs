@@ -216,6 +216,14 @@ namespace Spacearr.Common.Services.Implementations
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Finished git merge");
 
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Starting git push");
+            process.StartInfo.Arguments = @"/C git push";
+            process.Start();
+            while (!process.HasExited) { }
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Finished git push");
+
             Console.ForegroundColor = ConsoleColor.White;
         }
 

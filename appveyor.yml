@@ -127,6 +127,6 @@ deploy:
     branch: master
 on_success:
 - cmd: >-
-    cd C:\projects\spacearr\Spacearr.Changelog.Generator\bin\Debug\netcoreapp3.1
+    cd C:\projects\spacearr\Spacearr.Changelog.Generator\bin\%CONFIGURATION%\netcoreapp3.1
 
     Spacearr.Changelog.Generator.exe tmathura Spacearr C:\projects\spacearr %GITHUHTOKEN%

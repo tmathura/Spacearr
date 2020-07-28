@@ -3,7 +3,7 @@ using Octokit;
 using Spacearr.Common.Services.Implementations;
 using Spacearr.Common.Services.Interfaces;
 
-namespace Spacearr.ChangelogGenerator
+namespace Spacearr.Changelog.Generator
 {
     public class AutofacConfig
     {

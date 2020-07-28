@@ -3,7 +3,7 @@ using Spacearr.Common.Services.Interfaces;
 using System;
 using System.Threading.Tasks;
 
-namespace Spacearr.ChangelogGenerator
+namespace Spacearr.Changelog.Generator
 {
     public class Program
     {

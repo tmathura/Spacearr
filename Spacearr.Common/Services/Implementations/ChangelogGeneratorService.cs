@@ -164,6 +164,30 @@ namespace Spacearr.Common.Services.Implementations
             }
 
             Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine($"Starting git switch (Branch: {currentBranch})");
+            process.StartInfo.Arguments = $@"/C git checkout {currentBranch}";
+            process.Start();
+            while (!process.HasExited) { }
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Finished git switch");
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Set username");
+            process.StartInfo.Arguments = @"/C git config user.name ""Teshvier Mathura""";
+            process.Start();
+            while (!process.HasExited) { }
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Finished set username");
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Set username");
+            process.StartInfo.Arguments = @"/C git config user.email ""tmathura@gmail.com""";
+            process.Start();
+            while (!process.HasExited) { }
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Finished set username");
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"Writing new release info to CHANGELOG.md (Changelog path: {changelogPath})");
             File.WriteAllLines(changelogPath, new[] { releaseText });
 

@@ -49,8 +49,9 @@ namespace Spacearr.Common.Services.Implementations
             };
 
             var mergeToBranch = _currentBranch.ToLower() == "master" ? "dev" : "master";
-
-            var changelogPath = Path.Combine(_repoDirectory, "CHANGELOG.md");
+            
+            const string changelogFileName = "CHANGELOG.md";
+            var changelogPath = Path.Combine(_repoDirectory, changelogFileName);
 
             var changelogDocument = new MarkdownDocument();
             var oldChangelog = string.Empty;
@@ -62,7 +63,7 @@ namespace Spacearr.Common.Services.Implementations
                 if (changelogDocument.Blocks.Any(x => x.ToString().Contains("Unreleased Changes")))
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine($"Getting previous CHANGELOG.md without unreleased changes (Changelog path: {changelogPath})");
+                    Console.WriteLine($"Getting previous {changelogFileName} without unreleased changes (Changelog path: {changelogPath})");
                     var count = 0;
                     foreach (var element in changelogDocument.Blocks)
                     {
@@ -90,7 +91,7 @@ namespace Spacearr.Common.Services.Implementations
                         count++;
                     }
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("Got CHANGELOG.md without unreleased changes");
+                    Console.WriteLine($"Got {changelogFileName} without unreleased changes");
                 }
             }
 
@@ -182,65 +183,44 @@ namespace Spacearr.Common.Services.Implementations
             Console.WriteLine("Finished set email");
 
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"Writing new release info to CHANGELOG.md (Changelog path: {changelogPath})");
+            Console.WriteLine($"Writing new release info to {changelogFileName} (Changelog path: {changelogPath})");
             File.WriteAllLines(changelogPath, new[] { releaseText });
 
             if (!string.IsNullOrWhiteSpace(oldChangelog))
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine($"Writing old release info to CHANGELOG.md (Changelog path: {changelogPath})");
+                Console.WriteLine($"Writing old release info to {changelogFileName} (Changelog path: {changelogPath})");
                 File.AppendAllLines(changelogPath, new[] { oldChangelog });
             }
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Finished writing to CHANGELOG.md");
+            Console.WriteLine($"Finished writing to {changelogFileName}");
 
+            var latestChangeLogText = File.ReadAllText(changelogPath);
+            try
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine($"Starting upload of CHANGELOG.md to {_currentBranch}");
+                var existingFile = await _gitHubClient.Repository.Content.GetAllContentsByRef(_owner, _repositoryName, changelogFileName, _currentBranch);
+                await _gitHubClient.Repository.Content.UpdateFile(_owner, _repositoryName, changelogFileName,
+                    new UpdateFileRequest($"Update {changelogFileName}", latestChangeLogText + DateTime.UtcNow, existingFile.First().Sha, _currentBranch));
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Finished upload of CHANGELOG.md");
+            }
+            catch (NotFoundException)
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine($"Starting upload of CHANGELOG.md to {_currentBranch}");
+                await _gitHubClient.Repository.Content.CreateFile(_owner, _repositoryName, changelogFileName,
+                    new CreateFileRequest($"Create {changelogFileName}", latestChangeLogText + DateTime.UtcNow, _currentBranch));
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Finished upload of CHANGELOG.md");
+            }
+            
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("Starting git add for CHANGELOG.md");
-            process.StartInfo.Arguments = @"/C git add CHANGELOG.md";
-            process.Start();
-            while (!process.HasExited) { }
+            Console.WriteLine($"Starting upload of CHANGELOG.md to {mergeToBranch}");
+            await _gitHubClient.Repository.Merging.Create(_owner, _repositoryName, new NewMerge(mergeToBranch, _currentBranch) { CommitMessage = $"Merge Update {changelogFileName}" });
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Finished git add for CHANGELOG.md");
-
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("Starting git commit for CHANGELOG.md");
-            process.StartInfo.Arguments = @"/C git commit -m ""Update CHANGELOG.md""";
-            process.Start();
-            while (!process.HasExited) { }
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Finished git commit to CHANGELOG.md");
-
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("Starting git push");
-            process.StartInfo.Arguments = @"/C git push";
-            process.Start();
-            while (!process.HasExited) { }
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Finished git push");
-
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"Starting git switch (Branch: {mergeToBranch})");
-            process.StartInfo.Arguments = $@"/C git checkout {mergeToBranch}";
-            process.Start();
-            while (!process.HasExited) { }
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Finished git switch");
-
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"Starting git merge (Branch: {_currentBranch})");
-            process.StartInfo.Arguments = $@"/C git merge {_currentBranch}";
-            process.Start();
-            while (!process.HasExited) { }
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Finished git merge");
-
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("Starting git push");
-            process.StartInfo.Arguments = @"/C git push";
-            process.Start();
-            while (!process.HasExited) { }
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Finished git push");
+            Console.WriteLine("Finished upload of CHANGELOG.md");
 
             Console.ForegroundColor = ConsoleColor.White;
         }

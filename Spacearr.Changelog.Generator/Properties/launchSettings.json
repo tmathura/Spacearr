@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Spacearr.Changelog.Generator": {
+      "commandName": "Project",
+      "commandLineArgs": ""
+    }
+  }
+}

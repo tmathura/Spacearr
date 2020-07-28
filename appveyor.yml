@@ -24,7 +24,7 @@ environment:
     secure: ip+MaKkov03vZVGeVh5fC6si6FbRfrWm56llWSSUWcE=
   CLIENTX509CERTURL:
     secure: QDaluQuWueG/zTleLmhEKx4AkwEC7eL+rb7Bh75lLewjVXEEN2qpTJ0dKPFkABcOmW0im4mT3dncgv4rmUMt7aD8YTSnvgLHSWyt+2S8L273X9GiVrwZ4tsCRr+SCSb8OewCJaC+iAEu7pd/KUdSA76UzWM+f+9cSFDPH4LHS4Y=
-  GITHUHTOKEN:
+  GITHUBTOKEN:
     secure: hrSlozxLvI3bwxH/2eq1PVZL+V0RbODDjapVwbS5TZCCxwjD0LwT4/yI93DW3fJ7
 pull_requests:
   do_not_increment_build_number: true
@@ -129,4 +129,4 @@ on_success:
 - cmd: >-
     cd C:\projects\spacearr\Spacearr.Changelog.Generator\bin\%CONFIGURATION%\netcoreapp3.1
 
-    Spacearr.Changelog.Generator.exe tmathura Spacearr C:\projects\spacearr %GITHUHTOKEN%
+    Spacearr.Changelog.Generator.exe tmathura Spacearr C:\projects\spacearr %APPVEYOR_REPO_BRANCH% %GITHUBTOKEN%

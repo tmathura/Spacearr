@@ -16,13 +16,15 @@ namespace Spacearr.Common.Services.Implementations
         private readonly string _owner;
         private readonly string _repositoryName;
         private readonly string _repoDirectory;
+        private readonly string _currentBranch;
         private readonly IGitHubClient _gitHubClient;
 
-        public ChangelogGeneratorService(string owner, string repositoryName, string repoDirectory, IGitHubClient gitHubClient)
+        public ChangelogGeneratorService(string owner, string repositoryName, string repoDirectory, string currentBranch, IGitHubClient gitHubClient)
         {
             _owner = owner;
             _repositoryName = repositoryName;
             _repoDirectory = repoDirectory;
+            _currentBranch = currentBranch;
             _gitHubClient = gitHubClient;
         }
 
@@ -39,22 +41,14 @@ namespace Spacearr.Common.Services.Implementations
                     WindowStyle = ProcessWindowStyle.Hidden,
                     WorkingDirectory = _repoDirectory,
                     FileName = "cmd.exe",
-                    Arguments = @"/C git branch --show-current",
                     UseShellExecute = false,
                     CreateNoWindow = true,
                     RedirectStandardOutput = true,
                     RedirectStandardInput = true
                 }
             };
-            process.Start();
-            var output = string.Empty;
-            while (!process.HasExited)
-            {
-                output += await process.StandardOutput.ReadToEndAsync();
-            }
 
-            var currentBranch = output.Replace("\n", string.Empty);
-            var mergeToBranch = currentBranch == "master" ? "dev" : "master";
+            var mergeToBranch = _currentBranch.ToLower() == "master" ? "dev" : "master";
 
             var changelogPath = Path.Combine(_repoDirectory, "CHANGELOG.md");
 
@@ -164,6 +158,30 @@ namespace Spacearr.Common.Services.Implementations
             }
 
             Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine($"Starting git switch (Branch: {_currentBranch})");
+            process.StartInfo.Arguments = $@"/C git checkout {_currentBranch}";
+            process.Start();
+            while (!process.HasExited) { }
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Finished git switch");
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Set username");
+            process.StartInfo.Arguments = @"/C git config user.name ""Teshvier Mathura""";
+            process.Start();
+            while (!process.HasExited) { }
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Finished set username");
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Set email");
+            process.StartInfo.Arguments = @"/C git config user.email ""tmathura@gmail.com""";
+            process.Start();
+            while (!process.HasExited) { }
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Finished set email");
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"Writing new release info to CHANGELOG.md (Changelog path: {changelogPath})");
             File.WriteAllLines(changelogPath, new[] { releaseText });
 
@@ -209,8 +227,8 @@ namespace Spacearr.Common.Services.Implementations
             Console.WriteLine("Finished git switch");
 
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"Starting git merge (Branch: {currentBranch})");
-            process.StartInfo.Arguments = $@"/C git merge {currentBranch}";
+            Console.WriteLine($"Starting git merge (Branch: {_currentBranch})");
+            process.StartInfo.Arguments = $@"/C git merge {_currentBranch}";
             process.Start();
             while (!process.HasExited) { }
             Console.ForegroundColor = ConsoleColor.Green;

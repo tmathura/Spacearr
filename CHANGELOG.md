@@ -1,5 +1,16 @@
-# Unreleased Changes
+# Release 1.0.0.281
+
+## Included Changes
+ - [Merge Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/2d190ec0341fd6d618ff5c76681aa7856db9a6ed)
+ - [Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/a7fb1799797ef040a12ddf3ed271256d26ad69a6)
  - [update LowSpaceGBValue to be 25](https://api.github.com/repos/tmathura/Spacearr/git/commits/d54b8b79a2f62d23be65af19783bb008d831b28a)
+ - [Merge branch 'dev'](https://api.github.com/repos/tmathura/Spacearr/git/commits/9d914459817cb73bbb1b0a8ef76b82bbf0f11161)
+ - [update changelog generator to upload via octokit](https://api.github.com/repos/tmathura/Spacearr/git/commits/c49f7282f8c9a79eb4a289b988941967eaec2d9f)
+ - [Merge Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/19275c3a17ab260ea684c185756797df6cb2bf7b)
+
+## Issues Closed
+ - [Auto update apps](https://github.com/tmathura/Spacearr/issues/25)
+
 
 # Release 1.0.0.276
 
@@ -16,4 +27,4 @@
 
 ## Issues Closed
  - [Auto update apps](https://github.com/tmathura/Spacearr/issues/25)
-7/28/2020 3:28:15 PM
+7/28/2020 3:38:42 PM

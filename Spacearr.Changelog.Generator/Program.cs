@@ -15,6 +15,12 @@ namespace Spacearr.Changelog.Generator
                 Console.WriteLine("Too many arguments supplied, supply only the 'GitHub Owner', 'GitHub Repo', 'Directory Of Clone', 'Current Branch', 'GitHub Token'");
                 Console.ForegroundColor = ConsoleColor.White;
             }
+            else if (string.IsNullOrWhiteSpace(args[0]) || string.IsNullOrWhiteSpace(args[1]) || string.IsNullOrWhiteSpace(args[2]) || string.IsNullOrWhiteSpace(args[3]) || string.IsNullOrWhiteSpace(args[4]))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("One of the arguments is blank");
+                Console.ForegroundColor = ConsoleColor.White;
+            }
             else
             {
                 var builder = new ContainerBuilder();

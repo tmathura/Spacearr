@@ -34,20 +34,6 @@ namespace Spacearr.Common.Services.Implementations
         /// <returns></returns>
         public async Task CreateChangelog()
         {
-            var process = new Process
-            {
-                StartInfo =
-                {
-                    WindowStyle = ProcessWindowStyle.Hidden,
-                    WorkingDirectory = _repoDirectory,
-                    FileName = "cmd.exe",
-                    UseShellExecute = false,
-                    CreateNoWindow = true,
-                    RedirectStandardOutput = true,
-                    RedirectStandardInput = true
-                }
-            };
-
             var mergeToBranch = _currentBranch.ToLower() == "master" ? "dev" : "master";
             
             const string changelogFileName = "CHANGELOG.md";
@@ -157,31 +143,7 @@ namespace Spacearr.Common.Services.Implementations
             {
                 releaseText += $"\n\n## Changes Merged{pulls}";
             }
-
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"Starting git switch (Branch: {_currentBranch})");
-            process.StartInfo.Arguments = $@"/C git checkout {_currentBranch}";
-            process.Start();
-            while (!process.HasExited) { }
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Finished git switch");
-
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("Set username");
-            process.StartInfo.Arguments = @"/C git config user.name ""Teshvier Mathura""";
-            process.Start();
-            while (!process.HasExited) { }
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Finished set username");
-
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("Set email");
-            process.StartInfo.Arguments = @"/C git config user.email ""tmathura@gmail.com""";
-            process.Start();
-            while (!process.HasExited) { }
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Finished set email");
-
+            
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"Writing new release info to {changelogFileName} (Changelog path: {changelogPath})");
             File.WriteAllLines(changelogPath, new[] { releaseText });

@@ -1,6 +1,10 @@
+# Unreleased Changes
+ - [Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/f97429a47a77fa5658c4c1ca8d9fe109da6c45d5)
+
 # Release 1.0.0.285
 
 ## Included Changes
+ - [Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/340ad5b5946ad370831946e271b9f0e095e4c794)
  - [remove changelog text](https://api.github.com/repos/tmathura/Spacearr/git/commits/3492d34c357c2db270935cf134f2d2ef4c62e571)
  - [Merge branch 'dev'](https://api.github.com/repos/tmathura/Spacearr/git/commits/d49ccf01d8bca121b7654cb4c9bc8158b4b670f2)
  - [Update CHANGELOG.md (#29) (#30)](https://api.github.com/repos/tmathura/Spacearr/git/commits/f7ae9a42957a985c82f94fe3e90620438443f196)
@@ -39,8 +43,9 @@
  - [Auto update apps](https://github.com/tmathura/Spacearr/issues/25)
 
 ## Changes Merged
+ - [Pull request for master](https://github.com/tmathura/Spacearr/pull/31)
  - [Pull request for dev](https://github.com/tmathura/Spacearr/pull/30)
  - [Pull request for master](https://github.com/tmathura/Spacearr/pull/29)
  - [Pull request for master](https://github.com/tmathura/Spacearr/pull/28)
  - [Pull request for master](https://github.com/tmathura/Spacearr/pull/27)
-2020/07/29 13:04:55
+7/29/2020 1:05:49 PM

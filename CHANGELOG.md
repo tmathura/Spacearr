@@ -1,6 +1,8 @@
-# Release 1.0.0.281
+# Release 1.0.0.285
 
 ## Included Changes
+ - [Merge Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/b8d0b1927544f96eee76298e1e09a203380d875f)
+ - [Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/3cf61c448de62364a03037b39bfeac5b2b133879)
  - [remove changelog data](https://api.github.com/repos/tmathura/Spacearr/git/commits/f1b492d70ab3e9f59a8ec4b87b4ab099ec5206e6)
  - [Merge 44872d0cfff8a072de473a194f6d030461c9a650 into dev](https://api.github.com/repos/tmathura/Spacearr/git/commits/8d2cbe78cbc4c68720934cbdde61c5e57ae3dd88)
  - [Merge a5c8f49c9b1c85995472873ede2fff980ef2f054 into master](https://api.github.com/repos/tmathura/Spacearr/git/commits/44872d0cfff8a072de473a194f6d030461c9a650)
@@ -16,12 +18,7 @@
  - [Merge Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/e388441dea3bc35ea44ba57d6e5ebaedbaf35d64)
  - [Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/baa71da93444f25cf99b47ca40614e5d2ecd84bb)
  - [Merge Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/2d190ec0341fd6d618ff5c76681aa7856db9a6ed)
- - [Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/a7fb1799797ef040a12ddf3ed271256d26ad69a6)
- - [update LowSpaceGBValue to be 25](https://api.github.com/repos/tmathura/Spacearr/git/commits/d54b8b79a2f62d23be65af19783bb008d831b28a)
- - [Merge branch 'dev'](https://api.github.com/repos/tmathura/Spacearr/git/commits/9d914459817cb73bbb1b0a8ef76b82bbf0f11161)
- - [update changelog generator to upload via octokit](https://api.github.com/repos/tmathura/Spacearr/git/commits/c49f7282f8c9a79eb4a289b988941967eaec2d9f)
- - [Merge Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/19275c3a17ab260ea684c185756797df6cb2bf7b)
 
 ## Issues Closed
  - [Auto update apps](https://github.com/tmathura/Spacearr/issues/25)
-7/29/2020 9:04:59 AM
+7/29/2020 9:15:06 AM

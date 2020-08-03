@@ -1,6 +1,11 @@
+# Unreleased Changes
+ - [test new update ref logic](https://api.github.com/repos/tmathura/Spacearr/git/commits/0336f2dbce81c1ae5a18e64af8d276e9d92e4537)
+
 # Release 1.0.0.295
 
 ## Included Changes
+ - [Merge Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/650927146e175ffc7ddb1b90fa55231c7cac0f18)
+ - [Update CHANGELOG.md. 8/3/2020 9:35:21 AM](https://api.github.com/repos/tmathura/Spacearr/git/commits/2a6195cbd304dcec2ae6d2a510685f0782a73649)
  - [Merge Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/0092a8e46378774262b90139e32865cbe5edb45f)
  - [Update CHANGELOG.md. 8/3/2020 9:25:18 AM](https://api.github.com/repos/tmathura/Spacearr/git/commits/b3335049763e332a764933c1f1ef3c4ce96dbda6)
  - [Merge Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/96c6c5d943caab48eb7e9507ad8cd2097231fdf0)
@@ -21,68 +26,4 @@
  - [Pull request for master](https://github.com/tmathura/Spacearr/pull/29)
  - [Pull request for master](https://github.com/tmathura/Spacearr/pull/28)
  - [Pull request for master](https://github.com/tmathura/Spacearr/pull/27)
-
-
-# Release 1.0.0.292
-
-## Included Changes
- - [Merge Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/5d5053b93e4ac30064e389027157d76ea91156d0)
- - [Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/0ac19b359009add9a2147e46105bdc9ac908c485)
- - [Merge Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/71e0daae300661910b84fab6e25a4d4ee7512767)
- - [Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/85325200979160d74d2d1e27df1edac77851d10f)
- - [update Changelog.Generator to cater for blanks](https://api.github.com/repos/tmathura/Spacearr/git/commits/698d709dbd1cf30e5b48bf537c48fe6a7f18127c)
- - [update changelog generator](https://api.github.com/repos/tmathura/Spacearr/git/commits/d75fef33b92c90d8dac29d3aa5e996648f219272)
- - [clear the changelog.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/fb4dc8d76e14e4b3f2549416598a39480963079a)
- - [Merge Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/e0974574aaab868bd976543fff07d36cd4a7c620)
- - [Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/1094f0bdabc338c29ea77a3899c898d94a4e9865)
- - [clear changelog](https://api.github.com/repos/tmathura/Spacearr/git/commits/7c667042117d2a407893f27eb9d13f74ccb38910)
- - [Merge Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/f4a0cdeeafb9cfa22abb66eb049eebb12c956534)
- - [Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/e3cff6521c2cb63769ac7ff972379747b6be1d93)
- - [remove changelog](https://api.github.com/repos/tmathura/Spacearr/git/commits/75dd6dfdc83d7587ff7114b4f34d570c4ec0b5f5)
- - [Merge Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/00e048c17a7a3dfa7360a0c923bf81b1d537dbd3)
- - [Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/692dfdc24fdb2e313506be22da7f42570e67dcdd)
- - [clear change log](https://api.github.com/repos/tmathura/Spacearr/git/commits/5702a25bea20a0070f9ab7eed3bac650551f1c6b)
- - [Merge Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/4ead2aa46dc687eef7470af15828797359e112c3)
- - [Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/b0a3fb8657732df4c1825fd0cc80f28812761d7b)
- - [clean changelog](https://api.github.com/repos/tmathura/Spacearr/git/commits/ce53a2bc2e2e1bdb4271661ef2fe5129ac84813c)
- - [Merge Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/d75dad6ad6138b666e4037bcfe3cf130e5124b17)
- - [Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/ab959cd1653f0bb603264cef4264b2a46d9fe4ed)
- - [undo changelog](https://api.github.com/repos/tmathura/Spacearr/git/commits/897401f719ee81a3d889dd80aec486753edd4232)
- - [Merge Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/7f09700e20fb2423ace6ddcf4feb05a7ada9ec50)
- - [Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/fd8402d69889f6da992e06f872127a5ce786d828)
- - [clean changelog](https://api.github.com/repos/tmathura/Spacearr/git/commits/7b932fcc0ade92fccb99fe7cfe0a1196772e230e)
- - [Merge branch 'dev'; # Conflicts:; #	CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/f7e00f8a2f21bafbb04a02bd776b111975997720)
- - [Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/0dd0808384194863f2612680e2321432c3ea4e2f)
- - [Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/340ad5b5946ad370831946e271b9f0e095e4c794)
- - [Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/f97429a47a77fa5658c4c1ca8d9fe109da6c45d5)
- - [remove changelog text](https://api.github.com/repos/tmathura/Spacearr/git/commits/3492d34c357c2db270935cf134f2d2ef4c62e571)
- - [Merge branch 'dev'](https://api.github.com/repos/tmathura/Spacearr/git/commits/d49ccf01d8bca121b7654cb4c9bc8158b4b670f2)
- - [Update CHANGELOG.md (#29) (#30)](https://api.github.com/repos/tmathura/Spacearr/git/commits/f7ae9a42957a985c82f94fe3e90620438443f196)
- - [Update CHANGELOG.md (#29)](https://api.github.com/repos/tmathura/Spacearr/git/commits/f64833b29c3fe10283de961d4f2fdf7c632285c2)
- - [Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/b7c210d995ed2bcd2ea05561f245ad621c4277ee)
- - [remove text](https://api.github.com/repos/tmathura/Spacearr/git/commits/28503ee26dbe5d6fa9bf4894de46a6deca09cc61)
- - [Merge branch 'master' into dev](https://api.github.com/repos/tmathura/Spacearr/git/commits/3008594e3b8a449a4c9bb691a27d696e62603ad1)
- - [remove text from changelog](https://api.github.com/repos/tmathura/Spacearr/git/commits/bbf6b4f642e1a6d0e4c75179a2da7546d082ae00)
- - [Update CHANGELOG.md (#28)](https://api.github.com/repos/tmathura/Spacearr/git/commits/0f565cd4b7e5a290830c1e7a9fd1a52655546288)
- - [Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/9b3587795d84ba798fcd5eff82b8eb479e1192cf)
- - [remove changelog text](https://api.github.com/repos/tmathura/Spacearr/git/commits/08812bb875b1b783351622650474569ae2c09669)
- - [Merge pull request #27 from tmathura/dev; Pull request for master](https://api.github.com/repos/tmathura/Spacearr/git/commits/feba61ddb17c1e532e226d308390c3956ac27e21)
- - [Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/408090e6af7b76485edb891dfb7541cbddc14c55)
- - [wipe the changelog](https://api.github.com/repos/tmathura/Spacearr/git/commits/552de0f357f28330db4b32e211e4cdb2aed6cf71)
- - [Merge Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/ad8d368f6f60a281afbfb5735dae772c78bc089d)
- - [Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/920e2cb25262569a162256bbd06a6a9959cba42b)
- - [Merge Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/b8d0b1927544f96eee76298e1e09a203380d875f)
- - [Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/3cf61c448de62364a03037b39bfeac5b2b133879)
- - [remove changelog data](https://api.github.com/repos/tmathura/Spacearr/git/commits/f1b492d70ab3e9f59a8ec4b87b4ab099ec5206e6)
- - [Merge 44872d0cfff8a072de473a194f6d030461c9a650 into dev](https://api.github.com/repos/tmathura/Spacearr/git/commits/8d2cbe78cbc4c68720934cbdde61c5e57ae3dd88)
-
-## Issues Closed
- - [Auto update apps](https://github.com/tmathura/Spacearr/issues/25)
-
-## Changes Merged
- - [Pull request for master](https://github.com/tmathura/Spacearr/pull/31)
- - [Pull request for dev](https://github.com/tmathura/Spacearr/pull/30)
- - [Pull request for master](https://github.com/tmathura/Spacearr/pull/29)
- - [Pull request for master](https://github.com/tmathura/Spacearr/pull/28)
- - [Pull request for master](https://github.com/tmathura/Spacearr/pull/27)
-8/3/2020 9:35:21 AM
+8/3/2020 10:15:06 AM

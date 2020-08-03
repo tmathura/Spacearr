@@ -32,6 +32,7 @@ namespace Spacearr.Common.Services.Implementations
         public async Task CreateChangelog()
         {
             const string tempBranchName = "changelog";
+
             const string masterBranchName = "master";
             const string devBranchName = "dev";
             const string changelogFileName = "CHANGELOG.md";

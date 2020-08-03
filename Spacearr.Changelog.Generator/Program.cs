@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Spacearr.Common.Services.Interfaces;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Spacearr.Changelog.Generator
@@ -15,7 +16,7 @@ namespace Spacearr.Changelog.Generator
                 Console.WriteLine("Too many arguments supplied, supply only the 'GitHub Owner', 'GitHub Repo', 'Directory Of Clone', 'GitHub Token'");
                 Console.ForegroundColor = ConsoleColor.White;
             }
-            else if (string.IsNullOrWhiteSpace(args[0]) || string.IsNullOrWhiteSpace(args[1]) || string.IsNullOrWhiteSpace(args[2]) || string.IsNullOrWhiteSpace(args[3]) || string.IsNullOrWhiteSpace(args[4]))
+            else if (args.Any(string.IsNullOrWhiteSpace))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("One of the arguments is blank");

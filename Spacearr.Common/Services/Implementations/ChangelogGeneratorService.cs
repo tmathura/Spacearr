@@ -46,8 +46,6 @@ namespace Spacearr.Common.Services.Implementations
 
                 if (changelogDocument.Blocks.Any(x => x.ToString().Contains("Unreleased Changes")))
                 {
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine($"Getting previous {changelogFileName} without unreleased changes (Changelog path: {changelogPath})");
                     var count = 0;
                     foreach (var element in changelogDocument.Blocks)
                     {
@@ -74,8 +72,30 @@ namespace Spacearr.Common.Services.Implementations
                         }
                         count++;
                     }
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine($"Got {changelogFileName} without unreleased changes");
+                }
+                else
+                {
+                    foreach (var element in changelogDocument.Blocks)
+                    {
+                        if (element is HeaderBlock header)
+                        {
+                            if (header.ToString().Contains("Release "))
+                            {
+                                oldChangelog += $"\n\n#{header}";
+                            }
+                            else
+                            {
+                                oldChangelog += $"\n\n##{header}";
+                            }
+                        }
+                        else if (element is ListBlock listItem)
+                        {
+                            foreach (var listItemBlock in listItem.Items)
+                            {
+                                oldChangelog += $"\n - {listItemBlock.Blocks[0]}";
+                            }
+                        }
+                    }
                 }
             }
 
@@ -107,8 +127,8 @@ namespace Spacearr.Common.Services.Implementations
             var formattedDiffCommits = FormatCommits(diffCommits);
             var formattedMasterCommits = FormatCommits(masterCommits);
 
-            var issues = await GetReleaseDetails(IssueTypeQualifier.Issue, $"{_repositoryOwner}/{_repositoryName}");
-            var pulls = await GetReleaseDetails(IssueTypeQualifier.PullRequest, $"{_repositoryOwner}/{_repositoryName}");
+            var issues = await GetReleaseDetails(IssueTypeQualifier.Issue, previousReleaseDate);
+            var pulls = await GetReleaseDetails(IssueTypeQualifier.PullRequest, previousReleaseDate);
 
             var releaseText = string.Empty;
 
@@ -227,7 +247,7 @@ namespace Spacearr.Common.Services.Implementations
 
             foreach (var commit in commitsList)
             {
-                formatCommits += $"\n - [{commit.Commit.Message.Replace("\n\n", "; ").Replace("\n", "; ")}]({commit.Commit.Url})";
+                formatCommits += $"\n - [{commit.Commit.Message.Replace("\n\n", "; ").Replace("\n", "; ")}]({commit.HtmlUrl}) ([{commit.Commit.Author.Name}]({commit.Author.HtmlUrl}))";
             }
 
             return formatCommits;
@@ -237,15 +257,14 @@ namespace Spacearr.Common.Services.Implementations
         /// Get release details.
         /// </summary>
         /// <param name="type"></param>
-        /// <param name="repoName"></param>
+        /// <param name="since"></param>
         /// <returns></returns>
-        private async Task<string> GetReleaseDetails(IssueTypeQualifier type, string repoName)
+        private async Task<string> GetReleaseDetails(IssueTypeQualifier type, DateTimeOffset since)
         {
-            var twoWeeks = DateTimeOffset.Now.Subtract(TimeSpan.FromDays(14));
-            var range = new DateRange(twoWeeks, SearchQualifierOperator.GreaterThanOrEqualTo);
+            var range = new DateRange(since, SearchQualifierOperator.GreaterThanOrEqualTo);
             var request = new SearchIssuesRequest();
 
-            request.Repos.Add(repoName);
+            request.Repos.Add($"{_repositoryOwner}/{_repositoryName}");
             request.Type = type;
 
             if (type == IssueTypeQualifier.Issue)

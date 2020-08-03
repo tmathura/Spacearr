@@ -4,7 +4,6 @@ using Octokit;
 using Spacearr.Common.Services.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -158,13 +157,14 @@ namespace Spacearr.Common.Services.Implementations
             Console.WriteLine($"Finished writing to {changelogFileName}");
 
             var latestChangeLogText = File.ReadAllText(changelogPath);
+            RepositoryContentChangeSet changeSet;
             try
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine($"Starting upload of CHANGELOG.md to {_currentBranch}");
                 var existingFile = await _gitHubClient.Repository.Content.GetAllContentsByRef(_owner, _repositoryName, changelogFileName, _currentBranch);
-                await _gitHubClient.Repository.Content.UpdateFile(_owner, _repositoryName, changelogFileName,
-                    new UpdateFileRequest($"Update {changelogFileName}", latestChangeLogText + DateTime.UtcNow, existingFile.First().Sha, _currentBranch));
+                changeSet = await _gitHubClient.Repository.Content.UpdateFile(_owner, _repositoryName, changelogFileName,
+                    new UpdateFileRequest($"Update {changelogFileName}. {DateTime.Now}", latestChangeLogText + DateTime.UtcNow, existingFile.First().Sha, _currentBranch));
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Finished upload of CHANGELOG.md");
             }
@@ -172,15 +172,15 @@ namespace Spacearr.Common.Services.Implementations
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine($"Starting upload of CHANGELOG.md to {_currentBranch}");
-                await _gitHubClient.Repository.Content.CreateFile(_owner, _repositoryName, changelogFileName,
-                    new CreateFileRequest($"Create {changelogFileName}", latestChangeLogText + DateTime.UtcNow, _currentBranch));
+                changeSet = await _gitHubClient.Repository.Content.CreateFile(_owner, _repositoryName, changelogFileName,
+                    new CreateFileRequest($"Create {changelogFileName}. {DateTime.Now}", latestChangeLogText + DateTime.UtcNow, _currentBranch));
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Finished upload of CHANGELOG.md");
             }
 
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"Merging CHANGELOG.md to {mergeToBranch}");
-            var merge = await _gitHubClient.Repository.Merging.Create(_owner, _repositoryName, new NewMerge(mergeToBranch, _currentBranch) { CommitMessage = $"Merge Update {changelogFileName}" });
+            var merge = await _gitHubClient.Repository.Merging.Create(_owner, _repositoryName, new NewMerge(mergeToBranch, changeSet.Commit.Sha) { CommitMessage = $"Merge Update {changelogFileName}" });
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Finished merge of CHANGELOG.md");
 
@@ -202,7 +202,7 @@ namespace Spacearr.Common.Services.Implementations
         private async Task<IReadOnlyList<GitHubCommit>> GetCommits(string branchName, DateTimeOffset since)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"Getting commits from GitHub (Owner: {_owner}, Repository: {_repositoryName}, Branch: {branchName}, Since: {since.DateTime.ToLongDateString()})");
+            Console.WriteLine($"Getting commits from GitHub (Owner: {_owner}, Repository: {_repositoryName}, Branch: {branchName}, Since: {since.DateTime})");
             var commits =  await _gitHubClient.Repository.Commit.GetAll(_owner, _repositoryName, new CommitRequest { Sha = branchName, Since = since, Until = DateTimeOffset.Now });
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Succeeded in getting commits from GitHub");

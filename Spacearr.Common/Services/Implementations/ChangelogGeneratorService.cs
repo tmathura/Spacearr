@@ -178,15 +178,15 @@ namespace Spacearr.Common.Services.Implementations
                 Console.WriteLine("Finished upload of CHANGELOG.md");
             }
 
-            //Console.ForegroundColor = ConsoleColor.Yellow;
-            //Console.WriteLine($"Merging CHANGELOG.md to {mergeToBranch}");
-            //var merge = await _gitHubClient.Repository.Merging.Create(_owner, _repositoryName, new NewMerge(mergeToBranch, changeSet.Commit.Sha) { CommitMessage = $"Merge update {changelogFileName}. {DateTime.Now}" });
-            //Console.ForegroundColor = ConsoleColor.Green;
-            //Console.WriteLine("Finished merge of CHANGELOG.md");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine($"Merging CHANGELOG.md to {mergeToBranch}");
+            var merge = await _gitHubClient.Repository.Merging.Create(_owner, _repositoryName, new NewMerge(mergeToBranch, changeSet.Commit.Sha) { CommitMessage = $"Merge update {changelogFileName}. {DateTime.Now}" });
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Finished merge of CHANGELOG.md");
 
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"Updating reference of {mergeToBranch} branch");
-            await _gitHubClient.Git.Reference.Update(_owner, _repositoryName, $"heads/{mergeToBranch}", new ReferenceUpdate(changeSet.Commit.Sha, true));
+            Console.WriteLine($"Updating reference of {_currentBranch} branch");
+            await _gitHubClient.Git.Reference.Update(_owner, _repositoryName, $"heads/{_currentBranch}", new ReferenceUpdate(merge.Sha, true));
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Finished updating reference");
 

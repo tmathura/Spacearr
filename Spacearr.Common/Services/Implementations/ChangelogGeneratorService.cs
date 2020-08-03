@@ -12,14 +12,14 @@ namespace Spacearr.Common.Services.Implementations
 {
     public class ChangelogGeneratorService : IChangelogGeneratorService
     {
-        private readonly string _owner;
+        private readonly string _repositoryOwner;
         private readonly string _repositoryName;
         private readonly string _repoDirectory;
         private readonly IGitHubClient _gitHubClient;
 
-        public ChangelogGeneratorService(string owner, string repositoryName, string repoDirectory, string currentBranch, IGitHubClient gitHubClient)
+        public ChangelogGeneratorService(string repositoryOwner, string repositoryName, string repoDirectory, IGitHubClient gitHubClient)
         {
-            _owner = owner;
+            _repositoryOwner = repositoryOwner;
             _repositoryName = repositoryName;
             _repoDirectory = repoDirectory;
             _gitHubClient = gitHubClient;
@@ -80,8 +80,8 @@ namespace Spacearr.Common.Services.Implementations
             }
 
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"Getting releases from GitHub (Owner: {_owner}, Repository: {_repositoryName})");
-            var releases = await _gitHubClient.Repository.Release.GetAll(_owner, _repositoryName);
+            Console.WriteLine($"Getting releases from GitHub (Owner: {_repositoryOwner}, Repository: {_repositoryName})");
+            var releases = await _gitHubClient.Repository.Release.GetAll(_repositoryOwner, _repositoryName);
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Succeeded in getting releases from GitHub");
 
@@ -93,8 +93,8 @@ namespace Spacearr.Common.Services.Implementations
             }
 
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"Getting latest commit from GitHub (Owner: {_owner}, Repository: {_repositoryName}, Commit: {latestRelease.TargetCommitish})");
-            var latestCommit = await _gitHubClient.Repository.Commit.Get(_owner, _repositoryName, latestRelease.TargetCommitish);
+            Console.WriteLine($"Getting latest commit from GitHub (Owner: {_repositoryOwner}, Repository: {_repositoryName}, Commit: {latestRelease.TargetCommitish})");
+            var latestCommit = await _gitHubClient.Repository.Commit.Get(_repositoryOwner, _repositoryName, latestRelease.TargetCommitish);
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Succeeded in getting latest commit from GitHub");
 
@@ -107,8 +107,8 @@ namespace Spacearr.Common.Services.Implementations
             var formattedDiffCommits = FormatCommits(diffCommits);
             var formattedMasterCommits = FormatCommits(masterCommits);
 
-            var issues = await GetReleaseDetails(IssueTypeQualifier.Issue, $"{_owner}/{_repositoryName}");
-            var pulls = await GetReleaseDetails(IssueTypeQualifier.PullRequest, $"{_owner}/{_repositoryName}");
+            var issues = await GetReleaseDetails(IssueTypeQualifier.Issue, $"{_repositoryOwner}/{_repositoryName}");
+            var pulls = await GetReleaseDetails(IssueTypeQualifier.PullRequest, $"{_repositoryOwner}/{_repositoryName}");
 
             var releaseText = string.Empty;
 
@@ -161,8 +161,8 @@ namespace Spacearr.Common.Services.Implementations
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine($"Starting upload of CHANGELOG.md to {masterBranchName}");
-                var existingFile = await _gitHubClient.Repository.Content.GetAllContentsByRef(_owner, _repositoryName, changelogFileName, masterBranchName);
-                await _gitHubClient.Repository.Content.UpdateFile(_owner, _repositoryName, changelogFileName,
+                var existingFile = await _gitHubClient.Repository.Content.GetAllContentsByRef(_repositoryOwner, _repositoryName, changelogFileName, masterBranchName);
+                await _gitHubClient.Repository.Content.UpdateFile(_repositoryOwner, _repositoryName, changelogFileName,
                     new UpdateFileRequest($"Update {changelogFileName}. {DateTime.Now}", latestChangeLogText + DateTime.UtcNow, existingFile.First().Sha, masterBranchName));
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Finished upload of CHANGELOG.md");
@@ -171,7 +171,7 @@ namespace Spacearr.Common.Services.Implementations
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine($"Starting upload of CHANGELOG.md to {masterBranchName}");
-                await _gitHubClient.Repository.Content.CreateFile(_owner, _repositoryName, changelogFileName,
+                await _gitHubClient.Repository.Content.CreateFile(_repositoryOwner, _repositoryName, changelogFileName,
                     new CreateFileRequest($"Create {changelogFileName}. {DateTime.Now}", latestChangeLogText + DateTime.UtcNow, masterBranchName));
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Finished upload of CHANGELOG.md");
@@ -189,8 +189,8 @@ namespace Spacearr.Common.Services.Implementations
         private async Task<IReadOnlyList<GitHubCommit>> GetCommits(string branchName, DateTimeOffset since)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"Getting commits from GitHub (Owner: {_owner}, Repository: {_repositoryName}, Branch: {branchName}, Since: {since.DateTime})");
-            var commits =  await _gitHubClient.Repository.Commit.GetAll(_owner, _repositoryName, new CommitRequest { Sha = branchName, Since = since, Until = DateTimeOffset.Now });
+            Console.WriteLine($"Getting commits from GitHub (Owner: {_repositoryOwner}, Repository: {_repositoryName}, Branch: {branchName}, Since: {since.DateTime})");
+            var commits =  await _gitHubClient.Repository.Commit.GetAll(_repositoryOwner, _repositoryName, new CommitRequest { Sha = branchName, Since = since, Until = DateTimeOffset.Now });
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Succeeded in getting commits from GitHub");
             return commits;

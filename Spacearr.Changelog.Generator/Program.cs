@@ -9,10 +9,10 @@ namespace Spacearr.Changelog.Generator
     {
         public static async Task Main(string[] args)
         {
-            if (args.Length != 5)
+            if (args.Length != 4)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Too many arguments supplied, supply only the 'GitHub Owner', 'GitHub Repo', 'Directory Of Clone', 'Current Branch', 'GitHub Token'");
+                Console.WriteLine("Too many arguments supplied, supply only the 'GitHub Owner', 'GitHub Repo', 'Directory Of Clone', 'GitHub Token'");
                 Console.ForegroundColor = ConsoleColor.White;
             }
             else if (string.IsNullOrWhiteSpace(args[0]) || string.IsNullOrWhiteSpace(args[1]) || string.IsNullOrWhiteSpace(args[2]) || string.IsNullOrWhiteSpace(args[3]) || string.IsNullOrWhiteSpace(args[4]))
@@ -24,7 +24,7 @@ namespace Spacearr.Changelog.Generator
             else
             {
                 var builder = new ContainerBuilder();
-                AutofacConfig.Configure(args[0], args[1], args[2], args[3], args[4], builder);
+                AutofacConfig.Configure(args[0], args[1], args[2], args[3], builder);
                 var container = builder.Build();
                 var changelogGeneratorService = container.Resolve<IChangelogGeneratorService>();
                 await changelogGeneratorService.CreateChangelog();

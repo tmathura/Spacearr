@@ -33,9 +33,11 @@ namespace Spacearr.Common.Services.Implementations
         /// <returns></returns>
         public async Task CreateChangelog()
         {
-            var mergeToBranch = _currentBranch.ToLower() == "master" ? "dev" : "master";
-            
+            const string tempBranchName = "changelog";
+            const string masterBranchName = "master";
+            const string devBranchName = "dev";
             const string changelogFileName = "CHANGELOG.md";
+
             var changelogPath = Path.Combine(_repoDirectory, changelogFileName);
 
             var changelogDocument = new MarkdownDocument();
@@ -99,8 +101,8 @@ namespace Spacearr.Common.Services.Implementations
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Succeeded in getting latest commit from GitHub");
 
-            var masterCommits = await GetCommits("master", previousReleaseDate);
-            var devCommits = await GetCommits("dev", previousReleaseDate);
+            var masterCommits = await GetCommits(masterBranchName, previousReleaseDate);
+            var devCommits = await GetCommits(devBranchName, previousReleaseDate);
             var diffCommits = GetCommitsDiff(devCommits, masterCommits);
 
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -157,38 +159,42 @@ namespace Spacearr.Common.Services.Implementations
             Console.WriteLine($"Finished writing to {changelogFileName}");
 
             var latestChangeLogText = File.ReadAllText(changelogPath);
+            await _gitHubClient.Git.Reference.Create(_owner, _repositoryName, new NewReference($"refs/heads/{tempBranchName}", latestCommit.Commit.Sha));
+
             RepositoryContentChangeSet changeSet;
             try
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine($"Starting upload of CHANGELOG.md to {_currentBranch}");
-                var existingFile = await _gitHubClient.Repository.Content.GetAllContentsByRef(_owner, _repositoryName, changelogFileName, _currentBranch);
+                Console.WriteLine($"Starting upload of CHANGELOG.md to {tempBranchName}");
+                var existingFile = await _gitHubClient.Repository.Content.GetAllContentsByRef(_owner, _repositoryName, changelogFileName, tempBranchName);
                 changeSet = await _gitHubClient.Repository.Content.UpdateFile(_owner, _repositoryName, changelogFileName,
-                    new UpdateFileRequest($"Update {changelogFileName}. {DateTime.Now}", latestChangeLogText + DateTime.UtcNow, existingFile.First().Sha, _currentBranch));
+                    new UpdateFileRequest($"Update {changelogFileName}. {DateTime.Now}", latestChangeLogText + DateTime.UtcNow, existingFile.First().Sha, tempBranchName));
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Finished upload of CHANGELOG.md");
             }
             catch (NotFoundException)
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine($"Starting upload of CHANGELOG.md to {_currentBranch}");
+                Console.WriteLine($"Starting upload of CHANGELOG.md to {tempBranchName}");
                 changeSet = await _gitHubClient.Repository.Content.CreateFile(_owner, _repositoryName, changelogFileName,
-                    new CreateFileRequest($"Create {changelogFileName}. {DateTime.Now}", latestChangeLogText + DateTime.UtcNow, _currentBranch));
+                    new CreateFileRequest($"Create {changelogFileName}. {DateTime.Now}", latestChangeLogText + DateTime.UtcNow, tempBranchName));
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Finished upload of CHANGELOG.md");
             }
 
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"Merging CHANGELOG.md to {mergeToBranch}");
-            var merge = await _gitHubClient.Repository.Merging.Create(_owner, _repositoryName, new NewMerge(mergeToBranch, changeSet.Commit.Sha) { CommitMessage = $"Merge update {changelogFileName}. {DateTime.Now}" });
+            Console.WriteLine($"Merging CHANGELOG.md to {masterBranchName}");
+            var merge = await _gitHubClient.Repository.Merging.Create(_owner, _repositoryName, new NewMerge(masterBranchName, changeSet.Commit.Sha) { CommitMessage = $"Merge update {changelogFileName}. {DateTime.Now}" });
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Finished merge of CHANGELOG.md");
 
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"Updating reference of {_currentBranch} branch");
-            await _gitHubClient.Git.Reference.Update(_owner, _repositoryName, $"heads/{_currentBranch}", new ReferenceUpdate(merge.Sha, true));
+            Console.WriteLine($"Updating reference of {devBranchName} branch");
+            await _gitHubClient.Git.Reference.Update(_owner, _repositoryName, $"heads/{devBranchName}", new ReferenceUpdate(merge.Sha, true));
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Finished updating reference");
+
+            await _gitHubClient.Git.Reference.Delete(_owner, _repositoryName, "refs/heads/changelog");
 
             Console.ForegroundColor = ConsoleColor.White;
         }

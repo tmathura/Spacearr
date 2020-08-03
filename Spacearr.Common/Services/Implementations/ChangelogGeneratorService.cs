@@ -159,7 +159,7 @@ namespace Spacearr.Common.Services.Implementations
             Console.WriteLine($"Finished writing to {changelogFileName}");
 
             var latestChangeLogText = File.ReadAllText(changelogPath);
-            await _gitHubClient.Git.Reference.Create(_owner, _repositoryName, new NewReference($"refs/heads/{tempBranchName}", latestCommit.Commit.Sha));
+            await _gitHubClient.Git.Reference.Create(_owner, _repositoryName, new NewReference($"refs/heads/{tempBranchName}", masterCommits[0].Sha));
 
             RepositoryContentChangeSet changeSet;
             try

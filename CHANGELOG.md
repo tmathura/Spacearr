@@ -1,6 +1,8 @@
 # Release 1.0.0.295
 
 ## Included Changes
+ - [Merge Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/0092a8e46378774262b90139e32865cbe5edb45f)
+ - [Update CHANGELOG.md. 8/3/2020 9:25:18 AM](https://api.github.com/repos/tmathura/Spacearr/git/commits/b3335049763e332a764933c1f1ef3c4ce96dbda6)
  - [Merge Update CHANGELOG.md](https://api.github.com/repos/tmathura/Spacearr/git/commits/96c6c5d943caab48eb7e9507ad8cd2097231fdf0)
  - [Update CHANGELOG.md. 8/3/2020 9:15:07 AM](https://api.github.com/repos/tmathura/Spacearr/git/commits/ab5871bd1edb4794fabc0d61baf55f398947fb0f)
  - [update ChangelogGeneratorService, fix date and merge to specific sha](https://api.github.com/repos/tmathura/Spacearr/git/commits/5baa17768979f796d0ef32d4ef01a802260e2d76)
@@ -83,4 +85,4 @@
  - [Pull request for master](https://github.com/tmathura/Spacearr/pull/29)
  - [Pull request for master](https://github.com/tmathura/Spacearr/pull/28)
  - [Pull request for master](https://github.com/tmathura/Spacearr/pull/27)
-8/3/2020 9:25:18 AM
+8/3/2020 9:35:21 AM

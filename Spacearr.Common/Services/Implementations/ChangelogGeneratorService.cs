@@ -15,7 +15,6 @@ namespace Spacearr.Common.Services.Implementations
         private readonly string _owner;
         private readonly string _repositoryName;
         private readonly string _repoDirectory;
-        private readonly string _currentBranch;
         private readonly IGitHubClient _gitHubClient;
 
         public ChangelogGeneratorService(string owner, string repositoryName, string repoDirectory, string currentBranch, IGitHubClient gitHubClient)
@@ -23,7 +22,6 @@ namespace Spacearr.Common.Services.Implementations
             _owner = owner;
             _repositoryName = repositoryName;
             _repoDirectory = repoDirectory;
-            _currentBranch = currentBranch;
             _gitHubClient = gitHubClient;
         }
 

@@ -51,9 +51,6 @@ dotnet_csproj:
   informational_version: '{version}'
 before_build:
 - cmd: >-
-    echo %APPVEYOR_REPO_COMMIT%
-    echo %APPVEYOR_REPO_COMMIT_AUTHOR%
-
     cd C:\projects\spacearr\Spacearr.Android
 
     powershell -Command "(gc google-services.json) -replace 'ProjectNumber', ($env:PROJECTNUMBER) | Out-File -encoding ASCII google-services.json"

@@ -129,4 +129,4 @@ on_success:
 - cmd: >-
     cd C:\projects\spacearr\Spacearr.Changelog.Generator\bin\%CONFIGURATION%\netcoreapp3.1
 
-    Spacearr.Changelog.Generator.exe tmathura Spacearr C:\projects\spacearr %GITHUBTOKEN%
+    Spacearr.Changelog.Generator.exe tmathura Spacearr C:\projects\spacearr %APPVEYOR_REPO_COMMIT% %GITHUBTOKEN%

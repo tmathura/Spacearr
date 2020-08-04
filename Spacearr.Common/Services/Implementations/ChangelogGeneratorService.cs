@@ -15,13 +15,15 @@ namespace Spacearr.Common.Services.Implementations
         private readonly string _repositoryOwner;
         private readonly string _repositoryName;
         private readonly string _repoDirectory;
+        private readonly string _commitSha;
         private readonly IGitHubClient _gitHubClient;
 
-        public ChangelogGeneratorService(string repositoryOwner, string repositoryName, string repoDirectory, IGitHubClient gitHubClient)
+        public ChangelogGeneratorService(string repositoryOwner, string repositoryName, string repoDirectory, string commitSha, IGitHubClient gitHubClient)
         {
             _repositoryOwner = repositoryOwner;
             _repositoryName = repositoryName;
             _repoDirectory = repoDirectory;
+            _commitSha = commitSha;
             _gitHubClient = gitHubClient;
         }
 
@@ -44,57 +46,38 @@ namespace Spacearr.Common.Services.Implementations
                 var changelogText = File.ReadAllText(changelogPath);
                 changelogDocument.Parse(changelogText);
 
-                if (changelogDocument.Blocks.Any(x => x.ToString().Contains("Unreleased Changes")))
+                var count = 0;
+                if (!changelogDocument.Blocks.Any(x => x.ToString().Contains("Unreleased Changes")))
                 {
-                    var count = 0;
-                    foreach (var element in changelogDocument.Blocks)
+                    count = -1;
+                }
+                foreach (var element in changelogDocument.Blocks)
+                {
+                    if (count !=0 && count != 1)
                     {
-                        if (count !=0 && count != 1)
+                        switch (element)
                         {
-                            if (element is HeaderBlock header)
-                            {
-                                if (header.ToString().Contains("Release "))
-                                {
-                                    oldChangelog += $"\n\n#{header}";
-                                }
-                                else
-                                {
-                                    oldChangelog += $"\n\n##{header}";
-                                }
-                            }
-                            else if (element is ListBlock listItem)
+                            case HeaderBlock header when header.ToString().Contains("Release "):
+                                oldChangelog += $"\n\n#{header}";
+                                break;
+                            case HeaderBlock header:
+                                oldChangelog += $"\n\n##{header}";
+                                break;
+                            case ListBlock listItem:
                             {
                                 foreach (var listItemBlock in listItem.Items)
                                 {
                                     oldChangelog += $"\n - {listItemBlock.Blocks[0]}";
                                 }
+
+                                break;
                             }
                         }
-                        count++;
                     }
-                }
-                else
-                {
-                    foreach (var element in changelogDocument.Blocks)
+
+                    if (changelogDocument.Blocks.Any(x => x.ToString().Contains("Unreleased Changes")))
                     {
-                        if (element is HeaderBlock header)
-                        {
-                            if (header.ToString().Contains("Release "))
-                            {
-                                oldChangelog += $"\n\n#{header}";
-                            }
-                            else
-                            {
-                                oldChangelog += $"\n\n##{header}";
-                            }
-                        }
-                        else if (element is ListBlock listItem)
-                        {
-                            foreach (var listItemBlock in listItem.Items)
-                            {
-                                oldChangelog += $"\n - {listItemBlock.Blocks[0]}";
-                            }
-                        }
+                        count++;
                     }
                 }
             }
@@ -122,10 +105,14 @@ namespace Spacearr.Common.Services.Implementations
             var devCommits = await GetCommits(devBranchName, previousReleaseDate);
             var diffCommits = GetCommitsDiff(devCommits, masterCommits);
 
+            var commitShaDate = masterCommits.FirstOrDefault(x => x.Sha == _commitSha)?.Commit.Committer.Date;
+
+            IReadOnlyList<GitHubCommit> currentMasterCommits = masterCommits.Where(commit => commit.Commit.Committer.Date <= commitShaDate).ToList();
+
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Formatting commits");
             var formattedDiffCommits = FormatCommits(diffCommits);
-            var formattedMasterCommits = FormatCommits(masterCommits);
+            var formattedMasterCommits = FormatCommits(currentMasterCommits.Count > 0 ? currentMasterCommits : masterCommits);
 
             var issues = await GetReleaseDetails(IssueTypeQualifier.Issue, previousReleaseDate);
             var pulls = await GetReleaseDetails(IssueTypeQualifier.PullRequest, previousReleaseDate);

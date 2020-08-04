@@ -103,11 +103,12 @@ namespace Spacearr.Common.Services.Implementations
 
             var masterCommits = await GetCommits(masterBranchName, previousReleaseDate);
             var devCommits = await GetCommits(devBranchName, previousReleaseDate);
-            var diffCommits = GetCommitsDiff(devCommits, masterCommits);
 
             var commitShaDate = masterCommits.FirstOrDefault(x => x.Sha == _commitSha)?.Commit.Committer.Date;
 
             IReadOnlyList<GitHubCommit> currentMasterCommits = masterCommits.Where(commit => commit.Commit.Committer.Date <= commitShaDate).ToList();
+
+            var diffCommits = GetCommitsDiff(devCommits, currentMasterCommits.Count > 0 ? currentMasterCommits : masterCommits);
 
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Formatting commits");

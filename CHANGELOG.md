@@ -1,6 +1,10 @@
 # Release 1.0.0.315
 
 ## Included Changes
+ - [change LowSpaceGBValue](https://github.com/tmathura/Spacearr/commit/9eb133e3b98ade9e1c7412287ccabde3d42402cb) ([Teshvier Mathura](https://github.com/tmathura))
+ - [move when GetCommitsDiff is done](https://github.com/tmathura/Spacearr/commit/9454d5c084a689aa134f1b819996db95c5b04535) ([Teshvier Mathura](https://github.com/tmathura))
+ - [ChangelogGeneratorService to take in current commit Sha to build changelog](https://github.com/tmathura/Spacearr/commit/704f3eb10669e79c78f2578f9948cfbaa58a51c3) ([Teshvier Mathura](https://github.com/tmathura))
+ - [Update CHANGELOG.md. 8/4/2020 10:42:16 AM](https://github.com/tmathura/Spacearr/commit/b01355bcd5daa707e3567ab2fc630240aaf8ddab) ([tmathura](https://github.com/tmathura))
  - [revert echo](https://github.com/tmathura/Spacearr/commit/0a86d747a21a7c5122575797b6f633739d28549d) ([Teshvier Mathura](https://github.com/tmathura))
  - [echo values to test](https://github.com/tmathura/Spacearr/commit/ff7aa194a134e1afbf7ab68d88cacf264301118b) ([Teshvier Mathura](https://github.com/tmathura))
  - [Update CHANGELOG.md. 8/3/2020 5:12:56 PM](https://github.com/tmathura/Spacearr/commit/767cf8be237217b2272ec91ef0aed7b8136a9a90) ([tmathura](https://github.com/tmathura))
@@ -10,6 +14,18 @@
  - [Update CHANGELOG.md. 8/3/2020 2:53:34 PM](https://github.com/tmathura/Spacearr/commit/d0c924ee601393e33db10895bbe42fed7c43b51d) ([tmathura](https://github.com/tmathura))
  - [fix index out of bounds error](https://github.com/tmathura/Spacearr/commit/27b9b3c00ed4ee015797a1a1457e83167386e01c) ([Teshvier Mathura](https://github.com/tmathura))
 
+
+# Release 1.0.0.315
+
+## Included Changes
+ - [revert echo](https://github.com/tmathura/Spacearr/commit/0a86d747a21a7c5122575797b6f633739d28549d) ([Teshvier Mathura](https://github.com/tmathura))
+ - [echo values to test](https://github.com/tmathura/Spacearr/commit/ff7aa194a134e1afbf7ab68d88cacf264301118b) ([Teshvier Mathura](https://github.com/tmathura))
+ - [Update CHANGELOG.md. 8/3/2020 5:12:56 PM](https://github.com/tmathura/Spacearr/commit/767cf8be237217b2272ec91ef0aed7b8136a9a90) ([tmathura](https://github.com/tmathura))
+ - [Update CHANGELOG.md. 8/3/2020 5:03:02 PM](https://github.com/tmathura/Spacearr/commit/bbfdad1e15b880a6cf71eece33c4daeb7ad8fef6) ([tmathura](https://github.com/tmathura))
+ - [update changelog generator](https://github.com/tmathura/Spacearr/commit/9c64efd60e13dd36b6e2b82a118090621f6209a8) ([Teshvier Mathura](https://github.com/tmathura))
+ - [Update CHANGELOG.md. 8/3/2020 3:04:01 PM](https://github.com/tmathura/Spacearr/commit/68d574b51df3a63f937ef4a67d0ba23cbb2a6890) ([tmathura](https://github.com/tmathura))
+ - [Update CHANGELOG.md. 8/3/2020 2:53:34 PM](https://github.com/tmathura/Spacearr/commit/d0c924ee601393e33db10895bbe42fed7c43b51d) ([tmathura](https://github.com/tmathura))
+ - [fix index out of bounds error](https://github.com/tmathura/Spacearr/commit/27b9b3c00ed4ee015797a1a1457e83167386e01c) ([Teshvier Mathura](https://github.com/tmathura))
 
 # Release 1.0.0.315
 
@@ -38,4 +54,4 @@
  - [Pull request for master](https://github.com/tmathura/Spacearr/pull/29)
  - [Pull request for master](https://github.com/tmathura/Spacearr/pull/28)
  - [Pull request for master](https://github.com/tmathura/Spacearr/pull/27)
-8/4/2020 10:42:16 AM
+8/4/2020 11:15:56 AM

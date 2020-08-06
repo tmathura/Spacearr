@@ -1,10 +1,7 @@
 # Spacearr
 Spacearr allows you to monitor your hard disk space on you computer via an Android phone or via a Windows UWP app. This is done without opening any ports on a computer but by using a message service from [Pusher](https://pusher.com/). The messaging service that [Pusher](https://pusher.com/) offers us is a "Pub/Sub" service, which is an asynchronous messaging service which is used by the computer and Android/UWP app to communicate to one another.
 
-# Spacearr Windows Service
-This is the Windows service that you will install onto the computer so that the computer and Android/UWP app can communicate.
-
-# Spacearr Worker Service.Windows
+# Spacearr Worker Service Windows
 This is the Windows worker service that you will install onto the computer so that the computer and Android/UWP app can communicate. It is basically the same as a Windows service, but more modern and uses the [.Net Core](https://en.wikipedia.org/wiki/.NET_Core) Framework. See this Stackoverflow [answer](https://stackoverflow.com/questions/59636097/c-sharp-worker-service-vs-windows-service#:~:text=Both%20are%20real%20services.,and%20stops%20with%20the%20application.) for more information.
 
 # Spacearr Android App

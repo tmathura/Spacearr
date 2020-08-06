@@ -1,4 +1,4 @@
-# Release 1.0.0.328
+# Release 1.0.0.332
 
 ## Included Changes
  - [fix yml](https://github.com/tmathura/Spacearr/commit/292e4a4521929b93c74411519122e8ad35322592) ([Teshvier Mathura](https://github.com/tmathura))
@@ -6,12 +6,6 @@
  - [Update CHANGELOG.md. 8/6/2020 9:41:21 AM](https://github.com/tmathura/Spacearr/commit/58989ea1f89621e56378cd3b77e2e5e9161ec7a5) ([tmathura](https://github.com/tmathura))
  - [Update CHANGELOG.md. 8/6/2020 9:31:26 AM](https://github.com/tmathura/Spacearr/commit/fac9bf1002469de67b06831b3e0ed5c66ee5ee38) ([tmathura](https://github.com/tmathura))
  - [update readme to remove normal windows servcie](https://github.com/tmathura/Spacearr/commit/b4300762235358c0502fc7306c8304348cc3c21a) ([Teshvier Mathura](https://github.com/tmathura))
- - [Update CHANGELOG.md. 8/4/2020 12:28:43 PM](https://github.com/tmathura/Spacearr/commit/26f8f3ec404b667a68cb0e1076402344c2e59324) ([tmathura](https://github.com/tmathura))
- - [Update CHANGELOG.md. 8/4/2020 11:15:56 AM](https://github.com/tmathura/Spacearr/commit/735359d0c036053f269a79564ce2a4dd98a25902) ([tmathura](https://github.com/tmathura))
- - [change LowSpaceGBValue](https://github.com/tmathura/Spacearr/commit/9eb133e3b98ade9e1c7412287ccabde3d42402cb) ([Teshvier Mathura](https://github.com/tmathura))
-
-## Issues Closed
- - [Buttons needs a shadow](https://github.com/tmathura/Spacearr/issues/32)
 
 
 # Release 1.0.0.328
@@ -77,4 +71,4 @@
  - [Pull request for master](https://github.com/tmathura/Spacearr/pull/29)
  - [Pull request for master](https://github.com/tmathura/Spacearr/pull/28)
  - [Pull request for master](https://github.com/tmathura/Spacearr/pull/27)
-8/6/2020 10:39:12 AM
+8/6/2020 10:49:04 AM

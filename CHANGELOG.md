@@ -1,12 +1,24 @@
 # Release 1.0.0.332
 
 ## Included Changes
+ - [move pusher related objects](https://github.com/tmathura/Spacearr/commit/7c2e3938f0f861d37602b64ce12af325c3215d88) ([Teshvier Mathura](https://github.com/tmathura))
+ - [Update CHANGELOG.md. 8/6/2020 10:49:04 AM](https://github.com/tmathura/Spacearr/commit/c7294ad5870b7a0ca6ec7606a912b3ef9d6caadb) ([tmathura](https://github.com/tmathura))
+ - [Update CHANGELOG.md. 8/6/2020 10:39:12 AM](https://github.com/tmathura/Spacearr/commit/4a638d0cb91d42a7ae5f349f3399e4958b5916c5) ([tmathura](https://github.com/tmathura))
  - [fix yml](https://github.com/tmathura/Spacearr/commit/292e4a4521929b93c74411519122e8ad35322592) ([Teshvier Mathura](https://github.com/tmathura))
  - [do not build on .md files changing](https://github.com/tmathura/Spacearr/commit/e44ed21097642224435cabf9f3524811cbb483c6) ([Teshvier Mathura](https://github.com/tmathura))
  - [Update CHANGELOG.md. 8/6/2020 9:41:21 AM](https://github.com/tmathura/Spacearr/commit/58989ea1f89621e56378cd3b77e2e5e9161ec7a5) ([tmathura](https://github.com/tmathura))
  - [Update CHANGELOG.md. 8/6/2020 9:31:26 AM](https://github.com/tmathura/Spacearr/commit/fac9bf1002469de67b06831b3e0ed5c66ee5ee38) ([tmathura](https://github.com/tmathura))
  - [update readme to remove normal windows servcie](https://github.com/tmathura/Spacearr/commit/b4300762235358c0502fc7306c8304348cc3c21a) ([Teshvier Mathura](https://github.com/tmathura))
 
+
+# Release 1.0.0.332
+
+## Included Changes
+ - [fix yml](https://github.com/tmathura/Spacearr/commit/292e4a4521929b93c74411519122e8ad35322592) ([Teshvier Mathura](https://github.com/tmathura))
+ - [do not build on .md files changing](https://github.com/tmathura/Spacearr/commit/e44ed21097642224435cabf9f3524811cbb483c6) ([Teshvier Mathura](https://github.com/tmathura))
+ - [Update CHANGELOG.md. 8/6/2020 9:41:21 AM](https://github.com/tmathura/Spacearr/commit/58989ea1f89621e56378cd3b77e2e5e9161ec7a5) ([tmathura](https://github.com/tmathura))
+ - [Update CHANGELOG.md. 8/6/2020 9:31:26 AM](https://github.com/tmathura/Spacearr/commit/fac9bf1002469de67b06831b3e0ed5c66ee5ee38) ([tmathura](https://github.com/tmathura))
+ - [update readme to remove normal windows servcie](https://github.com/tmathura/Spacearr/commit/b4300762235358c0502fc7306c8304348cc3c21a) ([Teshvier Mathura](https://github.com/tmathura))
 
 # Release 1.0.0.328
 
@@ -71,4 +83,4 @@
  - [Pull request for master](https://github.com/tmathura/Spacearr/pull/29)
  - [Pull request for master](https://github.com/tmathura/Spacearr/pull/28)
  - [Pull request for master](https://github.com/tmathura/Spacearr/pull/27)
-8/6/2020 10:49:04 AM
+8/7/2020 7:15:31 AM

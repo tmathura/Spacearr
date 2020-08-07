@@ -1,6 +1,6 @@
 ﻿using Spacearr.Common.Enums;
 
-namespace Spacearr.Common.Models
+namespace Spacearr.Pusher.API.Models
 {
     public class PusherSendMessageModel
     {

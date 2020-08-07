@@ -1,4 +1,4 @@
-﻿namespace Spacearr.Common.Models
+﻿namespace Spacearr.Pusher.API.Models
 {
     public class PusherReceiveMessageModel
     {

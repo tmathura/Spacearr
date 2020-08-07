@@ -3,6 +3,7 @@ using Spacearr.Common.Command.Implementations.Commands;
 using Spacearr.Common.Enums;
 using Spacearr.Common.Logger.Interfaces;
 using Spacearr.Common.Models;
+using Spacearr.Pusher.API.Models;
 using Spacearr.Pusher.API.Receivers.Interfaces;
 using System;
 using System.Threading.Tasks;

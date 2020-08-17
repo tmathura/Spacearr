@@ -1,11 +1,22 @@
 # Release 1.0.0.334
 
 ## Included Changes
+ - [update nugest](https://github.com/tmathura/Spacearr/commit/bd2753447dfa3c7c92c8f3b8e5b46fab5be9240a) ([Teshvier Mathura](https://github.com/tmathura))
+ - [Update CHANGELOG.md. 8/7/2020 7:26:27 AM](https://github.com/tmathura/Spacearr/commit/0be609ab697fdfcf16b7a155dcb312db0364178e) ([tmathura](https://github.com/tmathura))
+ - [Update CHANGELOG.md. 8/7/2020 7:15:31 AM](https://github.com/tmathura/Spacearr/commit/0029f11b62d1022b92264ee418d061fc532c2e92) ([tmathura](https://github.com/tmathura))
  - [move pusher related objects](https://github.com/tmathura/Spacearr/commit/7c2e3938f0f861d37602b64ce12af325c3215d88) ([Teshvier Mathura](https://github.com/tmathura))
  - [Update CHANGELOG.md. 8/6/2020 10:49:04 AM](https://github.com/tmathura/Spacearr/commit/c7294ad5870b7a0ca6ec7606a912b3ef9d6caadb) ([tmathura](https://github.com/tmathura))
  - [Update CHANGELOG.md. 8/6/2020 10:39:12 AM](https://github.com/tmathura/Spacearr/commit/4a638d0cb91d42a7ae5f349f3399e4958b5916c5) ([tmathura](https://github.com/tmathura))
  - [fix yml](https://github.com/tmathura/Spacearr/commit/292e4a4521929b93c74411519122e8ad35322592) ([Teshvier Mathura](https://github.com/tmathura))
 
+
+# Release 1.0.0.334
+
+## Included Changes
+ - [move pusher related objects](https://github.com/tmathura/Spacearr/commit/7c2e3938f0f861d37602b64ce12af325c3215d88) ([Teshvier Mathura](https://github.com/tmathura))
+ - [Update CHANGELOG.md. 8/6/2020 10:49:04 AM](https://github.com/tmathura/Spacearr/commit/c7294ad5870b7a0ca6ec7606a912b3ef9d6caadb) ([tmathura](https://github.com/tmathura))
+ - [Update CHANGELOG.md. 8/6/2020 10:39:12 AM](https://github.com/tmathura/Spacearr/commit/4a638d0cb91d42a7ae5f349f3399e4958b5916c5) ([tmathura](https://github.com/tmathura))
+ - [fix yml](https://github.com/tmathura/Spacearr/commit/292e4a4521929b93c74411519122e8ad35322592) ([Teshvier Mathura](https://github.com/tmathura))
 
 # Release 1.0.0.332
 
@@ -79,4 +90,4 @@
  - [Pull request for master](https://github.com/tmathura/Spacearr/pull/29)
  - [Pull request for master](https://github.com/tmathura/Spacearr/pull/28)
  - [Pull request for master](https://github.com/tmathura/Spacearr/pull/27)
-8/7/2020 7:26:27 AM
+8/17/2020 11:10:53 AM

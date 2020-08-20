@@ -8,6 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="PusherClient" Version="1.1.2" />
+    <PackageReference Include="PusherServer" Version="4.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Spacearr.Common\Spacearr.Common.csproj" />
   </ItemGroup>
 

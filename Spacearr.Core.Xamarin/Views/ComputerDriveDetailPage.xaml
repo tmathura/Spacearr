@@ -25,7 +25,7 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <microcharts:ChartView Grid.Row="0" HeightRequest="200" VerticalOptions="FillAndExpand" Chart="{Binding ComputerDriveModel.PieChart}"/>
+                            <microcharts:ChartView Grid.Row="0" HeightRequest="200" VerticalOptions="FillAndExpand" Chart="{Binding ComputerDriveModel.Chart}"/>
                             <controls:FloatingLabel Grid.Row="1" LabelTopText="Name" LabelBottomText="{Binding ComputerDriveModel.Name}"/>
                             <controls:FloatingLabel Grid.Row="2" LabelTopText="Volume Label" LabelBottomText="{Binding ComputerDriveModel.VolumeLabel}"/>
                             <controls:FloatingLabel Grid.Row="3" LabelTopText="Drive Type" LabelBottomText="{Binding ComputerDriveModel.DriveType}"/>

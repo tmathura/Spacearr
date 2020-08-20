@@ -18,6 +18,6 @@ namespace Spacearr.Common.Models
         public string TotalUsedSpaceString => DataSize.SizeSuffix(TotalSize - TotalFreeSpace, 2);
         public long TotalSize { get; set; }
         public string TotalSizeString => DataSize.SizeSuffix(TotalSize, 2);
-        public PieChart PieChart { get; set; }
+        public DonutChart Chart { get; set; }
     }
 }

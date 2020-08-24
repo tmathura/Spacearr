@@ -15,11 +15,11 @@
         <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="SizeProportional">
             <Frame Margin="5" HasShadow="True" CornerRadius="2">
                 <StackLayout BackgroundColor="{DynamicResource ColorPrimaryLight}">
-                    <StackLayout Orientation="Horizontal" BackgroundColor="{DynamicResource ColorPrimaryLight}">
+                    <StackLayout HeightRequest="20" Orientation="Horizontal" BackgroundColor="{DynamicResource ColorPrimaryLight}">
                         <Label FontAttributes="Bold" Text="Device Id"/>
                         <Label x:Name="DeviceId" HorizontalOptions="EndAndExpand"/>
                     </StackLayout>
-                    <StackLayout Orientation="Horizontal" BackgroundColor="{DynamicResource ColorPrimaryLight}">
+                    <StackLayout HeightRequest="20" Orientation="Horizontal" BackgroundColor="{DynamicResource ColorPrimaryLight}">
                         <Label FontAttributes="Bold" Text="Dark Mode"/>
                         <Switch x:Name="DarkModeSwitch" Toggled="DarkMode_OnToggled" HorizontalOptions="EndAndExpand"/>
                     </StackLayout>

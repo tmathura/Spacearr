@@ -1,4 +1,4 @@
-# Release 1.0.0.340
+# Release 1.0.0.343
 
 ## Included Changes
  - [update height](https://github.com/tmathura/Spacearr/commit/e33011d41d7b9d0afc1a87eed8370b4cdd518f9a) ([Teshvier Mathura](https://github.com/tmathura))
@@ -6,13 +6,6 @@
  - [Update CHANGELOG.md. 8/20/2020 3:16:45 PM](https://github.com/tmathura/Spacearr/commit/9904f746ef915f52b12fd6ebc33f8c9b47eda9d7) ([tmathura](https://github.com/tmathura))
  - [Update CHANGELOG.md. 8/20/2020 3:05:53 PM](https://github.com/tmathura/Spacearr/commit/d2c8791880e5066e2ee356bdf3d7a90eb28a0cf7) ([tmathura](https://github.com/tmathura))
  - [move pusher nugets to Spacearr.Pusher.API](https://github.com/tmathura/Spacearr/commit/1322afc05b64f7f8661569f4877639a773cb1fee) ([Teshvier Mathura](https://github.com/tmathura))
- - [change pie chart to a donut chart; fixes GH-33](https://github.com/tmathura/Spacearr/commit/bd8f0d7d999f9951784afd895ca9e623e3da92aa) ([Teshvier Mathura](https://github.com/tmathura))
- - [Update CHANGELOG.md. 8/17/2020 11:21:26 AM](https://github.com/tmathura/Spacearr/commit/96f92e003e554d2df7b4d3aec82484f7a5b7a833) ([tmathura](https://github.com/tmathura))
- - [Update CHANGELOG.md. 8/17/2020 11:10:53 AM](https://github.com/tmathura/Spacearr/commit/4ff25a8833726ec92be2baad89b3f5cef1b6418f) ([tmathura](https://github.com/tmathura))
- - [update nugest](https://github.com/tmathura/Spacearr/commit/bd2753447dfa3c7c92c8f3b8e5b46fab5be9240a) ([Teshvier Mathura](https://github.com/tmathura))
-
-## Issues Closed
- - [Change pie chart to be a donut chart](https://github.com/tmathura/Spacearr/issues/33)
 
 
 # Release 1.0.0.340
@@ -115,4 +108,4 @@
  - [Pull request for master](https://github.com/tmathura/Spacearr/pull/29)
  - [Pull request for master](https://github.com/tmathura/Spacearr/pull/28)
  - [Pull request for master](https://github.com/tmathura/Spacearr/pull/27)
-8/24/2020 12:03:01 PM
+8/24/2020 12:14:09 PM

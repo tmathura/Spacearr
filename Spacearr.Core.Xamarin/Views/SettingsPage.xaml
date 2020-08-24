@@ -19,7 +19,7 @@
                         <Label FontAttributes="Bold" Text="Device Id"/>
                         <Label x:Name="DeviceId" HorizontalOptions="EndAndExpand"/>
                     </StackLayout>
-                    <StackLayout HeightRequest="20" Orientation="Horizontal" BackgroundColor="{DynamicResource ColorPrimaryLight}">
+                    <StackLayout HeightRequest="30" Orientation="Horizontal" BackgroundColor="{DynamicResource ColorPrimaryLight}">
                         <Label FontAttributes="Bold" Text="Dark Mode"/>
                         <Switch x:Name="DarkModeSwitch" Toggled="DarkMode_OnToggled" HorizontalOptions="EndAndExpand"/>
                     </StackLayout>

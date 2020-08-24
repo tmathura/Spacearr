@@ -37,8 +37,8 @@ namespace Spacearr.Core.Xamarin.Views
 
             if (Device.RuntimePlatform == Device.Android)
             {
-                FirebaseTokenStackLayout.IsVisible = true;
-                FirebaseToken.Text = CrossFirebasePushNotification.Current.Token;
+                FirebaseToken.IsVisible = true;
+                FirebaseToken.LabelBottomText = CrossFirebasePushNotification.Current.Token;
             }
 
             BindingContext = _viewModel = new SettingsViewModel(logger, this);
@@ -63,7 +63,7 @@ namespace Spacearr.Core.Xamarin.Views
 
             if (Device.RuntimePlatform == Device.Android)
             {
-                FirebaseToken.Text = CrossFirebasePushNotification.Current.Token;
+                FirebaseToken.LabelBottomText = CrossFirebasePushNotification.Current.Token;
             }
 
             _viewModel.LoadItemsCommand.Execute(null);

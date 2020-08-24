@@ -5,6 +5,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:models="clr-namespace:Spacearr.Common.Models;assembly=Spacearr.Common"
              xmlns:viewModels="clr-namespace:Spacearr.Core.Xamarin.ViewModels;assembly=Spacearr.Core.Xamarin"
+             xmlns:controls="clr-namespace:Spacearr.Core.Xamarin.Views.Controls;assembly=Spacearr.Core.Xamarin"
              mc:Ignorable="d"
              x:Class="Spacearr.Core.Xamarin.Views.SettingsPage"
              Title="{Binding Title}"
@@ -22,10 +23,7 @@
                         <Label FontAttributes="Bold" Text="Dark Mode"/>
                         <Switch x:Name="DarkModeSwitch" Toggled="DarkMode_OnToggled" HorizontalOptions="EndAndExpand"/>
                     </StackLayout>
-                    <StackLayout x:Name="FirebaseTokenStackLayout" IsVisible="False" Orientation="Horizontal" BackgroundColor="{DynamicResource ColorPrimaryLight}">
-                        <Label FontAttributes="Bold" Text="Firebase Token"/>
-                        <Label x:Name="FirebaseToken" HorizontalOptions="EndAndExpand"/>
-                    </StackLayout>
+                    <controls:FloatingLabel x:Name="FirebaseToken" IsVisible="False" LabelTopText="Firebase Token"/>
                 </StackLayout>
             </Frame>
             <Frame x:Name="ListViewFrame" Margin="5" HasShadow="True" CornerRadius="2">

@@ -1,12 +1,29 @@
 # Release 1.0.0.343
 
 ## Included Changes
+ - [add version to settings in front end app, rename 'ComputerDrivesCommand' to 'GetComputerDrivesCommand'; fixes GH-34](https://github.com/tmathura/Spacearr/commit/eced6a8d300ef9e80d9dd2dfe76d5c88cb722272) ([Teshvier Mathura](https://github.com/tmathura))
+ - [Merge branch 'dev'](https://github.com/tmathura/Spacearr/commit/1ce9813e433bde5204b093cf0bc2ef63038cc60e) ([Teshvier Mathura](https://github.com/tmathura))
+ - [update settings view](https://github.com/tmathura/Spacearr/commit/e5578c9450078e98c74097827f003f5f3485aecb) ([Teshvier Mathura](https://github.com/tmathura))
+ - [Update CHANGELOG.md. 8/24/2020 12:14:09 PM](https://github.com/tmathura/Spacearr/commit/f757682a1ab00268903a3a0fa9fea1691ec6a268) ([tmathura](https://github.com/tmathura))
+ - [Update CHANGELOG.md. 8/24/2020 12:03:01 PM](https://github.com/tmathura/Spacearr/commit/f74ce5d22e3223c25ae2b9213606f51fdde5c5a2) ([tmathura](https://github.com/tmathura))
  - [update height](https://github.com/tmathura/Spacearr/commit/e33011d41d7b9d0afc1a87eed8370b4cdd518f9a) ([Teshvier Mathura](https://github.com/tmathura))
  - [update settings view](https://github.com/tmathura/Spacearr/commit/7cb13cb54a3fd7d723b5e09c10c7dd2f5d45bf49) ([Teshvier Mathura](https://github.com/tmathura))
  - [Update CHANGELOG.md. 8/20/2020 3:16:45 PM](https://github.com/tmathura/Spacearr/commit/9904f746ef915f52b12fd6ebc33f8c9b47eda9d7) ([tmathura](https://github.com/tmathura))
  - [Update CHANGELOG.md. 8/20/2020 3:05:53 PM](https://github.com/tmathura/Spacearr/commit/d2c8791880e5066e2ee356bdf3d7a90eb28a0cf7) ([tmathura](https://github.com/tmathura))
  - [move pusher nugets to Spacearr.Pusher.API](https://github.com/tmathura/Spacearr/commit/1322afc05b64f7f8661569f4877639a773cb1fee) ([Teshvier Mathura](https://github.com/tmathura))
 
+## Issues Closed
+ - [add version to settings in front end apps](https://github.com/tmathura/Spacearr/issues/34)
+
+
+# Release 1.0.0.343
+
+## Included Changes
+ - [update height](https://github.com/tmathura/Spacearr/commit/e33011d41d7b9d0afc1a87eed8370b4cdd518f9a) ([Teshvier Mathura](https://github.com/tmathura))
+ - [update settings view](https://github.com/tmathura/Spacearr/commit/7cb13cb54a3fd7d723b5e09c10c7dd2f5d45bf49) ([Teshvier Mathura](https://github.com/tmathura))
+ - [Update CHANGELOG.md. 8/20/2020 3:16:45 PM](https://github.com/tmathura/Spacearr/commit/9904f746ef915f52b12fd6ebc33f8c9b47eda9d7) ([tmathura](https://github.com/tmathura))
+ - [Update CHANGELOG.md. 8/20/2020 3:05:53 PM](https://github.com/tmathura/Spacearr/commit/d2c8791880e5066e2ee356bdf3d7a90eb28a0cf7) ([tmathura](https://github.com/tmathura))
+ - [move pusher nugets to Spacearr.Pusher.API](https://github.com/tmathura/Spacearr/commit/1322afc05b64f7f8661569f4877639a773cb1fee) ([Teshvier Mathura](https://github.com/tmathura))
 
 # Release 1.0.0.340
 
@@ -108,4 +125,4 @@
  - [Pull request for master](https://github.com/tmathura/Spacearr/pull/29)
  - [Pull request for master](https://github.com/tmathura/Spacearr/pull/28)
  - [Pull request for master](https://github.com/tmathura/Spacearr/pull/27)
-8/24/2020 12:14:09 PM
+8/27/2020 12:31:43 PM

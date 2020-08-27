@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Spacearr.Common.Command.Implementations.Commands
 {
-    public class ComputerDrivesCommand : ICommand
+    public class GetComputerDrivesCommand : ICommand
     {
         private readonly IComputerDrives _computerDrives;
 
-        public ComputerDrivesCommand(IComputerDrives computerDrives)
+        public GetComputerDrivesCommand(IComputerDrives computerDrives)
         {
             _computerDrives = computerDrives;
         }

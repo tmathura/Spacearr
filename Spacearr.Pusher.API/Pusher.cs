@@ -11,8 +11,9 @@ namespace Spacearr.Pusher.API
         private readonly ILogger _logger;
         private readonly IInvoker _invoker;
         private readonly IWorkerServiceReceiver _workerServiceReceiver;
-        private readonly IComputerDrivesCommandReceiver _computerDrivesCommandReceiver;
+        private readonly IGetComputerDrivesCommandReceiver _getComputerDrivesCommandReceiver;
         private readonly ISaveFirebasePushNotificationTokenCommandReceiver _saveFirebasePushNotificationTokenCommandReceiver;
+        private readonly IGetWorkerServiceVersionCommandReceiver _getWorkerServiceVersionCommandReceiver;
         public string ReturnData => _workerServiceReceiver?.ReturnData;
 
         public Pusher(ILogger logger, IWorkerServiceReceiver workerServiceReceiver)
@@ -21,25 +22,40 @@ namespace Spacearr.Pusher.API
             _workerServiceReceiver = workerServiceReceiver;
         }
 
-        public Pusher(ILogger logger, IInvoker invoker, IComputerDrivesCommandReceiver computerDrivesCommandReceiver, ISaveFirebasePushNotificationTokenCommandReceiver saveFirebasePushNotificationTokenCommandReceiver)
+        public Pusher(ILogger logger, IInvoker invoker, IGetComputerDrivesCommandReceiver getComputerDrivesCommandReceiver, ISaveFirebasePushNotificationTokenCommandReceiver saveFirebasePushNotificationTokenCommandReceiver,
+            IGetWorkerServiceVersionCommandReceiver getWorkerServiceVersionCommandReceiver)
         {
             _logger = logger;
             _invoker = invoker;
-            _computerDrivesCommandReceiver = computerDrivesCommandReceiver;
+            _getComputerDrivesCommandReceiver = getComputerDrivesCommandReceiver;
             _saveFirebasePushNotificationTokenCommandReceiver = saveFirebasePushNotificationTokenCommandReceiver;
+            _getWorkerServiceVersionCommandReceiver = getWorkerServiceVersionCommandReceiver;
         }
 
         /// <summary>
-        /// Connect the computer drives command receiver.
+        /// Connect the get computer drives command receiver.
         /// </summary>
         /// <param name="appId">The Pusher app id</param>
         /// <param name="key">The Pusher key</param>
         /// <param name="secret">The Pusher secret</param>
         /// <param name="cluster">The Pusher cluster</param>
         /// <returns></returns>
-        public async Task ComputerDrivesCommandReceiverConnect(string appId, string key, string secret, string cluster)
+        public async Task GetComputerDrivesCommandReceiverConnect(string appId, string key, string secret, string cluster)
         {
-            await _computerDrivesCommandReceiver.Connect(ExecuteCommand, appId, key, secret, cluster);
+            await _getComputerDrivesCommandReceiver.Connect(ExecuteCommand, appId, key, secret, cluster);
+        }
+
+        /// <summary>
+        /// Connect the get Worker Service version command receiver.
+        /// </summary>
+        /// <param name="appId">The Pusher app id</param>
+        /// <param name="key">The Pusher key</param>
+        /// <param name="secret">The Pusher secret</param>
+        /// <param name="cluster">The Pusher cluster</param>
+        /// <returns></returns>
+        public async Task GetWorkerServiceVersionCommandReceiverConnect(string appId, string key, string secret, string cluster)
+        {
+            await _getWorkerServiceVersionCommandReceiver.Connect(ExecuteCommand, appId, key, secret, cluster);
         }
 
         /// <summary>

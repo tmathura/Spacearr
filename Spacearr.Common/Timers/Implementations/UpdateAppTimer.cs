@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Spacearr.Common.Command.Implementations.Commands;
 using Spacearr.Common.Command.Interfaces;
-using Spacearr.Common.Enums;
 using Spacearr.Common.Logger.Interfaces;
 using Spacearr.Common.Services.Interfaces;
 using Spacearr.Common.Timers.Interfaces;
@@ -13,7 +12,6 @@ namespace Spacearr.Common.Timers.Implementations
 {
     public class UpdateAppTimer : IUpdateAppTimer
     {
-        private UpdateType _updateType;
         private readonly IConfiguration _configuration;
         private readonly IInvoker _invoker;
         private readonly ILogger _logger;
@@ -43,9 +41,8 @@ namespace Spacearr.Common.Timers.Implementations
         /// <summary>
         /// Start the timer.
         /// </summary>
-        public void Instantiate(UpdateType updateType)
+        public void Instantiate()
         {
-            _updateType = updateType;
             if (Convert.ToBoolean(_configuration.GetSection("AutoUpdateApp").Value))
             {
                 _timer.Start();
@@ -74,7 +71,7 @@ namespace Spacearr.Common.Timers.Implementations
             {
                 if (!_downloadService.IsDownloading)
                 {
-                    var command = new UpdateCommand(_updateType, _logger, _updateService, _downloadService, _fileService);
+                    var command = new UpdateCommand(_logger, _updateService, _downloadService, _fileService);
                     await _invoker.Invoke(command);
                 }
             }

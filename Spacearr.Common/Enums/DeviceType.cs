@@ -6,7 +6,6 @@
     public enum UpdateType
     {
         Android,
-        WindowsService,
         WorkerService,
         Uwp
     }

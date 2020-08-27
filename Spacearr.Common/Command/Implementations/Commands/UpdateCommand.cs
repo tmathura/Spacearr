@@ -13,15 +13,14 @@ namespace Spacearr.Common.Command.Implementations.Commands
 {
     public class UpdateCommand : ICommand
     {
-        private readonly UpdateType _updateType;
+        private const string AppName = "Spacearr.WorkerService.Windows";
         private readonly ILogger _logger;
         private readonly IUpdateService _updateService;
         private readonly IDownloadService _downloadService;
         private readonly IFileService _fileService;
 
-        public UpdateCommand(UpdateType updateType, ILogger logger, IUpdateService updateService, IDownloadService downloadService, IFileService fileService)
+        public UpdateCommand(ILogger logger, IUpdateService updateService, IDownloadService downloadService, IFileService fileService)
         {
-            _updateType = updateType;
             _logger = logger;
             _updateService = updateService;
             _downloadService = downloadService;
@@ -34,16 +33,15 @@ namespace Spacearr.Common.Command.Implementations.Commands
         /// <returns>string.Empty</returns>
         public async Task<string> Execute()
         {
-            var appName = _updateType == UpdateType.WorkerService ? "Spacearr.WorkerService.Windows" : "Spacearr.Windows.Windows";
             var parentDirectory = Directory.GetParent(_fileService.GetUpdateAppStorageFolderPath()).Parent;
             var currentAppPath = Path.GetFullPath(parentDirectory?.FullName ?? string.Empty);
-            var currentApp = Path.Combine(currentAppPath, $"{appName}.dll");
+            var currentApp = Path.Combine(currentAppPath, $"{AppName}.dll");
 
             var assemblyName = AssemblyName.GetAssemblyName(currentApp);
 
             if (await _updateService.CheckForUpdateAsync(assemblyName.Version.ToString()))
             {
-                var url = await _updateService.UpdateUrlOfLastUpdateCheck(_updateType);
+                var url = await _updateService.UpdateUrlOfLastUpdateCheck(UpdateType.WorkerService);
                 var progressIndicator = new Progress<double>();
                 var cts = new CancellationTokenSource();
                 try
@@ -52,7 +50,7 @@ namespace Spacearr.Common.Command.Implementations.Commands
                     Directory.CreateDirectory(_fileService.GetUpdateAppStorageFolderPath());
                     await _downloadService.DownloadFileAsync(url, progressIndicator, cts.Token);
 
-                    var controller = new ServiceController(appName);
+                    var controller = new ServiceController(AppName);
 
                     if (controller.Status != ServiceControllerStatus.StopPending && controller.Status != ServiceControllerStatus.Stopped)
                     {
@@ -60,7 +58,7 @@ namespace Spacearr.Common.Command.Implementations.Commands
                         controller.WaitForStatus(ServiceControllerStatus.Stopped);
                     }
 
-                    await _updateService.UpdateApp(_updateType);
+                    await _updateService.UpdateApp(UpdateType.WorkerService);
 
                     controller.Start();
                     controller.WaitForStatus(ServiceControllerStatus.Running);

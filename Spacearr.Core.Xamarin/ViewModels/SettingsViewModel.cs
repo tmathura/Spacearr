@@ -1,6 +1,7 @@
 ﻿using Spacearr.Common.Logger.Interfaces;
 using Spacearr.Common.Models;
 using Spacearr.Core.Xamarin.Helpers.Interfaces;
+using Spacearr.Pusher.API.Services.Interfaces;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -13,15 +14,17 @@ namespace Spacearr.Core.Xamarin.ViewModels
     {
         private readonly ILogger _logger;
         private readonly ISettingsPageHelper _settingsPageHelper;
+        private readonly IGetWorkerServiceVersionService _getWorkerServiceVersionService;
 
         public ICommand LoadItemsCommand { get; set; }
         public ICommand AddCommand { get; }
         public ObservableCollection<SettingModel> Settings { get; set; }
 
-        public SettingsViewModel(ILogger logger, ISettingsPageHelper settingsPageHelper)
+        public SettingsViewModel(ILogger logger, ISettingsPageHelper settingsPageHelper, IGetWorkerServiceVersionService getWorkerServiceVersionService)
         {
             _logger = logger;
             _settingsPageHelper = settingsPageHelper;
+            _getWorkerServiceVersionService = getWorkerServiceVersionService;
 
             Title = "Settings";
             Settings = new ObservableCollection<SettingModel>();
@@ -46,6 +49,17 @@ namespace Spacearr.Core.Xamarin.ViewModels
                 var settings = await _logger.GetSettingsAsync();
                 foreach (var setting in settings)
                 {
+                    var workerServiceVersion = await _getWorkerServiceVersionService.GetWorkerServiceVersionServiceAsync(setting);
+
+                    if (workerServiceVersion != null)
+                    {
+                        setting.Version = workerServiceVersion.Version.ToString();
+                    }
+                    else
+                    {
+                        setting.Version = "UNAVAILABLE";
+                    }
+
                     Settings.Add(setting);
                 }
 

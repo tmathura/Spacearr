@@ -13,6 +13,7 @@ using Spacearr.Common.Timers.Interfaces;
 using Spacearr.Pusher.API;
 using Spacearr.Pusher.API.Receivers.Implementations;
 using Spacearr.Pusher.API.Receivers.Interfaces;
+using Spacearr.WorkerService.Windows.Services.Implementations;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -41,14 +42,16 @@ namespace Spacearr.WorkerService.Windows
                 {
                     services.AddSingleton<ILogger, Logger>(serviceProvider => new Logger(Path.Combine(AppDomain.CurrentDomain.BaseDirectory ?? Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Spacearr.WorkerService.Windows.SQLite.db3")));
                     services.AddHostedService<Worker>();
+                    services.AddSingleton<IFileService, FileService>();
                     services.AddSingleton<IPusher, Pusher.API.Pusher>();
                     services.AddSingleton<IInvoker, Invoker>();
                     services.AddSingleton<IComputerDrives, ComputerDrives>();
                     services.AddSingleton<IComputerDriveInfo, ComputerDriveInfo>();
                     services.AddSingleton<ISendFirebasePushNotificationService, SendFirebasePushNotificationService>();
                     services.AddSingleton<ILowSpaceTimer, LowSpaceTimer>();
-                    services.AddSingleton<IComputerDrivesCommandReceiver, ComputerDrivesCommandReceiver>();
+                    services.AddSingleton<IGetComputerDrivesCommandReceiver, GetComputerDrivesCommandReceiver>();
                     services.AddSingleton<ISaveFirebasePushNotificationTokenCommandReceiver, SaveFirebasePushNotificationTokenCommandReceiver>();
+                    services.AddSingleton<IGetWorkerServiceVersionCommandReceiver, GetWorkerServiceVersionCommandReceiver>();
                 });
     }
 }

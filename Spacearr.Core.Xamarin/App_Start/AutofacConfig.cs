@@ -31,6 +31,7 @@ namespace Spacearr.Core.Xamarin
             builder.RegisterType<WorkerServiceReceiver>().As<IWorkerServiceReceiver>().SingleInstance();
             builder.RegisterType<GetComputerService>().As<IGetComputerService>().SingleInstance();
             builder.RegisterType<SaveFirebasePushNotificationTokenService>().As<ISaveFirebasePushNotificationTokenService>().SingleInstance();
+            builder.RegisterType<GetWorkerServiceVersionService>().As<IGetWorkerServiceVersionService>().SingleInstance();
         }
     }
 }

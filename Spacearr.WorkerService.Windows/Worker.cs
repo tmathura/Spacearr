@@ -11,11 +11,13 @@ namespace Spacearr.WorkerService.Windows
     {
         public Worker(IConfiguration configuration, IPusher pusher, ILowSpaceTimer lowSpaceTimer)
         {
-            pusher.ComputerDrivesCommandReceiverConnect(configuration.GetSection("PusherAppId").Value, configuration.GetSection("PusherKey").Value,
+            pusher.GetComputerDrivesCommandReceiverConnect(configuration.GetSection("PusherAppId").Value, configuration.GetSection("PusherKey").Value,
                 configuration.GetSection("PusherSecret").Value, configuration.GetSection("PusherCluster").Value);
             pusher.SaveFirebasePushNotificationTokenCommandReceiverConnect(configuration.GetSection("PusherAppId").Value, configuration.GetSection("PusherKey").Value,
                 configuration.GetSection("PusherSecret").Value, configuration.GetSection("PusherCluster").Value);
             lowSpaceTimer.Instantiate();
+            pusher.GetWorkerServiceVersionCommandReceiverConnect(configuration.GetSection("PusherAppId").Value, configuration.GetSection("PusherKey").Value,
+                configuration.GetSection("PusherSecret").Value, configuration.GetSection("PusherCluster").Value);
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)

@@ -1,13 +1,11 @@
-﻿using Spacearr.Common.Enums;
-
-namespace Spacearr.Common.Timers.Interfaces
+﻿namespace Spacearr.Common.Timers.Interfaces
 {
     public interface IUpdateAppTimer
     {
         /// <summary>
         /// Start the timer.
         /// </summary>
-        void Instantiate(UpdateType updateType);
+        void Instantiate();
 
         /// <summary>
         /// Stop the timer.

@@ -41,8 +41,8 @@
                 x:DataType="viewModels:SettingsViewModel">
                 <d:ListView.ItemsSource>
                     <x:Array Type="{x:Type models:SettingModel}">
-                        <models:SettingModel ComputerName = "Computer name 1" UpdatedDate = "2020/01/01" />
-                        <models:SettingModel ComputerName = "Computer name 2" UpdatedDate = "2020/01/02" />
+                        <models:SettingModel ComputerName = "Computer name 1" UpdatedDate = "2020/01/01" Version="1.0.0.1" />
+                        <models:SettingModel ComputerName = "Computer name 2" UpdatedDate = "2020/01/02" Version="1.0.0.1" />
                     </x:Array>
                 </d:ListView.ItemsSource>
                 <ListView.ItemTemplate>
@@ -58,11 +58,16 @@
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="Auto"/>
                                                 <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
                                             </Grid.RowDefinitions>
                                             <Label FontAttributes="Bold" Grid.Row="0" Text="{Binding ComputerName}" />
                                             <StackLayout Grid.Row="1" Orientation="Horizontal" BackgroundColor="{DynamicResource ColorPrimaryLight}">
                                                 <Label Text="Updated on:"/>
                                                 <Label Text="{Binding UpdatedDate}"/>
+                                            </StackLayout>
+                                            <StackLayout Grid.Row="2" Orientation="Horizontal" BackgroundColor="{DynamicResource ColorPrimaryLight}">
+                                                <Label Text="Version:"/>
+                                                <Label Text="{Binding Version}"/>
                                             </StackLayout>
                                         </Grid>
                                     </Grid>

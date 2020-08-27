@@ -1,0 +1,66 @@
+﻿using Newtonsoft.Json;
+using Spacearr.Common.Enums;
+using Spacearr.Common.Logger.Interfaces;
+using Spacearr.Common.Models;
+using Spacearr.Pusher.API.Models;
+using Spacearr.Pusher.API.Services.Interfaces;
+using System;
+using System.Diagnostics;
+using System.Threading.Tasks;
+
+namespace Spacearr.Pusher.API.Services.Implementations
+{
+    public class GetWorkerServiceVersionService : IGetWorkerServiceVersionService
+    {
+        private readonly ILogger _logger;
+        private readonly IPusher _pusher;
+
+        public GetWorkerServiceVersionService(ILogger logger, IPusher pusher)
+        {
+            _logger = logger;
+            _pusher = pusher;
+        }
+
+        /// <summary>
+        /// Returns the Worker Service version.
+        /// </summary>
+        /// <returns>Returns a IEnumerable of ComputerModel</returns>
+        public async Task<WorkerServiceVersionModel> GetWorkerServiceVersionServiceAsync(SettingModel setting)
+        {
+            WorkerServiceVersionModel workerServiceVersion = null;
+            var channelNameReceive = $"{ CommandType.GetWorkerServiceVersionCommand }{ PusherChannel.SpacearrChannel}";
+            var eventNameReceive = $"{ CommandType.GetWorkerServiceVersionCommand }{ PusherEvent.SpacearrEvent}";
+            var channelNameSend = $"{ CommandType.GetWorkerServiceVersionCommand }{ PusherChannel.SpacearrWorkerServiceWindowsChannel}";
+            var eventNameSend = $"{ CommandType.GetWorkerServiceVersionCommand }{ PusherEvent.WorkerServiceEvent}";
+            
+            try
+            {
+                await _pusher.WorkerServiceReceiverConnect(channelNameReceive, eventNameReceive, setting.PusherAppId, setting.PusherKey, setting.PusherSecret, setting.PusherCluster);
+
+                var pusherSendMessage = new PusherSendMessageModel { Command = CommandType.GetWorkerServiceVersionCommand };
+                await _pusher.SendMessage(channelNameSend, eventNameSend, JsonConvert.SerializeObject(pusherSendMessage), setting.PusherAppId, setting.PusherKey, setting.PusherSecret, setting.PusherCluster);
+
+                var stopwatch = new Stopwatch();
+                stopwatch.Start();
+
+                while (_pusher.ReturnData == null)
+                {
+                    if (stopwatch.ElapsedMilliseconds > 10000)
+                    {
+                        throw new Exception("Get Worker Service version took too long!");
+                    }
+                }
+
+                workerServiceVersion = JsonConvert.DeserializeObject<WorkerServiceVersionModel>(_pusher.ReturnData);
+                
+                await _pusher.WorkerServiceReceiverDisconnect();
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex.Message, ex.StackTrace);
+            }
+
+            return workerServiceVersion;
+        }
+    }
+}

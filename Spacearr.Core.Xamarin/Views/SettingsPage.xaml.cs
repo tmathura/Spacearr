@@ -4,6 +4,7 @@ using Spacearr.Common.Models;
 using Spacearr.Core.Xamarin.Helpers.Implementations;
 using Spacearr.Core.Xamarin.Helpers.Interfaces;
 using Spacearr.Core.Xamarin.ViewModels;
+using Spacearr.Pusher.API.Services.Interfaces;
 using Spacearr.Pusher.API.Validator.Interfaces;
 using System;
 using System.ComponentModel;
@@ -22,7 +23,7 @@ namespace Spacearr.Core.Xamarin.Views
         private readonly IPusherValidation _pusherValidation;
         private readonly SettingsViewModel _viewModel;
 
-        public SettingsPage(ILogger logger, IPusherValidation pusherValidation)
+        public SettingsPage(ILogger logger, IPusherValidation pusherValidation, IGetWorkerServiceVersionService getWorkerServiceVersionService)
         {
             _logger = logger;
             _pusherValidation = pusherValidation;
@@ -41,7 +42,7 @@ namespace Spacearr.Core.Xamarin.Views
                 FirebaseToken.LabelBottomText = CrossFirebasePushNotification.Current.Token;
             }
 
-            BindingContext = _viewModel = new SettingsViewModel(logger, this);
+            BindingContext = _viewModel = new SettingsViewModel(logger, this, getWorkerServiceVersionService);
         }
 
         private async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)

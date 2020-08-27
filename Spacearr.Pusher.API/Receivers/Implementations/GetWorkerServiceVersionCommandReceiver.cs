@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 using Spacearr.Common.Command.Implementations.Commands;
 using Spacearr.Common.Command.Interfaces;
-using Spacearr.Common.ComputerDrive.Interfaces;
 using Spacearr.Common.Enums;
 using Spacearr.Common.Logger.Interfaces;
+using Spacearr.Common.Services.Interfaces;
 using Spacearr.Pusher.API.Models;
 using Spacearr.Pusher.API.Receivers.Interfaces;
 using System;
@@ -11,29 +11,29 @@ using System.Threading.Tasks;
 
 namespace Spacearr.Pusher.API.Receivers.Implementations
 {
-    public class ComputerDrivesCommandReceiver : IComputerDrivesCommandReceiver
+    public class GetWorkerServiceVersionCommandReceiver : IGetWorkerServiceVersionCommandReceiver
     {
         private readonly ILogger _logger;
-        private readonly IComputerDrives _computerDrives;
+        private readonly IFileService _fileService;
 
         private readonly string _channelNameReceive;
         private readonly string _eventNameReceive;
         private readonly string _channelNameSend;
         private readonly string _eventNameSend;
 
-        public ComputerDrivesCommandReceiver(ILogger logger, IComputerDrives computerDrives)
+        public GetWorkerServiceVersionCommandReceiver(ILogger logger, IFileService fileService)
         {
             _logger = logger;
-            _computerDrives = computerDrives;
+            _fileService = fileService;
 
-            _channelNameReceive = $"{ CommandType.ComputerDrivesCommand }{ PusherChannel.SpacearrWorkerServiceWindowsChannel.ToString() }";
-            _eventNameReceive = $"{ CommandType.ComputerDrivesCommand }{ PusherEvent.WorkerServiceEvent.ToString() }";
-            _channelNameSend = $"{ CommandType.ComputerDrivesCommand }{ PusherChannel.SpacearrChannel.ToString() }";
-            _eventNameSend = $"{ CommandType.ComputerDrivesCommand }{ PusherEvent.SpacearrEvent.ToString() }";
+            _channelNameReceive = $"{ CommandType.GetWorkerServiceVersionCommand }{ PusherChannel.SpacearrWorkerServiceWindowsChannel }";
+            _eventNameReceive = $"{ CommandType.GetWorkerServiceVersionCommand }{ PusherEvent.WorkerServiceEvent }";
+            _channelNameSend = $"{ CommandType.GetWorkerServiceVersionCommand }{ PusherChannel.SpacearrChannel }";
+            _eventNameSend = $"{ CommandType.GetWorkerServiceVersionCommand }{ PusherEvent.SpacearrEvent }";
         }
 
         /// <summary>
-        /// Connect the computer drives command receiver to the Pusher Pub/Sub..
+        /// Connect the get worker service version receiver to the Pusher Pub/Sub.
         /// </summary>
         /// <param name="executeCommand">The command to execute</param>
         /// <param name="appId">The Pusher app id</param>
@@ -55,9 +55,9 @@ namespace Spacearr.Pusher.API.Receivers.Implementations
                         PusherReceiveMessageObjectModel pusherReceiveMessage = JsonConvert.DeserializeObject<PusherReceiveMessageObjectModel>(data.ToString());
                         var pusherMessage = JsonConvert.DeserializeObject<PusherReceiveMessageModel>(pusherReceiveMessage.Data);
                         var deserializeObject = JsonConvert.DeserializeObject<PusherSendMessageModel>(pusherMessage.Message);
-                        if (deserializeObject.Command == CommandType.ComputerDrivesCommand)
+                        if (deserializeObject.Command == CommandType.GetWorkerServiceVersionCommand)
                         {
-                            var command = new ComputerDrivesCommand(_computerDrives);
+                            var command = new GetWorkerServiceVersionCommand(_fileService);
                             executeCommand(command, _channelNameSend, _eventNameSend, appId, key, secret, cluster);
                         }
                     });

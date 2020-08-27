@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Spacearr.Pusher.API.Receivers.Interfaces
 {
-    public interface IComputerDrivesCommandReceiver
+    public interface IGetComputerDrivesCommandReceiver
     {
         /// <summary>
         /// Connect the computer drives command receiver to the Pusher Pub/Sub.

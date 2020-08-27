@@ -80,24 +80,6 @@ namespace Spacearr.Common.Tests.Services
         }
 
         [TestMethod]
-        public async Task UpdateUrlOfLastUpdateCheck_WindowsService()
-        {
-            // Arrange
-            const int noOfReleases = 9;
-            var releases = OctokitRelease.CreateOctokitReleases(noOfReleases);
-            _mockIGitHubClient.Setup(x => x.Repository.Release.GetAll("tmathura", "Spacearr")).ReturnsAsync(releases);
-            _updateService = new UpdateService(_mockILogger.Object, _mockIGitHubClient.Object, _mockIFileService.Object);
-
-            // Act
-            var update = await _updateService.CheckForUpdateAsync(_currentVersion.ToString());
-            var url = await _updateService.UpdateUrlOfLastUpdateCheck(UpdateType.WindowsService);
-
-            // Assert
-            Assert.AreEqual(true, update);
-            Assert.AreEqual($"browserDownloadUrl_windowsservice_{noOfReleases-1}", url);
-        }
-
-        [TestMethod]
         public async Task UpdateUrlOfLastUpdateCheck_WorkerService()
         {
             // Arrange
@@ -162,24 +144,6 @@ namespace Spacearr.Common.Tests.Services
             // Assert
             Assert.AreEqual(true, update);
             Assert.AreEqual($"apk_{noOfReleases - 1}", fileName);
-        }
-
-        [TestMethod]
-        public async Task FileNameOfLastUpdateCheck_WindowsService()
-        {
-            // Arrange
-            const int noOfReleases = 3;
-            var releases = OctokitRelease.CreateOctokitReleases(noOfReleases);
-            _mockIGitHubClient.Setup(x => x.Repository.Release.GetAll("tmathura", "Spacearr")).ReturnsAsync(releases);
-            _updateService = new UpdateService(_mockILogger.Object, _mockIGitHubClient.Object, _mockIFileService.Object);
-
-            // Act
-            var update = await _updateService.CheckForUpdateAsync(_currentVersion.ToString());
-            var fileName = await _updateService.FileNameOfLastUpdateCheck(UpdateType.WindowsService);
-
-            // Assert
-            Assert.AreEqual(true, update);
-            Assert.AreEqual($"windowsservice_{noOfReleases - 1}", fileName);
         }
 
         [TestMethod]

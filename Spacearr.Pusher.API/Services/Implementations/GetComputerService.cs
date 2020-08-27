@@ -30,10 +30,10 @@ namespace Spacearr.Pusher.API.Services.Implementations
         public async Task<IEnumerable<ComputerModel>> GetComputersAsync()
         {
             var result = new List<ComputerModel>();
-            var channelNameReceive = $"{ CommandType.ComputerDrivesCommand }{ PusherChannel.SpacearrChannel}";
-            var eventNameReceive = $"{ CommandType.ComputerDrivesCommand }{ PusherEvent.SpacearrEvent}";
-            var channelNameSend = $"{ CommandType.ComputerDrivesCommand }{ PusherChannel.SpacearrWorkerServiceWindowsChannel}";
-            var eventNameSend = $"{ CommandType.ComputerDrivesCommand }{ PusherEvent.WorkerServiceEvent}";
+            var channelNameReceive = $"{ CommandType.GetComputerDrivesCommand }{ PusherChannel.SpacearrChannel}";
+            var eventNameReceive = $"{ CommandType.GetComputerDrivesCommand }{ PusherEvent.SpacearrEvent}";
+            var channelNameSend = $"{ CommandType.GetComputerDrivesCommand }{ PusherChannel.SpacearrWorkerServiceWindowsChannel}";
+            var eventNameSend = $"{ CommandType.GetComputerDrivesCommand }{ PusherEvent.WorkerServiceEvent}";
 
 
             var settings = Task.Run(() => _logger.GetSettingsAsync()).Result;
@@ -48,7 +48,7 @@ namespace Spacearr.Pusher.API.Services.Implementations
                 {
                     await _pusher.WorkerServiceReceiverConnect(channelNameReceive, eventNameReceive, setting.PusherAppId, setting.PusherKey, setting.PusherSecret, setting.PusherCluster);
 
-                    var pusherSendMessage = new PusherSendMessageModel { Command = CommandType.ComputerDrivesCommand };
+                    var pusherSendMessage = new PusherSendMessageModel { Command = CommandType.GetComputerDrivesCommand };
                     await _pusher.SendMessage(channelNameSend, eventNameSend, JsonConvert.SerializeObject(pusherSendMessage), setting.PusherAppId, setting.PusherKey, setting.PusherSecret, setting.PusherCluster);
 
                     var stopwatch = new Stopwatch();

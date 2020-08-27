@@ -83,9 +83,6 @@ namespace Spacearr.Common.Services.Implementations
                     case UpdateType.Android:
                         url = _latestRelease.Assets.FirstOrDefault(x => x.Name.ToLower().Contains("apk"))?.BrowserDownloadUrl;
                         break;
-                    case UpdateType.WindowsService:
-                        url = _latestRelease.Assets.FirstOrDefault(x => x.Name.ToLower().Contains("windowsservice"))?.BrowserDownloadUrl;
-                        break;
                     case UpdateType.WorkerService:
                         url = _latestRelease.Assets.FirstOrDefault(x => x.Name.ToLower().Contains("workerservice"))?.BrowserDownloadUrl;
                         break;
@@ -122,9 +119,6 @@ namespace Spacearr.Common.Services.Implementations
                 {
                     case UpdateType.Android:
                         fileName = _latestRelease.Assets.FirstOrDefault(x => x.Name.ToLower().Contains("apk"))?.Name;
-                        break;
-                    case UpdateType.WindowsService:
-                        fileName = _latestRelease.Assets.FirstOrDefault(x => x.Name.ToLower().Contains("windowsservice"))?.Name;
                         break;
                     case UpdateType.WorkerService:
                         fileName = _latestRelease.Assets.FirstOrDefault(x => x.Name.ToLower().Contains("workerservice"))?.Name;
@@ -164,7 +158,7 @@ namespace Spacearr.Common.Services.Implementations
         /// <returns></returns>
         private async Task UpdateFiles(UpdateType updateType)
         {
-            var appName = updateType == UpdateType.WorkerService ? "Spacearr.WorkerService.Windows" : "Spacearr.Windows.Windows";
+            var appName = "Spacearr.WorkerService.Windows";
             var updateFilesPath = Path.Combine(_fileService.GetUpdateAppStorageFolderPath(), $@"Spacearr\{appName}");
             var parentDirectory = Directory.GetParent(_fileService.GetUpdateAppStorageFolderPath()).Parent;
             var currentAppPath = Path.GetFullPath(parentDirectory?.FullName ?? string.Empty);

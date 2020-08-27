@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 namespace Spacearr.Common.Tests.Command.Commands
 {
     [TestClass]
-    public class ComputerDrivesCommandTests
+    public class GetComputerDrivesCommandTests
     {
         private Mock<IComputerDrives> _mockIComputerDrives;
-        private ComputerDrivesCommand _computerDrivesCommand;
+        private GetComputerDrivesCommand _getComputerDrivesCommand;
 
         [TestInitialize]
         public void SetUp()
@@ -29,10 +29,10 @@ namespace Spacearr.Common.Tests.Command.Commands
 
             // Arrange
             _mockIComputerDrives.Setup(x => x.GetComputerDrives()).Returns(ComputerDriveInfoFactory.CreateComputerDriveInfos(noOfComputerDrives));
-            _computerDrivesCommand = new ComputerDrivesCommand(_mockIComputerDrives.Object);
+            _getComputerDrivesCommand = new GetComputerDrivesCommand(_mockIComputerDrives.Object);
 
             // Act
-            var commandData = await _computerDrivesCommand.Execute();
+            var commandData = await _getComputerDrivesCommand.Execute();
             var computerDrives = JsonConvert.DeserializeObject<List<ComputerDriveModel>>(commandData);
 
             // Assert
@@ -44,10 +44,10 @@ namespace Spacearr.Common.Tests.Command.Commands
         {
             // Arrange
             _mockIComputerDrives.Setup(x => x.GetComputerDrives()).Returns(ComputerDriveInfoFactory.CreateComputerDriveInfos(0));
-            _computerDrivesCommand = new ComputerDrivesCommand(_mockIComputerDrives.Object);
+            _getComputerDrivesCommand = new GetComputerDrivesCommand(_mockIComputerDrives.Object);
 
             // Act
-            var commandData = await _computerDrivesCommand.Execute();
+            var commandData = await _getComputerDrivesCommand.Execute();
             var computerDrives = JsonConvert.DeserializeObject<List<ComputerDriveModel>>(commandData);
 
             // Assert

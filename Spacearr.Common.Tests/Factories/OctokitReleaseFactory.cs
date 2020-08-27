@@ -17,8 +17,6 @@ namespace Spacearr.Common.Tests.Factories
                 {
                     new ReleaseAsset("url", 1, "1", $"apk_{i}", "label", "state", "contentType",
                         1, 1, DateTimeOffset.Now, DateTimeOffset.Now, $"browserDownloadUrl_apk_{i}", new Author()),
-                    new ReleaseAsset("url", 1, "1", $"windowsservice_{i}", "label", "state", "contentType",
-                        1, 1, DateTimeOffset.Now, DateTimeOffset.Now, $"browserDownloadUrl_windowsservice_{i}", new Author()),
                     new ReleaseAsset("url", 1, "1", $"workerservice_{i}", "label", "state", "contentType",
                         1, 1, DateTimeOffset.Now, DateTimeOffset.Now, $"browserDownloadUrl_workerservice_{i}", new Author()),
                     new ReleaseAsset("url", 1, "1", $"uwp_{i}", "label", "state", "contentType",

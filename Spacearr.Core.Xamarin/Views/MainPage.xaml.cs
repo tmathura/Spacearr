@@ -16,15 +16,18 @@ namespace Spacearr.Core.Xamarin.Views
         private readonly IGetComputerService _getComputerService;
         private readonly ILogger _logger;
         private readonly IPusherValidation _pusherValidation;
+        private readonly IGetWorkerServiceVersionService _getWorkerServiceVersionService;
         private readonly Dictionary<int, NavigationPage> _menuPages = new Dictionary<int, NavigationPage>();
 
-        public MainPage(IGetComputerService getComputerService, ILogger logger, IPusherValidation pusherValidation, IDownloadService downloadService, IUpdateService updateService)
+        public MainPage(IGetComputerService getComputerService, ILogger logger, IPusherValidation pusherValidation, IDownloadService downloadService, IUpdateService updateService, 
+            IGetWorkerServiceVersionService getWorkerServiceVersionService)
         {
             InitializeComponent();
             
             _getComputerService = getComputerService;
             _logger = logger;
             _pusherValidation = pusherValidation;
+            _getWorkerServiceVersionService = getWorkerServiceVersionService;
 
             Master = new MenuPage(downloadService, updateService);
 
@@ -49,7 +52,7 @@ namespace Spacearr.Core.Xamarin.Views
                         _menuPages.Add(id, new NavigationPage(new LogsPage(_logger)));
                         break;
                     case (int)MenuItemType.Settings:
-                        _menuPages.Add(id, new NavigationPage(new SettingsPage(_logger, _pusherValidation)));
+                        _menuPages.Add(id, new NavigationPage(new SettingsPage(_logger, _pusherValidation, _getWorkerServiceVersionService)));
                         break;
                 }
             }

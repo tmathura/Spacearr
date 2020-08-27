@@ -7,14 +7,24 @@ namespace Spacearr.Pusher.API
         string ReturnData { get; }
 
         /// <summary>
-        /// Connect the computer drives command receiver.
+        /// Connect the get computer drives command receiver.
         /// </summary>
         /// <param name="appId">The Pusher app id</param>
         /// <param name="key">The Pusher key</param>
         /// <param name="secret">The Pusher secret</param>
         /// <param name="cluster">The Pusher cluster</param>
         /// <returns></returns>
-        Task ComputerDrivesCommandReceiverConnect(string appId, string key, string secret, string cluster);
+        Task GetComputerDrivesCommandReceiverConnect(string appId, string key, string secret, string cluster);
+
+        /// <summary>
+        /// Connect the get Worker Service version command receiver.
+        /// </summary>
+        /// <param name="appId">The Pusher app id</param>
+        /// <param name="key">The Pusher key</param>
+        /// <param name="secret">The Pusher secret</param>
+        /// <param name="cluster">The Pusher cluster</param>
+        /// <returns></returns>
+        Task GetWorkerServiceVersionCommandReceiverConnect(string appId, string key, string secret, string cluster);
 
         /// <summary>
         /// Connect the save firebase push notification token command receiver.

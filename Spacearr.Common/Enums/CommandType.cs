@@ -5,8 +5,9 @@
     /// </summary>
     public enum CommandType
     {
-        ComputerDrivesCommand,
+        GetComputerDrivesCommand,
         ComputerDrivesLowCommand,
-        SaveFirebasePushNotificationTokenCommand
+        SaveFirebasePushNotificationTokenCommand,
+        GetWorkerServiceVersionCommand
     }
 }

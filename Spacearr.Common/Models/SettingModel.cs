@@ -42,6 +42,9 @@ namespace Spacearr.Common.Models
 
         [Column("UpdatedDate")]
 		public DateTime UpdatedDate { get; set; }
-	}
+
+        [Ignore]
+        public string Version { get; set; }
+    }
 }
 

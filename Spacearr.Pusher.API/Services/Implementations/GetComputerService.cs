@@ -15,7 +15,6 @@ namespace Spacearr.Pusher.API.Services.Implementations
     {
         private readonly ILogger _logger;
         private readonly IPusher _pusher;
-        private List<ComputerDriveModel> _computerDrives;
 
         public GetComputerService(ILogger logger, IPusher pusher)
         {
@@ -49,27 +48,38 @@ namespace Spacearr.Pusher.API.Services.Implementations
                     await _pusher.WorkerServiceReceiverConnect(channelNameReceive, eventNameReceive, setting.PusherAppId, setting.PusherKey, setting.PusherSecret, setting.PusherCluster);
 
                     var pusherSendMessage = new PusherSendMessageModel { Command = CommandType.GetComputerDrivesCommand };
-                    await _pusher.SendMessage(channelNameSend, eventNameSend, JsonConvert.SerializeObject(pusherSendMessage), setting.PusherAppId, setting.PusherKey, setting.PusherSecret, setting.PusherCluster);
+                    await _pusher.SendMessage(channelNameSend, eventNameSend, JsonConvert.SerializeObject(pusherSendMessage), true, setting.PusherAppId, setting.PusherKey, setting.PusherSecret, setting.PusherCluster);
 
                     var stopwatch = new Stopwatch();
                     stopwatch.Start();
 
-                    while (_pusher.ReturnData == null)
+                    while (!_pusher.CommandCompleted || stopwatch.ElapsedMilliseconds > _pusher.TimeLimit.TotalMilliseconds)
                     {
-                        if (stopwatch.ElapsedMilliseconds > 10000)
+                        if (stopwatch.ElapsedMilliseconds > _pusher.TimeLimit.TotalMilliseconds)
                         {
                             throw new Exception("Get computer information took too long!");
                         }
                     }
 
-                    _computerDrives = JsonConvert.DeserializeObject<List<ComputerDriveModel>>(_pusher.ReturnData);
-
-                    result.Add(new ComputerModel
+                    if (_pusher.CommandCompleted)
                     {
-                        Name = setting.ComputerName,
-                        ComputerDrives = await Task.FromResult(_computerDrives)
-                    });
-                    _computerDrives = null;
+                        if (_pusher.ReturnData.Count == 0)
+                        {
+                            throw new Exception("Get computer information has no return data!");
+                        }
+
+                        var computerDrives = new List<ComputerDriveModel>();
+                        foreach (var json in _pusher.ReturnData)
+                        {
+                            computerDrives.Add(JsonConvert.DeserializeObject<ComputerDriveModel>(json));
+                        }
+
+                        result.Add(new ComputerModel
+                        {
+                            Name = setting.ComputerName,
+                            ComputerDrives = await Task.FromResult(computerDrives)
+                        });
+                    }
 
                     await _pusher.WorkerServiceReceiverDisconnect();
                 }

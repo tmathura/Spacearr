@@ -1,4 +1,5 @@
-﻿using Spacearr.Common.Command.Interfaces;
+﻿using System.Collections.Generic;
+using Spacearr.Common.Command.Interfaces;
 using Spacearr.Common.Logger.Interfaces;
 using Spacearr.Common.Models;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace Spacearr.Common.Command.Implementations.Commands
         /// Save the firebase push notification token.
         /// </summary>
         /// <returns>string.Empty</returns>
-        public async Task<string> Execute()
+        public async Task<List<string>> Execute()
         {
             var firebasePushNotificationDevice = await _logger.GetFirebasePushNotificationDeviceAsync(_firebasePushNotificationDevice.DeviceId);
             if (firebasePushNotificationDevice == null)
@@ -33,7 +34,7 @@ namespace Spacearr.Common.Command.Implementations.Commands
                 await _logger.UpdateFirebasePushNotificationDeviceAsync(firebasePushNotificationDevice);
             }
 
-            return string.Empty;
+            return new List<string>();
         }
     }
 }

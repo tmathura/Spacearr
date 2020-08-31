@@ -2,6 +2,7 @@
 using Spacearr.Common.Logger.Interfaces;
 using Spacearr.Pusher.API.Receivers.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Spacearr.Pusher.API
@@ -14,7 +15,9 @@ namespace Spacearr.Pusher.API
         private readonly IGetComputerDrivesCommandReceiver _getComputerDrivesCommandReceiver;
         private readonly ISaveFirebasePushNotificationTokenCommandReceiver _saveFirebasePushNotificationTokenCommandReceiver;
         private readonly IGetWorkerServiceVersionCommandReceiver _getWorkerServiceVersionCommandReceiver;
-        public string ReturnData => _workerServiceReceiver?.ReturnData;
+        public TimeSpan TimeLimit => _workerServiceReceiver.TimeLimit;
+        public bool CommandCompleted => _workerServiceReceiver.CommandCompleted;
+        public List<string> ReturnData => _workerServiceReceiver?.ReturnData;
 
         public Pusher(ILogger logger, IWorkerServiceReceiver workerServiceReceiver)
         {
@@ -101,18 +104,19 @@ namespace Spacearr.Pusher.API
         /// <param name="channelName">The channel name to connect to</param>
         /// <param name="eventName">The event name to connect to</param>
         /// <param name="message">The message to send</param>
+        /// <param name="isFinalMessage">The it is the final message to send</param>
         /// <param name="appId">The Pusher app id</param>
         /// <param name="key">The Pusher key</param>
         /// <param name="secret">The Pusher secret</param>
         /// <param name="cluster">The Pusher cluster</param>
         /// <returns></returns>
-        public async Task SendMessage(string channelName, string eventName, string message, string appId, string key, string secret, string cluster)
+        public async Task SendMessage(string channelName, string eventName, string message, bool isFinalMessage, string appId, string key, string secret, string cluster)
         {
             if (!string.IsNullOrWhiteSpace(appId) && !string.IsNullOrWhiteSpace(key) && !string.IsNullOrWhiteSpace(secret) && !string.IsNullOrWhiteSpace(cluster))
             {
                 var pusherSend = new PusherServer.Pusher(appId, key, secret, new PusherServer.PusherOptions { Cluster = cluster });
 
-                await pusherSend.TriggerAsync(channelName, eventName, new { message });
+                await pusherSend.TriggerAsync(channelName, eventName, new { Message = message, IsFinalMessage = isFinalMessage });
             }
             else
             {
@@ -123,13 +127,24 @@ namespace Spacearr.Pusher.API
         /// <summary>
         /// Command to send a message to the Pusher Pub/Sub to a specific channel and event.
         /// </summary>
+        /// <param name="command">The command to execute</param>
+        /// <param name="channelName">The channel name to connect to</param>
+        /// <param name="eventName">The event name to connect to</param>
+        /// <param name="appId">The Pusher app id</param>
+        /// <param name="key">The Pusher key</param>
+        /// <param name="secret">The Pusher secret</param>
+        /// <param name="cluster">The Pusher cluster</param>
         /// <returns></returns>
         public async void ExecuteCommand(ICommand command, string channelName, string eventName, string appId, string key, string secret, string cluster)
         {
             try
             {
-                var json = await _invoker.Invoke(command);
-                await SendMessage(channelName, eventName, json, appId, key, secret, cluster);
+                var jsonList = await _invoker.Invoke(command);
+
+                for (var i = 0; i < jsonList.Count; i++)
+                {
+                    await SendMessage(channelName, eventName, jsonList[i], i == jsonList.Count-1, appId, key, secret, cluster);
+                }
             }
             catch (Exception e)
             {

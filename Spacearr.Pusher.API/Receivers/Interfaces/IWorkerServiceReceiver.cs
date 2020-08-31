@@ -1,10 +1,14 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Spacearr.Pusher.API.Receivers.Interfaces
 {
     public interface IWorkerServiceReceiver
     {
-        string ReturnData { get; set; }
+        TimeSpan TimeLimit { get; set; }
+        bool CommandCompleted { get; set; }
+        List<string> ReturnData { get; set; }
 
         /// <summary>
         /// Connect the worker service receiver to the Pusher Pub/Sub to a specific channel and event.

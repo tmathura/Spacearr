@@ -46,7 +46,7 @@ namespace Spacearr.Pusher.API.Services.Implementations
 
                     var firebasePushNotificationDevice = new FirebasePushNotificationDevice { DeviceId = deviceId, Token = token};
                     var pusherSendMessage = new PusherSendMessageModel { Command = CommandType.SaveFirebasePushNotificationTokenCommand, Values = JsonConvert.SerializeObject(firebasePushNotificationDevice) };
-                    await _pusher.SendMessage(channelNameSend, eventNameSend, JsonConvert.SerializeObject(pusherSendMessage), setting.PusherAppId, setting.PusherKey, setting.PusherSecret, setting.PusherCluster);
+                    await _pusher.SendMessage(channelNameSend, eventNameSend, JsonConvert.SerializeObject(pusherSendMessage), true, setting.PusherAppId, setting.PusherKey, setting.PusherSecret, setting.PusherCluster);
                     await _pusher.WorkerServiceReceiverDisconnect();
                 }
                 catch (Exception ex)

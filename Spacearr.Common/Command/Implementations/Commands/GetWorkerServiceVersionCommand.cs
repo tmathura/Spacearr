@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 using Spacearr.Common.Command.Interfaces;
 using Spacearr.Common.Models;
 using Spacearr.Common.Services.Interfaces;
@@ -22,15 +23,18 @@ namespace Spacearr.Common.Command.Implementations.Commands
         /// Returns the Worker Service version.
         /// </summary>
         /// <returns>Returns a WorkerServiceVersionModel</returns>
-        public async Task<string> Execute()
+        public async Task<List<string>> Execute()
         {
+            var commandData = new List<string>();
             var parentDirectory = Directory.GetParent(_fileService.GetUpdateAppStorageFolderPath());
             var currentAppPath = Path.GetFullPath(parentDirectory?.FullName ?? string.Empty);
             var currentApp = Path.Combine(currentAppPath, $"{AppName}.dll");
             var assemblyName = AssemblyName.GetAssemblyName(currentApp);
-            var workerServiceVersion = new WorkerServiceVersionModel { Version = assemblyName.Version};
 
-            return await Task.FromResult(JsonConvert.SerializeObject(workerServiceVersion));
+            var workerServiceVersion = new WorkerServiceVersionModel { Version = assemblyName.Version };
+            commandData.Add(JsonConvert.SerializeObject(workerServiceVersion));
+
+            return await Task.FromResult(commandData);
         }
     }
 }

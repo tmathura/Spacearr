@@ -3,6 +3,7 @@ using Spacearr.Common.Enums;
 using Spacearr.Common.Logger.Interfaces;
 using Spacearr.Common.Services.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.ServiceProcess;
@@ -31,7 +32,7 @@ namespace Spacearr.Common.Command.Implementations.Commands
         /// Update app.
         /// </summary>
         /// <returns>string.Empty</returns>
-        public async Task<string> Execute()
+        public async Task<List<string>> Execute()
         {
             var parentDirectory = Directory.GetParent(_fileService.GetUpdateAppStorageFolderPath()).Parent;
             var currentAppPath = Path.GetFullPath(parentDirectory?.FullName ?? string.Empty);
@@ -68,7 +69,7 @@ namespace Spacearr.Common.Command.Implementations.Commands
                     await _logger.LogErrorAsync(ex.Message, ex.StackTrace);
                 }
             }
-            return string.Empty;
+            return new List<string>();
         }
     }
 }

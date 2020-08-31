@@ -1,10 +1,14 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Spacearr.Pusher.API
 {
     public interface IPusher
     {
-        string ReturnData { get; }
+        TimeSpan TimeLimit { get; }
+        bool CommandCompleted { get; }
+        List<string> ReturnData { get; }
 
         /// <summary>
         /// Connect the get computer drives command receiver.
@@ -60,11 +64,12 @@ namespace Spacearr.Pusher.API
         /// <param name="channelName">The channel name to connect to</param>
         /// <param name="eventName">The event name to connect to</param>
         /// <param name="message">The message to send</param>
+        /// <param name="isFinalMessage">The it is the final message to send</param>
         /// <param name="appId">The Pusher app id</param>
         /// <param name="key">The Pusher key</param>
         /// <param name="secret">The Pusher secret</param>
         /// <param name="cluster">The Pusher cluster</param>
         /// <returns></returns>
-        Task SendMessage(string channelName, string eventName, string message, string appId, string key, string secret, string cluster);
+        Task SendMessage(string channelName, string eventName, string message, bool isFinalMessage, string appId, string key, string secret, string cluster);
     }
 }

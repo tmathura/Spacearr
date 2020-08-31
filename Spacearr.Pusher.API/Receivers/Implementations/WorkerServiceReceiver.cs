@@ -3,6 +3,7 @@ using Spacearr.Common.Logger.Interfaces;
 using Spacearr.Pusher.API.Models;
 using Spacearr.Pusher.API.Receivers.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Spacearr.Pusher.API.Receivers.Implementations
@@ -10,7 +11,9 @@ namespace Spacearr.Pusher.API.Receivers.Implementations
     public class WorkerServiceReceiver : IWorkerServiceReceiver
     {
         private readonly ILogger _logger;
-        public string ReturnData { get; set; }
+        public TimeSpan TimeLimit { get; set; }
+        public bool CommandCompleted { get; set; }
+        public List<string> ReturnData { get; set; }
         private PusherClient.Pusher _pusherReceive;
 
         public WorkerServiceReceiver(ILogger logger)
@@ -32,19 +35,28 @@ namespace Spacearr.Pusher.API.Receivers.Implementations
         {
             try
             {
-                ReturnData = null;
+                CommandCompleted = false;
+                ReturnData = new List<string>();
                 _pusherReceive = null;
 
                 if (!string.IsNullOrWhiteSpace(appId) && !string.IsNullOrWhiteSpace(key) && !string.IsNullOrWhiteSpace(secret) && !string.IsNullOrWhiteSpace(cluster))
                 {
                     _pusherReceive = new PusherClient.Pusher(key, new PusherClient.PusherOptions { Cluster = cluster });
 
+                    TimeLimit = new TimeSpan(0, 0, 10);
                     var myChannel = await _pusherReceive.SubscribeAsync(channelNameReceive);
                     myChannel.Bind(eventNameReceive, (dynamic data) =>
                     {
                         PusherReceiveMessageObjectModel pusherReceiveMessageObject = JsonConvert.DeserializeObject<PusherReceiveMessageObjectModel>(data.ToString());
                         var pusherReceiveMessage = JsonConvert.DeserializeObject<PusherReceiveMessageModel>(pusherReceiveMessageObject.Data);
-                        ReturnData = pusherReceiveMessage.Message;
+
+                        CommandCompleted = pusherReceiveMessage.IsFinalMessage;
+                        ReturnData.Add(pusherReceiveMessage.Message);
+
+                        if (!pusherReceiveMessage.IsFinalMessage)
+                        {
+                            TimeLimit = TimeLimit.Add(new TimeSpan(0, 0, 10));
+                        }
                     });
 
                     await _pusherReceive.ConnectAsync();

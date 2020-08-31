@@ -31,7 +31,7 @@ namespace Spacearr.Common.Command.Implementations.Commands
         /// Returns all the computers hard disk that are low, the low value is determined by the _lowSpaceGBValue.
         /// </summary>
         /// <returns>string.Empty</returns>
-        public async Task<string> Execute()
+        public async Task<List<string>> Execute()
         {
             var notificationList = new List<string>();
 
@@ -69,7 +69,7 @@ namespace Spacearr.Common.Command.Implementations.Commands
                 }
             }
 
-            return string.Empty;
+            return new List<string>();
         }
     }
 }

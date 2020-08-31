@@ -1,9 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Spacearr.Common.Command.Interfaces
 {
     public interface ICommand
     {
-        Task<string> Execute();
+        Task<List<string>> Execute();
     }
 }

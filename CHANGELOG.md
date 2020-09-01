@@ -1,5 +1,20 @@
-# Unreleased Changes
+# Release 1.0.0.354
+
+## Included Changes
+ - [Merge branch 'master' into dev](https://github.com/tmathura/Spacearr/commit/70dd9ef7eb64bc66647d1ee48f9f3331f18ec5b5) ([Teshvier Mathura](https://github.com/tmathura))
+ - [fix tests](https://github.com/tmathura/Spacearr/commit/c704cc5a8731becf8cba1e00130b3c8a1622e6f8) ([Teshvier Mathura](https://github.com/tmathura))
+ - [Merge branch 'master' into dev](https://github.com/tmathura/Spacearr/commit/5dd4e8527623567e52ec76ae76bb55a742a194b6) ([Teshvier Mathura](https://github.com/tmathura))
+ - [Update CHANGELOG.md. 9/1/2020 7:40:31 AM](https://github.com/tmathura/Spacearr/commit/e5027966f17a54e9ecf188c97674b8238f804d02) ([tmathura](https://github.com/tmathura))
  - [fix tests](https://github.com/tmathura/Spacearr/commit/53474220e978df4062e6d716f1dcd4d3b77a77b2) ([Teshvier Mathura](https://github.com/tmathura))
+ - [Merge branch 'master' into dev](https://github.com/tmathura/Spacearr/commit/50933e8f804070ea90d026681633819381ccad2c) ([Teshvier Mathura](https://github.com/tmathura))
+ - [change how the data is transferred from backend to frontend](https://github.com/tmathura/Spacearr/commit/c7352b17cfb7d00eed5a3ba145bcfbf03a91cd6e) ([Teshvier Mathura](https://github.com/tmathura))
+ - [Update CHANGELOG.md. 8/27/2020 12:42:27 PM](https://github.com/tmathura/Spacearr/commit/c2ee1e3a8f958ee19e536bad43818491e3154aab) ([tmathura](https://github.com/tmathura))
+ - [Update CHANGELOG.md. 8/27/2020 12:31:43 PM](https://github.com/tmathura/Spacearr/commit/f026f3e0aed8e73192e611af27e8c548483303f5) ([tmathura](https://github.com/tmathura))
+ - [add version to settings in front end app, rename 'ComputerDrivesCommand' to 'GetComputerDrivesCommand'; fixes GH-34](https://github.com/tmathura/Spacearr/commit/eced6a8d300ef9e80d9dd2dfe76d5c88cb722272) ([Teshvier Mathura](https://github.com/tmathura))
+
+## Issues Closed
+ - [add version to settings in front end apps](https://github.com/tmathura/Spacearr/issues/34)
+
 
 # Release 1.0.0.348
 
@@ -17,7 +32,6 @@
 
 ## Issues Closed
  - [add version to settings in front end apps](https://github.com/tmathura/Spacearr/issues/34)
-
 
 # Release 1.0.0.348
 
@@ -141,4 +155,4 @@
  - [Pull request for master](https://github.com/tmathura/Spacearr/pull/29)
  - [Pull request for master](https://github.com/tmathura/Spacearr/pull/28)
  - [Pull request for master](https://github.com/tmathura/Spacearr/pull/27)
-9/1/2020 7:40:31 AM
+9/1/2020 8:01:12 AM

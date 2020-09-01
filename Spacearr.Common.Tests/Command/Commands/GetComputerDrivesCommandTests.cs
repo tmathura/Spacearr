@@ -33,7 +33,12 @@ namespace Spacearr.Common.Tests.Command.Commands
 
             // Act
             var commandData = await _getComputerDrivesCommand.Execute();
-            var computerDrives = JsonConvert.DeserializeObject<List<ComputerDriveModel>>(commandData);
+
+            var computerDrives = new List<ComputerDriveModel>();
+            foreach (var json in commandData)
+            {
+                computerDrives.Add(JsonConvert.DeserializeObject<ComputerDriveModel>(json));
+            }
 
             // Assert
             Assert.AreEqual(noOfComputerDrives, computerDrives.Count);
@@ -48,7 +53,12 @@ namespace Spacearr.Common.Tests.Command.Commands
 
             // Act
             var commandData = await _getComputerDrivesCommand.Execute();
-            var computerDrives = JsonConvert.DeserializeObject<List<ComputerDriveModel>>(commandData);
+
+            var computerDrives = new List<ComputerDriveModel>();
+            foreach (var json in commandData)
+            {
+                computerDrives.Add(JsonConvert.DeserializeObject<ComputerDriveModel>(json));
+            }
 
             // Assert
             Assert.AreEqual(0, computerDrives.Count);
